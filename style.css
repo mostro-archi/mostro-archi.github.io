@@ -69,6 +69,7 @@ header a, header a:visited, header a:hover {
 
 .multi-column {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   overflow:hidden;
   height: max(90vh,400px);
@@ -78,10 +79,39 @@ header a, header a:visited, header a:hover {
   will-change: overflow;
 }
 
+/* sous mobile les colonnes passent l'une sous l'autre dans agence */
+
 @media (max-width:800px)  {
-.multi-column {
+.holder {
+  height:auto;
+  width: 100vw;
+  align-self: center;
+  margin-top: max(50px, 7vh);
+  display: flex;
   flex-direction: column;
+}
+#agence.multi-column {
+  flex-direction: column;
+  height:auto;
   } 
+.column {
+  height: auto;
+  padding: 35px;
+  flex:0;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+}
+
+#list {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#preview {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .column {
@@ -158,7 +188,37 @@ th {
 }
 
 
+/* liste des projets sur mobile */
 
+@media (max-width:480px)  {
+#myTable {
+  font-size: 12px;
+}
+
+#myTable tr td:nth-child(3),
+#myTable tr th:nth-child(3) {
+  display:none;
+}
+#myTable tr td:nth-child(5),
+#myTable tr th:nth-child(5) {
+  display:none;
+}
+#myTable tr td:nth-child(7),
+#myTable tr th:nth-child(7) {
+  display:none;
+}
+#preview {
+  display: none;
+}
+}
+
+/* liste des projets sur tablette */
+
+@media (min-width:481px) and (max-width:800px)  {
+#preview {
+  display: none;
+}
+}
 
 
 /* hyperliens */
@@ -172,64 +232,85 @@ th {
   background:black;
 }
 
-/* index page */
- body.index {
-      height: 400vh; /* on fait long pour permettre de scroller */
-      margin: 0;
-      background: white;
-      overflow-x: hidden;
-      color: black;
-      font-family: syne;
-       }
 
-.container, .final-text {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+/* index sur mobile */
+@media (max-width:600px) {
+  pre {
+    display:none
+  }
+  p.index {
+    display:none
+  }
+  body.index {
+    height:100vh;
+    overflow:hidden;
+  }
 }
 
-    pre {
-      font-family: syne;
-      font-weight: bold;
-      margin: 0;
-      white-space: pre;
-      line-height: 1;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      user-select: none;
-      opacity: 0;
-    }
+/* index sur pc */
 
-    pre.visible {
+@media (min-width:600px) {
+  #gif {
+    display:none
+  }
+}
+
+body.index {
+  height: 400vh; /* on fait long pour permettre de scroller */
+  margin: 0;
+  background: white;
+  overflow-x: hidden;
+  color: black;
+  font-family: syne;
+}
+
+.container, .final-text {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+pre {
+  font-family: syne;
+  font-weight: bold;
+  margin: 0;
+  white-space: pre;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  opacity: 0;
+}
+
+pre.visible {
+  opacity: 1;
+}
+
+.final-text {
+  font-family: syne;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  margin: 0;
+  line-height: 1;
+  white-space: pre;
+  user-select: none;
+  width: 100%;
+}
+
+.final-text.visible {
       opacity: 1;
-    }
-
-    .final-text {
-      font-family: syne;
-      font-weight: bold;
-      text-align: center;
-      opacity: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      user-select: none;
-      margin: 0;
-      line-height: 1;
-      white-space: pre;
-      user-select: none;
-      width: 100%;
-    }
-
-    .final-text.visible {
-      opacity: 1;
-    }
-
+}

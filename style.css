@@ -5,6 +5,10 @@
   font-family: syne;
   src: url(syne.ttf);
 }
+@font-face {
+  font-family: avara;
+  src: url(avara.ttf);
+}
  /* cache la scrollbar */
  html{
     scrollbar-width: none;
@@ -12,6 +16,130 @@
  html::-webkit-scrollbar {
   display: none;
 }
+
+/* pages classiques */
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* header */
+header {
+  display:flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: baseline;
+  position: fixed;
+  width: 98vw;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+
+header .box{
+  flex-grow:10;
+}
+
+header div {
+  margin-inline: 20px;
+  flex-grow:0;
+}
+
+header a, header a:visited, header a:hover {
+  color:black;
+  text-decoration: none;
+}
+
+/* main part */
+
+.holder {
+  height:90vh;
+  width: 100vw;
+  align-self: center;
+  margin-top: max(50px, 7vh);
+  display: flex;
+  flex-direction: column;
+}
+
+.paragraphe {
+  margin-left:30px;
+  margin-right:30px;
+}
+
+.multi-column {
+  display: flex;
+  overflow:hidden;
+  height: max(90vh,400px);
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: overflow;
+}
+
+.column {
+  overflow:scroll;
+  height: auto;
+  padding: 35px;
+  flex:1;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.column::-webkit-scrollbar {
+    display: none;
+}
+
+p {
+  font-family: syne;
+  font-size: max(14px, 2vh);
+}
+
+h1 {
+  font-family: avara;
+  font-size: max(24px, 4vh);
+}
+
+h2 {
+  font-family: syne;
+  font-size: max(14px, 2vh);
+}
+
+h3 {
+  font-family: avara;
+  font-weight: 900;
+  font-size: max(14px, 2vh);
+}
+
+h4 {
+  font-family: syne;
+  font-weight: bold;
+  font-size: 8px;
+  margin: 0;
+  white-space: pre;
+  line-height: 1;
+}
+
+table {
+  font-family: syne;
+  font-size: max(14px, 2vh);
+  text-align: left;
+}
+
+td {
+  vertical-align: top;
+  font-style: italic;
+  margin-right: 20px;
+}
+
+th {
+  vertical-align: top;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+
+
 
 
 /* hyperliens */
@@ -26,7 +154,6 @@
 }
 
 /* index page */
- 
  body.index {
       height: 400vh; /* on fait long pour permettre de scroller */
       margin: 0;
@@ -75,6 +202,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      user-select: none;
     }
 
     .final-text.visible {

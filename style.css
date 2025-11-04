@@ -69,12 +69,19 @@ header a, header a:visited, header a:hover {
 
 .multi-column {
   display: flex;
+  flex-direction: row;
   overflow:hidden;
   height: max(90vh,400px);
   position: relative;
   width: 100%;
   backface-visibility: hidden;
   will-change: overflow;
+}
+
+@media (max-width:800px)  {
+.multi-column {
+  flex-direction: column;
+  } 
 }
 
 .column {
@@ -118,24 +125,36 @@ h4 {
   margin: 0;
   white-space: pre;
   line-height: 1;
+  user-select: none;
+}
+
+h5 {
+  font-family: syne;
+  font-weight: bold;
+  font-size: 0.56vh;
+  margin: 0;
+  white-space: pre;
+  line-height: 1;
+  user-select: none;
 }
 
 table {
   font-family: syne;
   font-size: max(14px, 2vh);
   text-align: left;
+  width: 100%;
 }
 
 td {
   vertical-align: top;
   font-style: italic;
-  margin-right: 20px;
+  padding-right: 1em;
 }
 
 th {
   vertical-align: top;
   font-weight: bold;
-  margin-right: 20px;
+  padding-right: 1em;
 }
 
 
@@ -203,15 +222,14 @@ th {
       justify-content: center;
       align-items: center;
       user-select: none;
+      margin: 0;
+      line-height: 1;
+      white-space: pre;
+      user-select: none;
+      width: 100%;
     }
 
     .final-text.visible {
       opacity: 1;
     }
 
-    .final-text p {
-      margin: 0;
-      line-height: 1;
-      white-space: pre-wrap;
-      width: 100%;
-    }

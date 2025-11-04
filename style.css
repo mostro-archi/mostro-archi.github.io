@@ -251,7 +251,8 @@ th {
 
 @media (min-width:600px) {
   #gif {
-    display:none
+    display:none;
+    opacity:0;
   }
 }
 

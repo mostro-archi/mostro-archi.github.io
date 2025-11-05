@@ -35,6 +35,7 @@ header {
   width: 98vw;
   margin-top: 0px;
   margin-left: 5px;
+  z-index: 10;
 }
 
 header .box{
@@ -104,6 +105,12 @@ header a, header a:visited, header a:hover {
 }
 }
 
+@media (min-width:800px) {
+#small.column {
+  max-width:15vw
+}
+}
+
 #list {
   flex: 1 1 auto;
   min-width: 0;
@@ -127,27 +134,33 @@ header a, header a:visited, header a:hover {
     display: none;
 }
 
+.image {
+  width:100%
+}
+
+
+/*header*/
+h1 {
+  font-family: avara;
+  font-size: max(24px, 4vh);
+}
+h2 {
+  font-family: avara;
+  font-weight: 900;
+  font-size: max(14px, 2vh);
+}
+/*paragraphes*/
 p {
   font-family: syne;
   font-size: max(14px, 2vh);
 }
 
-h1 {
-  font-family: avara;
-  font-size: max(24px, 4vh);
-}
-
-h2 {
-  font-family: syne;
-  font-size: max(14px, 2vh);
-}
-
 h3 {
-  font-family: avara;
-  font-weight: 900;
-  font-size: max(14px, 2vh);
+  font-family: syne;
+  font-size: max(12px, 1.5vh);
+  font-weight: lighter;
 }
-
+/*ascii art*/
 h4 {
   font-family: syne;
   font-weight: bold;
@@ -157,7 +170,6 @@ h4 {
   line-height: 1;
   user-select: none;
 }
-
 h5 {
   font-family: syne;
   font-weight: bold;

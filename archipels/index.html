@@ -16,7 +16,7 @@
     }
 
     * {
-      cursor:url("cursor_dot.svg"),default;
+      cursor:url("cursor_dot.svg") 16 16,default;
     }
 
     body {
@@ -45,38 +45,43 @@
     h1 {
       font-family:Arial, Helvetica, sans-serif;
       font-weight: bold;
-      font-size:300px !important;
+      font-size:75px;
       background: white;
     }
 
     h2 {
       font-family: Arial, Helvetica, sans-serif;
       font-weight: bold;
-      font-size: 120px;
+      font-style: italic;
+      font-size: 30px;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+      color:white
     }
 
     h3 {
       font-family:Arial, Helvetica, sans-serif;
       font-weight:bolder;
       font-style:italic;
-      font-size:80px;
+      font-size:20px;
     }
 
     p {
       font-family: Arial, Helvetica, sans-serif;
-      font-size:60px;
+      font-size:15px;
     }
 
     a {
       text-decoration: none;
       font-size: inherit;
       font-family:inherit;
+      color:inherit;
     }
 
     .plan {
-      background-image: url(plan-01.png);
-      background-size: contain;
-      cursor:url("cursor.svg"),default;
+      /*background-image: url(plan-01.png);
+      background-size: contain;*/
+      cursor:url("cursor.svg")16 16,default;
     } 
 
     .grid {
@@ -86,8 +91,12 @@
       margin: 0.06vw;
       flex-grow: 0;
       flex-shrink: 0;
-      transition: transform .3s ease;
-      cursor:url("cursor.svg"),default;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor:url("cursor.svg")16 16,default;
+    }
+
+    .grid.relax {
+      transition: transform 2s ease, opacity 2s ease;
     }
 
     .empty {
@@ -97,7 +106,7 @@
       margin: 0vw;
       flex-grow: 0;
       flex-shrink: 0;
-      cursor:url("cursor_dot.svg"),default;
+      cursor:url("cursor_dot.svg")16 16,default;
       
     }
     .line {
@@ -108,14 +117,30 @@
       display:flex;
       flex-direction:row;
     }
-    .text-bloc {
-      margin:.5vw;
+    .title-bloc {
+      margin:.6vw;
       flex: auto;
     }
 
-    .s {z-index:10;box-shadow: 20px 20px 5px;}
-    .m {z-index:20;box-shadow: 40px 40px 10px;}
-    .l {z-index:30;box-shadow: 60px 60px 15px;}
+    .text-bloc {
+      margin:.2vw;
+      width: 8.49vw;
+      flex: auto;
+    }
+    
+    .text-bloc a {
+      display: inline-block;
+    }
+
+    .text-bloc a:hover {
+      cursor:url(cursor.svg) 16 16,default;
+      font-weight:bold;
+      transform: translateX(10px);
+    }
+
+    .s {z-index:10;box-shadow: 5px 5px 2px;}
+    .m {z-index:20;box-shadow: 10px 10px 4px;}
+    .l {z-index:30;box-shadow: 15px 15px 6px;}
 
     .structure, .paysage, .objet, .speculation, .programme, .enquete, .regard, .ruralite, .heritage, .alternative, .lowtech {
       width:1.92vw;
@@ -123,7 +148,7 @@
       flex-grow: 0;
       flex-shrink: 0;
       transition: transform 0.3s ease;
-      cursor:url("cursor_white.svg"),default;
+      cursor:url("cursor_white.svg")16 16,default;
     }
 
     .structure {
@@ -172,8 +197,11 @@
 
 <!-- première bande -->
 
-<div class="line">
-  <div style="width:50vw;" class="line">
+<div class="line" style="justify-content:start;">
+  <div>
+    <h2>CARTOGRAPHIE<br>D'UNE GÉNÉRATION</h2>
+  </div>
+  <div style="max-width: 50vw; margin-top: 10px;margin-left:20px">
   <p>Afin de cartographier les soixante-dix productions recensées, l’exposition Archipels déploie une grille tridimensionnelle dans le volume de la galerie Loire.<br>
 Topographie architecturée, les émergences quadrillées servent de supports et de coordonnées aux projets de fin d’études (PFE). Leurs positions relatives et leurs altimétries renseignent alors sur les liensthématiques, formels ou méthodologiques qui relient les ilots voisins, mais aussi sur la radicalité de leurs postures.<br>
 L’analyse des PFE a fait apparaitre onze thématiques communes, elles-mêmes rassemblées en trois pôles. Ces centralités sont marquées par des pics qui culminent au-dessus de la nappe continue et décrivent la thématique alentour. Les trois grandes problématiques travaillant l’ensemble de lagénération 2025 sont inscrites sur des bannières surplombant les archipels.<br>
@@ -741,7 +769,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30;box-shadow: 40px 40px 15px;" name="PAYSAGES CONSTRUITS"></div>
+  <div class="paysage" style="z-index: 30;box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
   <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -795,7 +823,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30;box-shadow: 40px 40px 15px;" name="PAYSAGES CONSTRUITS"></div>
+  <div class="paysage" style="z-index: 30;box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
   <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -838,9 +866,9 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="structure" style="z-index:30; box-shadow: 40px 40px 15px;" name="STRUCTURES POTENTIELLES"></div>
-  <div class="structure" style="z-index:30; box-shadow: 40px 40px 15px;" name="STRUCTURES POTENTIELLES"></div>
-  <div class="structure" style="z-index:30; box-shadow: 40px 40px 15px;" name="STRUCTURES POTENTIELLES"></div>
+  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
+  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
+  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -849,7 +877,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30; box-shadow: 40px 40px 15px;" name="PAYSAGES CONSTRUITS"></div>
+  <div class="paysage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
   <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -908,9 +936,9 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 40px 40px 15px;" name="OBJETS OPÉRANTS"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 40px 40px 15px;" name="OBJETS OPÉRANTS"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 40px 40px 15px;" name="OBJETS OPÉRANTS"></div>
+  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
+  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
+  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1134,7 +1162,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 40px 40px 15px;" name="SPÉCULATIONS FORMELLES"></div>
+  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1188,16 +1216,16 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 40px 40px 15px;" name="SPÉCULATIONS FORMELLES"></div>
+  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
   <div class="relaheedoomun speculation s" name="RIDHWAAN ELAHEE DOOMUN"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 40px 40px 15px;" name="INVENTIONS PROGRAMMATIQUES"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 40px 40px 15px;" name="INVENTIONS PROGRAMMATIQUES"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 40px 40px 15px;" name="INVENTIONS PROGRAMMATIQUES"></div>
+  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
+  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
+  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1242,7 +1270,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 40px 40px 15px;" name="SPÉCULATIONS FORMELLES"></div>
+  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
   <div class="relaheedoomun speculation s" name="RIDHWAAN ELAHEE DOOMUN"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1635,7 +1663,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ENQUÊTES SITUÉES"></div>
+  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
   <div class="mmany enquete m" name="MARIE MANY"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1673,7 +1701,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 40px 40px 15px;" name="REGARDS DÉCENTRÉS"></div>
+  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
   <div class="mlezot regard s" name="MANON LEZOT"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1689,7 +1717,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ENQUÊTES SITUÉES"></div>
+  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
   <div class="jjoseph enquete s" name="JULIETTE JOSEPH"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1727,7 +1755,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 40px 40px 15px;" name="REGARDS DÉCENTRÉS"></div>
+  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
   <div class="mlezot regard s" name="MANON LEZOT"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1743,7 +1771,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ENQUÊTES SITUÉES"></div>
+  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1774,14 +1802,14 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ALTERNATIVES DÉSIRABLES"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ALTERNATIVES DÉSIRABLES"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 40px 40px 15px;" name="ALTERNATIVES DÉSIRABLES"></div>
+  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
+  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
+  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 40px 40px 15px;" name="REGARDS DÉCENTRÉS"></div>
+  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1819,7 +1847,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 40px 40px 15px;" name="POST-RURALITÉS"></div>
+  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1873,7 +1901,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 40px 40px 15px;" name="POST-RURALITÉS"></div>
+  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
   <div class="aleveque ruralite s" name="ALEXANDRE LÉVÊQUE"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1919,15 +1947,15 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 40px 40px 15px;" name="HÉRITAGES ACTIVÉS"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 40px 40px 15px;" ame="HÉRITAGES ACTIVÉS"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 40px 40px 15px;" name="HÉRITAGES ACTIVÉS"></div>
+  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="HÉRITAGES ACTIVÉS"></div>
+  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" ame="HÉRITAGES ACTIVÉS"></div>
+  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="HÉRITAGES ACTIVÉS"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 40px 40px 15px;" name="POST-RURALITÉS"></div>
+  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
   <div class="aleveque ruralite s" name="ALEXANDRE LÉVÊQUE"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2009,9 +2037,9 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 40px 40px 15px;" name="AVENIRS LOWTECH"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 40px 40px 15px;" name="AVENIRS LOWTECH"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 40px 40px 15px;" name="AVENIRS LOWTECH"></div>
+  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
+  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
+  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2239,122 +2267,122 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
 
 <!-- index -->
 <div class="index">
- <div class="text-bloc">
-  <h2 style="margin-left: .5vw;">NOUVELLES ÉCHELLES</h2>
+  <div class="title-bloc">
+  <h2 style="margin-left: .5vw;justify-self: center;">NOUVELLES PRÉOCCUPATIONS</h2>
  <div class="index">
     <div class="text-bloc">
-      <h3>STRUCTURES<br>POTENTIELLES</h3>
-      <p><a>cédric angelin</a><br>
-      <a>harshita boyjoonauth</a><br>
-      <a>claire-emmanuelle chubilleau</a><br>
-      <a>hugo gerault</a><br>
-      <a>morgane massé</a><br>
-      <a>amandine pineau</a><br>
-      <a>anthony santerre</a><br>
-      <a>virginie savarino</a></p>
+      <h3 style="color:#94CDB9"><a href="heritagesactives">HÉRITAGES<br>ACTIVÉS</a></h3>
+      <p><a href="ebombarde">émilie bombarde</a><br>
+      <a href="jachoi">jin a choi</a><br>
+      <a href="scommunier">sebastien communier</a><br>
+      <a href="pdurand">paolina durand</a><br>
+      <a href="jgrondin">jessie grondin</a><br>
+      <a href="mlagoutte">maxime lagoutte</a><br>
+      <a href="lnoury">lauriane noury</a><br>
+      <a href="gringenbach">gladys ringenbach</a></p>
     </div>
     <div class="text-bloc">
-      <h3>PAYSAGES<br>CONSTRUITS</h3>
-      <p><a>thomas chiron</a><br>
-      <a>amy-aïcha coly</a><br>
-      <a>louisa gergaud</a><br>
-      <a>florian picques</a><br>
-      <a>kseniia tkachova</a><br>
-      <a>valentin georges</a></p>
+      <h3 style="color:#B1916B"><a href="postruralites">POST<br>RURALITÉS</a></h3>
+      <p><a href="palvarado">paloma alvarado</a><br>
+      <a href="tbedouet">thibault bedouet</a><br>
+      <a href="mblanc">maxime blanc</a><br>
+      <a href="agarel">amance garel</a><br>
+      <a href="aleveque">alexandre lévêque</a><br>
+      <a href="vsanassee">valen sanassee</a></p>
     </div>
     <div class="text-bloc">
-      <h3>OBJETS<br>OPÉRANTS</h3>
-      <p><a>magalie afi<br>zoé cano<br>alice guyot</a><br>
-      <a>manon brocarel</a><br>
-      <a>pierre canet</a><br>
-      <a>félicie frachon<br>clémence havy<br>louise marchand</a><br>
-      <a>antonin picot</a></p>
+      <h3 style="color:#E22017;"><a href="alternativesdesirables">ALTERNATIVES<br>DÉSIRABLES</a></h3>
+      <p><a href="llardeux">léo lardeux</a><br>
+      <a href="fperennes">florian pérennes</a><br>
+      <a href="eleduc">emma leduc</a><br>
+      <a href="abazin">alexandra bazin</a><br>
+      <a href="rrazafindrabe">rotsy razafindrabe</a><br>
+    </div>
+    <div class="text-bloc">
+      <h3 style="color:#234D87"><a href="regardsdecentres">REGARDS<br>DÉCENTRÉS</a></h3>
+      <p><a href="sdjflore">steeve david jeremie flore</a><br>
+      <a href="cppioffetettori_mlebidre">charles-pascal pioffet-ettori<br>maxime le bidre</a><br>
+      <a href="mlezot">manon lezot</a><br>
+      <a href="lpajot">luc pajot</a><br>
+      <a href="arazafindrainibe arivahy">anjaka razafindrainibe arivahy</a></p>
     </div>
   </div>
   </div>
-  <div class="text-bloc">
-  <h2 style="margin-left: .5vw;">NOUVELLES PRÉOCCUPATIONS</h2>
+   <div class="title-bloc">
+  <h2 style="margin-left: .5vw;justify-self: center;">NOUVELLES ÉCHELLES</h2>
  <div class="index">
     <div class="text-bloc">
-      <h3>HÉRITAGES<br>ACTIVÉS</h3>
-      <p><a>émilie bombarde</a><br>
-      <a>jin a choi</a><br>
-      <a>sebastien communier</a><br>
-      <a>paolina durand</a><br>
-      <a>jessie grondin</a><br>
-      <a>maxime lagoutte</a><br>
-      <a>lauriane noury</a><br>
-      <a>gladys ringenbach</a></p>
+      <h3 style="color:#9C97A6;"><a href="structurespotentielles">STRUCTURES<br>POTENTIELLES</a></h3>
+      <p><a href="cangelin">cédric angelin</a><br>
+      <a href="hboyjoonauth">harshita boyjoonauth</a><br>
+      <a href="cechubilleau">claire-emmanuelle chubilleau</a><br>
+      <a href="hgerault">hugo gerault</a><br>
+      <a href="mmasse">morgane massé</a><br>
+      <a href="apineau">amandine pineau</a><br>
+      <a href="asanterre">anthony santerre</a><br>
+      <a href="vsavarino">virginie savarino</a></p>
     </div>
     <div class="text-bloc">
-      <h3>POST<br>RURALITÉS</h3>
-      <p><a>paloma alvarado</a><br>
-      <a>thibault bedouet</a><br>
-      <a>maxime blanc</a><br>
-      <a>amance garel</a><br>
-      <a>alexandre lévêque</a><br>
-      <a>valen sanassee</a></p>
+      <h3 style="color:#0B9D60;"><a href="paysagesconstruits">PAYSAGES<br>CONSTRUITS</a></h3>
+      <p><a href="tchiron">thomas chiron</a><br>
+      <a href="aacoly">amy-aïcha coly</a><br>
+      <a href="lgergaud">louisa gergaud</a><br>
+      <a href="fpicques">florian picques</a><br>
+      <a href="ktkachova">kseniia tkachova</a><br>
+      <a href="vgeorges">valentin georges</a></p>
     </div>
     <div class="text-bloc">
-      <h3>ALTERNATIVES<br>DÉSIRABLES</h3>
-      <p><a>léo lardeux</a><br>
-      <a>florian pérennes</a><br>
-      <a>emma leduc</a><br>
-      <a>alexandra bazin</a><br>
-      <a>rotsy razafindrabe picot</a></p>
-    </div>
-    <div class="text-bloc">
-      <h3>REGARDS<br>DÉCENTRÉS</h3>
-      <p><a>steeve david jeremie flore</a><br>
-      <a>charles-pascal pioffet-ettori<br>maxime le bidre</a><br>
-      <a>manon lezot</a><br>
-      <a>luc pajot</a><br>
-      <a>anjaka razafindrainibe arivahy</a></p>
+      <h3 style="color:#3490BA;"><a href="objetsoperants">OBJETS<br>OPÉRANTS</a></h3>
+      <p><a href="mafi_zcano_aguyot">magalie afi<br>zoé cano<br>alice guyot</a><br>
+      <a href="mbrocarel">manon brocarel</a><br>
+      <a href="pcanet">pierre canet</a><br>
+      <a href="ffrachon_chavy_lmarchand">félicie frachon<br>clémence havy<br>louise marchand</a><br>
+      <a href="apicot">antonin picot</a></p>
     </div>
   </div>
   </div>
-  <div class="text-bloc">
-  <h2 style="margin-left: .5vw;">NOUVEAUX OUTILS</h2>
+  <div class="title-bloc">
+  <h2 style="margin-left: .5vw; justify-self: center;">NOUVEAUX OUTILS</h2>
  <div class="index">
     <div class="text-bloc">
-      <h3>SPÉCULATIONS<br>FORMELLES</h3>
-      <p><a>rohan bundhun</a><br>
-      <a>matthieu cosyns</a><br>
-      <a>ridhwaan elahee doomun</a><br>
-      <a>salomé gadoud</a><br>
-      <a>nathan le floïc</a><br>
-      <a>titouan le thomas</a><br>
-      <a>anouk lothe</a><br>
-      <a>hobbie rasamimanana</a></p>
+      <h3 style="color:#F3A9BA"><a href="speculationsformelles">SPÉCULATIONS<br>FORMELLES</a></h3>
+      <p><a href="rbundhun">rohan bundhun</a><br>
+      <a href="mcosyns">matthieu cosyns</a><br>
+      <a href="relaheedoomun">ridhwaan elahee doomun</a><br>
+      <a href="sgadoud">salomé gadoud</a><br>
+      <a href="nleflohic">nathan le flohic</a><br>
+      <a href="tlethomas">titouan le thomas</a><br>
+      <a href="alothe">anouk lothe</a><br>
+      <a href="hrasamiamanana">hobbie rasamimanana</a></p>
     </div>
     <div class="text-bloc">
-      <h3>INVENTIONS<br>PROGRAMMATIQUES</h3>
-      <p><a>anaëlle amblard</a><br>
-      <a>louison brault<br>charlotte brossard<br>clémence guérin</a><br>
-      <a>laurie-anne delporte</a><br>
-      <a>jeewon lekhansh</a><br>
-      <a>ninon marvier</a><br>
-      <a>romane pénin</a><br>
-      <a>tsiory ramaholison</a></p>
+      <h3 style="color:#F57E20"><a href="inventionsprogrammatiques">INVENTIONS<br>PROGRAMMES</a></h3>
+      <p><a href="aamblard">anaëlle amblard</a><br>
+      <a href="lbrault_cbrossard_cguerin">louison brault<br>charlotte brossard<br>clémence guérin</a><br>
+      <a href="ladelporte">laurie-anne delporte</a><br>
+      <a href="jlekhansh">jeewon lekhansh</a><br>
+      <a href="nmarvier">ninon marvier</a><br>
+      <a href="rpenin">romane pénin</a><br>
+      <a href="tramaholison">tsiory ramaholison</a></p>
     </div>
     <div class="text-bloc">
-      <h3>ENQUÊTES<br>SITUÉES</h3>
-      <p><a>énola garion</a><br>
-      <a>juliette joseph</a><br>
-      <a>marie ladan</a><br>
-      <a>réza madiot</a><br>
-      <a>marie many</a><br>
-      <a>ribal tarhini</a></p>
+      <h3 style="color:#9167AC;"><a href="enquetessituees">ENQUÊTES<br>SITUÉES</a></h3>
+      <p><a href="egarion">énola garion</a><br>
+      <a href="jjoseph">juliette joseph</a><br>
+      <a href="mmany">marie ladan</a><br>
+      <a href="rmadiot">réza madiot</a><br>
+      <a href="mmany">marie many</a><br>
+      <a href="rtarhini">ribal tarhini</a></p>
     </div>
     <div class="text-bloc">
-      <h3>AVENIRS<br>LOW-TECH</h3>
-      <p><a>antoine barbet<br>samuel fourrier</a><br>
-      <a>lisa bousseau</a><br>
-      <a>valentine bruneau</a><br>
-      <a>titouan helary<br></a><br>
-      <a>mathilde louet</a><br>
-      <a>harith orou-guidou</a><br>
-      <a>julie sédilot</a></p>
+      <h3 style="color: #FEB81C;"><a href="avenirslowtech">AVENIRS<br>LOW-TECH</a></h3>
+      <p><a href="abarbet_sfourrier">antoine barbet<br>samuel fourrier</a><br>
+      <a href="lbousseau">lisa bousseau</a><br>
+      <a href="vbruneau">valentine bruneau</a><br>
+      <a href="thelary">titouan helary</a><br>
+      <a href="mlouet">mathilde louet</a><br>
+      <a href="horouguidou">harith orou-guidou</a><br>
+      <a href="jsedilot">julie sédilot</a></p>
     </div>
   </div>
   </div>
@@ -2381,7 +2409,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
 <script>
   // aggrandit les tables cliquables quand on passe dessus //
   const allDivs = document.querySelectorAll('div');
-  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc']; // classes à exclure des effets globaux
+  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc']; // classes à exclure des effets globaux
 
   allDivs.forEach(div => {
     div.addEventListener('mouseenter', () => {
@@ -2411,12 +2439,17 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
 </script>
 
 <script>
-  // effet de vagues //
+  //effet de vague //
 const grids = document.querySelectorAll('.grid');
-const influenceRadius = 600; // distance en pixels autour du curseur
+const influenceRadius = 200; //distance influence en px//
 
 document.addEventListener('mousemove', (e) => {
   grids.forEach(grid => {
+
+    // Lire les anciens niveaux
+    let oldRot = parseFloat(grid.dataset.rot || 0);
+    let oldOpacity = parseFloat(grid.dataset.opacity || 100);
+
     const rect = grid.getBoundingClientRect();
     const gridX = rect.left + rect.width / 2;
     const gridY = rect.top + rect.height / 2;
@@ -2426,19 +2459,38 @@ document.addEventListener('mousemove', (e) => {
     if (distance < influenceRadius) {
       const proximity = 1 - (distance / influenceRadius);
 
-      // Rotation max 15° selon proximité
-      const rotateDeg = proximity * 15;
+      const newRot = proximity * 10;      // roration 0 → 20
+      const newOpacity = 100 - 25 * proximity; // scale 100 → 50
 
-      // Scale max 1.25 selon proximité
-      const scale = 1 + (0.25 * proximity);
+      // CUMUL MAXIMA : ne jamais diminuer instantanément
+      const appliedRot = Math.max(oldRot, newRot);
+      const appliedOpacity = Math.min(oldOpacity, newOpacity);
 
-      grid.style.transform = `rotate(${rotateDeg}deg) scale(${scale})`;
+      // enregistrer l’état
+      grid.dataset.rot = appliedRot;
+      grid.dataset.opacity = appliedOpacity;
+
+      // effet instantané
+      grid.classList.remove('relax');
+      grid.style.transform = `rotate(${appliedRot}deg) scale(${1 - appliedRot/40})`;
+      grid.style.opacity = `${appliedOpacity}%`;
+
     } else {
-      grid.style.transform = 'rotate(0deg) scale(1)';
+      // retour progressif
+      grid.classList.add('relax');
+
+      // interpolate vers l'état normal
+      grid.dataset.rot = 0;
+      grid.dataset.opacity = 100;
+
+      grid.style.transform = `rotate(0deg) scale(1)`;
+      grid.style.opacity = `100%`;
     }
   });
 });
 </script>
+
+
 
 </body>
 </html>

@@ -8,6 +8,8 @@
 
   <style>
 
+    /* généralités */
+
     html{
       scrollbar-width: none;
     }
@@ -26,22 +28,6 @@
       height: 100%;
     }
 
-
-    header {
-      margin-top: -50px;
-      z-index: 1000;
-      pointer-events: none;
-      display:flex;
-      justify-content: flex-end;
-      position: fixed;
-      flex-direction: row;
-      width:98vw;
-    }
-
-    header .box {
-      flex-grow:10;
-    }
-    
     h1 {
       font-family:Arial, Helvetica, sans-serif;
       font-weight: bold;
@@ -78,41 +64,6 @@
       color:inherit;
     }
 
-    .plan {
-      /*background-image: url(plan-01.png);
-      background-size: contain;*/
-      cursor:url("cursor.svg")16 16,default;
-    } 
-
-    .grid {
-      background-color:rgb(53, 53, 53);
-      width:1.8vw;
-      height:1.8vw;
-      margin: 0.06vw;
-      flex-grow: 0;
-      flex-shrink: 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      cursor:url("cursor.svg")16 16,default;
-    }
-
-    .grid.relax {
-      transition: transform 2s ease, opacity 2s ease;
-    }
-
-    .empty {
-      background-color:white;
-      width:1.92vw;
-      height:1.92vw;
-      margin: 0vw;
-      flex-grow: 0;
-      flex-shrink: 0;
-      cursor:url("cursor_dot.svg")16 16,default;
-      
-    }
-    .line {
-      display:flex;
-      flex-direction:row;
-    }
     .index {
       display:flex;
       flex-direction:row;
@@ -136,6 +87,61 @@
       cursor:url(cursor.svg) 16 16,default;
       font-weight:bold;
       transform: translateX(10px);
+    }
+
+    /* header */
+
+    header {
+      margin-top: -50px;
+      z-index: 1000;
+      pointer-events: none;
+      display:flex;
+      justify-content: flex-end;
+      position: fixed;
+      flex-direction: row;
+      width:98vw;
+    }
+
+    header .box {
+      flex-grow:10;
+    }
+    
+    /* cartographie */
+
+    .plan {
+      background-image: url(plan_bg.png);
+      background-size: contain;
+      cursor:url("cursor.svg")16 16,default;
+    } 
+
+    .grid {
+      background-color:rgb(53, 53, 53);
+      width:1.8vw;
+      height:1.8vw;
+      margin: 0.06vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor:url("cursor.svg")16 16,default;
+    }
+
+    .grid.relax {
+      transition: transform 2s ease, opacity 2s ease;
+    }
+
+    .empty {
+      background-color:none;
+      width:1.92vw;
+      height:1.92vw;
+      margin: 0vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      cursor:url("cursor_dot.svg")16 16,default;
+      
+    }
+    .line {
+      display:flex;
+      flex-direction:row;
     }
 
     .s {z-index:10;box-shadow: 5px 5px 2px;}
@@ -185,6 +191,31 @@
       background-color: #FEB81C ;
     }
 
+    /* frise */
+
+    .scroll-container {
+        width: 100vw;
+        height: 90vh;           /* hauteur visible */
+        overflow-x: auto;        /* scroll horizontal */
+        overflow-y: hidden;      /* bloque le vertical */
+        scroll-behavior: smooth;          
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto; /* masque scroll bar */
+        overflow-y: hidden;
+       -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar {
+      height: 0;
+      display: none;
+    }
+
+    .scroll-container img {
+        height: 100%;
+        display: inline-block;
+    }
+  
   </style>
 
 </head>
@@ -195,8 +226,7 @@
   <div ><h1 id="name-display">ARCHIPELS</h1></div>
 </header>
 
-<!-- première bande -->
-
+<!-- cartographie -->
 <div class="line" style="justify-content:start;">
   <div>
     <h2>CARTOGRAPHIE<br>D'UNE GÉNÉRATION</h2>
@@ -602,9 +632,9 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="fpicques paysage s" name="FLORIAN PICQUES"></div>
-  <div class="fpicques paysage s" name="FLORIAN PICQUES"></div>
-  <div class="fpicques paysage s" name="FLORIAN PICQUES"></div>
+  <a href="fpicques" class="s"><div class="fpicques paysage" name="FLORIAN PICQUES"></div></a>
+  <a href="fpicques" class="s"><div class="fpicques paysage" name="FLORIAN PICQUES"></div></a>
+  <a href="fpicques" class="s"><div class="fpicques paysage" name="FLORIAN PICQUES"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -649,22 +679,22 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="vsavarino structure s" name="VIRGINIE SAVARINO"></div>
-  <div class="vsavarino structure s" name="VIRGINIE SAVARINO"></div>
+  <a href="vsavarino" class="s"><div class="vsavarino structure" name="VIRGINIE SAVARINO"></div></a>
+  <a href="vsavarino" class="s"><div class="vsavarino structure" name="VIRGINIE SAVARINO"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="mmasse structure m" name="MORGANE MASSÉ"></div>
-  <div class="mmasse structure m" name="MORGANE MASSÉ"></div>
-  <div class="mmasse structure m" name="MORGANE MASSÉ"></div>
+  <a href="mmasse" class="m"><div class="mmasse structure" name="MORGANE MASSÉ"></div></a>
+  <a href="mmasse" class="m"><div class="mmasse structure" name="MORGANE MASSÉ"></div></a>
+  <a href="mmasse" class="m"><div class="mmasse structure" name="MORGANE MASSÉ"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="ktkachova paysage s" name="KSENIIA TKACHOVA"></div>
+  <a href="ktkachova" class="s"><div class="ktkachova paysage" name="KSENIIA TKACHOVA"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -702,7 +732,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="hgerault structure s" name="HUGO GERAULT"></div>
+  <a href="hgerault" class="s"><div class="hgerault structure" name="HUGO GERAULT"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -719,11 +749,11 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="vgeorges paysage s" name="VALENTIN GEORGES"></div>
+  <a href="vgeorges" class="s"><div class="vgeorges paysage" name="VALENTIN GEORGES"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="mbrocarel objet s" name="MARION BROCAREL"></div>
+  <a href="mbrocarel" class="s"><div class="mbrocarel objet" name="MARION BROCAREL"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -741,6 +771,222 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="empty"></div>
   <div class="empty"></div>
   <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="tchiron" class="m"><div class="tchiron paysage" name="THOMAS CHIRON"></div></a>
+  <a href="paysages construits" class="l"><div class="paysage" name="PAYSAGES CONSTRUITS"></div></a>
+  <a href="lgergaud" class="s"><div class="lgergaud paysage" name="LOUISA GERGAUD"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="pcanet" class="s"><div class="pcanet objet" name="PIERRE CANET"></div></a>
+  <a href="pcanet" class="s"><div class="pcanet objet" name="PIERRE CANET"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cechubilleau" class="s"><div class="cechubilleau structure" name="CLAIRE-EMMANUELLE CHUBILLEAU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="hboyjoonauth" class="s"><div class="hboyjoonauth structure" name="HARSHITA BOYJOONAUTH"></div></a>
+  <a href="hboyjoonauth" class="s"><div class="hboyjoonauth structure" name="HARSHITA BOYJOONAUTH"></div></a>
+  <a href="hboyjoonauth" class="s"><div class="hboyjoonauth structure" name="HARSHITA BOYJOONAUTH"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="tchiron" class="m"><div class="tchiron paysage" name="THOMAS CHIRON"></div></a>
+  <a href="paysagesconstruits" class="l"><div class="paysage" name="PAYSAGES CONSTRUITS"></div></a>
+  <a href="lgergaud" class="s"><div class="lgergaud paysage" name="LOUISA GERGAUD"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cechubilleau" class="s"><div class="cechubilleau structure" name="CLAIRE-EMMANUELLE CHUBILLEAU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="structurespotentielles" class="l"><div class="structure" name="STRUCTURES POTENTIELLES"></div></a>
+  <a href="structurespotentielles" class="l"><div class="structure" name="STRUCTURES POTENTIELLES"></div></a>
+  <a href="structurespotentielles" class="l"><div class="structure" name="STRUCTURES POTENTIELLES"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="tchiron" class="m"><div class="tchiron paysage" name="THOMAS CHIRON"></div></a>
+  <a href="paysagesconstruits" class="l"><div class="paysage" name="PAYSAGES CONSTRUITS"></div></a>
+  <a href="lgergaud" class="s"><div class="lgergaud paysage" name="LOUISA GERGAUD"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="alothe" class="m"><div class="alothe speculation" name="ANOUK LOTHE"></div></a>
+  <a href="alothe" class="s"><div class="alothe speculation" name="ANOUK LOTHE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="apineau" class="s"><div class="apineau structure" name="AMANDINE PINEAU"></div></a>
+  <a href="apineau" class="s"><div class="apineau structure" name="AMANDINE PINEAU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cangelin" class="m"><div class="cangelin structure" name="CEDRIC ANGELIN"></div></a>
+  <a href="cangelin" class="m"><div class="cangelin structure" name="CEDRIC ANGELIN"></div></a>
+  <a href="cangelin" class="m"><div class="cangelin structure" name="CEDRIC ANGELIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="objetsoperants" class="l"><div class="objet" name="OBJETS OPÉRANTS"></div></a>
+  <a href="objetsoperants" class="l"><div class="objet" name="OBJETS OPÉRANTS"></div></a>
+  <a href="objetsoperants" class="l"><div class="objet" name="OBJETS OPÉRANTS"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mcosyns" class="s"><div class="mcosyns speculation" name="MATTHIEU COSYNS"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="jlekhansh" class="s"><div class="jlekhansh programme" name="JEEWON LEKHANSH"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
   <div class="empty"></div>
   <div class="empty"></div>
   <div class="empty"></div>
@@ -768,245 +1014,29 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30;box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
-  <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="ffrachon_chavy_lmarchand" class="m"><div class="ffrachon_chavy_lmarchand objet" name="FRACHON + HAVY + MARCHAND"></div></a>
+  <a href="ffrachon_chavy_lmarchand" class="m"><div class="ffrachon_chavy_lmarchand objet" name="FRACHON + HAVY + MARCHAND"></div></a>
+  <a href="ffrachon_chavy_lmarchand" class="m"><div class="ffrachon_chavy_lmarchand objet" name="FRACHON + HAVY + MARCHAND"></div></a>
   <div class="grid"></div>
-  <div class="pcanet objet s" name="PIERRE CANET"></div>
-  <div class="pcanet objet s" name="PIERRE CANET"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="mcosyns" class="s"><div class="mcosyns speculation" name="MATTHIEU COSYNS"></div></a>
+  <a href="mcosyns" class="s"><div class="mcosyns speculation" name="MATTHIEU COSYNS"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-</div>
-<div class="line">
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="cechubilleau structure s" name="CLAIRE-EMMANUELLE CHUBILLEAU"></div>
   <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="hboyjoonauth structure s" name="HARSHITA BOYJOONAUTH"></div>
-  <div class="hboyjoonauth structure s" name="HARSHITA BOYJOONAUTH"></div>
-  <div class="hboyjoonauth structure s" name="HARSHITA BOYJOONAUTH"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30;box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
-  <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cechubilleau structure s" name="CLAIRE-EMMANUELLE CHUBILLEAU"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
-  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
-  <div class="structure" style="z-index:30; box-shadow: 10px 10px 4px;" name="STRUCTURES POTENTIELLES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="tchiron paysage m" name="THOMAS CHIRON"></div>
-  <div class="paysage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="PAYSAGES CONSTRUITS"></div>
-  <div class="lgergaud paysage s" name="LOUISA GERGAUD"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="alothe speculation s" name="ANOUK LOTHE" style="z-index:20"></div>
-  <div class="alothe speculation s" name="ANOUK LOTHE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="apineau structure s" name="AMANDINE PINEAU"></div>
-  <div class="apineau structure s" name="AMANDINE PINEAU"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cangelin structure m" name="CEDRIC ANGELIN"></div>
-  <div class="cangelin structure m" name="CEDRIC ANGELIN"></div>
-  <div class="cangelin structure m" name="CEDRIC ANGELIN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
-  <div class="objet" style="z-index: 30;box-shadow: 10px 10px 4px;" name="OBJETS OPÉRANTS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mcosyns speculation s" name="MATTHIEU COSYNS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="jlekhansh programme s" name="JEEWON LEKHANSH"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="ffrachon_chavy_lmarchand objet m" name="FRACHON + HAVY + MARCHAND"></div>
-  <div class="ffrachon_chavy_lmarchand objet m" name="FRACHON + HAVY + MARCHAND"></div>
-  <div class="ffrachon_chavy_lmarchand objet m" name="FRACHON + HAVY + MARCHAND"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mcosyns speculation s" name="MATTHIEU COSYNS"></div>
-  <div class="mcosyns speculation s" name="MATTHIEU COSYNS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="tramaholison programme s" name="TSIORY RAMAHOLISON"></div>
-  <div class="tramaholison programme s" name="TSIORY RAMAHOLISON"></div>
+  <a href="tramaholison" class="s"><div class="tramaholison programme" name="TSIORY RAMAHOLISON"></div></a>
+  <a href="tramaholison" class="s"><div class="tramaholison programme" name="TSIORY RAMAHOLISON"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1036,8 +1066,8 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="aacoly paysage s" name="AMY-AÏCHA COLY" style="z-index: 20;"></div>
-  <div class="aacoly paysage s" name="AMY-AÏCHA COLY"></div>
+  <a href="aacoly" class="m"><div class="aacoly paysage" name="AMY-AÏCHA COLY"></div></a>
+  <a href="aacoly" class="s"><div class="aacoly paysage" name="AMY-AÏCHA COLY"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1087,495 +1117,9 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="asanterre structure s" name="ANTHONY SANTERRE"></div>
-  <div class="asanterre structure s" name="ANTHONY SANTERRE"></div>
-  <div class="asanterre structure s" name="ANTHONY SANTERRE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="apicot objet s" name="ANTONIN PICOT"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mafi_zcano_aguyot objet s" name="AFI + CANO + GUYOT"></div>
-  <div class="mafi_zcano_aguyot objet s" name="AFI + CANO + GUYOT"></div>
-  <div class="mafi_zcano_aguyot objet s" name="AFI + CANO + GUYOT"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rpenin programme s" name="ROMANE PENIN"></div>
-  <div class="aamblard programme s" name="ANNAËLLE AMBLARD"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="nmarvier programme s" name="NINON MARVIER"></div>
-  <div class="nmarvier programme s" name="NINON MARVIER"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
-  <div class="relaheedoomun speculation s" name="RIDHWAAN ELAHEE DOOMUN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
-  <div class="programme" style="z-index: 30; box-shadow: 10px 10px 4px;" name="INVENTIONS PROGRAMMATIQUES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="nmarvier programme s" name="NINON MARVIER"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="tlethomas speculation s" name="TITOUAN LE THOMAS"></div>
-  <div class="tlethomas speculation s" name="TITOUAN LE THOMAS"></div>
-  <div class="tlethomas speculation s" name="TITOUAN LE THOMAS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="sgadoud speculation m" name="SALOMÉ GADOUD"></div>
-  <div class="speculation" style="z-index: 30; box-shadow: 10px 10px 4px;" name="SPÉCULATIONS FORMELLES"></div>
-  <div class="relaheedoomun speculation s" name="RIDHWAAN ELAHEE DOOMUN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cbrossard_lbrault_cguerin programme m" name="BROSSARD + BRAULT + GUERIN"></div>
-  <div class="cbrossard_lbrault_cguerin programme m" name="BROSSARD + BRAULT + GUERIN"></div>
-  <div class="cbrossard_lbrault_cguerin programme m" name="BROSSARD + BRAULT + GUERIN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="hrasamimanana speculation s" name="HOBBIE RASAMIMANANA" ></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rmadiot enquete s" name="RÉZA MADIOT"></div>
-  <div class="rmadiot enquete s" name="RÉZA MADIOT"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rmadiot enquete s" name="RÉZA MADIOT"></div>
-  <div class="rmadiot enquete s"  name="RÉZA MADIOT" style="z-index: 20;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rbundhun speculation s" name="ROHAN BUNDHUN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="ladelporte programme m" name="LAURIE-ANNE DELPORTE" style="z-index: 10;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mladan enquete s" name="MARIE LADAN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="sdjflore regard m" name="STEEVE DAVID JÉRÉMIE FLORE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="ladelporte programme m" name="LAURIE-ANNE DELPORTE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mladan enquete s" name="MARIE LADAN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="empty"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="sdjflore regard m" name="STEEVE DAVID JÉRÉMIE FLORE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC" style="z-index:20"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC" style="z-index:20"></div>
-  <div class="nlefloic speculation s" name="NATHAN LE FLOHIC" style="z-index:20"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="ladelporte programme m" name="LAURIE-ANNE DELPORTE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
+  <a href="asanterre" class="s"><div class="asanterre structure" name="ANTHONY SANTERRE"></div></a>
+  <a href="asanterre" class="s"><div class="asanterre structure" name="ANTHONY SANTERRE"></div></a>
+  <a href="asanterre" class="s"><div class="asanterre structure" name="ANTHONY SANTERRE"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1627,9 +1171,6 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="agarel ruralite s" name="AMANCE GAREL"></div>
-  <div class="agarel ruralite s" name="AMANCE GAREL"></div>
-  <div class="agarel ruralite s" name="AMANCE GAREL"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -1637,357 +1178,36 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="apicot" class="s"><div class="apicot objet" name="ANTONIN PICOT"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="mafi_zcanot_aguyot" class="s"><div class="mafi_zcano_aguyot objet" name="AFI + CANO + GUYOT"></div></a>
+  <a href="mafi_zcanot_aguyot" class="s"><div class="mafi_zcano_aguyot objet" name="AFI + CANO + GUYOT"></div></a>
+  <a href="mafi_zcanot_aguyot" class="s"><div class="mafi_zcano_aguyot objet" name="AFI + CANO + GUYOT"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="sgadoud" class="m"><div class="sgadoud speculation" name="SALOMÉ GADOUD"></div></a>
+  <a href="speculationsformelles" class="l"><div class="speculation" name="SPÉCULATIONS FORMELLES"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="rpenin" class="s"><div class="rpenin programme" name="ROMANE PENIN"></div></a>
+  <a href="aamblard" class="s"><div class="aamblard programme" name="ANNAËLLE AMBLARD"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="nmarvier" class="s"><div class="nmarvier programme" name="NINON MARVIER"></div></a>
+  <a href="nmarvier" class="s"><div class="nmarvier programme" name="NINON MARVIER"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rtarhini enquete s" name="RIBAL TARHINI"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
-  <div class="mmany enquete m" name="MARIE MANY"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="jgrondin heritage s" name="JESSIE GRONDIN"></div>
-  <div class="jgrondin heritage s" name="JESSIE GRONDIN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="scommunier heritage s" name="SEBASTIEN COMMUNIER"></div>
-  <div class="scommunier heritage s" name="SEBASTIEN COMMUNIER"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="tbedouet ruralite s" name="THIBAULT BEDOUET"></div>
-  <div class="tbedouet ruralite s" name="THIBAULT BEDOUET"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="fperennes alternative s" name="FLORIAN PÉRENNES"></div>
-  <div class="fperennes alternative s" name="FLORIAN PÉRENNES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
-  <div class="mlezot regard s" name="MANON LEZOT"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rtarhini enquete s" name="RIBAL TARHINI"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
-  <div class="jjoseph enquete s" name="JULIETTE JOSEPH"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="ebombarde heritage m" name="ÉMILIE BOMBARDE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="llardeux alternative s" name="LÉO LARDEUX"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="eleduc alternative m" name="EMMA LEDUC"></div>
-  <div class="eleduc alternative m" name="EMMA LEDUC"></div>
-  <div class="eleduc alternative m" name="EMMA LEDUC"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
-  <div class="mlezot regard s" name="MANON LEZOT"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="arazafindrainibe regard m" name="ANJAKA RAZAFINDRAINIBE" style="z-index: 10;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rtarhini enquete s" name="RIBAL TARHINI"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="egarion enquete m" name="ENOLA GARION"></div>
-  <div class="enquete" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ENQUÊTES SITUÉES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="lnoury heritage s" name="LAURIANE NOURY"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
-  <div class="alternative" style="z-index: 30; box-shadow: 10px 10px 4px;" name="ALTERNATIVES DÉSIRABLES"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="cppioffetettori_mlebidre regard m" name="PIOFFET-ETTORI + LE BIDRE"></div>
-  <div class="regard" style="z-index: 30; box-shadow: 10px 10px 4px;" name="REGARDS DÉCENTRÉS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="arazafindrainibe regard m" name="ANJAKA RAZAFINDRAINIBE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mlouet lowtech m" name="MATHILDE LOUET"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="arazafindrainibe regard m" name="ANJAKA RAZAFINDRAINIBE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mlouet lowtech m" name="MATHILDE LOUET" style="z-index: 10;"></div>
-  <div class="mlouet lowtech m" name="MATHILDE LOUET"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mlagoutte heritage m" name="MAXIME LAGOUTTE"></div>
-  <div class="mlagoutte heritage m" name="MAXIME LAGOUTTE"></div>
-  <div class="mlagoutte heritage m" name="MAXIME LAGOUTTE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
-  <div class="aleveque ruralite s" name="ALEXANDRE LÉVÊQUE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="horouguidou lowtech s" name="HARITH OROU-GUIDOU"></div>
-  <div class="horouguidou lowtech s" name="HARITH OROU-GUIDOU"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="abarbet_sfourrier lowtech s" name="BARBET + FOURRIER"></div>
-  <div class="abarbet_sfourrier lowtech s" name="BARBET + FOURRIER"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-</div>
-<div class="line">
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="HÉRITAGES ACTIVÉS"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" ame="HÉRITAGES ACTIVÉS"></div>
-  <div class="heritage" style="z-index: 30; box-shadow: 10px 10px 4px;" name="HÉRITAGES ACTIVÉS"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="vsanassee ruralite m" name="VALEN SANASSEE"></div>
-  <div class="ruralite" style="z-index: 30; box-shadow: 10px 10px 4px;" name="POST-RURALITÉS"></div>
-  <div class="aleveque ruralite s" name="ALEXANDRE LÉVÊQUE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="vbruneau lowtech m" name="VALENTINE BRUNEAU"></div>
-  <div class="vbruneau lowtech m" name="VALENTINE BRUNEAU"></div>
-  <div class="vbruneau lowtech m" name="VALENTINE BRUNEAU"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="abarbet_sfourrier lowtech s" name="ANTOINE BARBET"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2019,27 +1239,351 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="abazin alternative m" name="ALEXANDRA BAZIN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rrazafindrabe alternative m" name="ROTSY RAZAFINDRABE" style="z-index: 10;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="thelary lowtech s" name="TITOUAN HELARY"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="sgadoud" class="m"><div class="sgadoud speculation" name="SALOMÉ GADOUD"></div></a>
+  <a href="speculationsformelles" class="l"><div class="speculation" name="SPÉCULATIONS FORMELLES"></div></a>
+  <a href="relaheedoomun" class="s"><div class="relaheedoomun speculation" name="RIDHWAAN ELAHEE DOOMUN"></div></a>
   <div class="grid"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
-  <div class="lowtech" style="z-index: 30; box-shadow: 10px 10px 4px;" name="AVENIRS LOWTECH"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="inventionsprogrammatiques" class="l"><div class="programme" name="INVENTIONS PROGRAMMATIQUES"></div></a>
+  <a href="inventionsprogrammatiques" class="l"><div class="programme" name="INVENTIONS PROGRAMMATIQUES"></div></a>
+  <a href="inventionsprogrammatiques" class="l"><div class="programme" name="INVENTIONS PROGRAMMATIQUES"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="nmarvier" class="s"><div class="nmarvier programme" name="NINON MARVIER"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="tlethomas" class="s"><div class="tlethomas speculation" name="TITOUAN LE THOMAS"></div></a>
+  <a href="tlethomas" class="s"><div class="tlethomas speculation" name="TITOUAN LE THOMAS"></div></a>
+  <a href="tlethomas" class="s"><div class="tlethomas speculation" name="TITOUAN LE THOMAS"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="sgadoud" class="m"><div class="sgadoud speculation" name="SALOMÉ GADOUD"></div></a>
+  <a href="speculationsformelles" class="l"><div class="speculation" name="SPÉCULATIONS FORMELLES"></div></a>
+  <a href="relaheedoomun" class="s"><div class="relaheedoomun speculation" name="RIDHWAAN ELAHEE DOOMUN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="lbrault_cbrossard_cguerin" class="m"><div class="cbrossard_lbrault_cguerin programme" name="BROSSARD + BRAULT + GUERIN"></div></a>
+  <a href="lbrault_cbrossard_cguerin" class="m"><div class="cbrossard_lbrault_cguerin programme" name="BROSSARD + BRAULT + GUERIN"></div></a>
+  <a href="lbrault_cbrossard_cguerin" class="m"><div class="cbrossard_lbrault_cguerin programme" name="BROSSARD + BRAULT + GUERIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="hrasamimana" class="s"><div class="hrasamimanana speculation" name="HOBBIE RASAMIMANANA"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rmadiot" class="s"><div class="rmadiot enquete" name="RÉZA MADIOT"></div></a>
+  <a href="rmadiot" class="s"><div class="rmadiot enquete" name="RÉZA MADIOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rmadiot" class="s"><div class="rmadiot enquete" name="RÉZA MADIOT"></div></a>
+  <a href="rmadiot" class="m"><div class="rmadiot enquete" name="RÉZA MADIOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rbundhun" class="s"><div class="rbundhun speculation" name="ROHAN BUNDHUN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="ladelporte" class="s"><div class="ladelporte programme" name="LAURIE-ANNE DELPORTE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mladan" class="s"><div class="mladan enquete" name="MARIE LADAN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="sdjflore" class="m"><div class="sdjflore regard" name="STEEVE DAVID JÉRÉMIE FLORE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="nleflohic" class="s"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <a href="nleflohic" class="s"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <a href="nleflohic" class="s"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="ladelporte" class="m"><div class="ladelporte programme" name="LAURIE-ANNE DELPORTE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mladan" class="s"><div class="mladan enquete" name="MARIE LADAN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="sdjflore" class="m"><div class="sdjflore regard" name="STEEVE DAVID JÉRÉMIE FLORE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="nleflohic" class="m"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <a href="nleflohic" class="m"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <a href="nleflohic" class="m"><div class="nlefloic speculation" name="NATHAN LE FLOHIC"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="ladelporte" class="m"><div class="ladelporte programme" name="LAURIE-ANNE DELPORTE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2066,29 +1610,29 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="mblanc ruralite s" name="MAXIME BLANC"></div>
-  <div class="mblanc ruralite s" name="MAXIME BLANC"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="abazin alternative m" name="ALEXANDRA BAZIN"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rrazafindrabe alternative m" name="ROTSY RAZAFINDRABE"></div>
-  <div class="rrazafindrabe alternative m" name="ROTSY RAZAFINDRABE"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="lpajot regard s" name="LUC PAJOT"></div>
-  <div class="lpajot regard s" name="LUC PAJOT"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="jsedilot lowtech s" name="JULIE SÉDILOT"></div>
-  <div class="jsedilot lowtech s" name="JULIE SÉDILOT" style="z-index:20"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2110,28 +1654,12 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="jachoi heritage s" name="JIN A CHOI"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="palvarado ruralite m" name="PAMELA ALVARADO" style="z-index: 10;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="mblanc ruralite s" name="MAXIME BLANC"></div>
-  <div class="mblanc ruralite s" name="MAXIME BLANC"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="abazin alternative m" name="ALEXANDRA BAZIN" style="z-index: 10;"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="rrazafindrabe alternative m" name="ROTSY RAZAFINDRABE"></div>
-  <div class="rrazafindrabe alternative m" name="ROTSY RAZAFINDRABE"></div>
+  <a href="agarel" class="s"><div class="agarel ruralite" name="AMANCE GAREL"></div></a>
+  <a href="agarel" class="s"><div class="agarel ruralite" name="AMANCE GAREL"></div></a>
+  <a href="agarel" class="s"><div class="agarel ruralite" name="AMANCE GAREL"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2141,8 +1669,6 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="jsedilot lowtech s" name="JULIE SÉDILOT"></div>
-  <div class="jsedilot lowtech s" name="JULIE SÉDILOT"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2150,7 +1676,187 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="lbousseau lowtech s" name="LISA BOUSSEAU" style="z-index:20"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rtarhini" class="s"><div class="rtarhini enquete" name="RIBAL TARHINI"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="egarion" class="m"><div class="egarion enquete" name="ENOLA GARION"></div></a>
+  <a href="enquetessituees" class="l"><div class="enquete" name="ENQUÊTES SITUÉES"></div></a>
+  <a href="mmany" class="m"><div class="mmany enquete" name="MARIE MANY"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="jgrondin" class="s"><div class="jgrondin heritage" name="JESSIE GRONDIN"></div></a>
+  <a href="jgrondin" class="s"><div class="jgrondin heritage" name="JESSIE GRONDIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="scommunier" class="s"><div class="scommunier heritage" name="SEBASTIEN COMMUNIER"></div></a>
+  <a href="scommunier" class="s"><div class="scommunier heritage" name="SEBASTIEN COMMUNIER"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="tbedouet" class="s"><div class="tbedouet ruralite" name="THIBAULT BEDOUET"></div></a>
+  <a href="tbedouet" class="s"><div class="tbedouet ruralite" name="THIBAULT BEDOUET"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="fperennes" class="s"><div class="fperennes alternative" name="FLORIAN PÉRENNES"></div></a>
+  <a href="fperennes" class="s"><div class="fperennes alternative" name="FLORIAN PÉRENNES"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cppioffetettori_mlebidre" class="m"><div class="cppioffetettori_mlebidre regard" name="PIOFFET-ETTORI + LE BIDRE"></div></a>
+  <a href="regardsdecentres" class="l"><div class="regard" name="REGARDS DÉCENTRÉS"></div></a>
+  <a href="mlezot" class="s"><div class="mlezot regard" name="MANON LEZOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rtarhini" class="s"><div class="rtarhini enquete" name="RIBAL TARHINI"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="egarion" class="m"><div class="egarion enquete" name="ENOLA GARION"></div></a>
+  <a href="enquetessituees" class="l"><div class="enquete" name="ENQUÊTES SITUÉES"></div></a>
+  <a href="jjoseph" class="s"><div class="jjoseph enquete" name="JULIETTE JOSEPH"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="ebombarde" class="m"><div class="ebombarde heritage" name="ÉMILIE BOMBARDE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="llardeux" class="s"><div class="llardeux alternative" name="LÉO LARDEUX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="eleduc" class="m"><div class="eleduc alternative m" name="EMMA LEDUC"></div></a>
+  <a href="eleduc" class="m"><div class="eleduc alternative m" name="EMMA LEDUC"></div></a>
+  <a href="eleduc" class="m"><div class="eleduc alternative m" name="EMMA LEDUC"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cppioffetettori_mlebidre" class="m"><div class="cppioffetettori_mlebidre regard" name="PIOFFET-ETTORI + LE BIDRE"></div></a>
+  <a href="regardsdecentres" class="l"><div class="regard" name="REGARDS DÉCENTRÉS"></div></a>
+  <a href="mlezot" class="s"><div class="mlezot regard" name="MANON LEZOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="arazafindrainibe" class="s"><div class="arazafindrainibe regard" name="ANJAKA RAZAFINDRAINIBE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rtarhini" class="s"><div class="rtarhini enquete" name="RIBAL TARHINI"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="egarion" class="m"><div class="egarion enquete" name="ENOLA GARION"></div></a>
+  <a href="enquetessituees" class="l"><div class="enquete" name="ENQUÊTES SITUÉES"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="lnoury" class="s"><div class="lnoury heritage" name="LAURIANE NOURY"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="alternativesdesirables" class="l"><div class="alternative" name="ALTERNATIVES DÉSIRABLES"></div></a>
+  <a href="alternativesdesirables" class="l"><div class="alternative" name="ALTERNATIVES DÉSIRABLES"></div></a>
+  <a href="alternativesdesirables" class="l"><div class="alternative" name="ALTERNATIVES DÉSIRABLES"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="cppioffetettori_mlebidre" class="m"><div class="cppioffetettori_mlebidre regard" name="PIOFFET-ETTORI + LE BIDRE"></div></a>
+  <a href="regardsdecentres" class="l"><div class="regard" name="REGARDS DÉCENTRÉS"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="arazafindrainibe" class="m"><div class="arazafindrainibe regard" name="ANJAKA RAZAFINDRAINIBE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mlouet" class="m"><div class="mlouet lowtech" name="MATHILDE LOUET"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2165,16 +1871,13 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="gringenbach heritage s" name="GLADYS RINGENBACH"></div>
-  <div class="gringenbach heritage s" name="GLADYS RINGENBACH"></div>
-  <div class="grid"></div>
-  <div class="grid"></div>
-  <div class="palvarado ruralite m" name="PAMELA ALVARADO"></div>
-  <div class="palvarado ruralite m" name="PAMELA ALVARADO"></div>
-  <div class="palvarado ruralite m" name="PAMELA ALVARADO"></div>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="vsanassee" class="m"><div class="vsanassee ruralite" name="VALEN SANASSEE"></div></a>
+  <a href="postruralite" class="l"><div class="ruralite"  name="POST-RURALITÉS"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2194,6 +1897,12 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
+  <a href="arazafindrainibe" class="m"><div class="arazafindrainibe regard" name="ANJAKA RAZAFINDRAINIBE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mlouet" class="s"><div class="mlouet lowtech" name="MATHILDE LOUET"></div></a>
+  <a href="mlouet" class="m"><div class="mlouet lowtech" name="MATHILDE LOUET"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2203,8 +1912,329 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
-  <div class="lbousseau lowtech s" name="LISA BOUSSEAU"></div>
-  <div class="lbousseau lowtech s" name="LISA BOUSSEAU"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mlagoutte" class="m"><div class="mlagoutte heritage" name="MAXIME LAGOUTTE"></div></a>
+  <a href="mlagoutte" class="m"><div class="mlagoutte heritage" name="MAXIME LAGOUTTE"></div></a>
+  <a href="mlagoutte" class="m"><div class="mlagoutte heritage" name="MAXIME LAGOUTTE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="vsanassee" class="m"><div class="vsanassee ruralite" name="VALEN SANASSEE"></div></a>
+  <a href="postruralites" class="l"><div class="ruralite" name="POST-RURALITÉS"></div></a>
+  <a href="aleveque" class="s"><div class="aleveque ruralite" name="ALEXANDRE LÉVÊQUE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="horouguidou" class="s"><div class="horouguidou lowtech" name="HARITH OROU-GUIDOU"></div></a>
+  <a href="horouguidou" class="s"><div class="horouguidou lowtech" name="HARITH OROU-GUIDOU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="abarbet_sfourrier" class="s"><div class="abarbet_sfourrier lowtech" name="BARBET + FOURRIER"></div></a>
+  <a href="abarbet_sfourrier" class="s"><div class="abarbet_sfourrier lowtech" name="BARBET + FOURRIER"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="heritagesactives" class="l"><div class="heritage" name="HÉRITAGES ACTIVÉS"></div></a>
+  <a href="heritagesactives" class="l"><div class="heritage" name="HÉRITAGES ACTIVÉS"></div></a>
+  <a href="heritagesactives" class="l"><div class="heritage" name="HÉRITAGES ACTIVÉS"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="vsanassee" class="m"><div class="vsanassee ruralite" name="VALEN SANASSEE"></div></a>
+  <a href="postruralites" class="l"><div class="ruralite" name="POST-RURALITÉS"></div></a>
+  <a href="aleveque" class="s"><div class="aleveque ruralite" name="ALEXANDRE LÉVÊQUE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="vbruneau" class="m"><div class="vbruneau lowtech" name="VALENTINE BRUNEAU"></div></a>
+  <a href="vbruneau" class="m"><div class="vbruneau lowtech" name="VALENTINE BRUNEAU"></div></a>
+  <a href="vbruneau" class="m"><div class="vbruneau lowtech" name="VALENTINE BRUNEAU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="abarbet_sfourrier" class="s"><div class="abarbet_sfourrier lowtech" name="ANTOINE BARBET"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="abazin" class="m"><div class="abazin alternative" name="ALEXANDRA BAZIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rrazafindrabe" class="s"><div class="rrazafindrabe alternative" name="ROTSY RAZAFINDRABE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="thelary" class="s"><div class="thelary lowtech" name="TITOUAN HELARY"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="avenirslowtech" class="l"><div class="lowtech" name="AVENIRS LOWTECH"></div></a>
+  <a href="avenirslowtech" class="l"><div class="lowtech" name="AVENIRS LOWTECH"></div></a>
+  <a href="avenirslowtech" class="l"><div class="lowtech" name="AVENIRS LOWTECH"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mblanc" class="s"><div class="mblanc ruralite" name="MAXIME BLANC"></div></a>
+  <a href="mblanc" class="s"><div class="mblanc ruralite" name="MAXIME BLANC"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="abazin" class="m"><div class="abazin alternative" name="ALEXANDRA BAZIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rrazafindrabe" class="m"><div class="rrazafindrabe alternative" name="ROTSY RAZAFINDRABE"></div></a>
+  <a href="rrazafindrabe" class="m"><div class="rrazafindrabe alternative" name="ROTSY RAZAFINDRABE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="lpajot" class="s"><div class="lpajot regard" name="LUC PAJOT"></div></a>
+  <a href="lpajot" class="s"><div class="lpajot regard" name="LUC PAJOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="jsedilot" class="s"><div class="jsedilot lowtech" name="JULIE SÉDILOT"></div></a>
+  <a href="jsedilot" class="m"><div class="jsedilot lowtech" name="JULIE SÉDILOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="jachoi" class="s"><div class="jachoi heritage" name="JIN A CHOI"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="palvarado" class="s"><div class="palvarado ruralite" name="PAMELA ALVARADO"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="mblanc" class="s"><div class="mblanc ruralite" name="MAXIME BLANC"></div></a>
+  <a href="mblanc" class="s"><div class="mblanc ruralite" name="MAXIME BLANC"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="abazin" class="s"><div class="abazin alternative" name="ALEXANDRA BAZIN"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="rrazafindrabe" class="m"><div class="rrazafindrabe alternative" name="ROTSY RAZAFINDRABE"></div></a>
+  <a href="rrazafindrabe" class="m"><div class="rrazafindrabe alternative" name="ROTSY RAZAFINDRABE"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="jsedilot" class="s"><div class="jsedilot lowtech" name="JULIE SÉDILOT"></div></a>
+  <a href="jsedilot" class="s"><div class="jsedilot lowtech" name="JULIE SÉDILOT"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="lbousseau" class="m"><div class="lbousseau lowtech" name="LISA BOUSSEAU"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+</div>
+<div class="line">
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="gringenbach" class="s"><div class="gringenbach heritage" name="GLADYS RINGENBACH"></div></a>
+  <a href="gringenbach" class="s"><div class="gringenbach heritage" name="GLADYS RINGENBACH"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="palvarado" class="m"><div class="palvarado ruralite" name="PAMELA ALVARADO"></div></a>
+  <a href="palvarado" class="m"><div class="palvarado ruralite" name="PAMELA ALVARADO"></div></a>
+  <a href="palvarado" class="m"><div class="palvarado ruralite" name="PAMELA ALVARADO"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="lbousseau" class="s"><div class="lbousseau lowtech" name="LISA BOUSSEAU"></div></a>
+  <a href="lbousseau" class="s"><div class="lbousseau lowtech" name="LISA BOUSSEAU"></div></a>
   <div class="grid"></div>
   <div class="grid"></div>
   <div class="grid"></div>
@@ -2388,6 +2418,90 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   </div>
 </div>
 
+<p><br><br><br></p>
+<!-- frise -->
+
+<div class="scroll-container" id="scrl1">
+    <div style="min-width: 25vw;flex-shrink:1;margin-left: 2vw;">
+      <h2>D'OÙ PARS-TU<br>CAMARADE ?</h2>
+      <p>La formation du diplôme d’état en architecture est basée sur le modèle européen licence, master, doctorat et se déroule usuellement en cinq ans, intégrant un semestre de mobilité internationale ainsi qu’un stage en situation professionnelle. À partir du troisième semestre, l’école d’architecture de Nantes propose plusieurs choix de studios de projet pouvant mener les étudiant·e·s à travailler sur des sujets tout à fait différents dans leurs programmes, leurs situations ou leurs méthodes d’approche.<br><br>
+À ces embranchements au sein de l’école s’ajoutent des déviations supplémentaires que peuvent rechercher les étudiant·e·s. Par le processus de césure, il est possible de prolonger le stage ou la mobilité internationale, de prendre plus de temps pour rédiger son mémoire, voire même de suivre une autre formation professionnalisante en complément.<br>
+Ces semestres supplémentaires allongent le cursus et mènent les promotions à se croiser, les studios de master mélangeant les individus peu importe leur année d’étude en cours. La formation professionnelle continue, le double cursus ingénieur-architecte et architecte-ingénieur, ainsi que le partenariat avec l’antenne Nantes-Mauritius amènent autant de parcours additionnels.<br>
+De plus, le parcours scolaire n’est pas seulement rythmé par l’arborescence pédagogique. Il est particulièrement perméable à ce qui se passe en dehors du cadre académique. La trajectoire des étudiant·e·s est alors également infléchie par un ensemble d’événements extra-curriculaires : des confinements successifs, aux blocages d’ensa en luttes en passant par le retour du festival archiculture.<br><br>
+Le diagramme ci-contre tente de représenter cette diversité de parcours qui explique peut-être l’apparition d’une culture commune de cette nouvelle génération d’architectes. Construit grâce au témoignage de la moitié de la promotion ayant soutenu son PFE au printemps 2025, il révèle les croisements et les liens de filiation entre les divers enseignements, fait apparaître des tendances de parcours, des étapes obligées, des irrégularités comme des volte-face académiques.</p>
+    </div>
+    <img src="frise.png">
+</div>
+
+<p><br><br><br></p>
+<!-- footer -->
+ <div class="index">
+  <div class="text-bloc">
+     <p><u>commissariat, scénographie, conception graphique</u> :<br>
+    <a href="asap.archi" target="_blank">asap</a> × <a href="mostro.archi" target="_blank">mostro</a> (louis fiolleau, hugo forté, clarisse protat)<br>
+    exposition gratuite et ouverte à tou·te·s.<br>
+    galerie loire de <a href="nantes.archi.fr" target="_blank">l’ensa Nantes</a>, du 29/01 au 15/02</p>
+  </div>
+  <div class="text-bloc">
+     <p><u>ressources téléchargeables</u> :<br>
+    <a href="dépliant.pdf" target="_blank">dépliant format A2 recto-verso</a><br>
+    <a href="feuille de salle.pdf" target="_blank">feuille de salle format A4 recto-verso</a><br>
+    <a href="affiche" target="_blank">affiche format A1</a></p>
+  </div>
+  <div style="width:5vw">
+    <img src="mostro.png" style="width: 100%;  height: 100%;  object-fit: contain;">
+  </div>
+  <div style="width:5vw">
+    <img src="asap.png" style="width: 100%;  height: 100%;  object-fit: contain;">
+  </div>
+  <div style="width:5vw">
+    <img src="ensa.png" style="width: 100%;  height: 100%;  object-fit: contain;">
+  </div>
+
+ </div>
+
+
+<script>
+window.onload = () => {
+
+  const container = document.getElementById("scrl1");
+  const speed = 4; // accélère le scroll horizontal
+
+  container.addEventListener("wheel", function(event){
+
+    const atStart = container.scrollLeft <= 0;
+    const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth;
+
+    // --- CAS 1 : Scroll horizontal obligatoire (image pas finie)
+    if (!atEnd && event.deltaY > 0) {
+      event.preventDefault();
+      container.scrollLeft += event.deltaY * speed;
+      return;
+    }
+
+    if (!atStart && event.deltaY < 0) {
+      event.preventDefault();
+      container.scrollLeft += event.deltaY * speed;
+      return;
+    }
+
+    // --- CAS 2 : On est tout à droite → on libère le scroll vertical
+    if (atEnd && event.deltaY > 0) {
+      return; // vertical normal
+    }
+
+    // --- CAS 3 : On est tout à gauche → on libère le scroll vertical
+    if (atStart && event.deltaY < 0) {
+      return; // vertical normal
+    }
+
+  }, { passive: false });
+};
+</script>
+
+
+
+
 <script>
   //affichage des noms
   const items = document.querySelectorAll('div');
@@ -2405,11 +2519,10 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
   });
 </script>
 
-
 <script>
   // aggrandit les tables cliquables quand on passe dessus //
   const allDivs = document.querySelectorAll('div');
-  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc']; // classes à exclure des effets globaux
+  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc', 'scroll-container']; // classes à exclure des effets globaux
 
   allDivs.forEach(div => {
     div.addEventListener('mouseenter', () => {

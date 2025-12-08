@@ -3,190 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="favicon.png">
+  <link href="../style_pages.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ARCHIPELS</title>
 
-  <style>
-
-    /* généralités */
-
-    html{
-      scrollbar-width: none;
-    }
-    html::-webkit-scrollbar {
-      display: none;
-    }
-
-    * {
-      cursor:url("../cursor_dot.svg") 16 16,default;
-    }
-
-    body {
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    h1 {
-      font-family:Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      font-size:75px;
-      background: white;
-    }
-
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 30px;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
-      color:white
-    }
-
-    h3 {
-      font-family:Arial, Helvetica, sans-serif;
-      font-weight:bolder;
-      font-style:italic;
-      font-size:20px;
-    }
-
-    p {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size:15px;
-    }
-
-    a {
-      text-decoration: none;
-      font-size: inherit;
-      font-family:inherit;
-      color:inherit;
-    }
-
-    .index {
-      display:flex;
-      flex-direction:row;
-      justify-content: space-between;
-    }
-    .title-bloc {
-      margin:.6vw;
-      flex: auto;
-    }
-
-    .text-bloc {
-      margin:.2vw;
-      width: 8.49vw;
-      flex: auto;
-    }
-    
-    .text-bloc a {
-      display: inline-block;
-    }
-
-    .text-bloc a:hover {
-      cursor:url(../cursor.svg) 16 16,default;
-      font-weight:bold;
-      transform: translateX(10px);
-    }
-
-    .intro {
-      display:flex;
-      flex-direction:row;
-      justify-content: center;
-    }
-
-    .text-intro {
-      margin:2vw;
-      width:20vw;
-      height:80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .text-intro a {
-      display: inline-block;
-    }
-
-    .text-intro a:hover {
-      cursor:url(../cursor.svg) 16 16,default;
-      font-weight:bold;
-      transform: translateX(10px);
-    }
-
-    .image-intro {
-      margin:2vw;
-      max-width:72vw;
-      height:80vh;
-    }
-
-    .container {
-      margin:2vw;
-      display:flex;
-      flex-direction: column;
-    }
-    .container img {
-      width:100%;
-    }
-
-    
-
-    /* header */
-
-    header {
-      margin-top: -50px;
-      z-index: 1000;
-      display:flex;
-      justify-content: space-between;
-      position: fixed;
-      flex-direction: row;
-      width:98vw;
-    }
-
-    header .box {
-      flex-grow:10;
-    }
-
-    #quit a:hover {
-      cursor:url(../cursor.svg) 16 16,default;
-      transform: rotate(45deg);
-    }
-    
-    /* frise */
-
-    .scroll-container {
-        width: 100vw;
-        height: 90vh;           /* hauteur visible */
-        overflow-x: auto;        /* scroll horizontal */
-        overflow-y: hidden;      /* bloque le vertical */
-        scroll-behavior: smooth;          
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto; /* masque scroll bar */
-        overflow-y: hidden;
-       -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    .scroll-container::-webkit-scrollbar {
-      height: 0;
-      display: none;
-    }
-
-    .scroll-container img {
-        height: 100%;
-        display: inline-block;
-    }
-  
-  </style>
 
 </head>
 
 <body>
 
 <header>
-  <a id="quit" href="../index.html"><h1 style="margin-left: 2vw; background: none;">×</h1></a>
-  <h1>ALEXANDRE LEVEQUE</h1>
+  <a class="desktop" href="../index.html"><h1 style="margin-left: 2vw; background: none;">×</h1></a>
+  <h1>ALEXANDRE LÉVÊQUE</h1>
 </header>
 
 <div class="intro">
@@ -349,7 +177,7 @@
 
 <p><br><br><br></p>
 <!-- footer -->
- <div class="index">
+ <div class="index footer">
   <div class="text-bloc">
      <p><u>commissariat, scénographie, conception graphique</u> :<br>
     <a href="asap.archi" target="_blank">asap</a> × <a href="mostro.archi" target="_blank">mostro</a> (louis fiolleau, hugo forté, clarisse protat)<br>
@@ -362,13 +190,13 @@
     <a href="../feuille de salle.pdf" target="_blank">feuille de salle format A4 recto-verso</a><br>
     <a href="../affiche.pdf" target="_blank">affiche format A1</a></p>
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="../mostro.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="../asap.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="../ensa.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
 

@@ -1,0 +1,371 @@
+
+    /* généralités */
+
+    html{
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar {
+      display: none;
+    }
+
+    * {
+      cursor:url("cursor_dot.svg") 16 16,default;
+    }
+
+    body {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    h1 {
+      font-family:Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size:75px;
+      background: white;
+    }
+
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 30px;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+      color:white
+    }
+
+    h3 {
+      font-family:Arial, Helvetica, sans-serif;
+      font-weight:bolder;
+      font-style:italic;
+      font-size:20px;
+    }
+
+    p {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:15px;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: inherit;
+      font-family:inherit;
+      color:inherit;
+    }
+
+    .intro {
+      display:flex;
+      flex-direction:row;
+    }
+    .intro_image {
+      height:98vh;
+    }
+    .intro_image > img {
+      height:100%;
+    }
+    .intro_texte {
+      height:98vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      margin: 0 2vw;
+    }
+
+    .index {
+      display:flex;
+      flex-direction:row;
+    }
+
+    .title-bloc {
+      margin:.6vw;
+      flex: auto;
+    }
+
+    .text-bloc {
+      margin:.2vw;
+      width: 8.49vw;
+      flex: auto;
+    }
+    
+    .text-bloc a {
+      display: inline-block;
+    }
+
+    .text-bloc a:hover {
+      cursor:url(cursor.svg) 16 16,default;
+      font-weight:bold;
+      transform: translateX(10px);
+    }
+
+    /* header */
+
+    header {
+      margin-top: -50px;
+      z-index: 1000;
+      pointer-events: none;
+      display:flex;
+      justify-content: flex-end;
+      position: fixed;
+      flex-direction: row;
+      width:98vw;
+    }
+
+    header .box {
+      flex-grow:10;
+    }
+    
+    /* cartographie */
+
+    .cartographie {
+      max-width: 50vw;
+      margin-top: 10px;
+      margin-left:20px;
+    }
+
+    .plan {
+      background-image: url(plan_bg.png);
+      background-size: contain;
+      cursor:url("cursor.svg")16 16,default;
+    } 
+
+    .grid {
+      background-color:rgb(53, 53, 53);
+      width:1.8vw;
+      height:1.8vw;
+      margin: 0.06vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor:url("cursor.svg")16 16,default;
+    }
+
+    .grid.relax {
+      transition: transform 2s ease, opacity 2s ease;
+    }
+
+    .empty {
+      background-color:none;
+      width:1.92vw;
+      height:1.92vw;
+      margin: 0vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      cursor:url("cursor_dot.svg")16 16,default;
+      
+    }
+    .line {
+      display:flex;
+      flex-direction:row;
+    }
+
+    .s {z-index:10;box-shadow: 5px 5px 2px;}
+    .m {z-index:20;box-shadow: 10px 10px 4px;}
+    .l {z-index:30;box-shadow: 15px 15px 6px;}
+
+    .structure, .paysage, .objet, .speculation, .programme, .enquete, .regard, .ruralite, .heritage, .alternative, .lowtech {
+      width:1.92vw;
+      height:1.92vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+    }
+
+    .structure {
+      background-color: #9C97A6 ;
+    }
+    .paysage {
+      background-color: #0B9D60 ;
+    }
+    .objet {
+      background-color: #3490BA ;
+    }
+    .speculation {
+      background-color: #F3A9BA ;
+    }
+    .programme {
+      background-color: #F57E20 ;
+    }
+    .enquete {
+      background-color: #9167AC ;
+    }
+    .regard {
+      background-color: #234D87 ;
+    }
+    .ruralite {
+      background-color: #B1916B ;
+    }
+    .heritage {
+      background-color: #94CDB9 ;
+    }
+    .alternative {
+      background-color: #E22017 ;
+    }
+    .lowtech {
+      background-color: #FEB81C ;
+    }
+
+    /* frise */
+
+    .scroll-container {
+        width: 100vw;
+        height: 90vh;           /* hauteur visible */
+        overflow-x: auto;        /* scroll horizontal */
+        overflow-y: hidden;      /* bloque le vertical */
+        scroll-behavior: smooth;          
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto; /* masque scroll bar */
+        overflow-y: hidden;
+       -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scroll-container::-webkit-scrollbar {
+      height: 0;
+      display: none;
+    }
+
+    .scroll-container img {
+        height: 100%;
+        display: inline-block;
+    }
+
+ @media (min-width:801px)  { /* version mobile */
+    
+    .mobile {
+      display:none;
+    }
+ }
+
+
+ @media (max-width:800px)  { /* version mobile */
+    
+    .desktop {
+      display:none;
+    }
+
+    h1 {
+      font-size:36px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size:16px;
+    }
+
+    .intro {
+      flex-direction:column;
+    }
+    .intro_image {
+      width:102vw;
+      height: auto;
+      align-self: center;
+      overflow: hidden;
+      margin: -15px;
+    }
+    .intro_image > img {
+      width:102vw;
+    }
+    .intro_texte {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      margin: 0 2vw;
+    }
+
+    .index {
+      flex-direction:column;
+    }
+
+    .title-bloc {
+      margin:.6vw;
+      flex: auto;
+    }
+
+    .text-bloc {
+      margin:2vw;
+      width: 100%;
+      flex: auto;
+    }
+    
+    /* header */
+
+    header {
+      display: none;
+    }
+    
+    /* cartographie */
+
+    .cartographie {
+      max-width: 100%;
+      margin: 0 2vw;
+    }
+
+    .plan {
+      background-image: none;
+      background-size: contain;
+      cursor:url("cursor.svg")16 16,default;
+      overflow-x: scroll;
+      width: 100vw;
+    } 
+
+    .grid {
+      background-color:rgb(53, 53, 53);
+      width:18px;
+      height:18px;
+      margin: 0.6px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor:url("cursor.svg")16 16,default;
+    }
+
+    .grid.relax {
+      transition: transform 2s ease, opacity 2s ease;
+    }
+
+    .empty {
+      background-color:none;
+      width:19.2px;
+      height:19.2px;
+      margin: 0px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      cursor:url("cursor_dot.svg")16 16,default;
+      
+    }
+    .line {
+      display:flex;
+      flex-direction:row;
+    }
+
+    .s {z-index:10;box-shadow: 5px 5px 2px;}
+    .m {z-index:20;box-shadow: 7px 7px 3px;}
+    .l {z-index:30;box-shadow: 10px 10px 5px;}
+
+    .structure, .paysage, .objet, .speculation, .programme, .enquete, .regard, .ruralite, .heritage, .alternative, .lowtech {
+      width:19.2px;
+      height:19.2px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+    }
+
+    /* frise */
+
+    .scroll-container {
+        display: none;
+    }
+
+    .footer p {
+      font-size: 10px;
+    }
+
+    
+  }

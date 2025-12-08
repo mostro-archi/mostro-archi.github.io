@@ -3,238 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ARCHIPELS</title>
-
-  <style>
-
-    /* généralités */
-
-    html{
-      scrollbar-width: none;
-    }
-    html::-webkit-scrollbar {
-      display: none;
-    }
-
-    * {
-      cursor:url("cursor_dot.svg") 16 16,default;
-    }
-
-    body {
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    h1 {
-      font-family:Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      font-size:75px;
-      background: white;
-    }
-
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 30px;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
-      color:white
-    }
-
-    h3 {
-      font-family:Arial, Helvetica, sans-serif;
-      font-weight:bolder;
-      font-style:italic;
-      font-size:20px;
-    }
-
-    p {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size:15px;
-    }
-
-    a {
-      text-decoration: none;
-      font-size: inherit;
-      font-family:inherit;
-      color:inherit;
-    }
-
-    .index {
-      display:flex;
-      flex-direction:row;
-    }
-    .title-bloc {
-      margin:.6vw;
-      flex: auto;
-    }
-
-    .text-bloc {
-      margin:.2vw;
-      width: 8.49vw;
-      flex: auto;
-    }
-    
-    .text-bloc a {
-      display: inline-block;
-    }
-
-    .text-bloc a:hover {
-      cursor:url(cursor.svg) 16 16,default;
-      font-weight:bold;
-      transform: translateX(10px);
-    }
-
-    /* header */
-
-    header {
-      margin-top: -50px;
-      z-index: 1000;
-      pointer-events: none;
-      display:flex;
-      justify-content: flex-end;
-      position: fixed;
-      flex-direction: row;
-      width:98vw;
-    }
-
-    header .box {
-      flex-grow:10;
-    }
-    
-    /* cartographie */
-
-    .plan {
-      background-image: url(plan_bg.png);
-      background-size: contain;
-      cursor:url("cursor.svg")16 16,default;
-    } 
-
-    .grid {
-      background-color:rgb(53, 53, 53);
-      width:1.8vw;
-      height:1.8vw;
-      margin: 0.06vw;
-      flex-grow: 0;
-      flex-shrink: 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      cursor:url("cursor.svg")16 16,default;
-    }
-
-    .grid.relax {
-      transition: transform 2s ease, opacity 2s ease;
-    }
-
-    .empty {
-      background-color:none;
-      width:1.92vw;
-      height:1.92vw;
-      margin: 0vw;
-      flex-grow: 0;
-      flex-shrink: 0;
-      cursor:url("cursor_dot.svg")16 16,default;
-      
-    }
-    .line {
-      display:flex;
-      flex-direction:row;
-    }
-
-    .s {z-index:10;box-shadow: 5px 5px 2px;}
-    .m {z-index:20;box-shadow: 10px 10px 4px;}
-    .l {z-index:30;box-shadow: 15px 15px 6px;}
-
-    .structure, .paysage, .objet, .speculation, .programme, .enquete, .regard, .ruralite, .heritage, .alternative, .lowtech {
-      width:1.92vw;
-      height:1.92vw;
-      flex-grow: 0;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-      cursor:url("cursor_white.svg")16 16,default;
-    }
-
-    .structure {
-      background-color: #9C97A6 ;
-    }
-    .paysage {
-      background-color: #0B9D60 ;
-    }
-    .objet {
-      background-color: #3490BA ;
-    }
-    .speculation {
-      background-color: #F3A9BA ;
-    }
-    .programme {
-      background-color: #F57E20 ;
-    }
-    .enquete {
-      background-color: #9167AC ;
-    }
-    .regard {
-      background-color: #234D87 ;
-    }
-    .ruralite {
-      background-color: #B1916B ;
-    }
-    .heritage {
-      background-color: #94CDB9 ;
-    }
-    .alternative {
-      background-color: #E22017 ;
-    }
-    .lowtech {
-      background-color: #FEB81C ;
-    }
-
-    /* frise */
-
-    .scroll-container {
-        width: 100vw;
-        height: 90vh;           /* hauteur visible */
-        overflow-x: auto;        /* scroll horizontal */
-        overflow-y: hidden;      /* bloque le vertical */
-        scroll-behavior: smooth;          
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto; /* masque scroll bar */
-        overflow-y: hidden;
-       -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    .scroll-container::-webkit-scrollbar {
-      height: 0;
-      display: none;
-    }
-
-    .scroll-container img {
-        height: 100%;
-        display: inline-block;
-    }
-  
-  </style>
-
 </head>
 
 <body>
-
 <header>
   <div ><h1 id="name-display">ARCHIPELS</h1></div>
 </header>
 
+<div class="intro">
+  <div class="intro_image"><img src="affiche.png"><img src="affiche_bas.png" class="mobile" style="margin-top: -4px;"></div>
+  <div class="intro_texte"><p>L’architecture est une pratique collective. Du maçon à l’usager en passant par l’élu local et - bien sûr - l’architecte, un édifice est le produit de la coopération et de l’échange d’une myriade    d’acteurs. Mais si l’on reconnait de plus en plus la parentée partagée des bâtiments construits, qu’en est-il de ceux qui restent à l’état de projet - de fin d’étude qui plus est ?<br>
+  Quand soixante-dix esquisses sont produites côte à côte, coude à coude, ne pouvons-nous pas concevoir cet ensemble d’architectures non pas uniquement comme la somme d’individualités, mais aussi comme la trace d’un esprit du temps qui traverse une génération de nouvelle·aux praticien·ne·s ?<br><br>
+  Cette exposition des projets de fin d’étude (PFE) de la session printemps 2025 propose une format différent de la sélection des « meilleurs diplômes » en mettant cette fois-ci l’accent sur la constitution d’une culture partagée au sein de l’ensa Nantes. L’analyse de l’entièreté des PFE soutenus en juillet 2025, fait apparaître des préoccupations communes au sein de la promotion, des outils de conception partagés, et des propositions formelles convergentes.<br><br>
+  <i>« Nul homme n’est une île »</i> écrivait le poète. L’exposition Archipels révèle les liens thématiques, esthétiques ou méthodiques qui maillent ensemble la production d’une génération.<br>
+  Rassemblés sous onze thématiques, elles-mêmes réparties dans trois grands pôles, les soixante-dix productions des étudiant·e·s illustrent les problématiques qui les travaillent et qu’ils et elles ont souhaité saisir via le champ d’analyse et de transformation du monde qu’est l’architecture.<br>
+  Chaque PFE est présenté au travers d’une sélection de documents graphiques, textuels ou tri-dimensionnels qui permettent à la fois de comprendre sa portée individuelle et de le situer dans la cartographie globale de la promotion.</p></div>
+</div>
+
+<div class="mobile" style="width:100vw;justify-self: center;"><img src="ikea.png" style="width:100%"></div>
+
+<p class="desktop"><br><br><br></p>
+
 <!-- cartographie -->
-<div class="line" style="justify-content:start;">
-  <div>
+<div class="index">
+  <div style>
     <h2>CARTOGRAPHIE<br>D'UNE GÉNÉRATION</h2>
   </div>
-  <div style="max-width: 50vw; margin-top: 10px;margin-left:20px">
+  <div class="cartographie">
   <p>Afin de cartographier les soixante-dix productions recensées, l’exposition Archipels déploie une grille tridimensionnelle dans le volume de la galerie Loire.<br>
 Topographie architecturée, les émergences quadrillées servent de supports et de coordonnées aux projets de fin d’études (PFE). Leurs positions relatives et leurs altimétries renseignent alors sur les liensthématiques, formels ou méthodologiques qui relient les ilots voisins, mais aussi sur la radicalité de leurs postures.<br>
-L’analyse des PFE a fait apparaitre onze thématiques communes, elles-mêmes rassemblées en trois pôles. Ces centralités sont marquées par des pics qui culminent au-dessus de la nappe continue et décrivent la thématique alentour. Les trois grandes problématiques travaillant l’ensemble de lagénération 2025 sont inscrites sur des bannières surplombant les archipels.<br>
+L’analyse des PFE a fait apparaitre onze thématiques communes, elles-mêmes rassemblées en trois pôles. Ces centralités sont marquées par des pics qui culminent au-dessus de la nappe continue et décrivent la thématique alentour. Les trois grandes problématiques travaillant l’ensemble de la génération 2025 sont inscrites sur des bannières surplombant les archipels.<br>
 Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. Dériver entre les ilots créera naturellement un cheminement fluide, traversant de proche en proche l’ensemble des projets et des sujets qui préoccupent les futurs architectes de la promotion 2025.</p>
   </div>
 </div>
@@ -2422,7 +2223,7 @@ Aucune trajectoire spécifique n’est conseillée pour visiter l’exposition. 
 <!-- frise -->
 
 <div class="scroll-container" id="scrl1">
-    <div style="min-width: 25vw;flex-shrink:1;margin-left: 2vw;">
+    <div style="min-width: 27vw;flex-shrink:1;margin-left: 2vw;">
       <h2>D'OÙ PARS-TU<br>CAMARADE ?</h2>
       <p>La formation du diplôme d’état en architecture est basée sur le modèle européen licence, master, doctorat et se déroule usuellement en cinq ans, intégrant un semestre de mobilité internationale ainsi qu’un stage en situation professionnelle. À partir du troisième semestre, l’école d’architecture de Nantes propose plusieurs choix de studios de projet pouvant mener les étudiant·e·s à travailler sur des sujets tout à fait différents dans leurs programmes, leurs situations ou leurs méthodes d’approche.<br><br>
 À ces embranchements au sein de l’école s’ajoutent des déviations supplémentaires que peuvent rechercher les étudiant·e·s. Par le processus de césure, il est possible de prolonger le stage ou la mobilité internationale, de prendre plus de temps pour rédiger son mémoire, voire même de suivre une autre formation professionnalisante en complément.<br>
@@ -2433,9 +2234,23 @@ Le diagramme ci-contre tente de représenter cette diversité de parcours qui ex
     <img src="frise.png">
 </div>
 
+<div class="mobile">
+   <div class="cartographie">
+     <h2>D'OÙ PARS-TU<br>CAMARADE ?</h2>
+      <p>La formation du diplôme d’état en architecture est basée sur le modèle européen licence, master, doctorat et se déroule usuellement en cinq ans, intégrant un semestre de mobilité internationale ainsi qu’un stage en situation professionnelle. À partir du troisième semestre, l’école d’architecture de Nantes propose plusieurs choix de studios de projet pouvant mener les étudiant·e·s à travailler sur des sujets tout à fait différents dans leurs programmes, leurs situations ou leurs méthodes d’approche.<br><br>
+      À ces embranchements au sein de l’école s’ajoutent des déviations supplémentaires que peuvent rechercher les étudiant·e·s. Par le processus de césure, il est possible de prolonger le stage ou la mobilité internationale, de prendre plus de temps pour rédiger son mémoire, voire même de suivre une autre formation professionnalisante en complément.<br>
+      Ces semestres supplémentaires allongent le cursus et mènent les promotions à se croiser, les studios de master mélangeant les individus peu importe leur année d’étude en cours. La formation professionnelle continue, le double cursus ingénieur-architecte et architecte-ingénieur, ainsi que le partenariat avec l’antenne Nantes-Mauritius amènent autant de parcours additionnels.<br>
+      De plus, le parcours scolaire n’est pas seulement rythmé par l’arborescence pédagogique. Il est particulièrement perméable à ce qui se passe en dehors du cadre académique. La trajectoire des étudiant·e·s est alors également infléchie par un ensemble d’événements extra-curriculaires : des confinements successifs, aux blocages d’ensa en luttes en passant par le retour du festival archiculture.<br><br>
+      Le diagramme ci-contre tente de représenter cette diversité de parcours qui explique peut-être l’apparition d’une culture commune de cette nouvelle génération d’architectes. Construit grâce au témoignage de la moitié de la promotion ayant soutenu son PFE au printemps 2025, il révèle les croisements et les liens de filiation entre les divers enseignements, fait apparaître des tendances de parcours, des étapes obligées, des irrégularités comme des volte-face académiques.</p>
+   </div>
+   <div class="plan">
+    <img src="frise.png" style="height:100vh;">
+   </div>   
+</div>
+
 <p><br><br><br></p>
 <!-- footer -->
- <div class="index">
+ <div class="index footer">
   <div class="text-bloc">
      <p><u>commissariat, scénographie, conception graphique</u> :<br>
     <a href="asap.archi" target="_blank">asap</a> × <a href="mostro.archi" target="_blank">mostro</a> (louis fiolleau, hugo forté, clarisse protat)<br>
@@ -2448,13 +2263,13 @@ Le diagramme ci-contre tente de représenter cette diversité de parcours qui ex
     <a href="feuille de salle.pdf" target="_blank">feuille de salle format A4 recto-verso</a><br>
     <a href="affiche" target="_blank">affiche format A1</a></p>
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="mostro.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="asap.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
-  <div style="width:5vw">
+  <div style="width:5vw" class="desktop">
     <img src="ensa.png" style="width: 100%;  height: 100%;  object-fit: contain;">
   </div>
 
@@ -2522,7 +2337,7 @@ window.onload = () => {
 <script>
   // aggrandit les tables cliquables quand on passe dessus //
   const allDivs = document.querySelectorAll('div');
-  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc', 'scroll-container']; // classes à exclure des effets globaux
+  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc', 'scroll-container','intro','intro_image','intro_texte','footer','cartographie','desktop','mobile']; // classes à exclure des effets globaux
 
   allDivs.forEach(div => {
     div.addEventListener('mouseenter', () => {

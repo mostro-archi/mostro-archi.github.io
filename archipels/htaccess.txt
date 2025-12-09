@@ -1,5 +1,12 @@
 RewriteEngine On
 
+# Ne pas réécrire la page 404
+RewriteCond %{REQUEST_URI} !^/archipels/404\.html$
 
+RewriteRule .* test.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ $1.html [L]
 
 ErrorDocument 404 /archipels/404.html

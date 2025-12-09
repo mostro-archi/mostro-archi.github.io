@@ -60,6 +60,12 @@
       flex-direction:row;
       justify-content: space-between;
     }
+    
+    .index > img {
+      width:46vw;
+      margin:0 2vw;
+      object-fit: contain;
+    }
     .title-bloc {
       margin:.6vw;
       flex: auto;
@@ -85,6 +91,7 @@
       display:flex;
       flex-direction:row;
       justify-content: center;
+      height:80vh;
     }
 
     .text-intro {
@@ -109,7 +116,10 @@
     .image-intro {
       margin:2vw;
       max-width:72vw;
-      height:80vh;
+      max-height:80vh;
+    }
+    .image-intro > img {
+      height: 100%;
     }
 
     .container {
@@ -119,6 +129,7 @@
     }
     .container img {
       width:100%;
+      margin:1vw;
     }
 
     /* header */
@@ -182,6 +193,11 @@
       flex-direction:column;
       justify-content: start;
     }
+    .index > img {
+      width:100%;
+    }
+
+
     .title-bloc {
       margin:.6vw;
       flex:auto;

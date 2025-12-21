@@ -178,9 +178,9 @@
   </div>
   <div class="text-bloc">
      <p><u>ressources téléchargeables</u> :<br>
-    <a href="dépliant.pdf" target="_blank">dépliant format A2 recto-verso</a><br>
-    <a href="feuille de salle.pdf" target="_blank">feuille de salle format A4 recto-verso</a><br>
-    <a href="affiche" target="_blank">affiche format A1</a></p>
+    <a href="../dépliant.pdf" target="_blank">dépliant format A2 recto-verso</a><br>
+    <a href="../feuille de salle.pdf" target="_blank">feuille de salle format A4 recto-verso</a><br>
+    <a href="../affiche_A0.jpg" target="_blank">affiche format A1</a></p>
   </div>
   <div style="width:5vw" class="desktop">
     <a href="https://www.mostro.archi" target="_blank"><img src="../mostro.png" style="width: 100%;  height: 100%;  object-fit: contain;"></a>
@@ -191,54 +191,7 @@
   <div style="width:5vw" class="desktop">
     <a href="https://www.nantes.archi.fr" target="_blank"><img src="../ensa.png" style="width: 100%;  height: 100%;  object-fit: contain;"></a>
   </div>
-
  </div>
-
-
-<script>
-window.onload = () => {
-
-  const container = document.getElementById("scrl1");
-  const speed = 4; // accélère le scroll horizontal
-
-  container.addEventListener("wheel", function(event){
-
-    const atStart = container.scrollLeft <= 0;
-    const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth;
-
-    // --- CAS 1 : Scroll horizontal obligatoire (image pas finie)
-    if (!atEnd && event.deltaY > 0) {
-      event.preventDefault();
-      container.scrollLeft += event.deltaY * speed;
-      return;
-    }
-
-    if (!atStart && event.deltaY < 0) {
-      event.preventDefault();
-      container.scrollLeft += event.deltaY * speed;
-      return;
-    }
-
-    // --- CAS 2 : On est tout à droite → on libère le scroll vertical
-    if (atEnd && event.deltaY > 0) {
-      return; // vertical normal
-    }
-
-    // --- CAS 3 : On est tout à gauche → on libère le scroll vertical
-    if (atStart && event.deltaY < 0) {
-      return; // vertical normal
-    }
-
-  }, { passive: false });
-};
-</script>
-
-
-
-
 
 </body>
 </html>
-
-
-

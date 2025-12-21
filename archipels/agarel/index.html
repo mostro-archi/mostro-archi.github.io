@@ -217,50 +217,12 @@
  </div>
 
 
-<script>
-window.onload = () => {
-
-  const container = document.getElementById("scrl1");
-  const speed = 4; // accélère le scroll horizontal
-
-  container.addEventListener("wheel", function(event){
-
-    const atStart = container.scrollLeft <= 0;
-    const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth;
-
-    // --- CAS 1 : Scroll horizontal obligatoire (image pas finie)
-    if (!atEnd && event.deltaY > 0) {
-      event.preventDefault();
-      container.scrollLeft += event.deltaY * speed;
-      return;
-    }
-
-    if (!atStart && event.deltaY < 0) {
-      event.preventDefault();
-      container.scrollLeft += event.deltaY * speed;
-      return;
-    }
-
-    // --- CAS 2 : On est tout à droite → on libère le scroll vertical
-    if (atEnd && event.deltaY > 0) {
-      return; // vertical normal
-    }
-
-    // --- CAS 3 : On est tout à gauche → on libère le scroll vertical
-    if (atStart && event.deltaY < 0) {
-      return; // vertical normal
-    }
-
-  }, { passive: false });
-};
-</script>
-
-
 
 
 
 </body>
 </html>
+
 
 
 

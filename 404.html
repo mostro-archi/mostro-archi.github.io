@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARCHIPELS</title>
+
+  <style>
+    .ilot {
+      width:1.92vw;
+      height:1.92vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+      background-color: whitesmoke ;
+    }
+    .mostro {
+      width:1.92vw;
+      height:1.92vw;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+      background-color: whitesmoke ;
+    }
+
+    @media (max-width:800px)  { 
+    .ilot {
+      width:19.2px;
+      height:19.2px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+      background-color: whitesmoke ;
+    }
+    .mostro {
+      width:19.2px;
+      height:19.2px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor:url("cursor_white.svg")16 16,default;
+      background-color: whitesmoke ;
+    }
+  }
+  </style>
+
+  
+</head>
+
+<body>
+<header>
+  <div><h1 id="name-display">PAGE INCONNUE</h1></div>
+</header>
+<h2 style="text-align: center;" class="mobile">PAGE INCONNUE</h2>
+<!-- carte de la galerie loire -->
+<div class="plan">
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+ <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <a href="/archipels/index" class="m"><div class="ilot" name="RETOUR À L'INDEX"></div></a>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <a href="/index" class="m"><div class="mostro desktop" name="DÉCOUVREZ MOSTRO"></div></a>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<div class="line">
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+  <div class="grid desktop"></div>
+</div>
+<a href="index"><h2 style="text-align: center;" class="mobile">RETOUR À L'INDEX</h2></a>
+
+
+</div>
+
+
+
+<script>
+  //affichage des noms
+  const items = document.querySelectorAll('div');
+  const nameDisplay = document.getElementById('name-display');
+
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const art = item.getAttribute('name');
+      if (art) {
+        nameDisplay.textContent = art;
+      } else {
+        nameDisplay.textContent = "PAGE INCONNUE";
+      }
+    });
+  });
+</script>
+
+<script>
+  // aggrandit les tables cliquables quand on passe dessus //
+  const allDivs = document.querySelectorAll('div');
+  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc', 'scroll-container','intro','intro_image','intro_texte','footer','cartographie','desktop','mobile']; // classes à exclure des effets globaux
+
+  allDivs.forEach(div => {
+    div.addEventListener('mouseenter', () => {
+      // Récupérer les classes "actives" : toutes sauf celles exclues
+      const activeClasses = [...div.classList].filter(cls => !exceptions.includes(cls));
+      if (activeClasses.length === 0) return; // rien à faire si aucune classe active
+
+      // Construire un sélecteur CSS combiné pour cette combinaison exacte
+      const selector = activeClasses.map(cls => `.${cls}`).join('');
+
+      // Sélectionner tous les éléments qui ont exactement cette combinaison
+      const sameComboElements = document.querySelectorAll(selector);
+
+      sameComboElements.forEach(el => el.style.transform = 'scale(1.5)');
+    });
+
+    div.addEventListener('mouseleave', () => {
+      const activeClasses = [...div.classList].filter(cls => !exceptions.includes(cls));
+      if (activeClasses.length === 0) return;
+
+      const selector = activeClasses.map(cls => `.${cls}`).join('');
+      const sameComboElements = document.querySelectorAll(selector);
+
+      sameComboElements.forEach(el => el.style.transform = 'scale(1)');
+    });
+  });
+</script>
+
+<script>
+  //effet de vague //
+const grids = document.querySelectorAll('.grid');
+const influenceRadius = 300; //distance influence en px//
+
+document.addEventListener('mousemove', (e) => {
+  grids.forEach(grid => {
+
+    // Lire les anciens niveaux
+    let oldRot = parseFloat(grid.dataset.rot || 0);
+    let oldOpacity = parseFloat(grid.dataset.opacity || 100);
+
+    const rect = grid.getBoundingClientRect();
+    const gridX = rect.left + rect.width / 2;
+    const gridY = rect.top + rect.height / 2;
+
+    const distance = Math.hypot(e.clientX - gridX, e.clientY - gridY);
+
+    if (distance < influenceRadius) {
+      const proximity = 1 - (distance / influenceRadius);
+
+      const newRot = proximity * 10;      // roration 0 → 20
+      const newOpacity = 100 - 25 * proximity; // scale 100 → 50
+
+      // CUMUL MAXIMA : ne jamais diminuer instantanément
+      const appliedRot = Math.max(oldRot, newRot);
+      const appliedOpacity = Math.min(oldOpacity, newOpacity);
+
+      // enregistrer l’état
+      grid.dataset.rot = appliedRot;
+      grid.dataset.opacity = appliedOpacity;
+
+      // effet instantané
+      grid.classList.remove('relax');
+      grid.style.transform = `rotate(${appliedRot}deg) scale(${1 - appliedRot/40})`;
+      grid.style.opacity = `${appliedOpacity}%`;
+
+    } else {
+      // retour progressif
+      grid.classList.add('relax');
+
+      // interpolate vers l'état normal
+      grid.dataset.rot = 0;
+      grid.dataset.opacity = 100;
+
+      grid.style.transform = `rotate(0deg) scale(1)`;
+      grid.style.opacity = `100%`;
+    }
+  });
+});
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

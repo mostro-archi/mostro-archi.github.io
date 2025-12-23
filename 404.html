@@ -26,6 +26,11 @@
       cursor:url("cursor_white.svg")16 16,default;
       background-color: whitesmoke ;
     }
+    .plan404 {
+      background-image: none;
+      background-size: contain;
+      cursor:url("cursor.svg")16 16,default;
+    } 
 
     @media (max-width:800px)  { 
     .ilot {
@@ -46,6 +51,12 @@
       cursor:url("cursor_white.svg")16 16,default;
       background-color: whitesmoke ;
     }
+    .plan404 {
+      background-size: contain;
+      cursor:url("cursor.svg")16 16,default;
+      overflow-x: scroll;
+      width: 100vw;
+    } 
   }
   </style>
 
@@ -58,7 +69,7 @@
 </header>
 <h2 style="text-align: center;" class="mobile">PAGE INCONNUE</h2>
 <!-- carte de la galerie loire -->
-<div class="plan">
+<div class="plan404">
 <div class="line">
   <div class="grid desktop"></div>
   <div class="grid desktop"></div>
@@ -1382,7 +1393,7 @@
 <script>
   // aggrandit les tables cliquables quand on passe dessus //
   const allDivs = document.querySelectorAll('div');
-  const exceptions = ['grid', 'empty', 'line', 'plan','index','text-bloc', 'title-bloc', 'scroll-container','intro','intro_image','intro_texte','footer','cartographie','desktop','mobile']; // classes à exclure des effets globaux
+  const exceptions = ['grid', 'empty', 'line', 'plan404','index','text-bloc', 'title-bloc', 'scroll-container','intro','intro_image','intro_texte','footer','cartographie','desktop','mobile']; // classes à exclure des effets globaux
 
   allDivs.forEach(div => {
     div.addEventListener('mouseenter', () => {
@@ -1467,6 +1478,7 @@ document.addEventListener('mousemove', (e) => {
 
 </body>
 </html>
+
 
 
 

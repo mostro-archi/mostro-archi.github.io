@@ -274,8 +274,9 @@
     .intro_texte {
       display: flex;
       flex-direction: column;
-      justify-content: end;
-      margin-top: 30px;
+      justify-content: start;
+      margin-top: 0px;
+      height: auto;
     }
 
     .index {
@@ -370,3 +371,4 @@
     
 
   }
+

@@ -327,3 +327,9 @@ pre.visible {
 .final-text.visible {
       opacity: 1;
 }
+
+.video_wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: none;
+}

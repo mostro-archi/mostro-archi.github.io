@@ -82,6 +82,16 @@ html, body {
   height: 100vh;
 }
 
+#centerCol, #rightCol {
+  padding-bottom: 100px;
+}
+
+#centerCol::after, #rightCol::after {
+  content: '';
+  display: block;
+  height: 100px;
+}
+
 @media (max-width: 800px) {
   html, body {
     height: auto;

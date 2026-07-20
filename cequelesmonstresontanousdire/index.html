@@ -6,23 +6,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mostro</title>
   <link href="../style.css" rel="stylesheet" />  
+
+<script>
+
+function isMobile() {
+  return window.innerWidth <= 800;
+}
+
+function getScrollTop(el, container) {
+  let offsetTop = 0;
+  let current = el;
+  while (current && current !== container) {
+    offsetTop += current.offsetTop;
+    current = current.offsetParent;
+  }
+  return offsetTop;
+}
+
+function scrollNotes(noteId) {
+  const target = document.getElementById(noteId);
+  if (!target) return;
+  const HEADER_OFFSET = 80;
+
+  if (isMobile()) {
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET,
+      behavior: "smooth"
+    });
+  } else {
+    const right = document.getElementById("rightCol");
+    right.scrollTo({
+      top: target.offsetTop - HEADER_OFFSET,
+      behavior: "smooth"
+    });
+  }
+}
+
+function scrollBack(refId) {
+  const target = document.getElementById(refId);
+  if (!target) return;
+  const HEADER_OFFSET = 80;
+
+  if (isMobile()) {
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET,
+      behavior: "smooth"
+    });
+  } else {
+    const center = document.getElementById("centerCol");
+    let offsetTop = getScrollTop(target, center);
+    center.scrollTo({
+      top: offsetTop - HEADER_OFFSET,
+      behavior: "smooth"
+    });
+  }
+}
+
+</script>
+
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.holder {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.column {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+#centerCol, #rightCol {
+  padding-bottom: 100px;
+}
+
+#centerCol::after, #rightCol::after {
+  content: '';
+  display: block;
+  height: 100px;
+}
+
+@media (max-width: 800px) {
+  html, body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .holder {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .column,
+  #centerCol,
+  #rightCol {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+</style>
+
 </head>
 
 <body>
 
 <header>
-<div><a href="../index"><h1>mostro</h1></a></div>
-<div class="box"></div>
-<div><a href="../projets"><h2>projets</h2></a></div>
-<div><a href="../agence"><h2>agence</h2></a></div>
-<div><a href="https://asap.archi"><h2>asap</h2></a></div>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
 </header>
 
 <div class="holder">
 
-<div class="multi-column" id="agence">
-
-    <div class="column" id="small">
+  <!-- COLONNE GAUCHE (MENU) -->
+  <div class="column" id="small">
     <h2>situations monstrueuses, disjonctions désirables</h2>
     <p>institution : ensa versailles<br>
       date : white week janvier 2026<br>
@@ -36,56 +141,62 @@
       Le texte thématique d'introduction reproduit ici et écrit à six mains avec Margaux sera prochainement publié à l'occasion d'un ouvrage collectif rassemblant la dizaine d'intervenant·e·s lors du workshop.</h3>
   </div>
 
-  <div class="column">
-    <img class="image" src="1.png" title="exposition de rendu">
+  <!-- COLONNE CENTRALE -->
+  <div class="column" id="centerCol" style="flex-direction: column; padding-left:35px; overflow-y:auto; height:100vh;">
+
+
+      <h2 id="mostro"></h2>
+
+      <h2 style="margin-left:3em ; font-style: italic;">« La crise consiste justement en ce que le vieux monde est en train de mourir, le nouveau peine à naître, et dans ce clair-obscur naissent les monstres » <a onclick="scrollNotes('1')" style="cursor:pointer;" id="A"><sup>1</sup></a></h2>
+    
+      <p>La discipline architecturale semble s’être récemment prise de passion pour la figure du monstre</i><a onclick="scrollNotes('2')" style="cursor:pointer;" id="B"><sup>2</sup></a>, “l’anormal”</i><a onclick="scrollNotes('3')" style="cursor:pointer;" id="C"><sup>3</sup></a> qui par sa différence corporelle et comportementale révèle les limites et les contraintes imposées par la norme. On peut relier cette digestion tardive des idées foucaldiennes à l’influence des thèses queer, féministes et décoloniales qui parviennent enfin à remettre en question la normativité héritée de la modernité. Mais on peut aussi y voir l’abandon progressif de la notion de crise, centrale dans le discours architectural post 2008</i><a onclick="scrollNotes('4')" style="cursor:pointer;" id="D"><sup>4</sup></a>, qui en s’allongeant en longueur et sans fin annoncée, prend plutôt les couleurs du “clair-obscur” gramscien, propice à la naissance des monstres. La révolution verte qui n’a pas lieu, la pandémie qui ne cause pas de basculement profond ou la menace fasciste qui ne génère aucun soubresaut républicain ont terni l’idéal du grand soir, de la réforme immédiate. L’époque est à la superposition des nappes de réalité, hantées les unes par les autres car contemporaines, mais non-miscibles puisque évoluant dans des réalités parallèles.<br>
+      <br>
+      La célèbre citation de Gramsci nous semble un point de départ intéressant pour aborder la question du monstre par un angle temporel. Dans la matrice matérialiste marxiste, la marche de l’histoire se fait par la dialectique entre base (les conditions matérielles de production) et superstructure (leur codification culturelle et socio-légale). Les évolutions du monde pour un matérialiste ne peuvent s’expliquer qu’à partir de la matière, c’est-à-dire des conditions de production : on découvre un nouveau continent, une nouvelle source d’énergie, de nouvelles limites planétaires, et alors toute la machine productive (et reproductive) s’adapte en fonction. Dans le même temps, afin de justifier un certain ordre du monde qui crée nécessairement des perdants et des gagnants (les colons et les colonisés, les prolétaires et les propriétaires, etc.), les classes dominantes construisent une superstructure culturelle qui naturalise les rapports entre les individus par la loi mais aussi par la tradition, la morale, la religion, voire même « le pragmatisme ». La base s’en voit alors façonnée et souvent maintenue dans un état des choses qui favorise les dominants - cela jusque dans la métabolisation de la crise écologique elle-même, discours critique transformé par ces derniers en nouvelle opportunité de marché</i><a onclick="scrollNotes('5')" style="cursor:pointer;" id="E"><sup>5</sup></a>.<br>
+      <br>
+      Or la base et la superstructure ont toutes les deux une certaine inertie et la mise à jour de l’une ne peut immédiatement se répercuter sur l’autre. La crise décrite par Gramsci a lieu dans les moments de « clair-obscur », quand une nouvelle base matérielle tente de s’imposer mais que l’ancienne superstructure continue de lutter pour justifier l’ancien ordre du monde – à vide. Dans ces entre-deux apparaissent les monstres, c’est-à-dire les phénomènes rendus possibles par les nouvelles conditions de production, mais qui restent codifiés dans des grilles culturelles héritées du système précédent. Les monstres sont donc à la fois des entités et des temporalités, des objets qui se débattent dans des systèmes qu’ils réfutent ou qu’ils inquiètent. Les monstres sont en somme des situations qui, si on apprend à les regarder attentivement, peuvent devenir des disjonctions désirables. L’opportunité d’un renversement d’une superstructure se situe en effet peut-être dans cette discordance des temps, potentiel territoire d’une lutte pour de nouveaux équilibres.</p>
+
+      <h2 style="margin-left:3em ; font-style: italic;">« The time is out of joint: O cursed spite,<br>That ever I was born to set it right! » <a onclick="scrollNotes('6')" style="cursor:pointer;" id="F"><sup>6</sup></a></h2>
+
+      <p>L’exclamation de Hamlet qui vient d’échanger avec le fantôme de son père devient le fer de lance de Jacques Derrida dans son ouvrage <i>Spectres de Marx</i> (Éditions Galilée, 1993). Le spectre derridien c’est justement le monstre dans le plus pur sens marxiste : l’idée qui n’est pas en phase avec le monde – car arrivée trop tôt ou trop tard. Le fantôme c’est le monstre : rendu impossible par la nouvelle organisation de la matière (le corps décédé) mais maintenu artificiellement en présence par l’obstination de l’esprit.<br>
+      <br>
+      Le monstre est l’être désarticulé, le zombie tiraillé entre deux mondes et donc renié par les deux. La sorcière, la femme guérisseuse est pointée du doigt entre le Moyen Age tardif et la Renaissance (montrée, rendue donc monstre) lorsque la réorganisation de la société confisque la santé aux individus pour en faire le monopole de l’institution. La base matérielle qui l’a faite naître est balayée par une nouvelle superstructure. De manière inverse la figure du vampire, mute au tournant de l’ère de la modernité et de l’émancipation démocratique. De simple revenant, il devient sous la plume des auteurs gothiques un aristocrate qui se nourrit de la force vitale des serfs. Le vampire n’a alors plus de corps, plus de matière, c’est un esprit nuisible qui doit aspirer l’âme des hommes pour se maintenir en vie. Le monstre apparaît quand base et superstructure entrent en contradiction, quand l'une change de limite, d'échelle ou d'incarnation et percute ou hante l'autre.</p>
+
+      <h2 style="margin-left:3em ; font-style: italic;">« Considérons, en fait, la question de ce qui reste. Étant donné la réalité des dommages qu’ont causé les machines étatiques et capitalistes aux paysages naturels, nous devons nous demander pourquoi quelque chose a subsisté malgré leurs impitoyables filets. Pour répondre à cette préoccupation, nous aurons besoin de nous faufiler dans les marges. » <a onclick="scrollNotes('7')" style="cursor:pointer;" id="G"><sup>7</sup></a></h2>
+
+      <p>À l’heure des crises environnementales, le monstre peut être un opérateur pour faire atterrir dans la superstructure l’Anthropocène et son changement climatique. Pour appréhender les effets de cette nouvelle ère depuis la base matérielle et à l’échelle de ses pouvoirs d’agir, l’anthropologue Anna Sting propose de suivre à la trace l’animal ou le végétal féral qui, autrefois domestiqué, se propage hors du contrôle des humain·e·s en s’entremêlant aux infrastructures qui l'ont fait naître. L’être féral, c’est l’effet non planifié des structures, celui qui leur échappe tout en ayant besoin d’elles pour proliférer. C’est un être inquiétant, un monstre porteur d’un potentiel de déraillement, de renversement. Si l’animal est un sujet prompt à la féralité (puisque même dans son stade domestique, il reste une part capturée de la nature), l’architecture peut contenir un potentiel de féralité que l’ère des fermetures<a onclick="scrollNotes('8')" style="cursor:pointer;" id="H"><sup>8</sup></a> nous permet d’appréhender. Les vraies-fausses grottes en ciment rocaille des jardins du château de Versailles et leurs groupes sculptés, protégés comme des humain·e·s par des sacs de sable pendant la seconde guerre mondiale, ou les terrils des anciennes mines devenus refuges de biodiversité et parc d’agrément, ne sont-ils pas des situations monstrueuses, des manières d’habiter en clair-obscur, entre plusieurs mondes, aux limites des catégories, humain·e·s / non-humain·e·s, naturel / culturel, désirables / inquiétantes ?<br>
+      <br>
+      Ailleurs, les ruines de la modernité industrielle transformées en parc d’attractions ou les chantiers abandonnés par le capital fossile consacrés en <i>incompiuto</i><a onclick="scrollNotes('9')" style="cursor:pointer;" id="I"><sup>9</sup></a> par nos imaginaires d’architectes, contredisent la capacité des architectures férales à renverser vraiment l’ordre superstructurel. Pour autant, la description attentive de situations architecturales monstrueuses peut permettre d’échapper à la perception d’une base matérielle le subissant. Observer avec attention, puis décrire avec grande précision, une situation monstrueuse permet de saisir les superstructures invisibles, réseaux extractivistes et économies mondialisées, qui la sous-tendent. Explorer les lieux et les moments où le monstre émerge du seuil auquel il était assigné, ce processus étrange où flanche la réalité lissée des formes construites du capitalisme tardif et de l’idéologie de la ville néolibérale, est un moyen de révéler ses transgressions possibles. Cela permet de comprendre par quelle forme et à quelle échelle, la base peut s’échapper, et comment l’architecte peut l’accompagner.</p>
+
+      <h2 style="margin-left:3em ; font-style: italic;">« Les premiers maniéristes étaient des architectes de la Renaissance qui connaissaient superbement bien les règles – si bien qu’ils pouvaient les briser astucieusement, intelligemment et de manière amusante. Mais ils ne les brisaient pas tout le temps ou toutes en même temps. Il nous semble qu’il doit y avoir de bonnes raisons – pas juste pour s’amuser – de rompre les règles aujourd’hui. […] Dans les villes d’aujourd’hui, de nombreux systèmes se croisent et vous ne pouvez pas simplement suivre les règles de chacun d’entre eux car ils entrent souvent en conflit. Vous avez besoin d’une philosophie et d’une stratégie pour plier les règles afin de les faire fonctionner ensemble. Voici une raison moderne du maniérisme. » <a onclick="scrollNotes('10')" style="cursor:pointer;" id="J"><sup>10</sup></a></h2>
+
+      <p>Dans leur dernier livre en commun, le couple Venturi-Scott Brown développent l’idée du maniérisme non pas comme un style historique mais comme une stratégie de réponse à des moments de clair-obscur du système architectural. Quand la base matérielle (les injonctions techniques) ne correspond plus à la superstructure (les injonctions culturelles) ; quand la complexité accrue du monde de la construction amène à des contradictions internes (entre les différents acteurs, entre les logiques économiques, etc.), alors l’architecture maniériste est tiraillée entre plusieurs mondes. Elle est disjointe, et sa forme en devient monstrueuse.<br>
+      Ce que les monstres ont à nous apprendre, c’est que des situations asynchrones, des moments de crises créent des situations monstrueuses. Le maniérisme peut être envisagé comme la réponse architecturale à ces contradictions. En se risquant nous aussi à l’anachronie pour suivre la proposition des Venturi-Scott Brown, nous pourrions dire ainsi que la double colonnade du Louvre (1670), l’immeuble de la rue Franklin (1904), le centre Pompidou (1977) ou encore Euralille (1994) sont des monstres qui proviennent d’un monde et tentent d’en habiter un autre. Alors être un·e architecte maniériste, serait être un·e monstre conscient qui décrit et participe à cultiver le monstrueux et même à le rendre désirable.</p>
+
+      <h2 style="margin-left:3em ; font-style: italic;">« Pourquoi cette distorsion, ces voix délibérément étouffées, cette fragmentation auditive hallucinatoire, ces cris amplifiés ? Pourquoi ne pas communiquer clairement ? Parce que la communication claire et lisse – et tout ce qu’elle présuppose – est le fantasme que le système projette à la fois comme sa justification mais aussi comme son objectif nécessaire toujours repoussé. (...) “As the Veneer of Democracy Starts to Fade” (1985) est une machine sonore qui accélère le processus. Une arme de bruit anti-œdipienne, anti-névrotique, anti-silence, pro-prolétarienne. » <a onclick="scrollNotes('11')" style="cursor:pointer;" id="K"><sup>11</sup></a></h2>
+
+      <p>Alors s’il est bien décrit et même, bien mis en œuvre, le monstre peut se faire accélérateur de la disjonction d’un monde. Pour Mark Fisher, critique culturel marxiste, le fait d’insérer des défaillances, des bruits dans la musique (ici précisément dans les morceaux noise de Mark Stewart), de remettre le crac du vinyle dans une composition numérique, des effets de VHS dans les clips tournés au caméscope, sont des moyens monstrueux de rappeler les anachronies et les dissonances du réel sous le capitalisme tardif. Notre temporalité n’est pas lisse, elle est buggée, inégale. Le glitch est la rocaille contemporaine, l’excès de maniérisme qui révèle la sur-complexité de l’époque. On peut trouver la même ironie asynchrone dans le néo-classicisme préfabriqué des espaces d’Abraxas de Riccardo Bofill (1983) et l’apocalypse commerciale annoncée par les supermarchés Best imaginés par James Wines (1975-84).<br>
+      <br>
+      Mais la disjonction peut aussi échapper à la planification des constructeurs. Le bug architectural, qu'il soit planifié au sein de la matière construite ou à l'inverse subi dans l'existence d'un édifice, peut accélérer les incursions monstrueuses transformatrices du réel. Là est donc le double rôle du monstre architectural, voire de l'architecture dans une époque monstrueuse : révéler les contradictions internes de son système, les incarner moins pour les résoudre que pour les faire fructifier, car c’est peut-être dans le monstre que se niche des renversements profonds entre la base et la superstructure. Comme l’écrivait Henri Lefebvre, <i>« Ce qui advient en architecture a toujours une portée symptomatique d’abord, et causale ensuite. »</i><a onclick="scrollNotes('12')" style="cursor:pointer;" id="L"><sup>12</sup></a></p>
+  </div>
+
+  <!-- COLONNE DROITE -->
+  <div class="column" id="rightCol" style="padding-left: 35px; overflow-y:auto; height:100vh;">
+    <iframe src="https://drive.google.com/file/d/1AcC1AwBq_fPfNURubKlDWUWBBaX_U6JP/preview" class="video_wrapper"></iframe><br>
+    <h3>Vidéo produite par les étudiant·e·s lors de la semaine de workshop</h3>
+    <img src="1.png" class="image" title="Exposition de rendu">
     <h3>Exposition de rendu dans la nef de l'ensa Versailles. A gauche les maquettes produites pour la réalisation des vidéos</h3>
-
-    <p><br></p>
-
-    <h2>1. <i>« La crise consiste justement en ce que le vieux monde est en train de mourir, le nouveau peine à naître, et dans ce clair-obscur naissent les monstres »</i></h2>
-    <h3><i>Antonio Gramsci, Les Cahiers de Prison, Cahiers 3, Paris, Gallimard, 1983 [1948]</i></h3>
-
-    <p>La discipline architecturale semble s’être récemment prise de passion pour la figure du monstre<sup><small> 1</small></sup>, “l’anormal”<sup><small> 2</small></sup> qui par sa différence corporelle et comportementale révèle les limites et les contraintes imposées par la norme. On peut relier cette digestion tardive des idées foucaldiennes à l’influence des thèses queer, féministes et décoloniales qui parviennent enfin à remettre en question la normativité héritée de la modernité. Mais on peut aussi y voir l’abandon progressif de la notion de crise, centrale dans le discours architectural post 2008<sup><small> 3</small></sup>, qui en s’allongeant en longueur et sans fin annoncée, prend plutôt les couleurs du “clair-obscur” gramscien, propice à la naissance des monstres. La révolution verte qui n’a pas lieu, la pandémie qui ne cause pas de basculement profond ou la menace fasciste qui ne génère aucun soubresaut républicain ont terni l’idéal du grand soir, de la réforme immédiate. L’époque est à la superposition des nappes de réalité, hantées les unes par les autres car contemporaines, mais non-miscibles puisque évoluant dans des réalités parallèles.<br>
-    <br>
-    La célèbre citation de Gramsci nous semble un point de départ intéressant pour aborder la question du monstre par un angle temporel. Dans la matrice matérialiste marxiste, la marche de l’histoire se fait par la dialectique entre base (les conditions matérielles de production) et superstructure (leur codification culturelle et socio-légale). Les évolutions du monde pour un matérialiste ne peuvent s’expliquer qu’à partir de la matière, c’est-à-dire des conditions de production : on découvre un nouveau continent, une nouvelle source d’énergie, de nouvelles limites planétaires, et alors toute la machine productive (et reproductive) s’adapte en fonction. Dans le même temps, afin de justifier un certain ordre du monde qui crée nécessairement des perdants et des gagnants (les colons et les colonisés, les prolétaires et les propriétaires, etc.), les classes dominantes construisent une superstructure culturelle qui naturalise les rapports entre les individus par la loi mais aussi par la tradition, la morale, la religion, voire même « le pragmatisme ». La base s’en voit alors façonnée et souvent maintenue dans un état des choses qui favorise les dominants - cela jusque dans la métabolisation de la crise écologique elle-même, discours critique transformé par ces derniers en nouvelle opportunité de marché<sup><small> 4</small></sup>.<br>
-    <br>
-    Or la base et la superstructure ont toutes les deux une certaine inertie et la mise à jour de l’une ne peut immédiatement se répercuter sur l’autre. La crise décrite par Gramsci a lieu dans les moments de « clair-obscur », quand une nouvelle base matérielle tente de s’imposer mais que l’ancienne superstructure continue de lutter pour justifier l’ancien ordre du monde – à vide. Dans ces entre-deux apparaissent les monstres, c’est-à-dire les phénomènes rendus possibles par les nouvelles conditions de production, mais qui restent codifiés dans des grilles culturelles héritées du système précédent. Les monstres sont donc à la fois des entités et des temporalités, des objets qui se débattent dans des systèmes qu’ils réfutent ou qu’ils inquiètent. Les monstres sont en somme des situations qui, si on apprend à les regarder attentivement, peuvent devenir des disjonctions désirables. L’opportunité d’un renversement d’une superstructure se situe en effet peut-être dans cette discordance des temps, potentiel territoire d’une lutte pour de nouveaux équilibres.<br>
-    <br>
-    <i>« The time is out of joint: O cursed spite,<br>
-      That ever I was born to set it right! »</i><sup><small> 5</small></sup><br>
-    L’exclamation de Hamlet qui vient d’échanger avec le fantôme de son père devient le fer de lance de Jacques Derrida dans son ouvrage <i>Spectres de Marx</i> (Éditions Galilée, 1993). Le spectre derridien c’est justement le monstre dans le plus pur sens marxiste : l’idée qui n’est pas en phase avec le monde – car arrivée trop tôt ou trop tard. Le fantôme c’est le monstre : rendu impossible par la nouvelle organisation de la matière (le corps décédé) mais maintenu artificiellement en présence par l’obstination de l’esprit.<br>
-    <br>
-    Le monstre est l’être désarticulé, le zombie tiraillé entre deux mondes et donc renié par les deux. La sorcière, la femme guérisseuse est pointée du doigt entre le Moyen Age tardif et la Renaissance (montrée, rendue donc monstre) lorsque la réorganisation de la société confisque la santé aux individus pour en faire le monopole de l’institution. La base matérielle qui l’a faite naître est balayée par une nouvelle superstructure. De manière inverse la figure du vampire, mute au tournant de l’ère de la modernité et de l’émancipation démocratique. De simple revenant, il devient sous la plume des auteurs gothiques un aristocrate qui se nourrit de la force vitale des serfs. Le vampire n’a alors plus de corps, plus de matière, c’est un esprit nuisible qui doit aspirer l’âme des hommes pour se maintenir en vie. Le monstre apparaît quand base et superstructure entrent en contradiction, quand l'une change de limite, d'échelle ou d'incarnation et percute ou hante l'autre.</p>
-
-    <h2><br>2. <i>« Considérons, en fait, la question de ce qui reste. Étant donné la réalité des dommages qu’ont causé les machines étatiques et capitalistes aux paysages naturels, nous devons nous demander pourquoi quelque chose a subsisté malgré leurs impitoyables filets. Pour répondre à cette préoccupation, nous aurons besoin de nous faufiler dans les marges.»</i></h2>
-    <h3><i> Anna Lowenhaupt Tsing, Le champignon de la fin du monde. Sur la possibilité de vivre dans les ruines du capitalisme, Paris, La Découverte, 2022 [2015], p.55</i></h3>
-
-    <p>À l’heure des crises environnementales, le monstre peut être un opérateur pour faire atterrir dans la superstructure l’Anthropocène et son changement climatique. Pour appréhender les effets de cette nouvelle ère depuis la base matérielle et à l’échelle de ses pouvoirs d’agir, l’anthropologue Anna Sting propose de suivre à la trace l’animal ou le végétal féral qui, autrefois domestiqué, se propage hors du contrôle des humain·e·s en s’entremêlant aux infrastructures qui l'ont fait naître. L’être féral, c’est l’effet non planifié des structures, celui qui leur échappe tout en ayant besoin d’elles pour proliférer. C’est un être inquiétant, un monstre porteur d’un potentiel de déraillement, de renversement. Si l’animal est un sujet prompt à la féralité (puisque même dans son stade domestique, il reste une part capturée de la nature), l’architecture peut contenir un potentiel de féralité que l’ère des fermetures<sup><small> 6</small></sup> nous permet d’appréhender. Les vraies-fausses grottes en ciment rocaille des jardins du château de Versailles et leurs groupes sculptés, protégés comme des humain·e·s par des sacs de sable pendant la seconde guerre mondiale, ou les terrils des anciennes mines devenus refuges de biodiversité et parc d’agrément, ne sont-ils pas des situations monstrueuses, des manières d’habiter en clair-obscur, entre plusieurs mondes, aux limites des catégories, humain·e·s / non-humain·e·s, naturel / culturel, désirables / inquiétantes ?<br>
-    <br>
-    Ailleurs, les ruines de la modernité industrielle transformées en parc d’attractions ou les chantiers abandonnés par le capital fossile consacrés en <i>incompiuto</i><sup><small> 7</small></sup> par nos imaginaires d’architectes, contredisent la capacité des architectures férales à renverser vraiment l’ordre superstructurel. Pour autant, la description attentive de situations architecturales monstrueuses peut permettre d’échapper à la perception d’une base matérielle le subissant. Observer avec attention, puis décrire avec grande précision, une situation monstrueuse permet de saisir les superstructures invisibles, réseaux extractivistes et économies mondialisées, qui la sous-tendent. Explorer les lieux et les moments où le monstre émerge du seuil auquel il était assigné, ce processus étrange où flanche la réalité lissée des formes construites du capitalisme tardif et de l’idéologie de la ville néolibérale, est un moyen de révéler ses transgressions possibles. Cela permet de comprendre par quelle forme et à quelle échelle, la base peut s’échapper, et comment l’architecte peut l’accompagner.</p>
-
-    <h2><br>3. <i>« Les premiers maniéristes étaient des architectes de la Renaissance qui connaissaient superbement bien les règles – si bien qu’ils pouvaient les briser astucieusement, intelligemment et de manière amusante. Mais ils ne les brisaient pas tout le temps ou toutes en même temps. Il nous semble qu’il doit y avoir de bonnes raisons – pas juste pour s’amuser – de rompre les règles aujourd’hui. […] Dans les villes d’aujourd’hui, de nombreux systèmes se croisent et vous ne pouvez pas simplement suivre les règles de chacun d’entre eux car ils entrent souvent en conflit. Vous avez besoin d’une philosophie et d’une stratégie pour plier les règles afin de les faire fonctionner ensemble. Voici une raison moderne du maniérisme. »</i></h2>
-    <h3><i>Denise Scott Brown & Robert Venturi, Architecture as Sign and System, for a Mannerist Time, Harvard University Press, Cambridge, 2004</i></h3>
-
-    <p>Dans leur dernier livre en commun, Architecture as Sign, le couple Venturi-Scott Brown développent l’idée du maniérisme non pas comme un style historique mais comme une stratégie de réponse à des moments de clair-obscur du système architectural. Quand la base matérielle (les injonctions techniques) ne correspond plus à la superstructure (les injonctions culturelles) ; quand la complexité accrue du monde de la construction amène à des contradictions internes (entre les différents acteurs, entre les logiques économiques, etc.), alors l’architecture maniériste est tiraillée entre plusieurs mondes. Elle est disjointe, et sa forme en devient monstrueuse.<br>
-    <br>
-    Ce que les monstres ont à nous apprendre, c’est que des situations asynchrones, des moments de crises créent des situations monstrueuses. Le maniérisme peut être envisagé comme la réponse architecturale à ces contradictions. En se risquant nous aussi à l’anachronie pour suivre la proposition des Venturi-Scott Brown, nous pourrions dire ainsi que la double colonnade du Louvre (1670), l’immeuble de la rue Franklin (1904), le centre Pompidou (1977) ou encore Euralille (1994) sont des monstres qui proviennent d’un monde et tentent d’en habiter un autre. Alors être un·e architecte maniériste, serait être un·e monstre conscient qui décrit et participe à cultiver le monstrueux et même à le rendre désirable.<br>
-    <br>
-    <i>« Pourquoi cette distorsion, ces voix délibérément étouffées, cette fragmentation auditive hallucinatoire, ces cris amplifiés ? Pourquoi ne pas communiquer clairement ? Parce que la communication claire et lisse – et tout ce qu’elle présuppose – est le fantasme que le système projette à la fois comme sa justification mais aussi comme son objectif nécessaire toujours repoussé. (...) “As the Veneer of Democracy Starts to Fade” (1985) est une machine sonore qui accélère le processus. Une arme de bruit anti-œdipienne, anti-névrotique, anti-silence, pro-prolétarienne. »</i><sup><small> 8</small></sup>
-    Alors s’il est bien décrit et même, bien mis en œuvre, le monstre peut se faire accélérateur de la disjonction d’un monde. Pour Mark Fisher, critique culturel marxiste, le fait d’insérer des défaillances, des bruits dans la musique (ici précisément dans les morceaux noise de Mark Stewart), de remettre le crac du vinyle dans une composition numérique, des effets de VHS dans les clips tournés au caméscope, sont des moyens monstrueux de rappeler les anachronies et les dissonances du réel sous le capitalisme tardif. Notre temporalité n’est pas lisse, elle est buggée, inégale. Le glitch est la rocaille contemporaine, l’excès de maniérisme qui révèle la sur-complexité de l’époque. On peut trouver la même ironie asynchrone dans le néo-classicisme préfabriqué des espaces d’Abraxas de Riccardo Bofill (1983) et l’apocalypse commerciale annoncée par les supermarchés Best imaginés par James Wines (1975-84). <br>
-    <br>
-    Mais la disjonction peut aussi échapper à la planification des constructeurs. Le bug architectural, qu'il soit planifié au sein de la matière construite ou à l'inverse subi dans l'existence d'un édifice, peut accélérer les incursions monstrueuses transformatrices du réel. Là est donc le double rôle du monstre architectural, voire de l'architecture dans une époque monstrueuse : révéler les contradictions internes de son système, les incarner moins pour les résoudre que pour les faire fructifier, car c’est peut-être dans le monstre que se niche des renversements profonds entre la base et la superstructure. Comme l’écrivait Henri Lefebvre, <i>« Ce qui advient en architecture a toujours une portée symptomatique d’abord, et causale ensuite. »</i><sup><small> 9</small></sup><br></p>
-    <h3>1. Ainsi en 2020, Henri Bony, Léa Mosconi et Antoine Vercoutère invitent à « Penser le monstre moderne » lors d’un entretien avec Bruno Latour (<i>Les Cahiers de la recherche architecturale urbaine et paysagère</i> [En ligne], Matériaux de la recherche), en 2024 c’est Jean-Louis Violeau qui publie <i>Baudrillard et le monstre (l’architecture)</i>, aux éditions Parenthèses, et la même année Emmanuelle Raoul-Duval et Jacques Marie Ligot organisent le cycle de conférences <i>Monstrum</i> à l’école nationale supérieure d’architecture de Paris-Est.<br><br>
-      2.  Michel Foucault, “Les Anormaux”, cours au Collège de France, janvier-mars 1975<br><br>
-      3.  Voir par exemple Jean-Louis Violeau, <i>L’utopie et la ville : après la crise, épisodiquement</i>, Sens & Tonka, 2013<br><br>
-      4.  Hélène Tordjman, <i>La croissance verte contre la nature, Critique de l'écologie marchande</i>, Paris, La Découverte, 2022<br><br>
-      5.  William Shakespeare, <i>Hamlet</i>, 1601, Acte I, Scene 5<br><br>
-      6.  Emmanuel Bonnet, Diego Landivar, Alexandre Monnon, <i>Héritage et fermetures : une écologie du démantèlement</i>, Paris, Editions divergences, 2021<br><br>
-      7.  Alterazioni Video & Fosbury Architecture (coordination), <i>Incompiuto, la nascita di uno stile</i>, Humboldt Books, 2018<br><br>
-      8.  Mark Fisher, "noise as anti-capital: as the veneer of democracy starts to fade", <i>K punk,</i>, Audimat 2025, [2004]<br><br>
-      9.  Henri Lefebvre, <i>Critique de la vie quotidienne, Tome 3 De la modernité au modernisme (Pour une métaphilosophie du quotidien)</i>, L’Arche, 1981</h3>
-
-    <p></p>
+    <p id="1">1. A. Gramsci, <i>Les Cahiers de Prison, Cahiers 3</i>, Paris, Gallimard, 1983 [1948]<a onclick="scrollBack('A')" style="cursor:pointer;"> ↩</a></p>
+    <p id="2">2. Ainsi en 2020, Henri Bony, Léa Mosconi et Antoine Vercoutère invitent à « Penser le monstre moderne » lors d’un entretien avec Bruno Latour (<i>Les Cahiers de la recherche architecturale urbaine et paysagère</i> [En ligne], Matériaux de la recherche), en 2024 c’est Jean-Louis Violeau qui publie <i>Baudrillard et le monstre (l’architecture)</i>, aux éditions Parenthèses, et la même année Emmanuelle Raoul-Duval et Jacques Marie Ligot organisent le cycle de conférences <i>Monstrum</i> à l’école nationale supérieure d’architecture de Paris-Est.<a onclick="scrollBack('B')" style="cursor:pointer;"> ↩</a></p>
+    <p id="3">3. Michel Foucault, “Les Anormaux”, cours au Collège de France, janvier-mars 1975<a onclick="scrollBack('C')" style="cursor:pointer;"> ↩</a></p>
+    <p id="4">4. Voir par exemple Jean-Louis Violeau, <i>L’utopie et la ville : après la crise, épisodiquement</i>, Sens & Tonka, 2013<a onclick="scrollBack('D')" style="cursor:pointer;"> ↩</a></p>
+    <p id="5">5. Hélène Tordjman, <i>La croissance verte contre la nature, Critique de l'écologie marchande</i>, Paris, La Découverte, 2022<a onclick="scrollBack('E')" style="cursor:pointer;">↩</a></p>
+    <p id="6">6. William Shakespeare, <i>Hamlet</i>, 1601, Acte I, Scene 5<a onclick="scrollBack('F')" style="cursor:pointer;"> ↩</a></p>
+    <p id="7">7. Anna Lowenhaupt Tsing, Le champignon de la fin du monde. Sur la possibilité de vivre dans les ruines du capitalisme, Paris, La Découverte, 2022 [2015], p.55<a onclick="scrollBack('G')" style="cursor:pointer;"> ↩</a></p>
+    <p id="8">8. Emmanuel Bonnet, Diego Landivar, Alexandre Monnon, <i>Héritage et fermetures : une écologie du démantèlement</i>, Paris, Editions divergences, 2021<a onclick="scrollBack('H')" style="cursor:pointer;"> ↩</a></p>
+    <p id="9">9. Alterazioni Video & Fosbury Architecture (coordination), <i>Incompiuto, la nascita di uno stile</i>, Humboldt Books, 2018<a onclick="scrollBack('I')" style="cursor:pointer;"> ↩</a></p>
+    <p id="10">10. Denise Scott Brown & Robert Venturi, <i>Architecture as Sign and System, for a Mannerist Time</i>, Harvard University Press, Cambridge, 2004<a onclick="scrollBack('J')" style="cursor:pointer;"> ↩</a></p>
+    <p id="11">11. Mark Fisher, "noise as anti-capital: as the veneer of democracy starts to fade", <i>K punk,</i>, Audimat 2025, [2004]<a onclick="scrollBack('J')" style="cursor:pointer;"> ↩</a></p>
+    <p id="12">12. Henri Lefebvre, <i>Critique de la vie quotidienne, Tome 3 De la modernité au modernisme (Pour une métaphilosophie du quotidien)</i>, L’Arche, 1981<a onclick="scrollBack('K')" style="cursor:pointer;"> ↩</a></p>
     <img class="image" src="2.png">
     <p></p>
     <img class="image" src="3.png">
@@ -94,17 +205,7 @@
     <h3>illustrations réalisées pour le <a class="lien" href="booklet_A5.pdf">booklet d'introduction</a> remis aux étudiants</h3>
   </div>
 
-  <div class="column">
-    <iframe src="https://drive.google.com/file/d/1AcC1AwBq_fPfNURubKlDWUWBBaX_U6JP/preview" class="video_wrapper"></iframe>
-    <br>
-    <h3>Vidéo produite par les étudiant·e·s lors de la semaine de workshop</h3>
-
-
-
 </div>
-
-
-
 
 </body>
 </html>

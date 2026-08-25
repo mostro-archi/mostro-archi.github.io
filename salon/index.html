@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<header>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+
+<style>
+
+#container {
+  position: relative;
+}
+
+.background_plan {
+  -moz-user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;;
+}
+
+.can-arrange {
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.can-arrange:hover {
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.377));
+}
+
+.can-arrange:active {
+  cursor: grabbing;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.377));
+}
+
+.floor {
+  z-index: 0;
+}
+
+.chair {
+  z-index: 100;
+}
+
+.table {
+  z-index: 200;
+}
+
+.deco {
+  z-index: 300;
+}
+
+#spawn-menu {
+  z-index: 99999;
+  font-family: syne;
+  user-select: none;
+}
+
+.epoch-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+.epoch-button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.epoch-button:hover {
+  background: black;
+  color: white;
+}
+
+.epoch-button.active {
+  background: black;
+  color: white;
+}
+
+.epoch-button.disabled {
+  opacity: 0.35;
+  cursor: default;
+  background-color: red;
+}
+
+.epoch-button.disabled:hover {
+  background: white;
+  color: black;
+}
+
+.category-row {
+  display: flex;
+  flex-wrap: balance;
+  gap: 4px;
+  margin-top: 15px;
+}
+
+.category {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  display: flex;
+}
+
+.category-button {
+  background: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.category:hover .category-button {
+  background: black;
+  color: white;
+}
+
+.object-list {
+  position: absolute;
+  left: 0;
+  bottom: calc(100%);
+  display: none;
+  min-width:100%;
+  background: white;
+  border: none;
+  box-shadow: 5px -5px 5px black;
+}
+
+.category:hover .object-list {
+  display: block;
+}
+
+.object-button {
+  display: block;
+  width: 100%;
+  padding: 3px 4px;
+  background: white;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.object-button:hover {
+  background: black;
+  color: white;
+}
+
+</style>
+
+<div class="holder">
+
+  <div class="multi-column" id="agence">
+
+    <div class="column" id="small">
+
+      <h2>Le séjour, du salon à l'espace commune</h2>
+      <p>
+        contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"
+        institution : maison de l'architecture d'Ile de France<br>
+        date : septembre 2026<br>
+        scénographie : Matters.xyz<br>
+        type : enseignement et recherche
+      </p>
+      <h3>
+        De l’italien salone (grande salle), le salon fait son apparition dans les mœurs et dans la pierre au XVIIe siècle chez la bourgeoisie récemment constituée comme classe. Parallèlement, la majorité des foyers populaires partagent leurs repas et leur temps libre dans la salle à manger. De cette double origine, dont la synthèse se fera peut-être via le living-room moderne, le séjour a hérité d’une certaine informité spatiale qui résulte d’une prolifération de ses usages possibles.<br>
+        <br>
+        Délaissant la composition pour l’ameublement, le séjour est ici ausculté au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond.  Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ices qui peuvent alors participer à cet atlas de nos intériorités.<br>
+      </h3>
+
+      <!-- menu de spawn -->
+
+      <div id="spawn-menu">
+        <div class="epoch-row">
+          <button class="epoch-button active" data-epoch="bourgeois">bourgeois</button>
+          <button class="epoch-button disabled" data-epoch="populaire">populaire</button>
+          <button class="epoch-button disabled" data-epoch="modern">moderne</button>
+          <button class="epoch-button disabled" data-epoch="contemporary">contemporain</button>
+        </div>
+        <div class="category-row">
+          <div class="category">
+            <button class="category-button">sols</button>
+            <div class="object-list">
+              <button class="object-button" data-spawn="floor-a">grand tapis</button>
+              <button class="object-button" data-spawn="floor-b">moyen tapis</button>
+              <button class="object-button" data-spawn="floor-c">petit tapis</button>
+            </div>
+          </div>
+          <div class="category">
+            <button class="category-button">assises</button>
+            <div class="object-list">
+              <button class="object-button" data-spawn="chair-1">canapé Louis XVI</button>
+              <button class="object-button" data-spawn="chair-2">bergère Louis Phillipe</button>
+              <button class="object-button" data-spawn="chair-3">canapé renaissance</button>
+              <button class="object-button" data-spawn="chair-4">fauteuil montesquieur</button>
+              <button class="object-button" data-spawn="chair-5">chaise second empire</button>
+            </div>
+          </div>
+          <div class="category">
+            <button class="category-button">tables</button>
+            <div class="object-list">
+              <button class="object-button" data-spawn="table-1">piano à queue</button>
+              <button class="object-button" data-spawn="table-2">table basse Louis XIV</button>
+              <button class="object-button" data-spawn="table-3">armoire régence</button>
+              <button class="object-button" data-spawn="table-4">petite table vitrée</button>
+              <button class="object-button" data-spawn="table-5">desserte à l'anglaise</button>
+            </div>
+          </div>
+          <div class="category">
+            <button class="category-button">bibelots</button>
+            <div class="object-list">
+              <button class="object-button" data-spawn="deco-1">trophée</button>
+              <button class="object-button" data-spawn="deco-2">livres fermés</button>
+              <button class="object-button" data-spawn="deco-3">tasse pleine</button>
+              <button class="object-button" data-spawn="deco-4">tasse vide</button>
+              <button class="object-button" data-spawn="deco-5">livre ouvert</button>
+              <button class="object-button" data-spawn="deco-6">journal fermé</button>
+              <button class="object-button" data-spawn="deco-7">chandelier</button>
+              <button class="object-button" data-spawn="deco-8">flacon</button>
+              <button class="object-button" data-spawn="deco-9">trophée</button>
+              <button class="object-button" data-spawn="deco-10">cendrier</button>
+              <button class="object-button" data-spawn="deco-11">assiette</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column" id="container">
+      <img class="background_plan" src="sprites/Fichier 25.png">
+
+
+      <!-- ===================================================
+           HIDDEN SOURCE OBJECTS
+           These are TEMPLATES only.
+           They are NEVER moved.
+           They are NEVER registered with PlayHTML.
+           They are NEVER duplicated from an existing instance.
+           =================================================== -->
+
+
+      <!-- FLOORS -->
+
+      <img
+        id="floor-a"
+        src="sprites/Fichier 12.png"
+        class="floor can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="floor-b"
+        src="sprites/Fichier 13.png"
+        class="floor can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="floor-c"
+        src="sprites/Fichier 14.png"
+        class="floor can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+
+      <!-- CHAIRS -->
+
+      <img
+        id="chair-1"
+        src="sprites/Fichier 1.png"
+        class="chair can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="chair-2"
+        src="sprites/Fichier 3.png"
+        class="chair can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="chair-3"
+        src="sprites/Fichier 5.png"
+        class="chair can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="chair-4"
+        src="sprites/Fichier 7.png"
+        class="chair can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="chair-5"
+        src="sprites/Fichier 8.png"
+        class="chair can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+
+      <!-- TABLES -->
+
+      <img
+        id="table-1"
+        src="sprites/Fichier 4.png"
+        class="table can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="table-2"
+        src="sprites/Fichier 6.png"
+        class="table can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="table-3"
+        src="sprites/Fichier 9.png"
+        class="table can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="table-4"
+        src="sprites/Fichier 10.png"
+        class="table can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="table-5"
+        src="sprites/Fichier 11.png"
+        class="table can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+
+      <!-- DECO -->
+
+      <img
+        id="deco-1"
+        src="sprites/Fichier 2.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-2"
+        src="sprites/Fichier 15.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-3"
+        src="sprites/Fichier 16.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-4"
+        src="sprites/Fichier 17.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-5"
+        src="sprites/Fichier 18.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-6"
+        src="sprites/Fichier 19.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-7"
+        src="sprites/Fichier 20.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-8"
+        src="sprites/Fichier 21.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-9"
+        src="sprites/Fichier 22.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-10"
+        src="sprites/Fichier 23.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+      <img
+        id="deco-11"
+        src="sprites/Fichier 24.png"
+        class="deco can-arrange spawn-source"
+        draggable="false"
+        hidden
+      >
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import { playhtml } from "https://unpkg.com/playhtml";
+
+
+/* ============================================================
+   CAN-ARRANGE
+   ============================================================ */
+
+const canArrange = {
+
+  defaultData: {
+
+    x: 0,
+    y: 0,
+    rotation: 0
+
+  },
+
+
+  defaultLocalData: {
+
+    startMouseX: 0,
+    startMouseY: 0,
+
+    dragX: 0,
+    dragY: 0,
+
+    startRotation: 0,
+
+    button: 0
+
+  },
+
+
+  /* ==========================================================
+     RENDER
+     ========================================================== */
+
+  updateElement: ({
+    element,
+    data
+  }) => {
+
+    element.style.transform =
+      `translate(${data.x}px, ${data.y}px) rotate(${data.rotation}deg)`;
+
+  },
+
+
+  /* ==========================================================
+     DRAG START
+     ========================================================== */
+
+  onDragStart: (
+    event,
+    {
+      data,
+      setLocalData
+    }
+  ) => {
+
+    const button =
+      "button" in event
+        ? event.button
+        : 0;
+
+
+    if (
+      button !== 0 &&
+      button !== 2
+    ) {
+
+      return;
+
+    }
+
+
+    const clientX =
+      "touches" in event
+        ? event.touches[0].clientX
+        : event.clientX;
+
+    const clientY =
+      "touches" in event
+        ? event.touches[0].clientY
+        : event.clientY;
+
+
+    setLocalData({
+
+      startMouseX:
+        clientX,
+
+      startMouseY:
+        clientY,
+
+      dragX:
+        data.x,
+
+      dragY:
+        data.y,
+
+      startRotation:
+        data.rotation,
+
+      button
+
+    });
+
+  },
+
+
+  /* ==========================================================
+     DRAG
+     ========================================================== */
+
+  onDrag: (
+    event,
+    {
+      data,
+      localData,
+      setData,
+      element
+    }
+  ) => {
+
+    const clientX =
+      "touches" in event
+        ? event.touches[0].clientX
+        : event.clientX;
+
+    const clientY =
+      "touches" in event
+        ? event.touches[0].clientY
+        : event.clientY;
+
+
+    /* ========================================================
+       LEFT = MOVE
+       ======================================================== */
+
+    if (
+      localData.button === 0
+    ) {
+
+      const dx =
+        clientX -
+        localData.startMouseX;
+
+      const dy =
+        clientY -
+        localData.startMouseY;
+
+
+      let newX =
+        localData.dragX +
+        dx;
+
+      let newY =
+        localData.dragY +
+        dy;
+
+
+      /* ------------------------------------------------------
+         BOUNDS
+         ------------------------------------------------------ */
+
+      const boundsAttribute =
+        element.getAttribute(
+          "can-arrange-bounds"
+        );
+
+
+      if (boundsAttribute) {
+
+        const bounds =
+          document.getElementById(
+            boundsAttribute
+          );
+
+
+        if (bounds) {
+
+          element.style.transform =
+            `translate(${newX}px, ${newY}px) rotate(${data.rotation}deg)`;
+
+
+          const elementRect =
+            element.getBoundingClientRect();
+
+          const boundsRect =
+            bounds.getBoundingClientRect();
+
+
+          if (
+            elementRect.left <
+            boundsRect.left
+          ) {
+
+            newX +=
+              boundsRect.left -
+              elementRect.left;
+
+          }
+
+
+          if (
+            elementRect.right >
+            boundsRect.right
+          ) {
+
+            newX -=
+              elementRect.right -
+              boundsRect.right;
+
+          }
+
+
+          if (
+            elementRect.top <
+            boundsRect.top
+          ) {
+
+            newY +=
+              boundsRect.top -
+              elementRect.top;
+
+          }
+
+
+          if (
+            elementRect.bottom >
+            boundsRect.bottom
+          ) {
+
+            newY -=
+              elementRect.bottom -
+              boundsRect.bottom;
+
+          }
+
+        }
+
+      }
+
+
+      setData({
+
+        x:
+          Math.round(
+            newX * 10
+          ) / 10,
+
+        y:
+          Math.round(
+            newY * 10
+          ) / 10,
+
+        rotation:
+          data.rotation
+
+      });
+
+
+      return;
+
+    }
+
+
+    /* ========================================================
+       RIGHT = ROTATE
+       ======================================================== */
+
+    if (
+      localData.button === 2
+    ) {
+
+      const deltaX =
+        clientX -
+        localData.startMouseX;
+
+
+      const rotation =
+        localData.startRotation -
+        deltaX * 2;
+
+
+      setData({
+
+        x:
+          data.x,
+
+        y:
+          data.y,
+
+        rotation
+
+      });
+
+    }
+
+  },
+
+
+  resetShortcut:
+    "shiftKey"
+
+};
+
+
+/* ============================================================
+   INITIALIZE PLAYHTML
+   ============================================================ */
+
+playhtml.init({
+
+  extraCapabilities: {
+
+    "can-arrange":
+      canArrange
+
+  }
+
+});
+
+
+/* ============================================================
+   SPAWN INSTANCE COUNTER
+   ============================================================
+
+   This is deliberately independent from the DOM.
+
+   IDs are NEVER reused during this page session.
+
+   Example:
+
+       chair-1-instance-1
+       chair-1-instance-2
+       chair-1-instance-3
+
+   Even if instance-1 is deleted, instance-4 will never
+   inherit its PlayHTML state because it has a completely
+   different ID.
+   ============================================================ */
+
+const spawnCounters = {};
+
+
+function createInstanceId(
+  sourceId
+) {
+
+  if (
+    !spawnCounters[sourceId]
+  ) {
+
+    spawnCounters[sourceId] =
+      0;
+
+  }
+
+
+  spawnCounters[sourceId]++;
+
+
+  return `${sourceId}-instance-${spawnCounters[sourceId]}`;
+
+}
+
+
+/* ============================================================
+   CENTER OBJECT
+   ============================================================
+
+   PlayHTML data:
+
+       x = 0
+       y = 0
+       rotation = 0
+
+   Physical position:
+
+       centered in the container
+
+   We use left/top for the physical initial position.
+   PlayHTML subsequently uses transform only for movement.
+   ============================================================ */
+
+function centerObject(
+  element
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (!container) {
+    return;
+  }
+
+
+  /* ----------------------------------------------------------
+     FORCE A COMPLETELY NEUTRAL VISUAL STATE
+     ---------------------------------------------------------- */
+
+  element.style.transform =
+    "translate(0px, 0px) rotate(0deg)";
+
+  element.style.left =
+    "0px";
+
+  element.style.top =
+    "0px";
+
+
+  /* ----------------------------------------------------------
+     MEASURE
+     ---------------------------------------------------------- */
+
+  const containerRect =
+    container.getBoundingClientRect();
+
+  const elementRect =
+    element.getBoundingClientRect();
+
+
+  /* ----------------------------------------------------------
+     CALCULATE CENTER
+     ---------------------------------------------------------- */
+
+  const x =
+    (
+      containerRect.width -
+      elementRect.width
+    ) / 2;
+
+  const y =
+    (
+      containerRect.height -
+      elementRect.height
+    ) / 2;
+
+
+  /* ----------------------------------------------------------
+     ESTABLISH PHYSICAL POSITION
+     ---------------------------------------------------------- */
+
+  element.style.left =
+    `${Math.round(x * 10) / 10}px`;
+
+  element.style.top =
+    `${Math.round(y * 10) / 10}px`;
+
+}
+
+
+/* ============================================================
+   SPAWN OBJECT
+   ============================================================
+
+   IMPORTANT:
+
+   This function ONLY accepts a hidden source element.
+
+   It does NOT clone an existing spawned instance.
+
+   Every call creates a brand-new instance with:
+
+       x = 0
+       y = 0
+       rotation = 0
+
+   and a brand-new ID that has never existed before.
+   ============================================================ */
+
+async function spawnObject(
+  sourceElement
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (
+    !container ||
+    !sourceElement ||
+    !sourceElement.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  /* ----------------------------------------------------------
+     CREATE A NEW ELEMENT FROM THE SOURCE TEMPLATE
+
+     We intentionally never use a spawned instance here.
+     ---------------------------------------------------------- */
+
+  const newElement =
+    document.createElement(
+      sourceElement.tagName
+    );
+
+
+  /* ----------------------------------------------------------
+     COPY ONLY THE SOURCE'S STRUCTURAL ATTRIBUTES
+
+     We do NOT copy:
+
+       id
+       hidden
+       style
+       can-arrange
+       can-arrange-bounds
+
+     because those belong to the old/template element.
+     ---------------------------------------------------------- */
+
+  for (
+    const attribute of sourceElement.attributes
+  ) {
+
+    if (
+      attribute.name === "id" ||
+      attribute.name === "hidden" ||
+      attribute.name === "style" ||
+      attribute.name === "can-arrange" ||
+      attribute.name === "can-arrange-bounds"
+    ) {
+
+      continue;
+
+    }
+
+
+    newElement.setAttribute(
+      attribute.name,
+      attribute.value
+    );
+
+  }
+
+
+  /* ----------------------------------------------------------
+     BRAND NEW ID
+
+     This ID can never be reused after deletion.
+     ---------------------------------------------------------- */
+
+  newElement.id =
+    createInstanceId(
+      sourceElement.id
+    );
+
+
+  /* ----------------------------------------------------------
+     INSTANCE STATE
+     ---------------------------------------------------------- */
+
+  newElement.hidden =
+    false;
+
+  newElement.classList.remove(
+    "spawn-source"
+  );
+
+
+  newElement.style.position =
+    "absolute";
+
+  newElement.style.left =
+    "0px";
+
+  newElement.style.top =
+    "0px";
+
+  newElement.style.transform =
+    "translate(0px, 0px) rotate(0deg)";
+
+
+  /* ----------------------------------------------------------
+     PLAYHTML ATTRIBUTES
+     ---------------------------------------------------------- */
+
+  newElement.setAttribute(
+    "can-arrange",
+    ""
+  );
+
+  newElement.setAttribute(
+    "can-arrange-bounds",
+    "container"
+  );
+
+  newElement.setAttribute(
+    "draggable",
+    "false"
+  );
+
+
+  /* ----------------------------------------------------------
+     ADD TO CONTAINER
+     ---------------------------------------------------------- */
+
+  container.appendChild(
+    newElement
+  );
+
+
+  /* ----------------------------------------------------------
+     WAIT FOR DOM LAYOUT
+     ---------------------------------------------------------- */
+
+  await new Promise(
+    (resolve) =>
+      requestAnimationFrame(
+        resolve
+      )
+  );
+
+
+  /* ----------------------------------------------------------
+     REGISTER THE BRAND-NEW ELEMENT
+
+     Because the ID has never existed before,
+     PlayHTML cannot have old state associated with it.
+     ---------------------------------------------------------- */
+
+  playhtml.register(
+    newElement.id,
+    canArrange
+  );
+
+
+  /* ----------------------------------------------------------
+     WAIT FOR PLAYHTML INITIALIZATION
+     ---------------------------------------------------------- */
+
+  await new Promise(
+    (resolve) =>
+      requestAnimationFrame(
+        resolve
+      )
+  );
+
+
+  /* ----------------------------------------------------------
+     FORCE THE PHYSICAL POSITION TO CENTER
+
+     PlayHTML data remains:
+
+         x = 0
+         y = 0
+         rotation = 0
+     ---------------------------------------------------------- */
+
+  centerObject(
+    newElement
+  );
+
+
+  return newElement;
+
+}
+
+
+/* ============================================================
+   SPAWN BY SOURCE ID
+   ============================================================
+
+   This is now the central spawning mechanism.
+
+   The menu and double-click both use this same function.
+   ============================================================ */
+
+async function spawnObjectById(
+  sourceId
+) {
+
+  const source =
+    document.getElementById(
+      sourceId
+    );
+
+
+  if (
+    !source ||
+    !source.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  return spawnObject(
+    source
+  );
+
+}
+
+
+/* ============================================================
+   MENU SPAWNING
+   ============================================================ */
+
+document
+  .querySelectorAll(
+    "#spawn-menu [data-spawn]"
+  )
+  .forEach(
+    (button) => {
+
+      button.addEventListener(
+        "click",
+        (event) => {
+
+          event.stopPropagation();
+
+
+          spawnObjectById(
+            button.dataset.spawn
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   EPOCH TOGGLE
+   ============================================================ */
+
+document
+  .querySelectorAll(
+    ".epoch-button:not(.disabled)"
+  )
+  .forEach(
+    (button) => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".epoch-button"
+            )
+            .forEach(
+              (other) => {
+
+                other.classList.remove(
+                  "active"
+                );
+
+              }
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   DOUBLE RIGHT CLICK = DELETE
+   ============================================================ */
+
+document
+  .getElementById(
+    "container"
+  )
+  .addEventListener(
+    "mousedown",
+    (event) => {
+
+      if (
+        event.button !== 2
+      ) {
+
+        return;
+
+      }
+
+
+      const target =
+        event.target.closest(
+          "img[can-arrange]:not(.spawn-source)"
+        );
+
+
+      if (!target) {
+        return;
+      }
+
+
+      const now =
+        Date.now();
+
+
+      const lastRightClick =
+        Number(
+          target.dataset.lastRightClick || 0
+        );
+
+
+      /* ------------------------------------------------------
+         SECOND RIGHT CLICK
+         ------------------------------------------------------ */
+
+      if (
+        now -
+        lastRightClick <
+        400
+      ) {
+
+        /*
+           We simply remove the instance.
+
+           Its ID is never reused, so any PlayHTML state
+           associated with this ID can never affect a future
+           spawned object.
+        */
+
+        target.remove();
+
+        return;
+
+      }
+
+
+      /* ------------------------------------------------------
+         FIRST RIGHT CLICK
+         ------------------------------------------------------ */
+
+      target.dataset.lastRightClick =
+        String(now);
+
+    }
+  );
+
+
+/* ============================================================
+   DISABLE NATIVE RIGHT-CLICK MENU
+   ============================================================ */
+
+document.addEventListener(
+  "contextmenu",
+  (event) => {
+
+    event.preventDefault();
+
+  }
+);
+
+
+/* ============================================================
+   GLOBAL SPAWN FUNCTIONS
+   ============================================================ */
+
+window.spawnObject =
+  spawnObject;
+
+
+window.spawnObjectById =
+  spawnObjectById;
+
+</script>
+
+</body>
+</html>

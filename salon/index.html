@@ -31,7 +31,7 @@
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select: none;;
+  -ms-user-select: none;
 }
 
 .can-arrange {
@@ -144,7 +144,7 @@
   left: 0;
   bottom: calc(100%);
   display: none;
-  min-width:100%;
+  min-width: 100%;
   background: white;
   border: none;
   box-shadow: 5px -5px 5px black;
@@ -174,6 +174,7 @@
 
 </style>
 
+
 <div class="holder">
 
   <div class="multi-column" id="agence">
@@ -181,6 +182,7 @@
     <div class="column" id="small">
 
       <h2>Le séjour, du salon à l'espace commune</h2>
+
       <p>
         contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"
         institution : maison de l'architecture d'Ile de France<br>
@@ -188,80 +190,289 @@
         scénographie : Matters.xyz<br>
         type : enseignement et recherche
       </p>
+
       <h3>
         De l’italien salone (grande salle), le salon fait son apparition dans les mœurs et dans la pierre au XVIIe siècle chez la bourgeoisie récemment constituée comme classe. Parallèlement, la majorité des foyers populaires partagent leurs repas et leur temps libre dans la salle à manger. De cette double origine, dont la synthèse se fera peut-être via le living-room moderne, le séjour a hérité d’une certaine informité spatiale qui résulte d’une prolifération de ses usages possibles.<br>
         <br>
-        Délaissant la composition pour l’ameublement, le séjour est ici ausculté au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond.  Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ices qui peuvent alors participer à cet atlas de nos intériorités.<br>
+        Délaissant la composition pour l’ameublement, le séjour est ici ausculté au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond. Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ices qui peuvent alors participer à cet atlas de nos intériorités.<br>
       </h3>
 
-      <!-- menu de spawn -->
+
+      <!-- MENU DE SPAWN -->
 
       <div id="spawn-menu">
+
         <div class="epoch-row">
-          <button class="epoch-button active" data-epoch="bourgeois">bourgeois</button>
-          <button class="epoch-button disabled" data-epoch="populaire">populaire</button>
-          <button class="epoch-button disabled" data-epoch="modern">moderne</button>
-          <button class="epoch-button disabled" data-epoch="contemporary">contemporain</button>
+
+          <button
+            class="epoch-button active"
+            data-epoch="bourgeois"
+          >
+            bourgeois
+          </button>
+
+          <button
+            class="epoch-button disabled"
+            data-epoch="populaire"
+          >
+            populaire
+          </button>
+
+          <button
+            class="epoch-button disabled"
+            data-epoch="modern"
+          >
+            moderne
+          </button>
+
+          <button
+            class="epoch-button disabled"
+            data-epoch="contemporary"
+          >
+            contemporain
+          </button>
+
         </div>
+
+
         <div class="category-row">
+
           <div class="category">
-            <button class="category-button">sols</button>
+
+            <button class="category-button">
+              sols
+            </button>
+
             <div class="object-list">
-              <button class="object-button" data-spawn="floor-a">grand tapis</button>
-              <button class="object-button" data-spawn="floor-b">moyen tapis</button>
-              <button class="object-button" data-spawn="floor-c">petit tapis</button>
+
+              <button
+                class="object-button"
+                data-spawn="floor-a"
+              >
+                grand tapis
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="floor-b"
+              >
+                moyen tapis
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="floor-c"
+              >
+                petit tapis
+              </button>
+
             </div>
+
           </div>
+
+
           <div class="category">
-            <button class="category-button">assises</button>
+
+            <button class="category-button">
+              assises
+            </button>
+
             <div class="object-list">
-              <button class="object-button" data-spawn="chair-1">canapé Louis XVI</button>
-              <button class="object-button" data-spawn="chair-2">bergère Louis Phillipe</button>
-              <button class="object-button" data-spawn="chair-3">canapé renaissance</button>
-              <button class="object-button" data-spawn="chair-4">fauteuil montesquieur</button>
-              <button class="object-button" data-spawn="chair-5">chaise second empire</button>
+
+              <button
+                class="object-button"
+                data-spawn="chair-1"
+              >
+                canapé Louis XVI
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="chair-2"
+              >
+                bergère Louis Phillipe
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="chair-3"
+              >
+                canapé renaissance
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="chair-4"
+              >
+                fauteuil montesquieur
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="chair-5"
+              >
+                chaise second empire
+              </button>
+
             </div>
+
           </div>
+
+
           <div class="category">
-            <button class="category-button">tables</button>
+
+            <button class="category-button">
+              tables
+            </button>
+
             <div class="object-list">
-              <button class="object-button" data-spawn="table-1">piano à queue</button>
-              <button class="object-button" data-spawn="table-2">table basse Louis XIV</button>
-              <button class="object-button" data-spawn="table-3">armoire régence</button>
-              <button class="object-button" data-spawn="table-4">petite table vitrée</button>
-              <button class="object-button" data-spawn="table-5">desserte à l'anglaise</button>
+
+              <button
+                class="object-button"
+                data-spawn="table-1"
+              >
+                piano à queue
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="table-2"
+              >
+                table basse Louis XIV
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="table-3"
+              >
+                armoire régence
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="table-4"
+              >
+                petite table vitrée
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="table-5"
+              >
+                desserte à l'anglaise
+              </button>
+
             </div>
+
           </div>
+
+
           <div class="category">
-            <button class="category-button">bibelots</button>
+
+            <button class="category-button">
+              bibelots
+            </button>
+
             <div class="object-list">
-              <button class="object-button" data-spawn="deco-1">trophée</button>
-              <button class="object-button" data-spawn="deco-2">livres fermés</button>
-              <button class="object-button" data-spawn="deco-3">tasse pleine</button>
-              <button class="object-button" data-spawn="deco-4">tasse vide</button>
-              <button class="object-button" data-spawn="deco-5">livre ouvert</button>
-              <button class="object-button" data-spawn="deco-6">journal fermé</button>
-              <button class="object-button" data-spawn="deco-7">chandelier</button>
-              <button class="object-button" data-spawn="deco-8">flacon</button>
-              <button class="object-button" data-spawn="deco-9">trophée</button>
-              <button class="object-button" data-spawn="deco-10">cendrier</button>
-              <button class="object-button" data-spawn="deco-11">assiette</button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-1"
+              >
+                trophée
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-2"
+              >
+                livres fermés
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-3"
+              >
+                tasse pleine
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-4"
+              >
+                tasse vide
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-5"
+              >
+                livre ouvert
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-6"
+              >
+                journal fermé
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-7"
+              >
+                chandelier
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-8"
+              >
+                flacon
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-9"
+              >
+                trophée
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-10"
+              >
+                cendrier
+              </button>
+
+              <button
+                class="object-button"
+                data-spawn="deco-11"
+              >
+                assiette
+              </button>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
 
+
     <div class="column" id="container">
-      <img class="background_plan" src="sprites/Fichier 25.png">
+
+      <img
+        class="background_plan"
+        src="sprites/Fichier 25.png"
+      >
 
 
       <!-- ===================================================
-           HIDDEN SOURCE OBJECTS
-           These are TEMPLATES only.
-           They are NEVER moved.
-           They are NEVER registered with PlayHTML.
-           They are NEVER duplicated from an existing instance.
+           SOURCES CACHÉES
            =================================================== -->
 
 
@@ -481,6 +692,112 @@ import { playhtml } from "https://unpkg.com/playhtml";
 
 
 /* ============================================================
+   LOCAL STORAGE
+   ============================================================
+
+   PlayHTML ne sert PLUS à stocker la scène.
+
+   Le navigateur conserve ici :
+
+   [
+     {
+       sourceId: "chair-1",
+       x: 120,
+       y: 80,
+       rotation: 45
+     },
+     ...
+   ]
+
+   Cette donnée est propre à CE navigateur et à CE site.
+   ============================================================ */
+
+const STORAGE_KEY =
+  "mostro-scene-v1";
+
+
+let savedScene = [];
+
+
+function loadScene() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if (!raw) {
+
+      return [];
+
+    }
+
+
+    const parsed =
+      JSON.parse(raw);
+
+
+    if (!Array.isArray(parsed)) {
+
+      return [];
+
+    }
+
+
+    return parsed.filter(
+      item =>
+        item &&
+        typeof item.sourceId === "string" &&
+        Number.isFinite(Number(item.x)) &&
+        Number.isFinite(Number(item.y)) &&
+        Number.isFinite(Number(item.rotation))
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Impossible de lire la scène locale.",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveScene() {
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(
+        savedScene
+      )
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Impossible de sauvegarder la scène locale.",
+      error
+    );
+
+  }
+
+}
+
+
+savedScene =
+  loadScene();
+
+
+/* ============================================================
    CAN-ARRANGE
    ============================================================ */
 
@@ -521,6 +838,32 @@ const canArrange = {
 
     element.style.transform =
       `translate(${data.x}px, ${data.y}px) rotate(${data.rotation}deg)`;
+
+
+    /*
+       On conserve également les valeurs
+       dans le DOM.
+
+       Cela permet à notre système localStorage
+       de les récupérer sans dépendre de PlayHTML.
+    */
+
+    if (
+      !element.classList.contains(
+        "spawn-source"
+      )
+    ) {
+
+      element.dataset.x =
+        String(data.x);
+
+      element.dataset.y =
+        String(data.y);
+
+      element.dataset.rotation =
+        String(data.rotation);
+
+    }
 
   },
 
@@ -722,22 +1065,43 @@ const canArrange = {
       }
 
 
+      newX =
+        Math.round(
+          newX * 10
+        ) / 10;
+
+      newY =
+        Math.round(
+          newY * 10
+        ) / 10;
+
+
       setData({
 
         x:
-          Math.round(
-            newX * 10
-          ) / 10,
+          newX,
 
         y:
-          Math.round(
-            newY * 10
-          ) / 10,
+          newY,
 
         rotation:
           data.rotation
 
       });
+
+
+      /*
+         Sauvegarde immédiate.
+      */
+
+      updateSavedObject(
+        element,
+        {
+          x: newX,
+          y: newY,
+          rotation: data.rotation
+        }
+      );
 
 
       return;
@@ -775,6 +1139,20 @@ const canArrange = {
 
       });
 
+
+      /*
+         Sauvegarde immédiate.
+      */
+
+      updateSavedObject(
+        element,
+        {
+          x: data.x,
+          y: data.y,
+          rotation
+        }
+      );
+
     }
 
   },
@@ -804,21 +1182,6 @@ playhtml.init({
 
 /* ============================================================
    SPAWN INSTANCE COUNTER
-   ============================================================
-
-   This is deliberately independent from the DOM.
-
-   IDs are NEVER reused during this page session.
-
-   Example:
-
-       chair-1-instance-1
-       chair-1-instance-2
-       chair-1-instance-3
-
-   Even if instance-1 is deleted, instance-4 will never
-   inherit its PlayHTML state because it has a completely
-   different ID.
    ============================================================ */
 
 const spawnCounters = {};
@@ -848,20 +1211,6 @@ function createInstanceId(
 
 /* ============================================================
    CENTER OBJECT
-   ============================================================
-
-   PlayHTML data:
-
-       x = 0
-       y = 0
-       rotation = 0
-
-   Physical position:
-
-       centered in the container
-
-   We use left/top for the physical initial position.
-   PlayHTML subsequently uses transform only for movement.
    ============================================================ */
 
 function centerObject(
@@ -875,13 +1224,11 @@ function centerObject(
 
 
   if (!container) {
+
     return;
+
   }
 
-
-  /* ----------------------------------------------------------
-     FORCE A COMPLETELY NEUTRAL VISUAL STATE
-     ---------------------------------------------------------- */
 
   element.style.transform =
     "translate(0px, 0px) rotate(0deg)";
@@ -893,20 +1240,12 @@ function centerObject(
     "0px";
 
 
-  /* ----------------------------------------------------------
-     MEASURE
-     ---------------------------------------------------------- */
-
   const containerRect =
     container.getBoundingClientRect();
 
   const elementRect =
     element.getBoundingClientRect();
 
-
-  /* ----------------------------------------------------------
-     CALCULATE CENTER
-     ---------------------------------------------------------- */
 
   const x =
     (
@@ -921,10 +1260,6 @@ function centerObject(
     ) / 2;
 
 
-  /* ----------------------------------------------------------
-     ESTABLISH PHYSICAL POSITION
-     ---------------------------------------------------------- */
-
   element.style.left =
     `${Math.round(x * 10) / 10}px`;
 
@@ -935,26 +1270,110 @@ function centerObject(
 
 
 /* ============================================================
+   UPDATE LOCAL STORAGE OBJECT
+   ============================================================ */
+
+function updateSavedObject(
+  element,
+  data
+) {
+
+  const index =
+    savedScene.findIndex(
+      item =>
+        item.instanceId ===
+        element.dataset.instanceId
+    );
+
+
+  if (index === -1) {
+
+    return;
+
+  }
+
+
+  savedScene[index].x =
+    Number(data.x);
+
+  savedScene[index].y =
+    Number(data.y);
+
+  savedScene[index].rotation =
+    Number(data.rotation);
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   ADD OBJECT TO LOCAL STORAGE
+   ============================================================ */
+
+function addSavedObject(
+  element,
+  data
+) {
+
+  savedScene.push({
+
+    instanceId:
+      element.dataset.instanceId,
+
+    sourceId:
+      element.dataset.sourceId,
+
+    x:
+      Number(data.x),
+
+    y:
+      Number(data.y),
+
+    rotation:
+      Number(data.rotation)
+
+  });
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   REMOVE OBJECT FROM LOCAL STORAGE
+   ============================================================ */
+
+function removeSavedObject(
+  element
+) {
+
+  savedScene =
+    savedScene.filter(
+      item =>
+        item.instanceId !==
+        element.dataset.instanceId
+    );
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
    SPAWN OBJECT
    ============================================================
 
-   IMPORTANT:
-
-   This function ONLY accepts a hidden source element.
-
-   It does NOT clone an existing spawned instance.
-
-   Every call creates a brand-new instance with:
-
-       x = 0
-       y = 0
-       rotation = 0
-
-   and a brand-new ID that has never existed before.
+   initialData permet de recréer un objet depuis
+   localStorage avec exactement sa position précédente.
    ============================================================ */
 
 async function spawnObject(
-  sourceElement
+  sourceElement,
+  initialData = null
 ) {
 
   const container =
@@ -977,9 +1396,7 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     CREATE A NEW ELEMENT FROM THE SOURCE TEMPLATE
-
-     We intentionally never use a spawned instance here.
+     CREATE NEW ELEMENT
      ---------------------------------------------------------- */
 
   const newElement =
@@ -989,17 +1406,7 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     COPY ONLY THE SOURCE'S STRUCTURAL ATTRIBUTES
-
-     We do NOT copy:
-
-       id
-       hidden
-       style
-       can-arrange
-       can-arrange-bounds
-
-     because those belong to the old/template element.
+     COPY SOURCE ATTRIBUTES
      ---------------------------------------------------------- */
 
   for (
@@ -1028,15 +1435,25 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     BRAND NEW ID
-
-     This ID can never be reused after deletion.
+     NEW ID
      ---------------------------------------------------------- */
 
   newElement.id =
     createInstanceId(
       sourceElement.id
     );
+
+
+  /* ----------------------------------------------------------
+     LOCAL INSTANCE METADATA
+     ---------------------------------------------------------- */
+
+  newElement.dataset.instanceId =
+    initialData?.instanceId ||
+    newElement.id;
+
+  newElement.dataset.sourceId =
+    sourceElement.id;
 
 
   /* ----------------------------------------------------------
@@ -1085,7 +1502,7 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     ADD TO CONTAINER
+     ADD TO DOM
      ---------------------------------------------------------- */
 
   container.appendChild(
@@ -1094,11 +1511,11 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     WAIT FOR DOM LAYOUT
+     WAIT FOR LAYOUT
      ---------------------------------------------------------- */
 
   await new Promise(
-    (resolve) =>
+    resolve =>
       requestAnimationFrame(
         resolve
       )
@@ -1106,10 +1523,7 @@ async function spawnObject(
 
 
   /* ----------------------------------------------------------
-     REGISTER THE BRAND-NEW ELEMENT
-
-     Because the ID has never existed before,
-     PlayHTML cannot have old state associated with it.
+     REGISTER WITH PLAYHTML
      ---------------------------------------------------------- */
 
   playhtml.register(
@@ -1118,31 +1532,127 @@ async function spawnObject(
   );
 
 
-  /* ----------------------------------------------------------
-     WAIT FOR PLAYHTML INITIALIZATION
-     ---------------------------------------------------------- */
-
   await new Promise(
-    (resolve) =>
+    resolve =>
       requestAnimationFrame(
         resolve
       )
   );
 
 
-  /* ----------------------------------------------------------
-     FORCE THE PHYSICAL POSITION TO CENTER
+  /* ==========================================================
+     NEW OBJECT
+     ========================================================== */
 
-     PlayHTML data remains:
+  if (!initialData) {
 
-         x = 0
-         y = 0
-         rotation = 0
-     ---------------------------------------------------------- */
+    centerObject(
+      newElement
+    );
+
+
+    const data = {
+
+      x: 0,
+      y: 0,
+      rotation: 0
+
+    };
+
+
+    /*
+       Position initiale :
+       le centre est déterminé par left/top.
+
+       Les coordonnées PlayHTML restent à 0,0.
+    */
+
+    newElement.dataset.x =
+      "0";
+
+    newElement.dataset.y =
+      "0";
+
+    newElement.dataset.rotation =
+      "0";
+
+
+    addSavedObject(
+      newElement,
+      data
+    );
+
+
+    return newElement;
+
+  }
+
+
+  /* ==========================================================
+     RESTORE OBJECT
+     ========================================================== */
+
+  const x =
+    Number(initialData.x) || 0;
+
+  const y =
+    Number(initialData.y) || 0;
+
+  const rotation =
+    Number(initialData.rotation) || 0;
+
+
+  /*
+     On commence par centrer physiquement
+     l'objet comme lors d'un spawn normal.
+  */
 
   centerObject(
     newElement
   );
+
+
+  /*
+     Puis PlayHTML reçoit les anciennes
+     coordonnées enregistrées.
+  */
+
+  const handle =
+    playhtml.getHandle(
+      newElement.id,
+      canArrange
+    );
+
+
+  if (
+    handle &&
+    typeof handle.setData === "function"
+  ) {
+
+    handle.setData({
+
+      x,
+      y,
+      rotation
+
+    });
+
+  }
+
+
+  /*
+     On conserve également ces valeurs
+     dans le DOM.
+  */
+
+  newElement.dataset.x =
+    String(x);
+
+  newElement.dataset.y =
+    String(y);
+
+  newElement.dataset.rotation =
+    String(rotation);
 
 
   return newElement;
@@ -1152,11 +1662,6 @@ async function spawnObject(
 
 /* ============================================================
    SPAWN BY SOURCE ID
-   ============================================================
-
-   This is now the central spawning mechanism.
-
-   The menu and double-click both use this same function.
    ============================================================ */
 
 async function spawnObjectById(
@@ -1197,11 +1702,11 @@ document
     "#spawn-menu [data-spawn]"
   )
   .forEach(
-    (button) => {
+    button => {
 
       button.addEventListener(
         "click",
-        (event) => {
+        event => {
 
           event.stopPropagation();
 
@@ -1226,7 +1731,7 @@ document
     ".epoch-button:not(.disabled)"
   )
   .forEach(
-    (button) => {
+    button => {
 
       button.addEventListener(
         "click",
@@ -1237,7 +1742,7 @@ document
               ".epoch-button"
             )
             .forEach(
-              (other) => {
+              other => {
 
                 other.classList.remove(
                   "active"
@@ -1259,7 +1764,7 @@ document
 
 
 /* ============================================================
-   DOUBLE RIGHT CLICK = DELETE
+   DOUBLE RIGHT CLICK = DELETE LOCAL OBJECT
    ============================================================ */
 
 document
@@ -1268,7 +1773,7 @@ document
   )
   .addEventListener(
     "mousedown",
-    (event) => {
+    event => {
 
       if (
         event.button !== 2
@@ -1286,7 +1791,9 @@ document
 
 
       if (!target) {
+
         return;
+
       }
 
 
@@ -1296,13 +1803,14 @@ document
 
       const lastRightClick =
         Number(
-          target.dataset.lastRightClick || 0
+          target.dataset.lastRightClick ||
+          0
         );
 
 
-      /* ------------------------------------------------------
+      /* ======================================================
          SECOND RIGHT CLICK
-         ------------------------------------------------------ */
+         ====================================================== */
 
       if (
         now -
@@ -1311,23 +1819,31 @@ document
       ) {
 
         /*
-           We simply remove the instance.
+           IMPORTANT :
 
-           Its ID is never reused, so any PlayHTML state
-           associated with this ID can never affect a future
-           spawned object.
+           1. suppression de localStorage
+           2. suppression du DOM
+
+           L'objet ne pourra donc PAS réapparaître
+           au prochain rafraîchissement.
         */
 
+        removeSavedObject(
+          target
+        );
+
+
         target.remove();
+
 
         return;
 
       }
 
 
-      /* ------------------------------------------------------
+      /* ======================================================
          FIRST RIGHT CLICK
-         ------------------------------------------------------ */
+         ====================================================== */
 
       target.dataset.lastRightClick =
         String(now);
@@ -1337,12 +1853,12 @@ document
 
 
 /* ============================================================
-   DISABLE NATIVE RIGHT-CLICK MENU
+   DISABLE NATIVE RIGHT CLICK MENU
    ============================================================ */
 
 document.addEventListener(
   "contextmenu",
-  (event) => {
+  event => {
 
     event.preventDefault();
 
@@ -1351,15 +1867,109 @@ document.addEventListener(
 
 
 /* ============================================================
-   GLOBAL SPAWN FUNCTIONS
+   RESTORE SAVED SCENE
+   ============================================================
+
+   On attend que le document soit complètement prêt,
+   puis on recrée chaque objet enregistré.
+   ============================================================ */
+
+async function restoreScene() {
+
+  const objects =
+    [...savedScene];
+
+
+  for (
+    const savedObject of objects
+  ) {
+
+    const source =
+      document.getElementById(
+        savedObject.sourceId
+      );
+
+
+    if (!source) {
+
+      continue;
+
+    }
+
+
+    await spawnObject(
+      source,
+      savedObject
+    );
+
+  }
+
+}
+
+
+await restoreScene();
+
+
+/* ============================================================
+   GLOBAL FUNCTIONS
    ============================================================ */
 
 window.spawnObject =
   spawnObject;
 
-
 window.spawnObjectById =
   spawnObjectById;
+
+
+/* ============================================================
+   DEBUG MANUAL
+   ============================================================
+
+   Dans la console :
+
+       mostroClearScene()
+
+   efface complètement la scène locale.
+   ============================================================ */
+
+window.mostroClearScene =
+  function() {
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+    savedScene = [];
+
+    document
+      .querySelectorAll(
+        "#container img[can-arrange]:not(.spawn-source)"
+      )
+      .forEach(
+        element =>
+          element.remove()
+      );
+
+  };
+
+
+/*
+   Pour inspecter la scène :
+
+       mostroScene()
+
+*/
+
+window.mostroScene =
+  function() {
+
+    console.table(
+      savedScene
+    );
+
+    return savedScene;
+
+  };
 
 </script>
 

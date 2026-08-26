@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../favicon.png" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+<style>
+
+#container {
+  position: relative;
+}
+
+.background_plan {
+  pointer-events: none;
+  position: absolute;
+}
+
+.foreground_plan {
+  pointer-events: none;
+  z-index:500;
+  position: absolute;
+}
+
+.can-arrange {
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.can-arrange:hover {
+  filter:
+    drop-shadow(
+      5px 5px 5px
+      rgba(0, 0, 0, 0.377)
+    );
+}
+
+.can-arrange:active {
+  cursor: grabbing;
+  filter:
+    drop-shadow(
+      5px 5px 5px
+      rgba(0, 0, 0, 0.377)
+    );
+}
+
+.floor {
+  z-index: 0;
+}
+.chair {
+  z-index: 100;
+}
+.table {
+  z-index: 200;
+}
+.deco {
+  z-index: 300;
+}
+
+/* menus */
+
+#spawn-menu {
+  z-index: 99999;
+  font-family: syne;
+  user-select: none;
+}
+
+.epoch-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+.epoch-button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.epoch-button:hover {
+  background: black;
+  color: white;
+}
+
+.epoch-button.active {
+  background: black;
+  color: white;
+}
+
+.epoch-button.disabled {
+  opacity: 0.35;
+  cursor: default;
+  background-color: red;
+}
+
+.epoch-button.disabled:hover {
+  background: white;
+  color: black;
+}
+
+#plan-menu {
+  z-index: 99999;
+  font-family: syne;
+  user-select: none;
+}
+
+.plan-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+.plan-button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.plan-button:hover {
+  background: black;
+  color: white;
+}
+
+.plan-button.active {
+  background: black;
+  color: white;
+}
+
+.plan-button.disabled {
+  opacity: 0.35;
+  cursor: default;
+  background-color: red;
+}
+
+.plan-button.disabled:hover {
+  background: white;
+  color: black;
+}
+
+.category-row {
+  display: flex;
+  flex-wrap: balance;
+  gap: 4px;
+  margin-top: 15px;
+}
+
+.category {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  display: flex;
+}
+
+.category-button {
+  background: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.category:hover .category-button {
+  background: black;
+  color: white;
+}
+
+.object-list {
+  position: absolute;
+  left: 0;
+  bottom: calc(100%);
+  display: none;
+  min-width: 100%;
+  background: white;
+  border: none;
+  box-shadow: 5px -5px 5px black;
+}
+
+.category:hover .object-list.active {
+  display: block;
+}
+
+.object-button {
+  display: block;
+  width: 100%;
+  padding: 3px 4px;
+  background: white;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.object-button:hover {
+  background: black;
+  color: white;
+}
+
+#reset-scene {
+  margin-top: 4px;
+  width: 100%;
+  padding: 3px 4px;
+  background: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#reset-scene:hover {
+  background: black;
+  color: white;
+}
+
+#box-menu {
+  border : 2px black solid;
+  padding : 8px;
+}
+
+#head-menu {
+  border : 2px black solid;
+  padding : 2px 2px 2px 8px;
+  background-color: black;
+  color: white;
+  font-family: syne;
+}
+
+</style>
+
+
+<div class="holder">
+
+  <div class="multi-column" id="agence">
+
+    <div class="column" id="small">
+      <h2>Le séjour, du salon bourgeois à l'espace commun</h2>
+      <p>contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"<br>
+        institution : maison de l'architecture d'Ile de France<br>
+        date : septembre 2026<br>
+        scénographie : Matters.xyz<br>
+        type : enseignement et recherche
+      </p>
+
+      <!-- MENU DE PLAN -->
+      <div id="head-menu">sélection de plan</div>
+      <div id="box-menu">
+        <div id="plan-menu">
+          <div class="plan-row">
+            <button class="plan-button active" data-plan="bourgeois">le salon bourgeois</button>
+            <button class="plan-button" data-plan="populaire">la salle commune populaire</button>
+            <button class="plan-button disabled" data-plan="modern">le living room moderne</button>
+            <button class="plan-button disabled" data-plan="contemporary">l'espace commun contemporain</button>
+          </div>
+          <button id="reset-scene">réinitialiser le mobilier</button>
+        </div>
+      </div>
+
+      <h3 id="description"></h3>
+
+      <!-- MENU DE SPAWN -->
+      <div id="head-menu">éditeur de plan</div>
+      <div id="box-menu"><h3><i>> clic gauche : déplacer un objet<br>> clic droit : pivoter<br>> double clic-droit : supprimer</i></h3>
+        <div id="spawn-menu">
+        <div class="epoch-row">
+          <button class="epoch-button active" data-epoch="bourgeois">mobilier bourgeois</button>
+          <button class="epoch-button" data-epoch="populaire">mobilier populaire</button>
+          <button class="epoch-button disabled" data-epoch="modern">mobilier moderne</button>
+          <button class="epoch-button disabled" data-epoch="contemporary">mobilier contemporain</button>
+        </div>
+        <div class="category-row">
+
+          <div class="category">
+            <button class="category-button">sols</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_f3">grand tapis</button>
+              <button class="object-button" data-spawn="b_f2">moyen tapis</button>
+              <button class="object-button" data-spawn="b_f1">petit tapis</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_f1">caisse ouverte</button>
+              <button class="object-button" data-spawn="p_f2">caisse fermée</button>
+              <button class="object-button" data-spawn="p_f3">bicycles</button>
+              <button class="object-button" data-spawn="p_f4">ballon</button>
+              <button class="object-button" data-spawn="p_f5">cruche</button>
+            </div>
+          </div>
+
+          <div class="category">
+            <button class="category-button">assises</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_c1">canapé louis XIV</button>
+              <button class="object-button" data-spawn="b_c2">canapé régence</button>
+              <button class="object-button" data-spawn="b_c3">bergère louis XV</button>
+              <button class="object-button" data-spawn="b_c4">cabriolet louis XVI</button>
+              <button class="object-button" data-spawn="b_c5">chaise second empire</button>
+              <button class="object-button" data-spawn="b_c6">chaise restauration</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_c1">chaise art-nouveau</button>
+              <button class="object-button" data-spawn="p_c2">chaise thonet n°66</button>
+              <button class="object-button" data-spawn="p_c3">chaise thonet n°14</button>
+              <button class="object-button" data-spawn="p_c4">banquette de café</button>
+              <button class="object-button" data-spawn="p_c5">tabouret de bar</button>
+            </div>
+          </div>
+
+          <div class="category">
+            <button class="category-button">tables</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_t1">grande table à manger</button>
+              <button class="object-button" data-spawn="b_t2">bureau style directoire</button>
+              <button class="object-button" data-spawn="b_t3">table basse empire</button>
+              <button class="object-button" data-spawn="b_t4">desserte louis philippe</button>
+              <button class="object-button" data-spawn="b_t5">manteau de cheminée</button>
+              <button class="object-button" data-spawn="b_t6">piano à queue</button>
+              <button class="object-button" data-spawn="b_t7">billard anglais</button>
+              <button class="object-button" data-spawn="b_t8">armoire napoléon III</button>
+              <button class="object-button" data-spawn="b_t9">bibliothèques consulat</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_t1">table à manger</button>
+              <button class="object-button" data-spawn="p_t2">fourneau</button>
+              <button class="object-button" data-spawn="p_t3">lit d'appoint</button>
+              <button class="object-button" data-spawn="p_t4">guéridon carré</button>
+              <button class="object-button" data-spawn="p_t5">guéridon circulaire</button>
+              <button class="object-button" data-spawn="p_t6">landeau</button>
+            </div>
+          </div>
+
+          <div class="category">
+          <button class="category-button">bibelots</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_d1">trophée de chasse</button>
+              <button class="object-button" data-spawn="b_d2">livres fermés</button>
+              <button class="object-button" data-spawn="b_d3">livre ouvert</button>
+              <button class="object-button" data-spawn="b_d4">livres tranche</button>
+              <button class="object-button" data-spawn="b_d5">globe terrestre</button>
+              <button class="object-button" data-spawn="b_d6">coussin</button>
+              <button class="object-button" data-spawn="b_d7">horloge</button>
+              <button class="object-button" data-spawn="b_d8">assiette</button>
+              <button class="object-button" data-spawn="b_d9">plat</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_d1">journal</button>
+              <button class="object-button" data-spawn="p_d2">café vide</button>
+              <button class="object-button" data-spawn="p_d3">café plein</button>
+              <button class="object-button" data-spawn="p_d4">bouilloire</button>
+              <button class="object-button" data-spawn="p_d5">bouteille</button>
+              <button class="object-button" data-spawn="p_d6">cocotte</button>
+              <button class="object-button" data-spawn="p_d7">chandelier</button>
+              <button class="object-button" data-spawn="p_d8">machine à coudre</button>
+              <button class="object-button" data-spawn="p_d9">fer à repasser</button>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column" id="container">
+
+      <!-- plan en fond -->
+      <img id="background-plan" class="background_plan" src="sprites/b_bg.png">
+      <img id="foreground-plan" class="foreground_plan" src="sprites/b_fg.png">
+
+      <!-- sources cachées -->
+      <img id="b_f3" src="sprites/b_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_f2" src="sprites/b_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_f1" src="sprites/b_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_f1" src="sprites/p_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f2" src="sprites/p_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f3" src="sprites/p_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f4" src="sprites/p_f4.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f5" src="sprites/p_f5.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="b_c1" src="sprites/b_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c2" src="sprites/b_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c3" src="sprites/b_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c4" src="sprites/b_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c5" src="sprites/b_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c6" src="sprites/b_c6.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_c1" src="sprites/p_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c2" src="sprites/p_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c3" src="sprites/p_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c4" src="sprites/p_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c5" src="sprites/p_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="b_t1" src="sprites/b_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t2" src="sprites/b_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t3" src="sprites/b_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t4" src="sprites/b_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t5" src="sprites/b_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t6" src="sprites/b_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t7" src="sprites/b_t7.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t8" src="sprites/b_t8.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t9" src="sprites/b_t9.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_t1" src="sprites/p_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t2" src="sprites/p_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t3" src="sprites/p_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t4" src="sprites/p_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t5" src="sprites/p_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t6" src="sprites/p_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="b_d1" src="sprites/b_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d2" src="sprites/b_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d3" src="sprites/b_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d4" src="sprites/b_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d5" src="sprites/b_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d6" src="sprites/b_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d7" src="sprites/b_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d8" src="sprites/b_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d9" src="sprites/b_d9.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_d1" src="sprites/p_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d2" src="sprites/p_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d3" src="sprites/p_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d4" src="sprites/p_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d5" src="sprites/p_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d6" src="sprites/p_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d7" src="sprites/p_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d8" src="sprites/p_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d9" src="sprites/p_d9.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module">
+
+/* stockage local uniquement */
+
+const STORAGE_KEY =
+  "mostro-scene-v2";
+
+/* initialisation sur le plan bourgeois */
+
+let currentPlan =
+  "bourgeois";
+
+/* configuration de départ de chaque plan */
+
+const PLAN_CONFIG = {
+
+  bourgeois: {
+
+    background:
+      "sprites/b_bg.png",
+
+    foreground:
+      "sprites/b_fg.png",
+
+    description: `
+      En 1932, dans son <i>Dictionnaire Historique de l’Architecture</i>, Antoine Chrysostome Quatremère de Quincy distingue la salle à manger de la salle d’assemblée qu’il nomme Salon. Si la première est <i>“dans les maisons de quelque importance, une pièce séparée de l’appartement et placée volontiers à rez-de-chaussée [...] où on pratiquera des buffets et des fontaines.”</i>, la seconde est <i>“la pièce de réunion où l’on reçoit le monde, et où par conséquent, selon l’importance des maisons, on rassemble le plus d’objets de commodité, d’agrément, de goût et de luxe.”</i>.<br>
+      <br>
+      Le salon, de l’italien <i>salone</i>, soit grande salle, est une apparition récente qui témoigne d'un état particulier de la société. Il apparaît en effet conjointement à la classe sociale qui le plébiscitera : la bourgeoisie européenne.<br>
+      Comme tout élément architectural, le salon est à la fois processus et produit, machine et marchandise. Au sein des cercles bourgeois, le salon est loin d’être une pièce inutile. Il est au contraire le siège du pouvoir, le lieu où se tissent et se maintiennent les liens sociaux entre les grandes familles intrigantes qui se partagent le vieux comme le nouveau monde. Si on y joue au billard, ou si on y brode, c’est aussi là que se négocient les alliances, les mariages et les affaires.<br>
+      <br>
+      Le salon est donc un outil d’accumulation de capital social, comme économique. Il en est aussi la conséquence : pièce surnuméraire, le salon est un symbole de richesse. Plus il est grand, plus il se multiplie, plus il se spécifie (en fumoir, salle de billard, boudoir...) plus le salon démontre la puissance du foyer qui dispose d’autant de mètres carrés, mais aussi et surtout de décorations et mobiliers.<br>
+      <br>
+      <i>Ci-contre : Plan inspiré du Chateau de Champs-sur-Marne, Pierre et Jean-Baptiste Bullet, 1707</i>
+    `,
+
+    defaultScene: [
+
+      {
+        instanceId: "default-b_f3",
+        sourceId: "b_f3",
+        left: 40,
+        top: 40,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-b_c1",
+        sourceId: "b_c1",
+        left: 250,
+        top: 100,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-b_t1",
+        sourceId: "b_t1",
+        left: 150,
+        top: 250,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-b_d1",
+        sourceId: "b_d1",
+        left: 400,
+        top: 150,
+        rotation: 0
+      }
+
+    ]
+
+  },
+
+
+  populaire: {
+
+    background:
+      "sprites/p_bg.png",
+
+    foreground:
+      "sprites/p_fg.png",
+
+    description: `
+      Quand le salon est l’apanage de la bourgeoisie, l’habitat populaire, lui, dispose plutôt d’une <i>salle commune</i>, ou simplement <i>salle</i>. 
+      Celle-ci est tout sauf une pièce excédentaire. Il s’agit de l’espace à tout faire qui contient souvent le fourneau, et même parfois des couchages. Mais c’est aussi l’espace du travail lorsqu’il se fait à domicile, comme chez les <i>canuts</i> lyonnais. Dans ce cas-là, la salle commune se dote d’une double hauteur sur laquelle donne une mezzanine, ce qui la rapproche formellement des <i>halls</i>, cousins anglo-saxons des <i>salone</i>, qui bénéficient eux aussi en général d’une hauteur plus importante que les autres pièces.<br>
+      <br> 
+      Si la salle commune, ou <i>salle à manger</i>, populaire ne revêt pas de rôle de réception, c’est aussi car pour la majorité de la population, les habitudes de socialisation n’ont pas lieu au sein du foyer, mais dans l’espace public. On se retrouve plutôt au bistrot, dans les espaces de services collectifs comme les lavoirs et les jardins ouvriers, ou même directement dans la rue.<br>
+      Les fondations philanthropiques de la fin du XIXe siècle proposent ainsi de créer des salons collectifs dans les nouveaux immeubles qu’elles édifient, pour recadrer au sein de l’habitation – si ce n’est du logement – la sociabilisation des classes populaires.<br>
+      <br>
+      Le tournant du XXe siècle prolonge ce projet civilisateur désormais porté par la collectivité publique. À sa création en 1914, <i>l’Office public des Habitations à Bon Marché de la Ville de Paris</i> utilise le salon comme outil de classification des types de logements proposés.<br>
+      Selon le revenu du foyer, il peut avoir accès au <i>type primaire</i> avec une salle commune, dans laquelle on cuisine et on mange, au <i>type normal</i> qui sépare la pièce où l’on cuisine de la salle à manger, et enfin le <i>type pour loyers moyens</i> qui dispose en enfilade de la salle à manger un véritable salon.<br>
+      <br>
+      <i>Ci-contre : Plan type primaire pour l’Office Parisien des Habitations à Bon Marché, conçu par Dubost et Gautruche (Architectes de la Ville), 1914</i>
+    `,
+
+    defaultScene: [
+
+      {
+        instanceId: "default-p_f1",
+        sourceId: "p_f1",
+        left: 60,
+        top: 50,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-p_c1",
+        sourceId: "p_c1",
+        left: 260,
+        top: 100,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-p_t1",
+        sourceId: "p_t1",
+        left: 150,
+        top: 260,
+        rotation: 0
+      },
+
+      {
+        instanceId: "default-p_d1",
+        sourceId: "p_d1",
+        left: 400,
+        top: 160,
+        rotation: 0
+      }
+
+    ]
+
+  }
+
+};
+
+
+/* ============================================================
+   SCÈNE ACTUELLE
+   ============================================================ */
+
+
+let savedScene = [];
+
+
+/* ============================================================
+   GET DEFAULT SCENE
+   ============================================================ */
+
+
+function getDefaultScene() {
+
+  const plan =
+    PLAN_CONFIG[currentPlan];
+
+
+  if (!plan) {
+
+    return [];
+
+  }
+
+
+  return plan.defaultScene.map(
+    object => ({
+      ...object
+    })
+  );
+
+}
+
+
+/* ============================================================
+   APPLY PLAN
+   ============================================================ */
+
+
+function applyPlan(
+  planName
+) {
+
+  const plan =
+    PLAN_CONFIG[planName];
+
+
+  if (!plan) {
+
+    return;
+
+  }
+
+
+  currentPlan =
+    planName;
+
+
+  /*
+     Background
+  */
+
+
+  const background =
+    document.getElementById(
+      "background-plan"
+    );
+
+
+  if (background) {
+
+    background.src =
+      plan.background;
+
+  }
+
+
+  /*
+     Foreground
+  */
+
+
+  const foreground =
+    document.getElementById(
+      "foreground-plan"
+    );
+
+
+  if (foreground) {
+
+    foreground.src =
+      plan.foreground;
+
+  }
+
+
+  /*
+     Description
+  */
+
+
+  const description =
+    document.getElementById(
+      "description"
+    );
+
+
+  if (description) {
+
+    description.innerHTML =
+      plan.description;
+
+  }
+
+
+  /*
+     Active plan button
+  */
+
+
+  document
+    .querySelectorAll(
+      ".plan-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const selectedButton =
+    document.querySelector(
+      `.plan-button[data-plan="${planName}"]`
+    );
+
+
+  if (selectedButton) {
+
+    selectedButton.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   PLAN BUTTON EVENTS
+   ============================================================ */
+
+
+document
+  .querySelectorAll(
+    ".plan-button:not(.disabled)"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          applyPlan(
+            button.dataset.plan
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   INITIAL PLAN
+   ============================================================ */
+
+
+applyPlan(
+  "bourgeois"
+);
+
+
+/* ============================================================
+   LOAD SCENE
+   ============================================================ */
+
+
+function loadScene() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if (raw === null) {
+
+      return null;
+
+    }
+
+
+    const parsed =
+      JSON.parse(raw);
+
+
+    if (!Array.isArray(parsed)) {
+
+      return null;
+
+    }
+
+
+    return parsed.filter(
+      item =>
+
+        item &&
+
+        typeof item.instanceId === "string" &&
+
+        typeof item.sourceId === "string" &&
+
+        Number.isFinite(
+          Number(item.left)
+        ) &&
+
+        Number.isFinite(
+          Number(item.top)
+        ) &&
+
+        Number.isFinite(
+          Number(item.rotation)
+        )
+
+    );
+
+  }
+
+
+  catch (error) {
+
+    console.warn(
+      "Impossible de lire la scène locale.",
+      error
+    );
+
+
+    return null;
+
+  }
+
+}
+
+
+/* ============================================================
+   SAVE SCENE
+   ============================================================ */
+
+
+function saveScene() {
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(savedScene)
+    );
+
+  }
+
+
+  catch (error) {
+
+    console.warn(
+      "Impossible de sauvegarder la scène locale.",
+      error
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   INITIALISATION DE LA SCÈNE
+   ============================================================ */
+
+
+const loadedScene =
+  loadScene();
+
+
+if (loadedScene === null) {
+
+  /*
+     Première visite :
+     le default state dépend du plan actuel.
+  */
+
+
+  savedScene =
+    getDefaultScene();
+
+
+  saveScene();
+
+}
+
+
+else {
+
+  /*
+     Visiteur existant :
+     on conserve exactement sa scène.
+  */
+
+
+  savedScene =
+    loadedScene;
+
+}
+
+
+/* ============================================================
+   UNIQUE INSTANCE ID
+   ============================================================ */
+
+
+function createInstanceId() {
+
+  if (
+    window.crypto &&
+    typeof window.crypto.randomUUID === "function"
+  ) {
+
+    return window.crypto.randomUUID();
+
+  }
+
+
+  return (
+    "instance-" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .slice(2)
+  );
+
+}
+
+
+/* ============================================================
+   APPLY OBJECT STATE
+   ============================================================ */
+
+
+function applyObjectState(
+  element,
+  state
+) {
+
+  element.style.left =
+    `${state.left}px`;
+
+  element.style.top =
+    `${state.top}px`;
+
+  element.style.transform =
+    `rotate(${state.rotation}deg)`;
+
+
+  element.dataset.left =
+    String(state.left);
+
+  element.dataset.top =
+    String(state.top);
+
+  element.dataset.rotation =
+    String(state.rotation);
+
+}
+
+
+/* ============================================================
+   UPDATE SAVED OBJECT
+   ============================================================ */
+
+
+function updateSavedObject(
+  element
+) {
+
+  const index =
+    savedScene.findIndex(
+      item =>
+        item.instanceId ===
+        element.dataset.instanceId
+    );
+
+
+  if (index === -1) {
+
+    return;
+
+  }
+
+
+  savedScene[index].left =
+    Number(element.dataset.left);
+
+  savedScene[index].top =
+    Number(element.dataset.top);
+
+  savedScene[index].rotation =
+    Number(element.dataset.rotation);
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   ADD OBJECT TO SCENE
+   ============================================================ */
+
+
+function addSavedObject(
+  element
+) {
+
+  savedScene.push({
+
+    instanceId:
+      element.dataset.instanceId,
+
+    sourceId:
+      element.dataset.sourceId,
+
+    left:
+      Number(element.dataset.left),
+
+    top:
+      Number(element.dataset.top),
+
+    rotation:
+      Number(element.dataset.rotation)
+
+  });
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   REMOVE OBJECT FROM SCENE
+   ============================================================ */
+
+
+function removeSavedObject(
+  element
+) {
+
+  savedScene =
+    savedScene.filter(
+      item =>
+        item.instanceId !==
+        element.dataset.instanceId
+    );
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   CENTER OBJECT
+   ============================================================ */
+
+
+function getCenteredPosition(
+  element
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (!container) {
+
+    return {
+      left: 0,
+      top: 0
+    };
+
+  }
+
+
+  const containerRect =
+    container.getBoundingClientRect();
+
+
+  const elementRect =
+    element.getBoundingClientRect();
+
+
+  const left =
+    (
+      containerRect.width -
+      elementRect.width
+    ) / 2;
+
+
+  const top =
+    (
+      containerRect.height -
+      elementRect.height
+    ) / 2;
+
+
+  return {
+
+    left:
+      Math.round(left * 10) / 10,
+
+    top:
+      Math.round(top * 10) / 10
+
+  };
+
+}
+
+
+/* ============================================================
+   KEEP OBJECT INSIDE CONTAINER
+   ============================================================ */
+
+
+function constrainPosition(
+  element,
+  left,
+  top
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (!container) {
+
+    return {
+      left,
+      top
+    };
+
+  }
+
+
+  const containerRect =
+    container.getBoundingClientRect();
+
+
+  element.style.left =
+    `${left}px`;
+
+  element.style.top =
+    `${top}px`;
+
+
+  const elementRect =
+    element.getBoundingClientRect();
+
+
+  if (
+    elementRect.left <
+    containerRect.left
+  ) {
+
+    left +=
+      containerRect.left -
+      elementRect.left;
+
+  }
+
+
+  if (
+    elementRect.right >
+    containerRect.right
+  ) {
+
+    left -=
+      elementRect.right -
+      containerRect.right;
+
+  }
+
+
+  if (
+    elementRect.top <
+    containerRect.top
+  ) {
+
+    top +=
+      containerRect.top -
+      elementRect.top;
+
+  }
+
+
+  if (
+    elementRect.bottom >
+    containerRect.bottom
+  ) {
+
+    top -=
+      elementRect.bottom -
+      containerRect.bottom;
+
+  }
+
+
+  return {
+
+    left:
+      Math.round(left * 10) / 10,
+
+    top:
+      Math.round(top * 10) / 10
+
+  };
+
+}
+
+
+/* ============================================================
+   POINTER STATE
+   ============================================================ */
+
+
+const pointerState =
+  new WeakMap();
+
+
+/* ============================================================
+   START INTERACTION
+   ============================================================ */
+
+
+function startInteraction(
+  element,
+  event
+) {
+
+  if (
+    event.button !== 0 &&
+    event.button !== 2
+  ) {
+
+    return;
+
+  }
+
+
+  event.preventDefault();
+
+  event.stopPropagation();
+
+
+  /* ==========================================================
+     DOUBLE RIGHT CLICK = DELETE
+     ========================================================== */
+
+
+  if (
+    event.button === 2
+  ) {
+
+    const now =
+      Date.now();
+
+
+    const lastRightClick =
+      Number(
+        element.dataset.lastRightClick ||
+        0
+      );
+
+
+    if (
+      now -
+      lastRightClick <
+      400
+    ) {
+
+      pointerState.delete(
+        element
+      );
+
+
+      removeSavedObject(
+        element
+      );
+
+
+      element.remove();
+
+
+      return;
+
+    }
+
+
+    element.dataset.lastRightClick =
+      String(now);
+
+  }
+
+
+  /* ==========================================================
+     NORMAL INTERACTION
+     ========================================================== */
+
+
+  const left =
+    Number(
+      element.dataset.left
+    ) || 0;
+
+
+  const top =
+    Number(
+      element.dataset.top
+    ) || 0;
+
+
+  const rotation =
+    Number(
+      element.dataset.rotation
+    ) || 0;
+
+
+  pointerState.set(
+    element,
+    {
+
+      button:
+        event.button,
+
+      startMouseX:
+        event.clientX,
+
+      startMouseY:
+        event.clientY,
+
+      startLeft:
+        left,
+
+      startTop:
+        top,
+
+      startRotation:
+        rotation
+
+    }
+  );
+
+
+  element.setPointerCapture(
+    event.pointerId
+  );
+
+}
+
+
+/* ============================================================
+   MOVE / ROTATE
+   ============================================================ */
+
+
+function moveInteraction(
+  element,
+  event
+) {
+
+  const state =
+    pointerState.get(
+      element
+    );
+
+
+  if (!state) {
+
+    return;
+
+  }
+
+
+  const dx =
+    event.clientX -
+    state.startMouseX;
+
+
+  const dy =
+    event.clientY -
+    state.startMouseY;
+
+
+  /* ==========================================================
+     LEFT BUTTON = MOVE
+     ========================================================== */
+
+
+  if (
+    state.button === 0
+  ) {
+
+    let left =
+      state.startLeft +
+      dx;
+
+
+    let top =
+      state.startTop +
+      dy;
+
+
+    const constrained =
+      constrainPosition(
+        element,
+        left,
+        top
+      );
+
+
+    left =
+      constrained.left;
+
+    top =
+      constrained.top;
+
+
+    const rotation =
+      state.startRotation;
+
+
+    element.style.left =
+      `${left}px`;
+
+    element.style.top =
+      `${top}px`;
+
+    element.style.transform =
+      `rotate(${rotation}deg)`;
+
+
+    element.dataset.left =
+      String(left);
+
+    element.dataset.top =
+      String(top);
+
+    element.dataset.rotation =
+      String(rotation);
+
+
+    return;
+
+  }
+
+
+  /* ==========================================================
+     RIGHT BUTTON = ROTATE
+     ========================================================== */
+
+
+  if (
+    state.button === 2
+  ) {
+
+    const rotation =
+      state.startRotation -
+      dx * 2;
+
+
+    element.style.left =
+      `${state.startLeft}px`;
+
+    element.style.top =
+      `${state.startTop}px`;
+
+    element.style.transform =
+      `rotate(${rotation}deg)`;
+
+
+    element.dataset.left =
+      String(state.startLeft);
+
+    element.dataset.top =
+      String(state.startTop);
+
+    element.dataset.rotation =
+      String(rotation);
+
+  }
+
+}
+
+
+/* ============================================================
+   END INTERACTION
+   ============================================================ */
+
+
+function endInteraction(
+  element,
+  event
+) {
+
+  const state =
+    pointerState.get(
+      element
+    );
+
+
+  if (!state) {
+
+    return;
+
+  }
+
+
+  pointerState.delete(
+    element
+  );
+
+
+  if (
+    element.hasPointerCapture(
+      event.pointerId
+    )
+  ) {
+
+    element.releasePointerCapture(
+      event.pointerId
+    );
+
+  }
+
+
+  updateSavedObject(
+    element
+  );
+
+}
+
+
+/* ============================================================
+   PREPARE OBJECT
+   ============================================================ */
+
+
+function prepareObject(
+  element
+) {
+
+  element.addEventListener(
+    "pointerdown",
+    event => {
+
+      startInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointermove",
+    event => {
+
+      moveInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointerup",
+    event => {
+
+      endInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointercancel",
+    event => {
+
+      endInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "dragstart",
+    event => {
+
+      event.preventDefault();
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   SPAWN OBJECT
+   ============================================================ */
+
+
+async function spawnObject(
+  sourceElement,
+  savedObject = null
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (
+    !container ||
+    !sourceElement ||
+    !sourceElement.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  /* ----------------------------------------------------------
+     CREATE ELEMENT
+     ---------------------------------------------------------- */
+
+
+  const newElement =
+    document.createElement(
+      sourceElement.tagName
+    );
+
+
+  /* ----------------------------------------------------------
+     COPY SOURCE ATTRIBUTES
+     ---------------------------------------------------------- */
+
+
+  for (
+    const attribute of sourceElement.attributes
+  ) {
+
+    if (
+      attribute.name === "id" ||
+      attribute.name === "hidden" ||
+      attribute.name === "style" ||
+      attribute.name === "draggable"
+    ) {
+
+      continue;
+
+    }
+
+
+    newElement.setAttribute(
+      attribute.name,
+      attribute.value
+    );
+
+  }
+
+
+  /* ----------------------------------------------------------
+     UNIQUE ID
+     ---------------------------------------------------------- */
+
+
+  const instanceId =
+    savedObject?.instanceId ||
+    createInstanceId();
+
+
+  newElement.id =
+    instanceId;
+
+
+  /* ----------------------------------------------------------
+     METADATA
+     ---------------------------------------------------------- */
+
+
+  newElement.dataset.instanceId =
+    instanceId;
+
+
+  newElement.dataset.sourceId =
+    sourceElement.id;
+
+
+  /* ----------------------------------------------------------
+     OBJECT ATTRIBUTES
+     ---------------------------------------------------------- */
+
+
+  newElement.hidden =
+    false;
+
+
+  newElement.classList.remove(
+    "spawn-source"
+  );
+
+
+  newElement.classList.add(
+    "can-arrange"
+  );
+
+
+  newElement.style.position =
+    "absolute";
+
+
+  /*
+     IMPORTANT :
+
+     Un nouvel objet commence toujours avec une position
+     propre.
+  */
+
+
+  newElement.style.left =
+    "0px";
+
+
+  newElement.style.top =
+    "0px";
+
+
+  newElement.style.transform =
+    "rotate(0deg)";
+
+
+  newElement.setAttribute(
+    "draggable",
+    "false"
+  );
+
+
+  /* ----------------------------------------------------------
+     ADD TO DOM
+     ---------------------------------------------------------- */
+
+
+  container.appendChild(
+    newElement
+  );
+
+
+  /* ----------------------------------------------------------
+     WAIT FOR IMAGE LAYOUT
+     ---------------------------------------------------------- */
+
+
+  if (
+    !newElement.complete
+  ) {
+
+    await new Promise(
+      resolve => {
+
+        newElement.addEventListener(
+          "load",
+          resolve,
+          {
+            once: true
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  await new Promise(
+    resolve =>
+      requestAnimationFrame(
+        resolve
+      )
+  );
+
+
+  /* ==========================================================
+     RESTORE EXISTING OBJECT
+     ========================================================== */
+
+
+  if (savedObject) {
+
+    const left =
+      Number(savedObject.left);
+
+
+    const top =
+      Number(savedObject.top);
+
+
+    const rotation =
+      Number(savedObject.rotation);
+
+
+    applyObjectState(
+      newElement,
+      {
+
+        left:
+          Number.isFinite(left)
+            ? left
+            : 0,
+
+        top:
+          Number.isFinite(top)
+            ? top
+            : 0,
+
+        rotation:
+          Number.isFinite(rotation)
+            ? rotation
+            : 0
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================================
+     NEW OBJECT
+     ========================================================== */
+
+
+  else {
+
+    const centered =
+      getCenteredPosition(
+        newElement
+      );
+
+
+    const state = {
+
+      left:
+        centered.left,
+
+      top:
+        centered.top,
+
+      rotation:
+        0
+
+    };
+
+
+    applyObjectState(
+      newElement,
+      state
+    );
+
+
+    /*
+       On AJOUTE l'objet à la scène existante.
+    */
+
+
+    addSavedObject(
+      newElement
+    );
+
+  }
+
+
+  /* ----------------------------------------------------------
+     ENABLE INTERACTION
+     ---------------------------------------------------------- */
+
+
+  prepareObject(
+    newElement
+  );
+
+
+  return newElement;
+
+}
+
+
+/* ============================================================
+   SPAWN BY SOURCE ID
+   ============================================================ */
+
+
+async function spawnObjectById(
+  sourceId
+) {
+
+  const source =
+    document.getElementById(
+      sourceId
+    );
+
+
+  if (
+    !source ||
+    !source.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  return spawnObject(
+    source
+  );
+
+}
+
+
+/* ============================================================
+   MENU SPAWNING
+   ============================================================ */
+
+
+document
+  .querySelectorAll(
+    "#spawn-menu [data-spawn]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.stopPropagation();
+
+
+          spawnObjectById(
+            button.dataset.spawn
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   EPOCH TOGGLE
+   ============================================================ */
+
+
+function setActiveEpoch(
+  epoch
+) {
+
+  /*
+     Boutons epoch
+  */
+
+
+  document
+    .querySelectorAll(
+      ".epoch-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const selectedButton =
+    document.querySelector(
+      `.epoch-button[data-epoch="${epoch}"]`
+    );
+
+
+  if (selectedButton) {
+
+    selectedButton.classList.add(
+      "active"
+    );
+
+  }
+
+
+  /*
+     Object lists
+  */
+
+
+  document
+    .querySelectorAll(
+      ".object-list"
+    )
+    .forEach(
+      list => {
+
+        list.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      `.object-list.${epoch}`
+    )
+    .forEach(
+      list => {
+
+        list.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+}
+
+
+/* ------------------------------------------------------------
+   INITIAL EPOCH
+   ------------------------------------------------------------ */
+
+
+setActiveEpoch(
+  "bourgeois"
+);
+
+
+/* ------------------------------------------------------------
+   EPOCH BUTTON EVENTS
+   ------------------------------------------------------------ */
+
+
+document
+  .querySelectorAll(
+    ".epoch-button:not(.disabled)"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          setActiveEpoch(
+            button.dataset.epoch
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   RESET SCENE
+   ============================================================ */
+
+
+async function resetScene() {
+
+  /*
+     1. Supprimer tous les objets actuellement présents.
+  */
+
+
+  document
+    .querySelectorAll(
+      "#container img.can-arrange:not(.spawn-source)"
+    )
+    .forEach(
+      element =>
+        element.remove()
+    );
+
+
+  /*
+     2. Récupérer le default state du PLAN ACTUEL.
+
+     Chaque plan possède sa propre scène.
+  */
+
+
+  savedScene =
+    getDefaultScene();
+
+
+  /*
+     3. Chaque reset crée de nouvelles instances.
+
+     Les coordonnées et les objets du default state
+     restent toutefois exactement ceux définis dans
+     PLAN_CONFIG.
+  */
+
+
+  savedScene =
+    savedScene.map(
+      object => ({
+
+        ...object,
+
+        instanceId:
+          createInstanceId()
+
+      })
+    );
+
+
+  /*
+     4. Sauvegarder cette nouvelle scène.
+  */
+
+
+  saveScene();
+
+
+  /*
+     5. Recréer les objets dans le DOM.
+  */
+
+
+  const objects =
+    [...savedScene];
+
+
+  for (
+    const savedObject of objects
+  ) {
+
+    const source =
+      document.getElementById(
+        savedObject.sourceId
+      );
+
+
+    if (!source) {
+
+      continue;
+
+    }
+
+
+    await spawnObject(
+      source,
+      savedObject
+    );
+
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   RESET BUTTON
+   ------------------------------------------------------------ */
+
+
+document
+  .getElementById(
+    "reset-scene"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      resetScene();
+
+    }
+  );
+
+
+/* ============================================================
+   DISABLE NATIVE CONTEXT MENU
+   ============================================================ */
+
+
+document.addEventListener(
+  "contextmenu",
+  event => {
+
+    event.preventDefault();
+
+  }
+);
+
+
+/* ============================================================
+   RESTORE SAVED SCENE
+   ============================================================ */
+
+
+async function restoreScene() {
+
+  const objects =
+    [...savedScene];
+
+
+  for (
+    const savedObject of objects
+  ) {
+
+    const source =
+      document.getElementById(
+        savedObject.sourceId
+      );
+
+
+    if (!source) {
+
+      continue;
+
+    }
+
+
+    await spawnObject(
+      source,
+      savedObject
+    );
+
+  }
+
+}
+
+
+await restoreScene();
+
+
+/* ============================================================
+   GLOBAL FUNCTIONS
+   ============================================================ */
+
+
+window.spawnObject =
+  spawnObject;
+
+
+window.spawnObjectById =
+  spawnObjectById;
+
+
+/* ============================================================
+   DEBUG — CLEAR SCENE
+   ============================================================ */
+
+
+window.mostroClearScene =
+  function() {
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+
+    savedScene = [];
+
+
+    document
+      .querySelectorAll(
+        "#container img.can-arrange:not(.spawn-source)"
+      )
+      .forEach(
+        element =>
+          element.remove()
+      );
+
+  };
+
+
+/* ============================================================
+   DEBUG — INSPECT SCENE
+   ============================================================ */
+
+
+window.mostroScene =
+  function() {
+
+    console.table(
+      savedScene
+    );
+
+
+    return savedScene;
+
+  };
+
+
+/* ============================================================
+   DEBUG — STORAGE KEY
+   ============================================================ */
+
+
+window.mostroStorageKey =
+  STORAGE_KEY;
+
+
+</script>
+
+
+</body>
+
+</html>

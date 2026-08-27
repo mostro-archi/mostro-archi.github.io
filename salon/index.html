@@ -1,0 +1,5663 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../favicon.png" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+<style>
+
+#container {
+  position: relative;
+}
+
+.background_plan {
+  pointer-events: none;
+  position: absolute;
+}
+
+.foreground_plan {
+  pointer-events: none;
+  z-index:500;
+  position: absolute;
+}
+
+.can-arrange {
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.can-arrange:hover {
+  filter:
+    drop-shadow(
+      5px 5px 5px
+      rgba(0, 0, 0, 0.377)
+    );
+}
+
+.can-arrange:active {
+  cursor: grabbing;
+  filter:
+    drop-shadow(
+      5px 5px 5px
+      rgba(0, 0, 0, 0.377)
+    );
+}
+
+.floor {
+  z-index: 0;
+}
+.chair {
+  z-index: 100;
+}
+.table {
+  z-index: 200;
+}
+.deco {
+  z-index: 300;
+}
+
+/* menus */
+
+#spawn-menu {
+  z-index: 99999;
+  font-family: syne;
+  user-select: none;
+}
+
+.epoch-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+.epoch-button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.epoch-button:hover {
+  background: black;
+  color: white;
+}
+
+.epoch-button.active {
+  background: black;
+  color: white;
+}
+
+.epoch-button.disabled {
+  opacity: 0.35;
+  cursor: default;
+  background-color: red;
+}
+
+.epoch-button.disabled:hover {
+  background: white;
+  color: black;
+}
+
+#plan-menu {
+  z-index: 99999;
+  font-family: syne;
+  user-select: none;
+}
+
+.plan-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+.plan-button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.plan-button:hover {
+  background: black;
+  color: white;
+}
+
+.plan-button.active {
+  background: black;
+  color: white;
+}
+
+.plan-button.disabled {
+  opacity: 0.35;
+  cursor: default;
+  background-color: red;
+}
+
+.plan-button.disabled:hover {
+  background: white;
+  color: black;
+}
+
+.category-row {
+  display: flex;
+  flex-wrap: balance;
+  gap: 4px;
+  margin-top: 15px;
+}
+
+.category {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  display: flex;
+}
+
+.category-button {
+  background: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.category:hover .category-button {
+  background: black;
+  color: white;
+}
+
+.object-list {
+  position: absolute;
+  left: 0;
+  bottom: calc(100%);
+  display: none;
+  min-width: 100%;
+  background: white;
+  border: none;
+  box-shadow: 5px -5px 5px black;
+}
+
+.category:hover .object-list.active {
+  display: block;
+}
+
+.object-button {
+  display: block;
+  width: 100%;
+  padding: 3px 4px;
+  background: white;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.object-button:hover {
+  background: black;
+  color: white;
+}
+
+#reset-scene, #empty-scene {
+  margin-top: 4px;
+  padding: 3px 4px;
+  background: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  flex:1;
+}
+
+#reset-scene:hover, #empty-scene:hover {
+  background: black;
+  color: white;
+}
+
+.reset-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: balance;
+}
+
+#box-menu {
+  border : 2px black solid;
+  padding : 8px;
+}
+
+#head-menu {
+  border : 2px black solid;
+  padding : 2px 2px 2px 8px;
+  background-color: black;
+  color: white;
+  font-family: syne;
+}
+
+</style>
+
+
+<div class="holder">
+
+  <div class="multi-column" id="agence">
+
+    <div class="column" id="small">
+      <h2>Le séjour, du salon bourgeois à l'espace commun</h2>
+      <p>contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"<br>
+        institution : maison de l'architecture d'Ile de France<br>
+        date : septembre 2026<br>
+        scénographie : Matters.xyz<br>
+        type : enseignement et recherche
+      </p>
+
+      <!-- MENU DE PLAN -->
+      <div id="head-menu">sélection de plan</div>
+      <div id="box-menu">
+        <div id="plan-menu">
+          <div class="plan-row">
+            <button class="plan-button active" data-plan="bourgeois">le salon <br>bourgeois</button>
+            <button class="plan-button" data-plan="populaire">la salle commune populaire</button>
+            <button class="plan-button" data-plan="modern">le living room moderne</button>
+            <button class="plan-button" data-plan="contemporary">l'espace commun contemporain</button>
+          </div>
+          <br>
+          <div class="reset-row">
+            <button id="reset-scene">réinitialiser</button>
+            <button id="empty-scene">vider</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 id="description"></h3>
+
+      <!-- MENU DE SPAWN -->
+      <div id="head-menu">éditeur de plan</div>
+      <div id="box-menu"><h3><i>> clic gauche : déplacer un objet<br>> clic droit : pivoter<br>> double clic-droit : supprimer</i></h3>
+        <div id="spawn-menu">
+        <div class="epoch-row">
+          <button class="epoch-button active" data-epoch="bourgeois">mobilier bourgeois</button>
+          <button class="epoch-button" data-epoch="populaire">mobilier populaire</button>
+          <button class="epoch-button" data-epoch="modern">mobilier moderne</button>
+          <button class="epoch-button" data-epoch="contemporary">mob. contemporain</button>
+        </div>
+        <div class="category-row">
+
+          <div class="category">
+            <button class="category-button">sols</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_f3">grand tapis</button>
+              <button class="object-button" data-spawn="b_f2">moyen tapis</button>
+              <button class="object-button" data-spawn="b_f1">petit tapis</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_f1">caisse ouverte</button>
+              <button class="object-button" data-spawn="p_f2">caisse fermée</button>
+              <button class="object-button" data-spawn="p_f5">cruche</button>
+              <button class="object-button" data-spawn="p_f3">bicycles</button>
+              <button class="object-button" data-spawn="p_f4">ballon</button>
+            </div>
+            <div class="object-list modern">
+              <button class="object-button" data-spawn="m_f1">tapis 80s</button>
+              <button class="object-button" data-spawn="m_f6">paillaisson</button>
+              <button class="object-button" data-spawn="m_f2">yucca</button>
+              <button class="object-button" data-spawn="m_f3">aspiditra</button>
+              <button class="object-button" data-spawn="m_f4">dracanea</button>
+              <button class="object-button" data-spawn="m_f5">paravent</button>
+            </div>
+            <div class="object-list contemporary">
+              <button class="object-button" data-spawn="c_f8">grand tapis</button>
+              <button class="object-button" data-spawn="c_f1">tapis de jeu</button>
+              <button class="object-button" data-spawn="c_f3">fouta</button>
+              <button class="object-button" data-spawn="c_f4">tapis rond</button>
+              <button class="object-button" data-spawn="c_f5">descente de lit</button>
+              <button class="object-button" data-spawn="c_f2">carrelage</button>
+              <button class="object-button" data-spawn="c_f6">chat</button>
+              <button class="object-button" data-spawn="c_f7">chaussures</button>
+            
+            </div>
+          </div>
+
+          <div class="category">
+            <button class="category-button">assises</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_c1">canapé louis XIV</button>
+              <button class="object-button" data-spawn="b_c2">canapé régence</button>
+              <button class="object-button" data-spawn="b_c3">bergère louis XV</button>
+              <button class="object-button" data-spawn="b_c4">cabriolet louis XVI</button>
+              <button class="object-button" data-spawn="b_c5">chaise second empire</button>
+              <button class="object-button" data-spawn="b_c6">chaise restauration</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_c1">chaise art-nouveau</button>
+              <button class="object-button" data-spawn="p_c2">chaise thonet n°66</button>
+              <button class="object-button" data-spawn="p_c3">chaise thonet n°14</button>
+              <button class="object-button" data-spawn="p_c4">banquette de café</button>
+              <button class="object-button" data-spawn="p_c5">tabouret de bar</button>
+            </div>
+            <div class="object-list modern">
+              <button class="object-button" data-spawn="m_c1">fauteuil midcentury</button>
+              <button class="object-button" data-spawn="m_c2">canapé midcentury</button>
+              <button class="object-button" data-spawn="m_c3">chaise en rottin</button>
+              <button class="object-button" data-spawn="m_c4">chaise longue</button>
+              <button class="object-button" data-spawn="m_c5">fauteuil d'extérieur</button>
+            </div>
+            <div class="object-list contemporary">
+              <button class="object-button" data-spawn="c_c1">canapé king size</button>
+              <button class="object-button" data-spawn="c_c2">grand fauteuil</button>
+              <button class="object-button" data-spawn="c_c3">chaise de bureau</button>
+              <button class="object-button" data-spawn="c_c4">chaise scandinave</button>
+              <button class="object-button" data-spawn="c_c5">chaise d'appoint</button>
+              <button class="object-button" data-spawn="c_c6">chaise pliante</button>
+              <button class="object-button" data-spawn="c_c7">petit fauteuil</button>
+              <button class="object-button" data-spawn="c_c8">banc extérieur</button>
+            </div>
+          </div>
+
+          <div class="category">
+            <button class="category-button">tables</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_t1">grande table à manger</button>
+              <button class="object-button" data-spawn="b_t2">bureau style directoire</button>
+              <button class="object-button" data-spawn="b_t3">table basse empire</button>
+              <button class="object-button" data-spawn="b_t4">desserte louis philippe</button>
+              <button class="object-button" data-spawn="b_t5">manteau de cheminée</button>
+              <button class="object-button" data-spawn="b_t6">piano à queue</button>
+              <button class="object-button" data-spawn="b_t7">billard anglais</button>
+              <button class="object-button" data-spawn="b_t8">armoire napoléon III</button>
+              <button class="object-button" data-spawn="b_t9">bibliothèques consulat</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_t1">table à manger</button>
+              <button class="object-button" data-spawn="p_t2">fourneau</button>
+              <button class="object-button" data-spawn="p_t3">lit d'appoint</button>
+              <button class="object-button" data-spawn="p_t4">guéridon carré</button>
+              <button class="object-button" data-spawn="p_t5">guéridon circulaire</button>
+              <button class="object-button" data-spawn="p_t6">landeau</button>
+            </div>
+            <div class="object-list modern">
+              <button class="object-button" data-spawn="m_t1">table à manger</button>
+              <button class="object-button" data-spawn="m_t2">table basse bois</button>
+              <button class="object-button" data-spawn="m_t3">desserte mobile</button>
+              <button class="object-button" data-spawn="m_t4">planche à repasser</button>
+              <button class="object-button" data-spawn="m_t5">barbecue</button>
+              <button class="object-button" data-spawn="m_t6">étendoir à linge</button>
+            </div>
+            <div class="object-list contemporary">
+              <button class="object-button" data-spawn="c_t4">ilot central</button>
+              <button class="object-button" data-spawn="c_t1">table extérieure</button>
+              <button class="object-button" data-spawn="c_t8">ilot technique</button>
+              <button class="object-button" data-spawn="c_t5">table basse ronde</button>
+              <button class="object-button" data-spawn="c_t3">étagères metalliques</button>
+              <button class="object-button" data-spawn="c_t2">babyfoot</button>
+              <button class="object-button" data-spawn="c_t6">frigidaire</button>
+              <button class="object-button" data-spawn="c_t7">four</button>
+              <button class="object-button" data-spawn="c_t9">sapin de noël</button>
+            </div>
+          </div>
+
+          <div class="category">
+          <button class="category-button">bibelots</button>
+            <div class="object-list bourgeois active">
+              <button class="object-button" data-spawn="b_d1">trophée de chasse</button>
+              <button class="object-button" data-spawn="b_d2">livres fermés</button>
+              <button class="object-button" data-spawn="b_d3">livre ouvert</button>
+              <button class="object-button" data-spawn="b_d4">livres tranche</button>
+              <button class="object-button" data-spawn="b_d5">globe terrestre</button>
+              <button class="object-button" data-spawn="b_d6">coussin</button>
+              <button class="object-button" data-spawn="b_d7">horloge</button>
+              <button class="object-button" data-spawn="b_d8">assiette</button>
+              <button class="object-button" data-spawn="b_d9">plat</button>
+            </div>
+            <div class="object-list populaire">
+              <button class="object-button" data-spawn="p_d1">journal</button>
+              <button class="object-button" data-spawn="p_d2">tasses de café</button>
+              <button class="object-button" data-spawn="p_d3">ouvrage de cuisine</button>
+              <button class="object-button" data-spawn="p_d4">bouilloire</button>
+              <button class="object-button" data-spawn="p_d5">bouteille</button>
+              <button class="object-button" data-spawn="p_d6">cocotte</button>
+              <button class="object-button" data-spawn="p_d7">chandelier</button>
+              <button class="object-button" data-spawn="p_d8">machine à coudre</button>
+              <button class="object-button" data-spawn="p_d9">fer à repasser</button>
+            </div>
+            <div class="object-list modern">
+              <button class="object-button" data-spawn="m_d1">platine</button>
+              <button class="object-button" data-spawn="m_d2">vinyles</button>
+              <button class="object-button" data-spawn="m_d3">téléphone mural</button>
+              <button class="object-button" data-spawn="m_d4">télévision</button>
+              <button class="object-button" data-spawn="m_d5">pichet et verres</button>
+              <button class="object-button" data-spawn="m_d6">service à whiskey</button>
+              <button class="object-button" data-spawn="m_d7">tasses à café</button>
+              <button class="object-button" data-spawn="m_d8">lampe ronde</button>
+            </div>
+            <div class="object-list contemporary">
+              <button class="object-button" data-spawn="c_d2">TV multimédia</button>
+              <button class="object-button" data-spawn="c_d1">poste informatique</button>
+              <button class="object-button" data-spawn="c_d6">teléphone portable</button>
+              <button class="object-button" data-spawn="c_d7">chaine hi-fi</button>
+              <button class="object-button" data-spawn="c_d3">atelier de bricolage</button>
+              <button class="object-button" data-spawn="c_d9">jeu de carte</button>
+              <button class="object-button" data-spawn="c_d4">gazinière</button>
+              <button class="object-button" data-spawn="c_d5">plat famillial</button>
+              <button class="object-button" data-spawn="c_d8">plateau repas</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column" id="container">
+
+      <!-- plan en fond -->
+      <img id="background-plan" class="background_plan" src="sprites/b_bg.png">
+      <img id="foreground-plan" class="foreground_plan" src="sprites/b_fg.png">
+
+      <!-- sources cachées -->
+      <img id="b_f3" src="sprites/b_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_f2" src="sprites/b_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_f1" src="sprites/b_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_f1" src="sprites/p_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f2" src="sprites/p_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f3" src="sprites/p_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f4" src="sprites/p_f4.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_f5" src="sprites/p_f5.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="m_f1" src="sprites/m_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_f2" src="sprites/m_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_f3" src="sprites/m_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_f4" src="sprites/m_f4.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_f5" src="sprites/m_f5.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_f6" src="sprites/m_f6.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="c_f1" src="sprites/c_f1.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f2" src="sprites/c_f2.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f3" src="sprites/c_f3.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f4" src="sprites/c_f4.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f5" src="sprites/c_f5.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f6" src="sprites/c_f6.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f7" src="sprites/c_f7.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_f8" src="sprites/c_f8.png" class="floor can-arrange spawn-source" draggable="false" hidden>
+
+
+      <img id="b_c1" src="sprites/b_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c2" src="sprites/b_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c3" src="sprites/b_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c4" src="sprites/b_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c5" src="sprites/b_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_c6" src="sprites/b_c6.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_c1" src="sprites/p_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c2" src="sprites/p_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c3" src="sprites/p_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c4" src="sprites/p_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_c5" src="sprites/p_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="m_c1" src="sprites/m_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_c2" src="sprites/m_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_c3" src="sprites/m_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_c4" src="sprites/m_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_c5" src="sprites/m_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="c_c1" src="sprites/c_c1.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c2" src="sprites/c_c2.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c3" src="sprites/c_c3.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c4" src="sprites/c_c4.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c5" src="sprites/c_c5.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c6" src="sprites/c_c6.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c7" src="sprites/c_c7.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_c8" src="sprites/c_c8.png" class="chair can-arrange spawn-source" draggable="false" hidden>
+
+
+      <img id="b_t1" src="sprites/b_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t2" src="sprites/b_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t3" src="sprites/b_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t4" src="sprites/b_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t5" src="sprites/b_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t6" src="sprites/b_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t7" src="sprites/b_t7.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t8" src="sprites/b_t8.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_t9" src="sprites/b_t9.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_t1" src="sprites/p_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t2" src="sprites/p_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t3" src="sprites/p_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t4" src="sprites/p_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t5" src="sprites/p_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t6" src="sprites/p_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="m_t1" src="sprites/m_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_t2" src="sprites/m_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_t3" src="sprites/m_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_t4" src="sprites/m_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_t5" src="sprites/m_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_t6" src="sprites/m_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="c_t1" src="sprites/c_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t2" src="sprites/c_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t3" src="sprites/c_t3.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t4" src="sprites/c_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t5" src="sprites/c_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t6" src="sprites/c_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t7" src="sprites/c_t7.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t8" src="sprites/c_t8.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_t9" src="sprites/c_t9.png" class="table can-arrange spawn-source" draggable="false" hidden>
+
+
+      <img id="b_d1" src="sprites/b_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d2" src="sprites/b_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d3" src="sprites/b_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d4" src="sprites/b_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d5" src="sprites/b_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d6" src="sprites/b_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d7" src="sprites/b_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d8" src="sprites/b_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="b_d9" src="sprites/b_d9.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="p_d1" src="sprites/p_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d2" src="sprites/p_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d3" src="sprites/p_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d4" src="sprites/p_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d5" src="sprites/p_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d6" src="sprites/p_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d7" src="sprites/p_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d8" src="sprites/p_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_d9" src="sprites/p_d9.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="m_d1" src="sprites/m_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d2" src="sprites/m_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d3" src="sprites/m_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d4" src="sprites/m_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d5" src="sprites/m_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d6" src="sprites/m_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d7" src="sprites/m_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="m_d8" src="sprites/m_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+      <img id="c_d1" src="sprites/c_d1.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d2" src="sprites/c_d2.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d3" src="sprites/c_d3.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d4" src="sprites/c_d4.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d5" src="sprites/c_d5.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d6" src="sprites/c_d6.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d7" src="sprites/c_d7.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d8" src="sprites/c_d8.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+      <img id="c_d9" src="sprites/c_d9.png" class="deco can-arrange spawn-source" draggable="false" hidden>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module">
+
+/* stockage local uniquement */
+
+const STORAGE_KEY =
+  "mostro-scene-v2";
+
+/* initialisation sur le plan bourgeois */
+
+let currentPlan =
+  "bourgeois";
+
+/* configuration de départ de chaque plan */
+
+const PLAN_CONFIG = {
+
+  bourgeois: {
+    background:
+      "sprites/b_bg.png",
+    foreground:
+      "sprites/b_fg.png",
+    description: `
+      En 1932, dans son <i>Dictionnaire Historique de l’Architecture</i>, Antoine Chrysostome Quatremère de Quincy distingue la salle à manger de la salle d’assemblée qu’il nomme Salon. Si la première est <i>“dans les maisons de quelque importance, une pièce séparée de l’appartement et placée volontiers à rez-de-chaussée [...] où on pratiquera des buffets et des fontaines.”</i>, la seconde est <i>“la pièce de réunion où l’on reçoit le monde, et où par conséquent, selon l’importance des maisons, on rassemble le plus d’objets de commodité, d’agrément, de goût et de luxe.”</i>.<br>
+      <br>
+      Le salon, de l’italien <i>salone</i>, soit grande salle, est une apparition récente qui témoigne d'un état particulier de la société. Il apparaît en effet conjointement à la classe sociale qui le plébiscitera : la bourgeoisie européenne.<br>
+      Comme tout élément architectural, le salon est à la fois processus et produit, machine et marchandise. Au sein des cercles bourgeois, le salon est loin d’être une pièce inutile. Il est au contraire le siège du pouvoir, le lieu où se tissent et se maintiennent les liens sociaux entre les grandes familles intrigantes qui se partagent le vieux comme le nouveau monde. Si on y joue au billard, ou si on y brode, c’est aussi là que se négocient les alliances, les mariages et les affaires.<br>
+      <br>
+      Le salon est donc un outil d’accumulation de capital social, comme économique. Il en est aussi la conséquence : pièce surnuméraire, le salon est un symbole de richesse. Plus il est grand, plus il se multiplie, plus il se spécifie (en fumoir, salle de billard, boudoir...) plus le salon démontre la puissance du foyer qui dispose d’autant de mètres carrés, mais aussi et surtout de décorations et mobiliers.<br>
+      <br>
+      <i>Ci-contre : Plan inspiré du Chateau de Champs-sur-Marne, Pierre et Jean-Baptiste Bullet, 1707</i>
+    `,
+    defaultScene: [
+  {
+    sourceId: "b_f3",
+    left: 1377,
+    top: 193.3,
+    rotation: 91.111083984375
+  },
+  {
+    sourceId: "p_d5",
+    left: 1071.5,
+    top: 333.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_f2",
+    left: 478.5,
+    top: 228.8,
+    rotation: -2.22216796875
+  },
+  {
+    sourceId: "b_f2",
+    left: 780.7,
+    top: 173.3,
+    rotation: -82.222412109375
+  },
+  {
+    sourceId: "b_f1",
+    left: 837.2,
+    top: 84,
+    rotation: 86.66650390625
+  },
+  {
+    sourceId: "p_d2",
+    left: 1300.5,
+    top: 570.9,
+    rotation: 106
+  },
+  {
+    sourceId: "b_f1",
+    left: 852.8,
+    top: 349.5,
+    rotation: 100
+  },
+  {
+    sourceId: "p_d2",
+    left: 1150.5,
+    top: 484.9,
+    rotation: 56
+  },
+  {
+    sourceId: "b_t1",
+    left: 507.4,
+    top: 259.8,
+    rotation: 1.142822265625
+  },
+  {
+    sourceId: "p_d2",
+    left: 1470.5,
+    top: 308.9,
+    rotation: 36
+  },
+  {
+    sourceId: "b_t1",
+    left: 161.9,
+    top: 522.1,
+    rotation: 5.71429443359375
+  },
+  {
+    sourceId: "b_c1",
+    left: 750,
+    top: 95.3,
+    rotation: -26.666748046875
+  },
+  {
+    sourceId: "b_t5",
+    left: 403.9,
+    top: 325.4,
+    rotation: 270.03173828125
+  },
+  {
+    sourceId: "b_t2",
+    left: 624.9,
+    top: 313.6,
+    rotation: 90.28564453125
+  },
+  {
+    sourceId: "p_d4",
+    left: 1487.5,
+    top: 810.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c6",
+    left: 486.7,
+    top: 325,
+    rotation: -100.5714111328125
+  },
+  {
+    sourceId: "b_c6",
+    left: 585.5,
+    top: 321,
+    rotation: 88
+  },
+  {
+    sourceId: "b_c6",
+    left: 486.6,
+    top: 283.9,
+    rotation: -81.142822265625
+  },
+  {
+    sourceId: "b_c6",
+    left: 581.5,
+    top: 282.8,
+    rotation: 81.142822265625
+  },
+  {
+    sourceId: "b_c6",
+    left: 558.1,
+    top: 362.2,
+    rotation: 157.71429443359375
+  },
+  {
+    sourceId: "b_c6",
+    left: 514.1,
+    top: 359.9,
+    rotation: 197.71435546875
+  },
+  {
+    sourceId: "b_c6",
+    left: 555.9,
+    top: 246.7,
+    rotation: 10.2857666015625
+  },
+  {
+    sourceId: "b_d8",
+    left: 1280,
+    top: 559.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c6",
+    left: 511.2,
+    top: 249.5,
+    rotation: -20.5714111328125
+  },
+  {
+    sourceId: "b_d8",
+    left: 1132,
+    top: 482.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t8",
+    left: 524,
+    top: 410.1,
+    rotation: 90.28564453125
+  },
+  {
+    sourceId: "b_d8",
+    left: 512.1,
+    top: 291.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1277,
+    top: 372.9,
+    rotation: -28
+  },
+  {
+    sourceId: "b_d8",
+    left: 525.2,
+    top: 267.8,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 552.7,
+    top: 268.3,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 567.5,
+    top: 287.8,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 511,
+    top: 327.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 567,
+    top: 324.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 525.3,
+    top: 352.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1467,
+    top: 543.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 558.5,
+    top: 348.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d9",
+    left: 649.9,
+    top: 294.9,
+    rotation: -3.4285888671875
+  },
+  {
+    sourceId: "b_d9",
+    left: 188.7,
+    top: 543.5,
+    rotation: -172.57147216796875
+  },
+  {
+    sourceId: "b_d7",
+    left: 430.9,
+    top: 320.6,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d5",
+    left: 571.3,
+    top: 450.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d1",
+    left: 703.7,
+    top: 288.6,
+    rotation: -90.28564453125
+  },
+  {
+    sourceId: "p_d5",
+    left: 496.4,
+    top: 447,
+    rotation: -18.2857666015625
+  },
+  {
+    sourceId: "p_d6",
+    left: 539.4,
+    top: 305.6,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d7",
+    left: 433.6,
+    top: 301.3,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 530.7,
+    top: 449.9,
+    rotation: -20
+  },
+  {
+    sourceId: "b_c5",
+    left: 241.8,
+    top: 546.8,
+    rotation: 88
+  },
+  {
+    sourceId: "b_c5",
+    left: 141.8,
+    top: 533.8,
+    rotation: -73.14288330078125
+  },
+  {
+    sourceId: "b_c5",
+    left: 149.2,
+    top: 605.7,
+    rotation: -123.4285888671875
+  },
+  {
+    sourceId: "b_c5",
+    left: 237.7,
+    top: 598.9,
+    rotation: 110.857177734375
+  },
+  {
+    sourceId: "b_t5",
+    left: 172.3,
+    top: 473.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t3",
+    left: 253.7,
+    top: 489.6,
+    rotation: 89.142822265625
+  },
+  {
+    sourceId: "b_f1",
+    left: 152.7,
+    top: 514.8,
+    rotation: -3.42852783203125
+  },
+  {
+    sourceId: "b_d7",
+    left: 200.6,
+    top: 470.9,
+    rotation: 90.28570556640625
+  },
+  {
+    sourceId: "b_d3",
+    left: 270.9,
+    top: 486,
+    rotation: 50.28564453125
+  },
+  {
+    sourceId: "p_d7",
+    left: 290.1,
+    top: 504.7,
+    rotation: -41.142822265625
+  },
+  {
+    sourceId: "p_f4",
+    left: 102.5,
+    top: 664.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f5",
+    left: 103.1,
+    top: 478.2,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f1",
+    left: 290.1,
+    top: 555.7,
+    rotation: 8
+  },
+  {
+    sourceId: "c_f6",
+    left: 1034.7,
+    top: 669.6,
+    rotation: 183.63623046875
+  },
+  {
+    sourceId: "b_t2",
+    left: 140.8,
+    top: 794.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c4",
+    left: 149.3,
+    top: 738.4,
+    rotation: 328.00006103515625
+  },
+  {
+    sourceId: "b_c3",
+    left: 159.8,
+    top: 815.2,
+    rotation: 180
+  },
+  {
+    sourceId: "b_d3",
+    left: 166.7,
+    top: 799.3,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d2",
+    left: 147.5,
+    top: 808.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d5",
+    left: 201.6,
+    top: 797.6,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 145.2,
+    top: 795.5,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t8",
+    left: 237.8,
+    top: 754.6,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d1",
+    left: 235,
+    top: 765.2,
+    rotation: 73.3333740234375
+  },
+  {
+    sourceId: "p_d7",
+    left: 238.3,
+    top: 835,
+    rotation: 52
+  },
+  {
+    sourceId: "p_d5",
+    left: 238.8,
+    top: 790.8,
+    rotation: 53.3333740234375
+  },
+  {
+    sourceId: "b_d4",
+    left: 251.3,
+    top: 803.8,
+    rotation: 178
+  },
+  {
+    sourceId: "b_t6",
+    left: 1368.1,
+    top: 259.4,
+    rotation: 10.9091796875
+  },
+  {
+    sourceId: "b_t7",
+    left: 1133.7,
+    top: 219.2,
+    rotation: -2
+  },
+  {
+    sourceId: "b_t3",
+    left: 836.6,
+    top: 392.4,
+    rotation: 81.818115234375
+  },
+  {
+    sourceId: "b_t4",
+    left: 836.1,
+    top: 233.6,
+    rotation: 12.727294921875
+  },
+  {
+    sourceId: "b_t3",
+    left: 804,
+    top: 142.5,
+    rotation: -30.908935546875
+  },
+  {
+    sourceId: "b_t4",
+    left: 1491.8,
+    top: 211,
+    rotation: 83.63623046875
+  },
+  {
+    sourceId: "b_t5",
+    left: 1338.7,
+    top: 443.7,
+    rotation: 180
+  },
+  {
+    sourceId: "b_t5",
+    left: 1066.8,
+    top: 444.6,
+    rotation: 180.000244140625
+  },
+  {
+    sourceId: "b_t9",
+    left: 1276.1,
+    top: 271.3,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t5",
+    left: 673.2,
+    top: 380.1,
+    rotation: 270.9090576171875
+  },
+  {
+    sourceId: "b_d7",
+    left: 702.7,
+    top: 376.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d7",
+    left: 1368.2,
+    top: 442.5,
+    rotation: -90.9091796875
+  },
+  {
+    sourceId: "b_d7",
+    left: 1095.4,
+    top: 443.5,
+    rotation: -90.908935546875
+  },
+  {
+    sourceId: "b_d6",
+    left: 762.6,
+    top: 116.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d6",
+    left: 818,
+    top: 88.1,
+    rotation: 14.545654296875
+  },
+  {
+    sourceId: "b_d5",
+    left: 1278.8,
+    top: 399.7,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1276,
+    top: 278.2,
+    rotation: 176.36376953125
+  },
+  {
+    sourceId: "b_d3",
+    left: 862.9,
+    top: 420,
+    rotation: 21.818115234375
+  },
+  {
+    sourceId: "b_d2",
+    left: 855.3,
+    top: 386.7,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c2",
+    left: 933.8,
+    top: 393.3,
+    rotation: 96.363525390625
+  },
+  {
+    sourceId: "b_c3",
+    left: 872.5,
+    top: 91.7,
+    rotation: 29.091064453125
+  },
+  {
+    sourceId: "b_c4",
+    left: 870.5,
+    top: 242.5,
+    rotation: 87.272705078125
+  },
+  {
+    sourceId: "b_c3",
+    left: 901.6,
+    top: 458.9,
+    rotation: 169.0908203125
+  },
+  {
+    sourceId: "b_c4",
+    left: 799.6,
+    top: 236.1,
+    rotation: -83.6363525390625
+  },
+  {
+    sourceId: "m_f5",
+    left: 824.4,
+    top: 351.1,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d9",
+    left: 835,
+    top: 143.9,
+    rotation: -105.45458984375
+  },
+  {
+    sourceId: "p_d2",
+    left: 814.1,
+    top: 164.6,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t3",
+    left: 1036.6,
+    top: 338.7,
+    rotation: 89.091064453125
+  },
+  {
+    sourceId: "p_d1",
+    left: 1054.6,
+    top: 338.3,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d7",
+    left: 1066.1,
+    top: 363.7,
+    rotation: 124
+  },
+  {
+    sourceId: "p_d7",
+    left: 1513.4,
+    top: 224.6,
+    rotation: 58.181884765625
+  },
+  {
+    sourceId: "p_d7",
+    left: 1057,
+    top: 364.6,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d7",
+    left: 876.1,
+    top: 401.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1278.7,
+    top: 327.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c6",
+    left: 1052.2,
+    top: 259.5,
+    rotation: -89.0908203125
+  },
+  {
+    sourceId: "b_c6",
+    left: 1052.2,
+    top: 294,
+    rotation: -98.181640625
+  },
+  {
+    sourceId: "b_c6",
+    left: 1052.2,
+    top: 400.5,
+    rotation: -87.272705078125
+  },
+  {
+    sourceId: "b_t9",
+    left: 1177,
+    top: 484.1,
+    rotation: 180
+  },
+  {
+    sourceId: "b_t9",
+    left: 1375.2,
+    top: 482.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1242.8,
+    top: 552.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c4",
+    left: 1270.5,
+    top: 606.1,
+    rotation: 196.363525390625
+  },
+  {
+    sourceId: "b_c4",
+    left: 1246.9,
+    top: 527,
+    rotation: 3.636474609375
+  },
+  {
+    sourceId: "b_d4",
+    left: 1375.1,
+    top: 487.3,
+    rotation: 176.363525390625
+  },
+  {
+    sourceId: "b_d4",
+    left: 1378.8,
+    top: 587.4,
+    rotation: 181.818115234375
+  },
+  {
+    sourceId: "b_d4",
+    left: 1376.9,
+    top: 542,
+    rotation: 169.0908203125
+  },
+  {
+    sourceId: "b_d4",
+    left: 1183.3,
+    top: 596.5,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1180.5,
+    top: 550.1,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1179.6,
+    top: 538.3,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1178.7,
+    top: 491,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d2",
+    left: 1281.6,
+    top: 561.3,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d3",
+    left: 1249.3,
+    top: 551.7,
+    rotation: 18.181884765625
+  },
+  {
+    sourceId: "b_d1",
+    left: 1287.2,
+    top: 483.7,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d5",
+    left: 1302.4,
+    top: 556.6,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d6",
+    left: 1059.8,
+    top: 291.7,
+    rotation: 9.091064453125
+  },
+  {
+    sourceId: "p_d7",
+    left: 1250.6,
+    top: 566.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_f1",
+    left: 1233.2,
+    top: 514.9,
+    rotation: -21.818115234375
+  },
+  {
+    sourceId: "b_t2",
+    left: 1523.7,
+    top: 771.5,
+    rotation: 89.0908203125
+  },
+  {
+    sourceId: "b_t9",
+    left: 1482.5,
+    top: 702.2,
+    rotation: 180
+  },
+  {
+    sourceId: "c_d8",
+    left: 1485.7,
+    top: 714.5,
+    rotation: 81.818115234375
+  },
+  {
+    sourceId: "b_d9",
+    left: 1551,
+    top: 762.7,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d7",
+    left: 1491.4,
+    top: 766.3,
+    rotation: 102
+  },
+  {
+    sourceId: "b_c5",
+    left: 1586,
+    top: 577.3,
+    rotation: 169.0908203125
+  },
+  {
+    sourceId: "b_c5",
+    left: 1585.1,
+    top: 481.8,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t4",
+    left: 1581.6,
+    top: 522.8,
+    rotation: 60
+  },
+  {
+    sourceId: "b_d8",
+    left: 1595.9,
+    top: 533.6,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t8",
+    left: 1413.9,
+    top: 484.2,
+    rotation: 180
+  },
+  {
+    sourceId: "b_d4",
+    left: 1429.6,
+    top: 489.2,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d7",
+    left: 1431.5,
+    top: 523.7,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d1",
+    left: 1430.4,
+    top: 553.2,
+    rotation: 52.727294921875
+  },
+  {
+    sourceId: "b_t3",
+    left: 1435.7,
+    top: 547,
+    rotation: 100
+  },
+  {
+    sourceId: "b_d7",
+    left: 1460,
+    top: 575.2,
+    rotation: -76.36376953125
+  },
+  {
+    sourceId: "b_f1",
+    left: 1508.6,
+    top: 487.6,
+    rotation: -3.636474609375
+  },
+  {
+    sourceId: "m_f5",
+    left: 1542.3,
+    top: 487.4,
+    rotation: -22
+  },
+  {
+    sourceId: "b_f1",
+    left: 1448.6,
+    top: 162.1,
+    rotation: 98.18212890625
+  },
+  {
+    sourceId: "b_c1",
+    left: 1534.6,
+    top: 231.1,
+    rotation: 89.0908203125
+  },
+  {
+    sourceId: "b_c2",
+    left: 1469.3,
+    top: 163.3,
+    rotation: 1.818115234375
+  },
+  {
+    sourceId: "b_t3",
+    left: 1433,
+    top: 311.5,
+    rotation: 105.45458984375
+  },
+  {
+    sourceId: "b_d8",
+    left: 1455,
+    top: 309.1,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d3",
+    left: 1452.9,
+    top: 333.6,
+    rotation: 49.0908203125
+  },
+  {
+    sourceId: "b_c3",
+    left: 1417.9,
+    top: 175.2,
+    rotation: -49.091064453125
+  },
+  {
+    sourceId: "b_c5",
+    left: 1376.9,
+    top: 342.7,
+    rotation: 194.545654296875
+  },
+  {
+    sourceId: "b_d1",
+    left: 1549.9,
+    top: 293.7,
+    rotation: 90.908935546875
+  },
+  {
+    sourceId: "b_t8",
+    left: 1130.3,
+    top: 503.2,
+    rotation: 0
+  },
+  {
+    sourceId: "b_c2",
+    left: 1005.7,
+    top: 525.1,
+    rotation: 270.9090576171875
+  },
+  {
+    sourceId: "b_f1",
+    left: 1049.5,
+    top: 523.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t4",
+    left: 1073.4,
+    top: 557.3,
+    rotation: 18.181884765625
+  },
+  {
+    sourceId: "p_d5",
+    left: 1084.8,
+    top: 563.3,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1079.2,
+    top: 584.8,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 1129.7,
+    top: 574.6,
+    rotation: 172.727294921875
+  },
+  {
+    sourceId: "p_d1",
+    left: 1125.9,
+    top: 518.7,
+    rotation: 74.54541015625
+  },
+  {
+    sourceId: "m_f5",
+    left: 811,
+    top: 404.4,
+    rotation: 196
+  },
+  {
+    sourceId: "b_f2",
+    left: 1108.5,
+    top: 217.9,
+    rotation: 16
+  }
+]
+  },
+
+  populaire: {
+    background:
+      "sprites/p_bg.png",
+    foreground:
+      "sprites/p_fg.png",
+    description: `
+      Quand le salon est l’apanage de la bourgeoisie, l’habitat populaire, lui, dispose plutôt d’une <i>salle commune</i>, ou simplement <i>salle</i>. 
+      Celle-ci est tout sauf une pièce excédentaire. Il s’agit de l’espace à tout faire qui contient souvent le fourneau, et même parfois des couchages. Mais c’est aussi l’espace du travail lorsqu’il se fait à domicile, comme chez les <i>canuts</i> lyonnais. Dans ce cas-là, la salle commune se dote d’une double hauteur sur laquelle donne une mezzanine, ce qui la rapproche formellement des <i>halls</i>, cousins anglo-saxons des <i>salone</i>, qui bénéficient eux aussi en général d’une hauteur plus importante que les autres pièces.<br>
+      <br> 
+      Si la salle commune, ou <i>salle à manger</i>, populaire ne revêt pas de rôle de réception, c’est aussi car pour la majorité de la population, les habitudes de socialisation n’ont pas lieu au sein du foyer, mais dans l’espace public. On se retrouve plutôt au bistrot, dans les espaces de services collectifs comme les lavoirs et les jardins ouvriers, ou même directement dans la rue.<br>
+      Les fondations philanthropiques de la fin du XIXe siècle proposent ainsi de créer des salons collectifs dans les nouveaux immeubles qu’elles édifient, pour recadrer au sein de l’habitation – si ce n’est du logement – la sociabilisation des classes populaires.<br>
+      <br>
+      Le tournant du XXe siècle prolonge ce projet civilisateur désormais porté par la collectivité publique. À sa création en 1914, <i>l’Office public des Habitations à Bon Marché de la Ville de Paris</i> utilise le salon comme outil de classification des types de logements proposés.<br>
+      Selon le revenu du foyer, il peut avoir accès au <i>type primaire</i> avec une salle commune, dans laquelle on cuisine et on mange, au <i>type normal</i> qui sépare la pièce où l’on cuisine de la salle à manger, et enfin le <i>type pour loyers moyens</i> qui dispose en enfilade de la salle à manger un véritable salon.<br>
+      <br>
+      <i>Ci-contre : Plan type primaire pour l’Office Parisien des Habitations à Bon Marché, conçu par Dubost et Gautruche (Architectes de la Ville), 1914</i>
+    `,
+    defaultScene: [
+  {
+    sourceId: "p_f3",
+    left: 813,
+    top: 364.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f3",
+    left: 998,
+    top: 805.4,
+    rotation: -98
+  },
+  {
+    sourceId: "p_f4",
+    left: 849.5,
+    top: 615.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c1",
+    left: 673,
+    top: 566.9,
+    rotation: 90
+  },
+  {
+    sourceId: "p_c1",
+    left: 642,
+    top: 640.9,
+    rotation: 170
+  },
+  {
+    sourceId: "p_c2",
+    left: 592,
+    top: 595.4,
+    rotation: -108
+  },
+  {
+    sourceId: "p_c2",
+    left: 647,
+    top: 497.4,
+    rotation: 2
+  },
+  {
+    sourceId: "p_t1",
+    left: 596,
+    top: 552.9,
+    rotation: 94
+  },
+  {
+    sourceId: "p_t2",
+    left: 516,
+    top: 428.9,
+    rotation: -90
+  },
+  {
+    sourceId: "p_t3",
+    left: 683.5,
+    top: 586.9,
+    rotation: 270
+  },
+  {
+    sourceId: "p_t6",
+    left: 491.5,
+    top: 556.9,
+    rotation: 124
+  },
+  {
+    sourceId: "b_t2",
+    left: 524.5,
+    top: 505.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c3",
+    left: 558,
+    top: 529.9,
+    rotation: 156
+  },
+  {
+    sourceId: "p_d9",
+    left: 559,
+    top: 441.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t8",
+    left: 550.5,
+    top: 616.9,
+    rotation: 90
+  },
+  {
+    sourceId: "p_d1",
+    left: 523,
+    top: 654.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d6",
+    left: 586.5,
+    top: 647.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 533.5,
+    top: 440.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d7",
+    left: 547,
+    top: 653.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 679.5,
+    top: 424.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 636.5,
+    top: 541.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d3",
+    left: 620.5,
+    top: 570.9,
+    rotation: 110
+  },
+  {
+    sourceId: "p_d8",
+    left: 526,
+    top: 503.9,
+    rotation: -2
+  },
+  {
+    sourceId: "p_d6",
+    left: 583.5,
+    top: 426.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 710,
+    top: 423.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 623,
+    top: 421.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 628,
+    top: 426.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1039,
+    top: 493.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 968,
+    top: 494.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 982,
+    top: 311.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1028,
+    top: 310.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1011,
+    top: 383.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1011,
+    top: 428.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1012,
+    top: 557.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1012,
+    top: 608.4,
+    rotation: 82
+  },
+  {
+    sourceId: "p_c3",
+    left: 1047,
+    top: 571.9,
+    rotation: 86
+  },
+  {
+    sourceId: "p_c2",
+    left: 989,
+    top: 567.4,
+    rotation: 250
+  },
+  {
+    sourceId: "p_c2",
+    left: 1064,
+    top: 518.4,
+    rotation: 134
+  },
+  {
+    sourceId: "p_c3",
+    left: 984,
+    top: 471.9,
+    rotation: 18
+  },
+  {
+    sourceId: "p_c2",
+    left: 977,
+    top: 433.4,
+    rotation: -96
+  },
+  {
+    sourceId: "p_c3",
+    left: 1055,
+    top: 432.9,
+    rotation: 106
+  },
+  {
+    sourceId: "p_c2",
+    left: 1049,
+    top: 382.4,
+    rotation: 56
+  },
+  {
+    sourceId: "p_c3",
+    left: 975,
+    top: 390.9,
+    rotation: -94
+  },
+  {
+    sourceId: "p_c2",
+    left: 968,
+    top: 348.4,
+    rotation: 244
+  },
+  {
+    sourceId: "p_c3",
+    left: 1042,
+    top: 336.9,
+    rotation: 158
+  },
+  {
+    sourceId: "p_c2",
+    left: 1036,
+    top: 281.4,
+    rotation: 24
+  },
+  {
+    sourceId: "p_c3",
+    left: 983,
+    top: 277.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c2",
+    left: 1041,
+    top: 622.4,
+    rotation: 114
+  },
+  {
+    sourceId: "p_c3",
+    left: 987,
+    top: 616.9,
+    rotation: 262
+  },
+  {
+    sourceId: "p_f3",
+    left: 975,
+    top: 687.4,
+    rotation: 140
+  },
+  {
+    sourceId: "b_d8",
+    left: 1017,
+    top: 617.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1050,
+    top: 507.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1031,
+    top: 433.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1011,
+    top: 446.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1025,
+    top: 390.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 987,
+    top: 318.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1040,
+    top: 330.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1032,
+    top: 577.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d3",
+    left: 976,
+    top: 510.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 1059.5,
+    top: 517.4,
+    rotation: 202
+  },
+  {
+    sourceId: "p_d5",
+    left: 1014.5,
+    top: 610.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1015.5,
+    top: 562.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 992.5,
+    top: 500.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1059.5,
+    top: 496.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 1018.5,
+    top: 405.4,
+    rotation: 170
+  },
+  {
+    sourceId: "p_d5",
+    left: 1035.5,
+    top: 320.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d1",
+    left: 1036,
+    top: 628.4,
+    rotation: -64
+  },
+  {
+    sourceId: "p_d1",
+    left: 1003,
+    top: 333.4,
+    rotation: 136
+  },
+  {
+    sourceId: "p_c4",
+    left: 1139,
+    top: 774.9,
+    rotation: 180
+  },
+  {
+    sourceId: "p_c4",
+    left: 1245,
+    top: 771.9,
+    rotation: 180
+  },
+  {
+    sourceId: "p_c4",
+    left: 1350,
+    top: 772.9,
+    rotation: 180
+  },
+  {
+    sourceId: "p_c4",
+    left: 1352,
+    top: 510.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c4",
+    left: 1243,
+    top: 511.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c5",
+    left: 1410,
+    top: 401.9,
+    rotation: 14
+  },
+  {
+    sourceId: "p_c5",
+    left: 1409,
+    top: 364.9,
+    rotation: -36
+  },
+  {
+    sourceId: "p_c5",
+    left: 1403,
+    top: 300.9,
+    rotation: 62
+  },
+  {
+    sourceId: "p_c5",
+    left: 1408,
+    top: 250.9,
+    rotation: -46
+  },
+  {
+    sourceId: "p_c5",
+    left: 1431,
+    top: 192.9,
+    rotation: 30
+  },
+  {
+    sourceId: "p_d3",
+    left: 1570.5,
+    top: 290.9,
+    rotation: -88
+  },
+  {
+    sourceId: "p_d3",
+    left: 1441.5,
+    top: 550.9,
+    rotation: 96
+  },
+  {
+    sourceId: "p_d6",
+    left: 1604.5,
+    top: 435.9,
+    rotation: 124
+  },
+  {
+    sourceId: "p_d6",
+    left: 1592.5,
+    top: 547.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 1598.5,
+    top: 525.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 1472.5,
+    top: 388.9,
+    rotation: -84
+  },
+  {
+    sourceId: "p_d5",
+    left: 1601.5,
+    top: 345.4,
+    rotation: 246
+  },
+  {
+    sourceId: "p_d2",
+    left: 1459.5,
+    top: 364.9,
+    rotation: -42
+  },
+  {
+    sourceId: "p_d1",
+    left: 1455,
+    top: 226.4,
+    rotation: -88
+  },
+  {
+    sourceId: "p_d1",
+    left: 1450,
+    top: 384.4,
+    rotation: 70
+  },
+  {
+    sourceId: "p_d2",
+    left: 1462.5,
+    top: 273.9,
+    rotation: 34
+  },
+  {
+    sourceId: "p_t2",
+    left: 1573,
+    top: 529.9,
+    rotation: 90
+  },
+  {
+    sourceId: "b_d9",
+    left: 1602,
+    top: 605.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f1",
+    left: 1559.5,
+    top: 775.4,
+    rotation: 248
+  },
+  {
+    sourceId: "p_f1",
+    left: 1503.5,
+    top: 770.4,
+    rotation: 12
+  },
+  {
+    sourceId: "p_f2",
+    left: 1601,
+    top: 767.9,
+    rotation: -24
+  },
+  {
+    sourceId: "p_f2",
+    left: 1478,
+    top: 772.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f1",
+    left: 1602.5,
+    top: 370.4,
+    rotation: -16
+  },
+  {
+    sourceId: "p_f2",
+    left: 1560,
+    top: 260.9,
+    rotation: 16
+  },
+  {
+    sourceId: "b_d8",
+    left: 1596,
+    top: 412.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1459,
+    top: 243.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1458,
+    top: 337.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1472,
+    top: 706.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1473,
+    top: 711.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1478,
+    top: 738.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1475,
+    top: 740.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1475,
+    top: 708.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 1565,
+    top: 216.4,
+    rotation: 186
+  },
+  {
+    sourceId: "m_d6",
+    left: 1592,
+    top: 471.4,
+    rotation: 258
+  },
+  {
+    sourceId: "m_d6",
+    left: 1523,
+    top: 214.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d5",
+    left: 1456.5,
+    top: 402.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d8",
+    left: 1485,
+    top: 214.9,
+    rotation: -36
+  },
+  {
+    sourceId: "c_d8",
+    left: 1463,
+    top: 304.9,
+    rotation: 46
+  },
+  {
+    sourceId: "p_f5",
+    left: 1560.5,
+    top: 468.9,
+    rotation: 162
+  },
+  {
+    sourceId: "p_f1",
+    left: 1511.5,
+    top: 258.4,
+    rotation: -14
+  },
+  {
+    sourceId: "m_d3",
+    left: 1483.5,
+    top: 468.4,
+    rotation: 268
+  },
+  {
+    sourceId: "m_d7",
+    left: 1462,
+    top: 452.4,
+    rotation: 170
+  },
+  {
+    sourceId: "b_t2",
+    left: 1246.5,
+    top: 559.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1277.5,
+    top: 362.4,
+    rotation: 2
+  },
+  {
+    sourceId: "b_t2",
+    left: 1155.5,
+    top: 266.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1257.5,
+    top: 710.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1144.5,
+    top: 712.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1372.5,
+    top: 712.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_t2",
+    left: 1372.5,
+    top: 560.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1134,
+    top: 465.9,
+    rotation: 194
+  },
+  {
+    sourceId: "p_t5",
+    left: 1276,
+    top: 118.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1163,
+    top: 119.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1200,
+    top: 366.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1129,
+    top: 364.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1275,
+    top: 262.9,
+    rotation: 12
+  },
+  {
+    sourceId: "p_c2",
+    left: 1211,
+    top: 398.4,
+    rotation: 176
+  },
+  {
+    sourceId: "p_c3",
+    left: 1146,
+    top: 498.9,
+    rotation: 158
+  },
+  {
+    sourceId: "p_c2",
+    left: 1133,
+    top: 399.4,
+    rotation: 206
+  },
+  {
+    sourceId: "p_c3",
+    left: 1143,
+    top: 344.9,
+    rotation: 10
+  },
+  {
+    sourceId: "p_c2",
+    left: 1196,
+    top: 340.4,
+    rotation: -8
+  },
+  {
+    sourceId: "p_c3",
+    left: 1271,
+    top: 385.9,
+    rotation: 190
+  },
+  {
+    sourceId: "p_c2",
+    left: 1319,
+    top: 386.4,
+    rotation: 172
+  },
+  {
+    sourceId: "p_c3",
+    left: 1280,
+    top: 330.9,
+    rotation: -12
+  },
+  {
+    sourceId: "p_c2",
+    left: 1299,
+    top: 286.4,
+    rotation: 140
+  },
+  {
+    sourceId: "p_c3",
+    left: 1208,
+    top: 285.9,
+    rotation: 164
+  },
+  {
+    sourceId: "p_c2",
+    left: 1202,
+    top: 237.4,
+    rotation: 12
+  },
+  {
+    sourceId: "p_c3",
+    left: 1160,
+    top: 288.9,
+    rotation: 182
+  },
+  {
+    sourceId: "p_c2",
+    left: 1285,
+    top: 227.4,
+    rotation: 8
+  },
+  {
+    sourceId: "p_c3",
+    left: 1158,
+    top: 237.9,
+    rotation: -8
+  },
+  {
+    sourceId: "p_c2",
+    left: 1204,
+    top: 131.4,
+    rotation: 106
+  },
+  {
+    sourceId: "p_c3",
+    left: 1140,
+    top: 124.9,
+    rotation: -96
+  },
+  {
+    sourceId: "p_c2",
+    left: 1259,
+    top: 111.4,
+    rotation: -60
+  },
+  {
+    sourceId: "p_c3",
+    left: 1311,
+    top: 123.9,
+    rotation: 86
+  },
+  {
+    sourceId: "p_c3",
+    left: 1371,
+    top: 582.9,
+    rotation: 190
+  },
+  {
+    sourceId: "p_c2",
+    left: 1290,
+    top: 579.4,
+    rotation: 166
+  },
+  {
+    sourceId: "p_c3",
+    left: 1250,
+    top: 579.9,
+    rotation: 182
+  },
+  {
+    sourceId: "p_c2",
+    left: 1416,
+    top: 680.4,
+    rotation: -4
+  },
+  {
+    sourceId: "p_c3",
+    left: 1374,
+    top: 678.9,
+    rotation: 14
+  },
+  {
+    sourceId: "p_c2",
+    left: 1298,
+    top: 675.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c3",
+    left: 1201,
+    top: 674.9,
+    rotation: -18
+  },
+  {
+    sourceId: "p_c2",
+    left: 1254,
+    top: 681.4,
+    rotation: -16
+  },
+  {
+    sourceId: "p_c3",
+    left: 1159,
+    top: 682.9,
+    rotation: 18
+  },
+  {
+    sourceId: "p_c3",
+    left: 1417,
+    top: 585.9,
+    rotation: 188
+  },
+  {
+    sourceId: "p_f3",
+    left: 1092,
+    top: 7.4,
+    rotation: 266
+  },
+  {
+    sourceId: "p_d2",
+    left: 1298.5,
+    top: 281.9,
+    rotation: 44
+  },
+  {
+    sourceId: "p_d2",
+    left: 1160.5,
+    top: 280.9,
+    rotation: 80
+  },
+  {
+    sourceId: "p_d2",
+    left: 1282.5,
+    top: 138.9,
+    rotation: -40
+  },
+  {
+    sourceId: "p_d2",
+    left: 1179.5,
+    top: 127.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 1180.5,
+    top: 147.4,
+    rotation: -140
+  },
+  {
+    sourceId: "p_d5",
+    left: 1336.5,
+    top: 364.4,
+    rotation: 94
+  },
+  {
+    sourceId: "p_d5",
+    left: 1140.5,
+    top: 368.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d6",
+    left: 1251.5,
+    top: 563.9,
+    rotation: -30
+  },
+  {
+    sourceId: "p_d6",
+    left: 1200.5,
+    top: 270.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1387.5,
+    top: 569.9,
+    rotation: 28
+  },
+  {
+    sourceId: "p_d2",
+    left: 1300.5,
+    top: 570.9,
+    rotation: 106
+  },
+  {
+    sourceId: "p_d2",
+    left: 1150.5,
+    top: 484.9,
+    rotation: 56
+  },
+  {
+    sourceId: "p_d2",
+    left: 1304.5,
+    top: 368.9,
+    rotation: 36
+  },
+  {
+    sourceId: "p_d2",
+    left: 1211.5,
+    top: 386.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1148.5,
+    top: 386.9,
+    rotation: -58
+  },
+  {
+    sourceId: "p_d5",
+    left: 1267.5,
+    top: 715.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 1180.5,
+    top: 724.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1151.5,
+    top: 723.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d6",
+    left: 1386.5,
+    top: 723.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1294.5,
+    top: 714.9,
+    rotation: 62
+  },
+  {
+    sourceId: "p_d2",
+    left: 1425.5,
+    top: 717.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1413,
+    top: 725.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1310,
+    top: 722.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1280,
+    top: 559.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1132,
+    top: 482.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1318,
+    top: 377.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1292,
+    top: 376.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1286,
+    top: 361.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1180,
+    top: 276.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1292,
+    top: 119.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1219,
+    top: 367.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1415,
+    top: 574.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1427,
+    top: 559.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1199,
+    top: 724.9,
+    rotation: 0
+  }
+]
+  },
+
+  modern: {
+    background:
+      "sprites/m_bg.png",
+    foreground:
+      "sprites/m_fg.png",
+    description: `
+      On peut voir dans la figure du <i>living-room</i> la véritable introduction du salon dans l’habitat majoritaire. Si sa dénomination marque bien à l’origine une différenciation de la <i>dining-room</i>, le living devient assez rapidement dans l’habitat moderne le nouveau nom de la pièce centrale dont le but premier n’est pas la restauration ou la réception — bien qu’on y fasse les deux — mais surtout la détente. Traduit par <i>séjour</i> en français, il est conçu dans l’esprit moderne comme la salle d’autodéfinition du foyer, non uniquement orientée vers l’extérieur,  mais aussi vers soi-même.<br>
+      <br>
+      Usuellement mis à disposition vide pour les locataires, le séjour devient le réceptacle de la modernité dans le logement, non tant par sa forme que par les objets qu’il accueille. C’est ici que les ménages profitent des nouvelles technologies comme la chaîne hi-fi, et surtout la télévision.<br>
+      C’est ici aussi que le choix du mobilier devient central, grâce aux panoplies et aux meubles par élément que le système moderne développe. Bien plus que les pièces de service ou les chambres, trop étroites, c’est dans le séjour que le foyer se définit, par ses objets qui révèlent ses habitudes et son mode de vie.<br>
+      <br>
+      Ce règne des objets s’illustre particulièrement dans les tentatives modernistes de décloisonnement des espaces via le plan libre, qui trouve systématiquement son apex dans le séjour car les salles d’eau et les chambres restent souvent refermées. Le séjour comme espace libre — défini par l'îlot du canapé, un piano posé sur un tapis, ou un sac de frappe — trouve des illustrations dans les villa du Corbusier ou de Mies van der Rohe. <br>
+      À l’occasion de ce renversement du plan paralysé, le séjour phagocyte souvent l’entrée et le couloir, intégrant au sein du même espace libre les fonctions de distribution, ce qui renforce sa position centrale dans le logement.<br>
+      <br>
+      <i>Ci-contre : Plan des logements destinés aux familles d’officiers au sein du SHAPE (Supreme Headquarters of the Allied Powers in Europe) Village, à Saint-Germain-en-Laye, Félix Dumail, 1951</i>
+    `,
+    defaultScene: [
+  {
+    sourceId: "m_t1",
+    left: 758,
+    top: 320.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f1",
+    left: 713.5,
+    top: 451.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f6",
+    left: 697.5,
+    top: 264.9,
+    rotation: 90
+  },
+  {
+    sourceId: "m_f2",
+    left: 808,
+    top: 549.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f3",
+    left: 716,
+    top: 241.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f4",
+    left: 865,
+    top: 577.9,
+    rotation: 48
+  },
+  {
+    sourceId: "m_f2",
+    left: 750,
+    top: 228.4,
+    rotation: 80
+  },
+  {
+    sourceId: "m_f5",
+    left: 712,
+    top: 391.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_c1",
+    left: 737.5,
+    top: 420.4,
+    rotation: -32
+  },
+  {
+    sourceId: "m_c2",
+    left: 690.5,
+    top: 483.4,
+    rotation: 268
+  },
+  {
+    sourceId: "m_c4",
+    left: 770.5,
+    top: 558.4,
+    rotation: 102
+  },
+  {
+    sourceId: "m_t5",
+    left: 722.5,
+    top: 568.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_t4",
+    left: 770.5,
+    top: 450.9,
+    rotation: 110
+  },
+  {
+    sourceId: "m_t2",
+    left: 750.5,
+    top: 486.4,
+    rotation: 58
+  },
+  {
+    sourceId: "m_t3",
+    left: 700,
+    top: 363.4,
+    rotation: 74
+  },
+  {
+    sourceId: "m_t6",
+    left: 803,
+    top: 234.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d1",
+    left: 826,
+    top: 409.9,
+    rotation: 52
+  },
+  {
+    sourceId: "m_d2",
+    left: 820,
+    top: 393.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d3",
+    left: 702,
+    top: 370.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d4",
+    left: 824,
+    top: 510.4,
+    rotation: -88
+  },
+  {
+    sourceId: "m_d5",
+    left: 801,
+    top: 329.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 705.5,
+    top: 369.9,
+    rotation: 82
+  },
+  {
+    sourceId: "m_d7",
+    left: 752.5,
+    top: 487.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d8",
+    left: 837.5,
+    top: 425.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 766,
+    top: 321.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d1",
+    left: 757,
+    top: 499.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d5",
+    left: 769.5,
+    top: 328.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_c3",
+    left: 760.5,
+    top: 303.9,
+    rotation: -6
+  },
+  {
+    sourceId: "m_c3",
+    left: 801,
+    top: 342.4,
+    rotation: 172
+  },
+  {
+    sourceId: "m_c3",
+    left: 761,
+    top: 344.4,
+    rotation: 204
+  },
+  {
+    sourceId: "m_c3",
+    left: 797,
+    top: 303.4,
+    rotation: 12
+  },
+  {
+    sourceId: "c_f6",
+    left: 828.5,
+    top: 478.4,
+    rotation: 94
+  }
+]
+  },
+
+  contemporary: {
+    background:
+      "sprites/c_bg.png",
+    foreground:
+      "sprites/c_fg.png",
+    description: `
+      Le rôle de la salle commune a toujours été variable d’un foyer à l’autre. C’est d’autant plus le cas aujourd’hui alors que la composition même du foyer se réinvente.<br>
+      Dans les colocations prenant place dans d’anciens logements familiaux, le séjour devient parfois une chambre de plus afin de diviser davantage le loyer. Pour les familles monoparentales, il se munit régulièrement d’un canapé-lit qui permet de réserver la seule chambre à l’enfant. Pour le tiers des Français qui télétravaillent régulièrement, il retrouve une fonction productive.<br>
+      On peut aussi déceler des tentatives de sous-traitance du séjour à des espaces externes au logement, notamment pour compenser la réduction de sa surface moyenne.<br>
+      <br>
+      Si le terme <i>hall</i> a longtemps désigné les grandes salles de réception à l’anglaise en double hauteur, il est désormais indissociable des espaces communs propres au logement collectif. Alors qu’au XXe siècle ceux-ci étaient réduits au minimum pour tenter de réserver le plus de surface louable aux appartements privés, les opérations contemporaines proposent de plus en plus de gonfler les halls, paliers et coursives pour leur permettre d’accueillir des moments de convivialité inter-foyers.<br>
+      <br>
+      Qu’ils soient réservables par les habitants auprès du bailleur ou autogérés par la copropriété, ils offrent un espace de réception pour accueillir des personnes extérieures au foyer, ou un lieu de rencontre et de sociabilisation. Ce sont en un sens les descendants des salles de billard communales des familistères.<br>
+      On peut voir dans les typologies dites <i>cluster</i> l’aboutissement d’une telle conception du logement collectif, dans laquelle des appartements indépendants - comprenant chambres et salles d’eau - sont reliés par des espaces aux usages plus ou moins déterminés. <br>
+      <br>
+      <i>Ci-contre : Plan de la Maison A du quartier Hunziker à Zurich, Duplex Architekten, 2015</i>
+    `,
+    defaultScene: [
+  {
+    sourceId: "c_f8",
+    left: 395,
+    top: 596.9,
+    rotation: -74
+  },
+  {
+    sourceId: "c_f1",
+    left: 574.5,
+    top: 604.9,
+    rotation: -12
+  },
+  {
+    sourceId: "c_t4",
+    left: 731,
+    top: 409.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t4",
+    left: 729,
+    top: 277.9,
+    rotation: 90
+  },
+  {
+    sourceId: "c_f5",
+    left: 894,
+    top: 497.9,
+    rotation: 4
+  },
+  {
+    sourceId: "c_f3",
+    left: 1084.5,
+    top: 502.4,
+    rotation: 4
+  },
+  {
+    sourceId: "c_f6",
+    left: 697.5,
+    top: 214.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_f7",
+    left: 1089.5,
+    top: 889.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_f7",
+    left: 1214.5,
+    top: 479.4,
+    rotation: -6
+  },
+  {
+    sourceId: "c_f7",
+    left: 471.5,
+    top: 507.4,
+    rotation: 10
+  },
+  {
+    sourceId: "m_f6",
+    left: 1033.5,
+    top: 910.9,
+    rotation: 10
+  },
+  {
+    sourceId: "m_f3",
+    left: 386,
+    top: 492.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f2",
+    left: 670,
+    top: 319.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f2",
+    left: 837,
+    top: 210.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f3",
+    left: 878,
+    top: 213.4,
+    rotation: 108
+  },
+  {
+    sourceId: "m_f4",
+    left: 377,
+    top: 529.9,
+    rotation: 34
+  },
+  {
+    sourceId: "m_f4",
+    left: 1023,
+    top: 789.9,
+    rotation: 28
+  },
+  {
+    sourceId: "c_c1",
+    left: 399,
+    top: 580.9,
+    rotation: 16
+  },
+  {
+    sourceId: "c_c2",
+    left: 684.5,
+    top: 712.9,
+    rotation: 94
+  },
+  {
+    sourceId: "c_c2",
+    left: 481.5,
+    top: 680.9,
+    rotation: 126
+  },
+  {
+    sourceId: "c_c7",
+    left: 740.5,
+    top: 280.4,
+    rotation: -92
+  },
+  {
+    sourceId: "c_c7",
+    left: 815.5,
+    top: 319.4,
+    rotation: 94
+  },
+  {
+    sourceId: "c_c3",
+    left: 1163,
+    top: 607.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_c3",
+    left: 1189,
+    top: 558.9,
+    rotation: -94
+  },
+  {
+    sourceId: "c_c4",
+    left: 814.5,
+    top: 342.4,
+    rotation: 96
+  },
+  {
+    sourceId: "c_c4",
+    left: 737.5,
+    top: 251.4,
+    rotation: -92
+  },
+  {
+    sourceId: "c_c5",
+    left: 810.5,
+    top: 287.4,
+    rotation: 108
+  },
+  {
+    sourceId: "c_c5",
+    left: 736.5,
+    top: 306.4,
+    rotation: -98
+  },
+  {
+    sourceId: "c_c6",
+    left: 744.5,
+    top: 333.4,
+    rotation: 272
+  },
+  {
+    sourceId: "c_c6",
+    left: 814.5,
+    top: 258.4,
+    rotation: 84
+  },
+  {
+    sourceId: "c_c8",
+    left: 741,
+    top: 157.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_c8",
+    left: 741,
+    top: 88.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t1",
+    left: 739,
+    top: 107.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t5",
+    left: 509.5,
+    top: 639.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t5",
+    left: 516.5,
+    top: 98.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_c6",
+    left: 492.5,
+    top: 118.4,
+    rotation: 218
+  },
+  {
+    sourceId: "c_c6",
+    left: 487.5,
+    top: 74.4,
+    rotation: -52
+  },
+  {
+    sourceId: "m_c5",
+    left: 551.5,
+    top: 87.9,
+    rotation: 82
+  },
+  {
+    sourceId: "m_c4",
+    left: 678.5,
+    top: 71.4,
+    rotation: 188
+  },
+  {
+    sourceId: "m_c4",
+    left: 628.5,
+    top: 73.4,
+    rotation: 150
+  },
+  {
+    sourceId: "m_f2",
+    left: 423,
+    top: 67.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f3",
+    left: 375,
+    top: 95.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f4",
+    left: 396,
+    top: 64.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f3",
+    left: 639,
+    top: 821.5,
+    rotation: 10
+  },
+  {
+    sourceId: "p_f3",
+    left: 851,
+    top: 88.4,
+    rotation: 174
+  },
+  {
+    sourceId: "p_f4",
+    left: 882.5,
+    top: 63.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t9",
+    left: 528.5,
+    top: 701.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t2",
+    left: 1093,
+    top: 511.4,
+    rotation: 4
+  },
+  {
+    sourceId: "c_t8",
+    left: 883,
+    top: 317.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t6",
+    left: 877.5,
+    top: 440.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t7",
+    left: 872,
+    top: 411.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_t3",
+    left: 405,
+    top: 567.9,
+    rotation: 16
+  },
+  {
+    sourceId: "c_t3",
+    left: 604,
+    top: 453.9,
+    rotation: 98
+  },
+  {
+    sourceId: "c_t3",
+    left: 363,
+    top: 714.9,
+    rotation: 14
+  },
+  {
+    sourceId: "c_t3",
+    left: 731,
+    top: 458.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_c1",
+    left: 664,
+    top: 633.9,
+    rotation: 96
+  },
+  {
+    sourceId: "c_c4",
+    left: 721.5,
+    top: 517.4,
+    rotation: 54
+  },
+  {
+    sourceId: "c_c5",
+    left: 716.5,
+    top: 554.4,
+    rotation: 106
+  },
+  {
+    sourceId: "c_c7",
+    left: 711.5,
+    top: 584.4,
+    rotation: 104
+  },
+  {
+    sourceId: "m_c4",
+    left: 529.5,
+    top: 593.4,
+    rotation: 74
+  },
+  {
+    sourceId: "m_t2",
+    left: 418.5,
+    top: 634.4,
+    rotation: -24
+  },
+  {
+    sourceId: "m_t3",
+    left: 740,
+    top: 225.4,
+    rotation: -18
+  },
+  {
+    sourceId: "m_t4",
+    left: 636.5,
+    top: 727.9,
+    rotation: 246
+  },
+  {
+    sourceId: "c_d9",
+    left: 776,
+    top: 249.9,
+    rotation: 86
+  },
+  {
+    sourceId: "c_d4",
+    left: 735.5,
+    top: 411.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d5",
+    left: 763.5,
+    top: 326.9,
+    rotation: -18
+  },
+  {
+    sourceId: "p_d3",
+    left: 762.5,
+    top: 424.9,
+    rotation: 172
+  },
+  {
+    sourceId: "p_d6",
+    left: 876.5,
+    top: 322.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 793.5,
+    top: 345.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 765.5,
+    top: 294.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d9",
+    left: 485.5,
+    top: 556.9,
+    rotation: -72
+  },
+  {
+    sourceId: "b_d3",
+    left: 734,
+    top: 458.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d2",
+    left: 821.5,
+    top: 451.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 665,
+    top: 403.4,
+    rotation: 8
+  },
+  {
+    sourceId: "b_d3",
+    left: 506,
+    top: 642.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d2",
+    left: 423.5,
+    top: 638.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d4",
+    left: 652,
+    top: 491.4,
+    rotation: 6
+  },
+  {
+    sourceId: "m_t5",
+    left: 669.5,
+    top: 132.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d5",
+    left: 781,
+    top: 458.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d8",
+    left: 794,
+    top: 289.9,
+    rotation: 102
+  },
+  {
+    sourceId: "c_d8",
+    left: 760,
+    top: 116.9,
+    rotation: 22
+  },
+  {
+    sourceId: "c_d2",
+    left: 384.5,
+    top: 716.9,
+    rotation: 16
+  },
+  {
+    sourceId: "c_t3",
+    left: 984,
+    top: 642.9,
+    rotation: 96
+  },
+  {
+    sourceId: "b_t2",
+    left: 1191.5,
+    top: 562.4,
+    rotation: 90
+  },
+  {
+    sourceId: "b_t2",
+    left: 1147.5,
+    top: 634.4,
+    rotation: 0
+  },
+  {
+    sourceId: "c_f4",
+    left: 1157.5,
+    top: 571.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d6",
+    left: 688,
+    top: 664.4,
+    rotation: 34
+  },
+  {
+    sourceId: "c_d1",
+    left: 1199,
+    top: 569.4,
+    rotation: -94
+  },
+  {
+    sourceId: "c_d1",
+    left: 1155,
+    top: 642.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d8",
+    left: 625.5,
+    top: 543.4,
+    rotation: -68
+  },
+  {
+    sourceId: "m_d8",
+    left: 412.5,
+    top: 551.4,
+    rotation: 98
+  },
+  {
+    sourceId: "c_d3",
+    left: 1096,
+    top: 780.4,
+    rotation: 96
+  },
+  {
+    sourceId: "b_t8",
+    left: 1105.5,
+    top: 765.9,
+    rotation: 2
+  },
+  {
+    sourceId: "c_d7",
+    left: 1016,
+    top: 671.4,
+    rotation: 276
+  },
+  {
+    sourceId: "c_t3",
+    left: 994,
+    top: 473.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d6",
+    left: 995,
+    top: 470.4,
+    rotation: -38
+  },
+  {
+    sourceId: "b_d4",
+    left: 1070,
+    top: 469.4,
+    rotation: 88
+  },
+  {
+    sourceId: "b_d4",
+    left: 1040,
+    top: 470.4,
+    rotation: 90
+  },
+  {
+    sourceId: "m_d8",
+    left: 1094.5,
+    top: 477.4,
+    rotation: -92
+  },
+  {
+    sourceId: "m_f2",
+    left: 681,
+    top: 770.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f3",
+    left: 1104,
+    top: 683.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f4",
+    left: 1115,
+    top: 650.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f4",
+    left: 680,
+    top: 288.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_f3",
+    left: 540,
+    top: 524.4,
+    rotation: 184
+  },
+  {
+    sourceId: "m_f2",
+    left: 1211,
+    top: 499.4,
+    rotation: 0
+  }
+]
+  }
+};
+
+
+/* ============================================================
+   SCÈNE ACTUELLE
+   ============================================================ */
+
+
+let savedScene = [];
+
+
+/* ============================================================
+   GET DEFAULT SCENE
+   ============================================================ */
+
+
+function getDefaultScene() {
+
+  const plan =
+    PLAN_CONFIG[currentPlan];
+
+
+  if (!plan) {
+
+    return [];
+
+  }
+
+
+  return plan.defaultScene.map(
+    object => ({
+      ...object
+    })
+  );
+
+}
+
+
+/* ============================================================
+   APPLY PLAN
+   ============================================================ */
+
+
+function applyPlan(
+  planName
+) {
+
+  const plan =
+    PLAN_CONFIG[planName];
+
+
+  if (!plan) {
+
+    return;
+
+  }
+
+
+  currentPlan =
+    planName;
+
+
+  /*
+     Background
+  */
+
+
+  const background =
+    document.getElementById(
+      "background-plan"
+    );
+
+
+  if (background) {
+
+    background.src =
+      plan.background;
+
+  }
+
+
+  /*
+     Foreground
+  */
+
+
+  const foreground =
+    document.getElementById(
+      "foreground-plan"
+    );
+
+
+  if (foreground) {
+
+    foreground.src =
+      plan.foreground;
+
+  }
+
+
+  /*
+     Description
+  */
+
+
+  const description =
+    document.getElementById(
+      "description"
+    );
+
+
+  if (description) {
+
+    description.innerHTML =
+      plan.description;
+
+  }
+
+
+  /*
+     Active plan button
+  */
+
+
+  document
+    .querySelectorAll(
+      ".plan-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const selectedButton =
+    document.querySelector(
+      `.plan-button[data-plan="${planName}"]`
+    );
+
+
+  if (selectedButton) {
+
+    selectedButton.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   PLAN BUTTON EVENTS
+   ============================================================ */
+
+
+document
+  .querySelectorAll(
+    ".plan-button:not(.disabled)"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          applyPlan(
+            button.dataset.plan
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   INITIAL PLAN
+   ============================================================ */
+
+
+applyPlan(
+  "bourgeois"
+);
+
+
+/* ============================================================
+   LOAD SCENE
+   ============================================================ */
+
+
+function loadScene() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if (raw === null) {
+
+      return null;
+
+    }
+
+
+    const parsed =
+      JSON.parse(raw);
+
+
+    if (!Array.isArray(parsed)) {
+
+      return null;
+
+    }
+
+
+    return parsed.filter(
+      item =>
+
+        item &&
+
+        typeof item.instanceId === "string" &&
+
+        typeof item.sourceId === "string" &&
+
+        Number.isFinite(
+          Number(item.left)
+        ) &&
+
+        Number.isFinite(
+          Number(item.top)
+        ) &&
+
+        Number.isFinite(
+          Number(item.rotation)
+        )
+
+    );
+
+  }
+
+
+  catch (error) {
+
+    console.warn(
+      "Impossible de lire la scène locale.",
+      error
+    );
+
+
+    return null;
+
+  }
+
+}
+
+
+/* ============================================================
+   SAVE SCENE
+   ============================================================ */
+
+
+function saveScene() {
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(savedScene)
+    );
+
+  }
+
+
+  catch (error) {
+
+    console.warn(
+      "Impossible de sauvegarder la scène locale.",
+      error
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   INITIALISATION DE LA SCÈNE
+   ============================================================ */
+
+
+const loadedScene =
+  loadScene();
+
+
+if (loadedScene === null) {
+
+  /*
+     Première visite :
+     le default state dépend du plan actuel.
+  */
+
+
+  savedScene =
+    getDefaultScene();
+
+
+  saveScene();
+
+}
+
+
+else {
+
+  /*
+     Visiteur existant :
+     on conserve exactement sa scène.
+  */
+
+
+  savedScene =
+    loadedScene;
+
+}
+
+
+/* ============================================================
+   UNIQUE INSTANCE ID
+   ============================================================ */
+
+
+function createInstanceId() {
+
+  if (
+    window.crypto &&
+    typeof window.crypto.randomUUID === "function"
+  ) {
+
+    return window.crypto.randomUUID();
+
+  }
+
+
+  return (
+    "instance-" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .slice(2)
+  );
+
+}
+
+
+/* ============================================================
+   APPLY OBJECT STATE
+   ============================================================ */
+
+
+function applyObjectState(
+  element,
+  state
+) {
+
+  element.style.left =
+    `${state.left}px`;
+
+  element.style.top =
+    `${state.top}px`;
+
+  element.style.transform =
+    `rotate(${state.rotation}deg)`;
+
+
+  element.dataset.left =
+    String(state.left);
+
+  element.dataset.top =
+    String(state.top);
+
+  element.dataset.rotation =
+    String(state.rotation);
+
+}
+
+
+/* ============================================================
+   UPDATE SAVED OBJECT
+   ============================================================ */
+
+
+function updateSavedObject(
+  element
+) {
+
+  const index =
+    savedScene.findIndex(
+      item =>
+        item.instanceId ===
+        element.dataset.instanceId
+    );
+
+
+  if (index === -1) {
+
+    return;
+
+  }
+
+
+  savedScene[index].left =
+    Number(element.dataset.left);
+
+  savedScene[index].top =
+    Number(element.dataset.top);
+
+  savedScene[index].rotation =
+    Number(element.dataset.rotation);
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   ADD OBJECT TO SCENE
+   ============================================================ */
+
+
+function addSavedObject(
+  element
+) {
+
+  savedScene.push({
+
+    instanceId:
+      element.dataset.instanceId,
+
+    sourceId:
+      element.dataset.sourceId,
+
+    left:
+      Number(element.dataset.left),
+
+    top:
+      Number(element.dataset.top),
+
+    rotation:
+      Number(element.dataset.rotation)
+
+  });
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   REMOVE OBJECT FROM SCENE
+   ============================================================ */
+
+
+function removeSavedObject(
+  element
+) {
+
+  savedScene =
+    savedScene.filter(
+      item =>
+        item.instanceId !==
+        element.dataset.instanceId
+    );
+
+
+  saveScene();
+
+}
+
+
+/* ============================================================
+   CENTER OBJECT
+   ============================================================ */
+
+
+function getCenteredPosition(
+  element
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (!container) {
+
+    return {
+      left: 0,
+      top: 0
+    };
+
+  }
+
+
+  const containerRect =
+    container.getBoundingClientRect();
+
+
+  const elementRect =
+    element.getBoundingClientRect();
+
+
+  const left =
+    (
+      containerRect.width -
+      elementRect.width
+    ) / 2;
+
+
+  const top =
+    (
+      containerRect.height -
+      elementRect.height
+    ) / 2;
+
+
+  return {
+
+    left:
+      Math.round(left * 10) / 10,
+
+    top:
+      Math.round(top * 10) / 10
+
+  };
+
+}
+
+
+/* ============================================================
+   KEEP OBJECT INSIDE CONTAINER
+   ============================================================ */
+
+
+function constrainPosition(
+  element,
+  left,
+  top
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (!container) {
+
+    return {
+      left,
+      top
+    };
+
+  }
+
+
+  const containerRect =
+    container.getBoundingClientRect();
+
+
+  element.style.left =
+    `${left}px`;
+
+  element.style.top =
+    `${top}px`;
+
+
+  const elementRect =
+    element.getBoundingClientRect();
+
+
+  if (
+    elementRect.left <
+    containerRect.left
+  ) {
+
+    left +=
+      containerRect.left -
+      elementRect.left;
+
+  }
+
+
+  if (
+    elementRect.right >
+    containerRect.right
+  ) {
+
+    left -=
+      elementRect.right -
+      containerRect.right;
+
+  }
+
+
+  if (
+    elementRect.top <
+    containerRect.top
+  ) {
+
+    top +=
+      containerRect.top -
+      elementRect.top;
+
+  }
+
+
+  if (
+    elementRect.bottom >
+    containerRect.bottom
+  ) {
+
+    top -=
+      elementRect.bottom -
+      containerRect.bottom;
+
+  }
+
+
+  return {
+
+    left:
+      Math.round(left * 10) / 10,
+
+    top:
+      Math.round(top * 10) / 10
+
+  };
+
+}
+
+
+/* ============================================================
+   POINTER STATE
+   ============================================================ */
+
+
+const pointerState =
+  new WeakMap();
+
+
+/* ============================================================
+   START INTERACTION
+   ============================================================ */
+
+
+function startInteraction(
+  element,
+  event
+) {
+
+  if (
+    event.button !== 0 &&
+    event.button !== 2
+  ) {
+
+    return;
+
+  }
+
+
+  event.preventDefault();
+
+  event.stopPropagation();
+
+
+  /* ==========================================================
+     DOUBLE RIGHT CLICK = DELETE
+     ========================================================== */
+
+
+  if (
+    event.button === 2
+  ) {
+
+    const now =
+      Date.now();
+
+
+    const lastRightClick =
+      Number(
+        element.dataset.lastRightClick ||
+        0
+      );
+
+
+    if (
+      now -
+      lastRightClick <
+      400
+    ) {
+
+      pointerState.delete(
+        element
+      );
+
+
+      removeSavedObject(
+        element
+      );
+
+
+      element.remove();
+
+
+      return;
+
+    }
+
+
+    element.dataset.lastRightClick =
+      String(now);
+
+  }
+
+
+  /* ==========================================================
+     NORMAL INTERACTION
+     ========================================================== */
+
+
+  const left =
+    Number(
+      element.dataset.left
+    ) || 0;
+
+
+  const top =
+    Number(
+      element.dataset.top
+    ) || 0;
+
+
+  const rotation =
+    Number(
+      element.dataset.rotation
+    ) || 0;
+
+
+  pointerState.set(
+    element,
+    {
+
+      button:
+        event.button,
+
+      startMouseX:
+        event.clientX,
+
+      startMouseY:
+        event.clientY,
+
+      startLeft:
+        left,
+
+      startTop:
+        top,
+
+      startRotation:
+        rotation
+
+    }
+  );
+
+
+  element.setPointerCapture(
+    event.pointerId
+  );
+
+}
+
+
+/* ============================================================
+   MOVE / ROTATE
+   ============================================================ */
+
+
+function moveInteraction(
+  element,
+  event
+) {
+
+  const state =
+    pointerState.get(
+      element
+    );
+
+
+  if (!state) {
+
+    return;
+
+  }
+
+
+  const dx =
+    event.clientX -
+    state.startMouseX;
+
+
+  const dy =
+    event.clientY -
+    state.startMouseY;
+
+
+  /* ==========================================================
+     LEFT BUTTON = MOVE
+     ========================================================== */
+
+
+  if (
+    state.button === 0
+  ) {
+
+    let left =
+      state.startLeft +
+      dx;
+
+
+    let top =
+      state.startTop +
+      dy;
+
+
+    const constrained =
+      constrainPosition(
+        element,
+        left,
+        top
+      );
+
+
+    left =
+      constrained.left;
+
+    top =
+      constrained.top;
+
+
+    const rotation =
+      state.startRotation;
+
+
+    element.style.left =
+      `${left}px`;
+
+    element.style.top =
+      `${top}px`;
+
+    element.style.transform =
+      `rotate(${rotation}deg)`;
+
+
+    element.dataset.left =
+      String(left);
+
+    element.dataset.top =
+      String(top);
+
+    element.dataset.rotation =
+      String(rotation);
+
+
+    return;
+
+  }
+
+
+  /* ==========================================================
+     RIGHT BUTTON = ROTATE
+     ========================================================== */
+
+
+  if (
+    state.button === 2
+  ) {
+
+    const rotation =
+      state.startRotation -
+      dx * 2;
+
+
+    element.style.left =
+      `${state.startLeft}px`;
+
+    element.style.top =
+      `${state.startTop}px`;
+
+    element.style.transform =
+      `rotate(${rotation}deg)`;
+
+
+    element.dataset.left =
+      String(state.startLeft);
+
+    element.dataset.top =
+      String(state.startTop);
+
+    element.dataset.rotation =
+      String(rotation);
+
+  }
+
+}
+
+
+/* ============================================================
+   END INTERACTION
+   ============================================================ */
+
+
+function endInteraction(
+  element,
+  event
+) {
+
+  const state =
+    pointerState.get(
+      element
+    );
+
+
+  if (!state) {
+
+    return;
+
+  }
+
+
+  pointerState.delete(
+    element
+  );
+
+
+  if (
+    element.hasPointerCapture(
+      event.pointerId
+    )
+  ) {
+
+    element.releasePointerCapture(
+      event.pointerId
+    );
+
+  }
+
+
+  updateSavedObject(
+    element
+  );
+
+}
+
+
+/* ============================================================
+   PREPARE OBJECT
+   ============================================================ */
+
+
+function prepareObject(
+  element
+) {
+
+  element.addEventListener(
+    "pointerdown",
+    event => {
+
+      startInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointermove",
+    event => {
+
+      moveInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointerup",
+    event => {
+
+      endInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "pointercancel",
+    event => {
+
+      endInteraction(
+        element,
+        event
+      );
+
+    }
+  );
+
+
+  element.addEventListener(
+    "dragstart",
+    event => {
+
+      event.preventDefault();
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   SPAWN OBJECT
+   ============================================================ */
+
+
+async function spawnObject(
+  sourceElement,
+  savedObject = null
+) {
+
+  const container =
+    document.getElementById(
+      "container"
+    );
+
+
+  if (
+    !container ||
+    !sourceElement ||
+    !sourceElement.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  /* ----------------------------------------------------------
+     CREATE ELEMENT
+     ---------------------------------------------------------- */
+
+
+  const newElement =
+    document.createElement(
+      sourceElement.tagName
+    );
+
+
+  /* ----------------------------------------------------------
+     COPY SOURCE ATTRIBUTES
+     ---------------------------------------------------------- */
+
+
+  for (
+    const attribute of sourceElement.attributes
+  ) {
+
+    if (
+      attribute.name === "id" ||
+      attribute.name === "hidden" ||
+      attribute.name === "style" ||
+      attribute.name === "draggable"
+    ) {
+
+      continue;
+
+    }
+
+
+    newElement.setAttribute(
+      attribute.name,
+      attribute.value
+    );
+
+  }
+
+
+  /* ----------------------------------------------------------
+     UNIQUE ID
+     ---------------------------------------------------------- */
+
+
+  const instanceId =
+    savedObject?.instanceId ||
+    createInstanceId();
+
+
+  newElement.id =
+    instanceId;
+
+
+  /* ----------------------------------------------------------
+     METADATA
+     ---------------------------------------------------------- */
+
+
+  newElement.dataset.instanceId =
+    instanceId;
+
+
+  newElement.dataset.sourceId =
+    sourceElement.id;
+
+
+  /* ----------------------------------------------------------
+     OBJECT ATTRIBUTES
+     ---------------------------------------------------------- */
+
+
+  newElement.hidden =
+    false;
+
+
+  newElement.classList.remove(
+    "spawn-source"
+  );
+
+
+  newElement.classList.add(
+    "can-arrange"
+  );
+
+
+  newElement.style.position =
+    "absolute";
+
+
+  /*
+     IMPORTANT :
+
+     Un nouvel objet commence toujours avec une position
+     propre.
+  */
+
+
+  newElement.style.left =
+    "0px";
+
+
+  newElement.style.top =
+    "0px";
+
+
+  newElement.style.transform =
+    "rotate(0deg)";
+
+
+  newElement.setAttribute(
+    "draggable",
+    "false"
+  );
+
+
+  /* ----------------------------------------------------------
+     ADD TO DOM
+     ---------------------------------------------------------- */
+
+
+  container.appendChild(
+    newElement
+  );
+
+
+  /* ----------------------------------------------------------
+     WAIT FOR IMAGE LAYOUT
+     ---------------------------------------------------------- */
+
+
+  if (
+    !newElement.complete
+  ) {
+
+    await new Promise(
+      resolve => {
+
+        newElement.addEventListener(
+          "load",
+          resolve,
+          {
+            once: true
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  await new Promise(
+    resolve =>
+      requestAnimationFrame(
+        resolve
+      )
+  );
+
+
+  /* ==========================================================
+     RESTORE EXISTING OBJECT
+     ========================================================== */
+
+
+  if (savedObject) {
+
+    const left =
+      Number(savedObject.left);
+
+
+    const top =
+      Number(savedObject.top);
+
+
+    const rotation =
+      Number(savedObject.rotation);
+
+
+    applyObjectState(
+      newElement,
+      {
+
+        left:
+          Number.isFinite(left)
+            ? left
+            : 0,
+
+        top:
+          Number.isFinite(top)
+            ? top
+            : 0,
+
+        rotation:
+          Number.isFinite(rotation)
+            ? rotation
+            : 0
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================================
+     NEW OBJECT
+     ========================================================== */
+
+
+  else {
+
+    const centered =
+      getCenteredPosition(
+        newElement
+      );
+
+
+    const state = {
+
+      left:
+        centered.left,
+
+      top:
+        centered.top,
+
+      rotation:
+        0
+
+    };
+
+
+    applyObjectState(
+      newElement,
+      state
+    );
+
+
+    /*
+       On AJOUTE l'objet à la scène existante.
+    */
+
+
+    addSavedObject(
+      newElement
+    );
+
+  }
+
+
+  /* ----------------------------------------------------------
+     ENABLE INTERACTION
+     ---------------------------------------------------------- */
+
+
+  prepareObject(
+    newElement
+  );
+
+
+  return newElement;
+
+}
+
+
+/* ============================================================
+   SPAWN BY SOURCE ID
+   ============================================================ */
+
+
+async function spawnObjectById(
+  sourceId
+) {
+
+  const source =
+    document.getElementById(
+      sourceId
+    );
+
+
+  if (
+    !source ||
+    !source.classList.contains(
+      "spawn-source"
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  return spawnObject(
+    source
+  );
+
+}
+
+
+/* ============================================================
+   MENU SPAWNING
+   ============================================================ */
+
+
+document
+  .querySelectorAll(
+    "#spawn-menu [data-spawn]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.stopPropagation();
+
+
+          spawnObjectById(
+            button.dataset.spawn
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   EPOCH TOGGLE
+   ============================================================ */
+
+
+function setActiveEpoch(
+  epoch
+) {
+
+  /*
+     Boutons epoch
+  */
+
+
+  document
+    .querySelectorAll(
+      ".epoch-button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const selectedButton =
+    document.querySelector(
+      `.epoch-button[data-epoch="${epoch}"]`
+    );
+
+
+  if (selectedButton) {
+
+    selectedButton.classList.add(
+      "active"
+    );
+
+  }
+
+
+  /*
+     Object lists
+  */
+
+
+  document
+    .querySelectorAll(
+      ".object-list"
+    )
+    .forEach(
+      list => {
+
+        list.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      `.object-list.${epoch}`
+    )
+    .forEach(
+      list => {
+
+        list.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+}
+
+
+/* ------------------------------------------------------------
+   INITIAL EPOCH
+   ------------------------------------------------------------ */
+
+
+setActiveEpoch(
+  "bourgeois"
+);
+
+
+/* ------------------------------------------------------------
+   EPOCH BUTTON EVENTS
+   ------------------------------------------------------------ */
+
+
+document
+  .querySelectorAll(
+    ".epoch-button:not(.disabled)"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          setActiveEpoch(
+            button.dataset.epoch
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   RESET SCENE
+   ============================================================ */
+
+
+async function resetScene() {
+
+  /*
+     1. Supprimer tous les objets actuellement présents.
+  */
+
+
+  document
+    .querySelectorAll(
+      "#container img.can-arrange:not(.spawn-source)"
+    )
+    .forEach(
+      element =>
+        element.remove()
+    );
+
+
+  /*
+     2. Récupérer le default state du PLAN ACTUEL.
+
+     Chaque plan possède sa propre scène.
+  */
+
+
+  savedScene =
+    getDefaultScene();
+
+
+  /*
+     3. Chaque reset crée de nouvelles instances.
+
+     Les coordonnées et les objets du default state
+     restent toutefois exactement ceux définis dans
+     PLAN_CONFIG.
+  */
+
+
+  savedScene =
+    savedScene.map(
+      object => ({
+
+        ...object,
+
+        instanceId:
+          createInstanceId()
+
+      })
+    );
+
+
+  /*
+     4. Sauvegarder cette nouvelle scène.
+  */
+
+
+  saveScene();
+
+
+  /*
+     5. Recréer les objets dans le DOM.
+  */
+
+
+  const objects =
+    [...savedScene];
+
+
+  for (
+    const savedObject of objects
+  ) {
+
+    const source =
+      document.getElementById(
+        savedObject.sourceId
+      );
+
+
+    if (!source) {
+
+      continue;
+
+    }
+
+
+    await spawnObject(
+      source,
+      savedObject
+    );
+
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   RESET BUTTON
+   ------------------------------------------------------------ */
+
+
+document
+  .getElementById(
+    "reset-scene"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      resetScene();
+
+    }
+  );
+
+/* ============================================================
+   EMPTY SCENE
+   ============================================================ */
+
+async function emptyScene() {
+
+  /*
+     Supprimer tous les objets actuellement présents.
+  */
+
+  document
+    .querySelectorAll(
+      "#container img.can-arrange:not(.spawn-source)"
+    )
+    .forEach(
+      element =>
+        element.remove()
+    );
+
+  /*
+     La scène reste vide.
+     Aucun default state n'est chargé.
+     Aucun objet n'est recréé.
+  */
+
+  savedScene = [];
+}
+
+/* ------------------------------------------------------------
+   EMPTY BUTTON
+   ------------------------------------------------------------ */
+
+document
+  .getElementById(
+    "empty-scene"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      emptyScene();
+
+    }
+  );
+
+
+/* ============================================================
+   DISABLE NATIVE CONTEXT MENU
+   ============================================================ */
+
+
+document.addEventListener(
+  "contextmenu",
+  event => {
+
+    event.preventDefault();
+
+  }
+);
+
+
+/* ============================================================
+   RESTORE SAVED SCENE
+   ============================================================ */
+
+
+async function restoreScene() {
+
+  const objects =
+    [...savedScene];
+
+
+  for (
+    const savedObject of objects
+  ) {
+
+    const source =
+      document.getElementById(
+        savedObject.sourceId
+      );
+
+
+    if (!source) {
+
+      continue;
+
+    }
+
+
+    await spawnObject(
+      source,
+      savedObject
+    );
+
+  }
+
+}
+
+
+await restoreScene();
+
+
+/* ============================================================
+   GLOBAL FUNCTIONS
+   ============================================================ */
+
+
+window.spawnObject =
+  spawnObject;
+
+
+window.spawnObjectById =
+  spawnObjectById;
+
+
+/* ============================================================
+   DEBUG — CLEAR SCENE
+   ============================================================ */
+
+
+window.mostroClearScene =
+  function() {
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+
+    savedScene = [];
+
+
+    document
+      .querySelectorAll(
+        "#container img.can-arrange:not(.spawn-source)"
+      )
+      .forEach(
+        element =>
+          element.remove()
+      );
+
+  };
+
+
+/* ============================================================
+   DEBUG — INSPECT SCENE
+   ============================================================ */
+
+
+window.mostroScene =
+  function() {
+
+    console.table(
+      savedScene
+    );
+
+
+    return savedScene;
+
+  };
+
+  
+
+/* ============================================================
+   DEBUG — STORAGE KEY
+   ============================================================ */
+
+
+window.mostroStorageKey =
+  STORAGE_KEY;
+
+</script>
+
+<!-- ============================================================
+     DEBUG — DEFAULT STATE
+     ============================================================ -->
+
+<style>
+  #default-state-debug {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 420px;
+    max-height: 70vh;
+    overflow: auto;
+
+    padding: 15px;
+
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #000;
+
+    font-family: monospace;
+    font-size: 13px;
+
+    z-index: 99999;
+
+    box-sizing: border-box;
+  }
+
+  #default-state-debug-title {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  #default-state-debug pre {
+    margin: 0;
+    white-space: pre;
+  }
+
+  #default-state-debug button {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+</style>
+
+<div id="default-state-debug">
+
+  <div id="default-state-debug-title">
+    DEFAULT STATE
+  </div>
+
+  <button
+    type="button"
+    id="default-state-copy"
+  >
+    Copier
+  </button>
+
+  <pre id="default-state-debug-content"></pre>
+
+</div>
+
+<script>
+/* ============================================================
+   DEBUG — DISPLAY CURRENT OBJECT STATES
+   ============================================================ */
+
+function updateDefaultStateDebug() {
+
+  const elements =
+    document.querySelectorAll(
+      "#container img.can-arrange:not(.spawn-source)"
+    );
+
+  const objects = [];
+
+  elements.forEach(
+    element => {
+
+      const sourceId =
+        element.dataset.sourceId;
+
+      const left =
+        Number(element.dataset.left);
+
+      const top =
+        Number(element.dataset.top);
+
+      const rotation =
+        Number(element.dataset.rotation);
+
+      objects.push({
+        instanceId:
+          element.dataset.instanceId,
+
+        sourceId:
+          sourceId,
+
+        left:
+          Number.isFinite(left)
+            ? left
+            : 0,
+
+        top:
+          Number.isFinite(top)
+            ? top
+            : 0,
+
+        rotation:
+          Number.isFinite(rotation)
+            ? rotation
+            : 0
+      });
+
+    }
+  );
+
+  const text =
+`[
+${objects.map(
+  object =>
+`  {
+    sourceId: "${object.sourceId}",
+    left: ${object.left},
+    top: ${object.top},
+    rotation: ${object.rotation}
+  }`
+).join(",\n")}
+]`;
+
+  document
+    .getElementById(
+      "default-state-debug-content"
+    )
+    .textContent = text;
+
+}
+
+
+/* ============================================================
+   DEBUG — COPY
+   ============================================================ */
+
+document
+  .getElementById(
+    "default-state-copy"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      const text =
+        document
+          .getElementById(
+            "default-state-debug-content"
+          )
+          .textContent;
+
+      await navigator.clipboard.writeText(
+        text
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   DEBUG — UPDATE
+   ============================================================ */
+
+function refreshDefaultStateDebug() {
+  updateDefaultStateDebug();
+
+  requestAnimationFrame(
+    refreshDefaultStateDebug
+  );
+}
+
+refreshDefaultStateDebug();
+</script>
+
+
+</body>
+
+</html>

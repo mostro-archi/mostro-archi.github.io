@@ -285,6 +285,9 @@
             <button class="plan-button" data-plan="modern">le living room moderne</button>
             <button class="plan-button" data-plan="contemporary">l'espace commun contemporain</button>
           </div>
+          <div class="reset-row" style="margin-top: 8px;">
+            <button id="toggle-architecture" class="plan-button">masquer l'architecture</button>
+          </div>
           <br>
           <div class="reset-row">
             <button id="reset-scene">réinitialiser</button>
@@ -393,11 +396,14 @@
             </div>
             <div class="object-list populaire">
               <button class="object-button" data-spawn="p_t1">table à manger</button>
-              <button class="object-button" data-spawn="p_t2">fourneau</button>
-              <button class="object-button" data-spawn="p_t3">lit d'appoint</button>
+              <button class="object-button" data-spawn="p_t9">commode</button>
+              <button class="object-button" data-spawn="p_t7">table de travail</button>
               <button class="object-button" data-spawn="p_t4">guéridon carré</button>
               <button class="object-button" data-spawn="p_t5">guéridon circulaire</button>
+              <button class="object-button" data-spawn="p_t3">lit d'appoint</button>
               <button class="object-button" data-spawn="p_t6">landeau</button>
+              <button class="object-button" data-spawn="p_t2">fourneau</button>
+              <button class="object-button" data-spawn="p_t8">évier</button>
             </div>
             <div class="object-list modern">
               <button class="object-button" data-spawn="m_t1">table à manger</button>
@@ -551,6 +557,9 @@
       <img id="p_t4" src="sprites/p_t4.png" class="table can-arrange spawn-source" draggable="false" hidden>
       <img id="p_t5" src="sprites/p_t5.png" class="table can-arrange spawn-source" draggable="false" hidden>
       <img id="p_t6" src="sprites/p_t6.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t7" src="sprites/p_t7.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t8" src="sprites/p_t8.png" class="table can-arrange spawn-source" draggable="false" hidden>
+      <img id="p_t9" src="sprites/p_t9.png" class="table can-arrange spawn-source" draggable="false" hidden>
 
       <img id="m_t1" src="sprites/m_t1.png" class="table can-arrange spawn-source" draggable="false" hidden>
       <img id="m_t2" src="sprites/m_t2.png" class="table can-arrange spawn-source" draggable="false" hidden>
@@ -1648,1149 +1657,1125 @@ const PLAN_CONFIG = {
     defaultScene: [
   {
     sourceId: "p_f3",
-    left: 813,
-    top: 364.4,
+    left: 696,
+    top: 406.9,
     rotation: 0
   },
   {
     sourceId: "p_f3",
-    left: 998,
-    top: 805.4,
-    rotation: -98
+    left: 76,
+    top: 659.9,
+    rotation: 164
+  },
+  {
+    sourceId: "p_f3",
+    left: 1212,
+    top: 170.9,
+    rotation: 84
   },
   {
     sourceId: "p_f4",
-    left: 849.5,
-    top: 615.4,
+    left: 904.5,
+    top: 861.9,
+    rotation: 66
+  },
+  {
+    sourceId: "p_f4",
+    left: 1432.5,
+    top: 146.9,
+    rotation: 180
+  },
+  {
+    sourceId: "p_f4",
+    left: 78.5,
+    top: 640.9,
     rotation: 0
   },
   {
-    sourceId: "p_c1",
-    left: 673,
-    top: 566.9,
-    rotation: 90
+    sourceId: "p_f1",
+    left: 597.5,
+    top: 451.4,
+    rotation: -88
   },
   {
-    sourceId: "p_c1",
-    left: 642,
-    top: 640.9,
-    rotation: 170
+    sourceId: "p_f2",
+    left: 1067,
+    top: 282.4,
+    rotation: -64
   },
   {
-    sourceId: "p_c2",
-    left: 592,
-    top: 595.4,
-    rotation: -108
+    sourceId: "p_c4",
+    left: 1175.5,
+    top: 451.4,
+    rotation: -88
   },
   {
-    sourceId: "p_c2",
-    left: 647,
-    top: 497.4,
-    rotation: 2
-  },
-  {
-    sourceId: "p_t1",
-    left: 596,
-    top: 552.9,
-    rotation: 94
-  },
-  {
-    sourceId: "p_t2",
-    left: 516,
-    top: 428.9,
-    rotation: -90
-  },
-  {
-    sourceId: "p_t3",
-    left: 683.5,
-    top: 586.9,
+    sourceId: "p_c4",
+    left: 1176.5,
+    top: 396.4,
     rotation: 270
   },
   {
-    sourceId: "p_t6",
-    left: 491.5,
-    top: 556.9,
-    rotation: 124
-  },
-  {
-    sourceId: "b_t2",
-    left: 524.5,
-    top: 505.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_c3",
-    left: 558,
-    top: 529.9,
-    rotation: 156
-  },
-  {
-    sourceId: "p_d9",
-    left: 559,
-    top: 441.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_t8",
-    left: 550.5,
-    top: 616.9,
+    sourceId: "p_c4",
+    left: 1310.5,
+    top: 506.4,
     rotation: 90
   },
   {
-    sourceId: "p_d1",
-    left: 523,
-    top: 654.4,
-    rotation: 0
+    sourceId: "p_c4",
+    left: 1311.5,
+    top: 451.4,
+    rotation: 90
   },
   {
-    sourceId: "p_d6",
-    left: 586.5,
-    top: 647.9,
-    rotation: 0
+    sourceId: "p_c4",
+    left: 1310.5,
+    top: 394.4,
+    rotation: 90
   },
   {
-    sourceId: "p_d4",
-    left: 533.5,
-    top: 440.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d7",
-    left: 547,
-    top: 653.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d5",
-    left: 679.5,
-    top: 424.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 636.5,
-    top: 541.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d3",
-    left: 620.5,
-    top: 570.9,
+    sourceId: "p_t1",
+    left: 579,
+    top: 518.4,
     rotation: 110
   },
   {
-    sourceId: "p_d8",
-    left: 526,
-    top: 503.9,
-    rotation: -2
+    sourceId: "p_t9",
+    left: 537,
+    top: 578.9,
+    rotation: 180
   },
   {
-    sourceId: "p_d6",
-    left: 583.5,
-    top: 426.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 710,
-    top: 423.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 623,
-    top: 421.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 628,
-    top: 426.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1039,
+    sourceId: "p_t7",
+    left: 542,
     top: 493.9,
     rotation: 0
   },
   {
-    sourceId: "p_t5",
-    left: 968,
-    top: 494.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 982,
-    top: 311.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 1028,
-    top: 310.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 1011,
-    top: 383.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 1011,
-    top: 428.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 1012,
-    top: 557.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t4",
-    left: 1012,
-    top: 608.4,
-    rotation: 82
-  },
-  {
-    sourceId: "p_c3",
-    left: 1047,
-    top: 571.9,
-    rotation: 86
-  },
-  {
-    sourceId: "p_c2",
-    left: 989,
-    top: 567.4,
-    rotation: 250
-  },
-  {
-    sourceId: "p_c2",
-    left: 1064,
-    top: 518.4,
-    rotation: 134
-  },
-  {
-    sourceId: "p_c3",
-    left: 984,
-    top: 471.9,
-    rotation: 18
-  },
-  {
-    sourceId: "p_c2",
-    left: 977,
-    top: 433.4,
-    rotation: -96
-  },
-  {
-    sourceId: "p_c3",
-    left: 1055,
-    top: 432.9,
-    rotation: 106
-  },
-  {
-    sourceId: "p_c2",
-    left: 1049,
-    top: 382.4,
-    rotation: 56
-  },
-  {
-    sourceId: "p_c3",
-    left: 975,
-    top: 390.9,
-    rotation: -94
-  },
-  {
-    sourceId: "p_c2",
-    left: 968,
-    top: 348.4,
-    rotation: 244
-  },
-  {
-    sourceId: "p_c3",
-    left: 1042,
-    top: 336.9,
-    rotation: 158
-  },
-  {
-    sourceId: "p_c2",
-    left: 1036,
-    top: 281.4,
-    rotation: 24
-  },
-  {
-    sourceId: "p_c3",
-    left: 983,
-    top: 277.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_c2",
-    left: 1041,
-    top: 622.4,
-    rotation: 114
-  },
-  {
-    sourceId: "p_c3",
-    left: 987,
-    top: 616.9,
-    rotation: 262
-  },
-  {
-    sourceId: "p_f3",
-    left: 975,
-    top: 687.4,
-    rotation: 140
-  },
-  {
-    sourceId: "b_d8",
-    left: 1017,
-    top: 617.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1050,
-    top: 507.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1031,
-    top: 433.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1011,
-    top: 446.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1025,
-    top: 390.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 987,
-    top: 318.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1040,
-    top: 330.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1032,
-    top: 577.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d3",
-    left: 976,
-    top: 510.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d5",
-    left: 1059.5,
-    top: 517.4,
-    rotation: 202
-  },
-  {
-    sourceId: "p_d5",
-    left: 1014.5,
-    top: 610.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1015.5,
-    top: 562.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 992.5,
-    top: 500.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1059.5,
-    top: 496.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d5",
-    left: 1018.5,
-    top: 405.4,
-    rotation: 170
-  },
-  {
-    sourceId: "p_d5",
-    left: 1035.5,
-    top: 320.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d1",
-    left: 1036,
-    top: 628.4,
-    rotation: -64
-  },
-  {
-    sourceId: "p_d1",
-    left: 1003,
-    top: 333.4,
-    rotation: 136
-  },
-  {
-    sourceId: "p_c4",
-    left: 1139,
-    top: 774.9,
-    rotation: 180
-  },
-  {
-    sourceId: "p_c4",
-    left: 1245,
-    top: 771.9,
-    rotation: 180
-  },
-  {
-    sourceId: "p_c4",
-    left: 1350,
-    top: 772.9,
-    rotation: 180
-  },
-  {
-    sourceId: "p_c4",
-    left: 1352,
-    top: 510.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_c4",
-    left: 1243,
-    top: 511.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_c5",
-    left: 1410,
-    top: 401.9,
-    rotation: 14
-  },
-  {
-    sourceId: "p_c5",
-    left: 1409,
-    top: 364.9,
-    rotation: -36
-  },
-  {
-    sourceId: "p_c5",
-    left: 1403,
-    top: 300.9,
-    rotation: 62
-  },
-  {
-    sourceId: "p_c5",
-    left: 1408,
-    top: 250.9,
-    rotation: -46
-  },
-  {
-    sourceId: "p_c5",
-    left: 1431,
-    top: 192.9,
-    rotation: 30
-  },
-  {
-    sourceId: "p_d3",
-    left: 1570.5,
-    top: 290.9,
-    rotation: -88
-  },
-  {
-    sourceId: "p_d3",
-    left: 1441.5,
-    top: 550.9,
-    rotation: 96
-  },
-  {
-    sourceId: "p_d6",
-    left: 1604.5,
-    top: 435.9,
-    rotation: 124
-  },
-  {
-    sourceId: "p_d6",
-    left: 1592.5,
-    top: 547.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d4",
-    left: 1598.5,
-    top: 525.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d4",
-    left: 1472.5,
-    top: 388.9,
-    rotation: -84
-  },
-  {
-    sourceId: "p_d5",
-    left: 1601.5,
-    top: 345.4,
-    rotation: 246
-  },
-  {
-    sourceId: "p_d2",
-    left: 1459.5,
-    top: 364.9,
-    rotation: -42
-  },
-  {
-    sourceId: "p_d1",
-    left: 1455,
-    top: 226.4,
-    rotation: -88
-  },
-  {
-    sourceId: "p_d1",
-    left: 1450,
-    top: 384.4,
-    rotation: 70
-  },
-  {
-    sourceId: "p_d2",
-    left: 1462.5,
-    top: 273.9,
-    rotation: 34
-  },
-  {
-    sourceId: "p_t2",
-    left: 1573,
-    top: 529.9,
-    rotation: 90
-  },
-  {
-    sourceId: "b_d9",
-    left: 1602,
-    top: 605.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_f1",
-    left: 1559.5,
-    top: 775.4,
-    rotation: 248
-  },
-  {
-    sourceId: "p_f1",
-    left: 1503.5,
-    top: 770.4,
-    rotation: 12
-  },
-  {
-    sourceId: "p_f2",
-    left: 1601,
-    top: 767.9,
-    rotation: -24
-  },
-  {
-    sourceId: "p_f2",
-    left: 1478,
-    top: 772.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_f1",
-    left: 1602.5,
-    top: 370.4,
-    rotation: -16
-  },
-  {
-    sourceId: "p_f2",
-    left: 1560,
-    top: 260.9,
-    rotation: 16
-  },
-  {
-    sourceId: "b_d8",
-    left: 1596,
-    top: 412.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1459,
-    top: 243.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1458,
-    top: 337.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1472,
-    top: 706.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1473,
-    top: 711.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1478,
-    top: 738.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1475,
-    top: 740.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1475,
-    top: 708.9,
-    rotation: 0
-  },
-  {
-    sourceId: "m_d6",
-    left: 1565,
-    top: 216.4,
-    rotation: 186
-  },
-  {
-    sourceId: "m_d6",
-    left: 1592,
-    top: 471.4,
-    rotation: 258
-  },
-  {
-    sourceId: "m_d6",
-    left: 1523,
-    top: 214.4,
-    rotation: 0
-  },
-  {
-    sourceId: "m_d5",
-    left: 1456.5,
-    top: 402.9,
-    rotation: 0
-  },
-  {
-    sourceId: "c_d8",
-    left: 1485,
-    top: 214.9,
-    rotation: -36
-  },
-  {
-    sourceId: "c_d8",
-    left: 1463,
-    top: 304.9,
-    rotation: 46
-  },
-  {
-    sourceId: "p_f5",
-    left: 1560.5,
-    top: 468.9,
-    rotation: 162
-  },
-  {
-    sourceId: "p_f1",
-    left: 1511.5,
-    top: 258.4,
-    rotation: -14
-  },
-  {
-    sourceId: "m_d3",
-    left: 1483.5,
-    top: 468.4,
+    sourceId: "p_t3",
+    left: 616.5,
+    top: 533.4,
     rotation: 268
   },
   {
-    sourceId: "m_d7",
-    left: 1462,
-    top: 452.4,
-    rotation: 170
+    sourceId: "p_t6",
+    left: 511.5,
+    top: 540.9,
+    rotation: 162
   },
   {
-    sourceId: "b_t2",
-    left: 1246.5,
-    top: 559.4,
+    sourceId: "p_t2",
+    left: 541.5,
+    top: 460.9,
+    rotation: -90
+  },
+  {
+    sourceId: "p_t8",
+    left: 618.5,
+    top: 452.9,
     rotation: 0
   },
   {
-    sourceId: "b_t2",
-    left: 1277.5,
-    top: 362.4,
-    rotation: 2
-  },
-  {
-    sourceId: "b_t2",
-    left: 1155.5,
-    top: 266.4,
-    rotation: 0
-  },
-  {
-    sourceId: "b_t2",
-    left: 1257.5,
-    top: 710.4,
-    rotation: 0
-  },
-  {
-    sourceId: "b_t2",
-    left: 1144.5,
-    top: 712.4,
-    rotation: 0
-  },
-  {
-    sourceId: "b_t2",
-    left: 1372.5,
-    top: 712.4,
-    rotation: 0
-  },
-  {
-    sourceId: "b_t2",
-    left: 1372.5,
-    top: 560.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1134,
-    top: 465.9,
-    rotation: 194
-  },
-  {
-    sourceId: "p_t5",
-    left: 1276,
-    top: 118.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1163,
-    top: 119.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1200,
-    top: 366.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1129,
-    top: 364.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_t5",
-    left: 1275,
-    top: 262.9,
-    rotation: 12
-  },
-  {
-    sourceId: "p_c2",
-    left: 1211,
-    top: 398.4,
-    rotation: 176
-  },
-  {
-    sourceId: "p_c3",
-    left: 1146,
-    top: 498.9,
-    rotation: 158
-  },
-  {
-    sourceId: "p_c2",
-    left: 1133,
-    top: 399.4,
-    rotation: 206
-  },
-  {
-    sourceId: "p_c3",
-    left: 1143,
-    top: 344.9,
-    rotation: 10
-  },
-  {
-    sourceId: "p_c2",
-    left: 1196,
-    top: 340.4,
-    rotation: -8
-  },
-  {
-    sourceId: "p_c3",
-    left: 1271,
-    top: 385.9,
-    rotation: 190
-  },
-  {
-    sourceId: "p_c2",
-    left: 1319,
-    top: 386.4,
-    rotation: 172
-  },
-  {
-    sourceId: "p_c3",
-    left: 1280,
-    top: 330.9,
-    rotation: -12
-  },
-  {
-    sourceId: "p_c2",
-    left: 1299,
-    top: 286.4,
-    rotation: 140
-  },
-  {
-    sourceId: "p_c3",
-    left: 1208,
-    top: 285.9,
-    rotation: 164
-  },
-  {
-    sourceId: "p_c2",
-    left: 1202,
-    top: 237.4,
-    rotation: 12
-  },
-  {
-    sourceId: "p_c3",
-    left: 1160,
-    top: 288.9,
-    rotation: 182
-  },
-  {
-    sourceId: "p_c2",
-    left: 1285,
-    top: 227.4,
-    rotation: 8
-  },
-  {
-    sourceId: "p_c3",
-    left: 1158,
-    top: 237.9,
-    rotation: -8
-  },
-  {
-    sourceId: "p_c2",
-    left: 1204,
-    top: 131.4,
-    rotation: 106
-  },
-  {
-    sourceId: "p_c3",
-    left: 1140,
-    top: 124.9,
-    rotation: -96
-  },
-  {
-    sourceId: "p_c2",
-    left: 1259,
-    top: 111.4,
-    rotation: -60
-  },
-  {
-    sourceId: "p_c3",
-    left: 1311,
-    top: 123.9,
-    rotation: 86
-  },
-  {
-    sourceId: "p_c3",
-    left: 1371,
-    top: 582.9,
-    rotation: 190
-  },
-  {
-    sourceId: "p_c2",
-    left: 1290,
-    top: 579.4,
-    rotation: 166
-  },
-  {
-    sourceId: "p_c3",
-    left: 1250,
-    top: 579.9,
-    rotation: 182
-  },
-  {
-    sourceId: "p_c2",
-    left: 1416,
-    top: 680.4,
-    rotation: -4
-  },
-  {
-    sourceId: "p_c3",
-    left: 1374,
-    top: 678.9,
-    rotation: 14
-  },
-  {
-    sourceId: "p_c2",
-    left: 1298,
-    top: 675.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_c3",
-    left: 1201,
-    top: 674.9,
-    rotation: -18
-  },
-  {
-    sourceId: "p_c2",
-    left: 1254,
-    top: 681.4,
-    rotation: -16
-  },
-  {
-    sourceId: "p_c3",
-    left: 1159,
-    top: 682.9,
-    rotation: 18
-  },
-  {
-    sourceId: "p_c3",
-    left: 1417,
-    top: 585.9,
-    rotation: 188
-  },
-  {
-    sourceId: "p_f3",
-    left: 1092,
-    top: 7.4,
-    rotation: 266
-  },
-  {
-    sourceId: "p_d2",
-    left: 1298.5,
-    top: 281.9,
-    rotation: 44
-  },
-  {
-    sourceId: "p_d2",
-    left: 1160.5,
-    top: 280.9,
-    rotation: 80
-  },
-  {
-    sourceId: "p_d2",
-    left: 1282.5,
-    top: 138.9,
-    rotation: -40
-  },
-  {
-    sourceId: "p_d2",
-    left: 1179.5,
-    top: 127.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d5",
-    left: 1180.5,
-    top: 147.4,
-    rotation: -140
-  },
-  {
-    sourceId: "p_d5",
-    left: 1336.5,
-    top: 364.4,
-    rotation: 94
-  },
-  {
-    sourceId: "p_d5",
-    left: 1140.5,
-    top: 368.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d6",
-    left: 1251.5,
-    top: 563.9,
-    rotation: -30
-  },
-  {
-    sourceId: "p_d6",
-    left: 1200.5,
-    top: 270.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1387.5,
-    top: 569.9,
-    rotation: 28
-  },
-  {
-    sourceId: "p_d2",
-    left: 1300.5,
-    top: 570.9,
-    rotation: 106
-  },
-  {
-    sourceId: "p_d2",
-    left: 1150.5,
-    top: 484.9,
-    rotation: 56
-  },
-  {
-    sourceId: "p_d2",
-    left: 1304.5,
-    top: 368.9,
-    rotation: 36
-  },
-  {
-    sourceId: "p_d2",
-    left: 1211.5,
-    top: 386.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1148.5,
-    top: 386.9,
-    rotation: -58
-  },
-  {
-    sourceId: "p_d5",
-    left: 1267.5,
-    top: 715.4,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d4",
-    left: 1180.5,
-    top: 724.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1151.5,
-    top: 723.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d6",
-    left: 1386.5,
-    top: 723.9,
-    rotation: 0
-  },
-  {
-    sourceId: "p_d2",
-    left: 1294.5,
-    top: 714.9,
-    rotation: 62
-  },
-  {
-    sourceId: "p_d2",
-    left: 1425.5,
-    top: 717.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1413,
-    top: 725.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1310,
-    top: 722.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1280,
-    top: 559.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1132,
-    top: 482.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1318,
-    top: 377.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1292,
-    top: 376.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1286,
-    top: 361.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1180,
-    top: 276.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1292,
-    top: 119.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1219,
-    top: 367.9,
-    rotation: 0
-  },
-  {
-    sourceId: "b_d8",
-    left: 1415,
+    sourceId: "p_f5",
+    left: 619.5,
     top: 574.9,
     rotation: 0
   },
   {
+    sourceId: "p_c1",
+    left: 572,
+    top: 531.4,
+    rotation: -84
+  },
+  {
+    sourceId: "p_c2",
+    left: 614.5,
+    top: 543.4,
+    rotation: 130
+  },
+  {
+    sourceId: "p_c3",
+    left: 543.5,
+    top: 506.9,
+    rotation: 190
+  },
+  {
+    sourceId: "p_d3",
+    left: 584.5,
+    top: 524.9,
+    rotation: 114
+  },
+  {
+    sourceId: "p_d1",
+    left: 546,
+    top: 572.4,
+    rotation: -2
+  },
+  {
+    sourceId: "p_d4",
+    left: 555.5,
+    top: 462.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d6",
+    left: 573,
+    top: 454.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d7",
+    left: 580,
+    top: 574.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d8",
+    left: 542.5,
+    top: 498.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d9",
+    left: 559,
+    top: 478.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t2",
+    left: 1194.5,
+    top: 274.9,
+    rotation: -178
+  },
+  {
+    sourceId: "p_t8",
+    left: 1289.5,
+    top: 350.9,
+    rotation: 180
+  },
+  {
+    sourceId: "p_c5",
+    left: 1114.5,
+    top: 381.4,
+    rotation: -20
+  },
+  {
+    sourceId: "p_c5",
+    left: 1083.5,
+    top: 383.4,
+    rotation: 50
+  },
+  {
+    sourceId: "p_c5",
+    left: 1049.5,
+    top: 379.4,
+    rotation: -12
+  },
+  {
+    sourceId: "p_c5",
+    left: 1020.5,
+    top: 363.4,
+    rotation: 58
+  },
+  {
+    sourceId: "p_t4",
+    left: 915,
+    top: 376.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 911.5,
+    top: 330.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 913.5,
+    top: 283.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 917.5,
+    top: 460.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 915.5,
+    top: 430.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 919,
+    top: 533.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 919,
+    top: 507.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c2",
+    left: 940.5,
+    top: 541.4,
+    rotation: 124
+  },
+  {
+    sourceId: "p_c2",
+    left: 905.5,
+    top: 535.4,
+    rotation: 256
+  },
+  {
+    sourceId: "p_c3",
+    left: 939.5,
+    top: 503.9,
+    rotation: 82
+  },
+  {
+    sourceId: "p_c2",
+    left: 940.5,
+    top: 465.4,
+    rotation: 108
+  },
+  {
+    sourceId: "p_c3",
+    left: 935.5,
+    top: 379.9,
+    rotation: 98
+  },
+  {
+    sourceId: "p_c2",
+    left: 938.5,
+    top: 424.4,
+    rotation: 72
+  },
+  {
+    sourceId: "p_c3",
+    left: 933.5,
+    top: 326.9,
+    rotation: 60
+  },
+  {
+    sourceId: "p_c2",
+    left: 895.5,
+    top: 325.4,
+    rotation: -78
+  },
+  {
+    sourceId: "p_c3",
+    left: 934.5,
+    top: 286.9,
+    rotation: 94
+  },
+  {
+    sourceId: "p_d1",
+    left: 919,
+    top: 372.4,
+    rotation: -14
+  },
+  {
+    sourceId: "p_d2",
+    left: 925.5,
+    top: 541.9,
+    rotation: 50
+  },
+  {
+    sourceId: "p_d5",
+    left: 919.5,
+    top: 538.4,
+    rotation: 260
+  },
+  {
+    sourceId: "p_d1",
+    left: 916,
+    top: 520.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 924.5,
+    top: 511.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 916.5,
+    top: 342.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 921.5,
+    top: 335.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d3",
+    left: 920,
+    top: 282.9,
+    rotation: 112
+  },
+  {
+    sourceId: "m_d5",
+    left: 924,
+    top: 467.9,
+    rotation: 48
+  },
+  {
+    sourceId: "m_d7",
+    left: 922.5,
+    top: 436.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 919.5,
+    top: 385.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d5",
+    left: 1039.5,
+    top: 346.9,
+    rotation: 38
+  },
+  {
+    sourceId: "p_d3",
+    left: 1191.5,
+    top: 343.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d4",
+    left: 1135.5,
+    top: 354.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 1231.5,
+    top: 278.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d6",
+    left: 1206,
+    top: 283.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f1",
+    left: 1327.5,
+    top: 304.4,
+    rotation: -12
+  },
+  {
+    sourceId: "p_f2",
+    left: 1324,
+    top: 281.4,
+    rotation: 72
+  },
+  {
+    sourceId: "p_f1",
+    left: 1095.5,
+    top: 278.4,
+    rotation: 108
+  },
+  {
+    sourceId: "p_f5",
+    left: 1162.5,
+    top: 305.9,
+    rotation: 262
+  },
+  {
+    sourceId: "p_t8",
+    left: 1027.5,
+    top: 312.9,
+    rotation: -90
+  },
+  {
+    sourceId: "b_d9",
+    left: 1137.5,
+    top: 263.9,
+    rotation: 88
+  },
+  {
     sourceId: "b_d8",
-    left: 1427,
-    top: 559.9,
+    left: 1041,
+    top: 281.9,
     rotation: 0
   },
   {
     sourceId: "b_d8",
-    left: 1199,
-    top: 724.9,
+    left: 1036,
+    top: 278.9,
     rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1037,
+    top: 282.9,
+    rotation: 0
+  },
+  {
+    sourceId: "c_d8",
+    left: 1258,
+    top: 281.9,
+    rotation: -18
+  },
+  {
+    sourceId: "m_d5",
+    left: 1080,
+    top: 352.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 1102.5,
+    top: 355.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1068.5,
+    top: 617.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1068.5,
+    top: 584.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1142,
+    top: 622.9,
+    rotation: -2
+  },
+  {
+    sourceId: "p_t4",
+    left: 1142,
+    top: 579.9,
+    rotation: 4
+  },
+  {
+    sourceId: "p_t4",
+    left: 1302,
+    top: 603.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1273,
+    top: 604.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1245,
+    top: 604.9,
+    rotation: 6
+  },
+  {
+    sourceId: "p_t4",
+    left: 1216,
+    top: 605.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_f3",
+    left: 1327,
+    top: 587.9,
+    rotation: 160
+  },
+  {
+    sourceId: "p_c2",
+    left: 1244.5,
+    top: 582.4,
+    rotation: -4
+  },
+  {
+    sourceId: "p_c3",
+    left: 1274.5,
+    top: 584.9,
+    rotation: 10
+  },
+  {
+    sourceId: "p_c2",
+    left: 1215.5,
+    top: 583.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c3",
+    left: 1162.5,
+    top: 625.9,
+    rotation: 74
+  },
+  {
+    sourceId: "p_c2",
+    left: 1161.5,
+    top: 589.4,
+    rotation: 120
+  },
+  {
+    sourceId: "p_c3",
+    left: 1159.5,
+    top: 562.9,
+    rotation: 38
+  },
+  {
+    sourceId: "p_c2",
+    left: 1050.5,
+    top: 625.4,
+    rotation: -106
+  },
+  {
+    sourceId: "p_c3",
+    left: 1127.5,
+    top: 570.9,
+    rotation: 298
+  },
+  {
+    sourceId: "p_c3",
+    left: 1098.5,
+    top: 620.9,
+    rotation: 102
+  },
+  {
+    sourceId: "p_c2",
+    left: 1089.5,
+    top: 583.4,
+    rotation: 82
+  },
+  {
+    sourceId: "p_c3",
+    left: 1055.5,
+    top: 578.9,
+    rotation: -56
+  },
+  {
+    sourceId: "p_c2",
+    left: 1303.5,
+    top: 624.4,
+    rotation: 144
+  },
+  {
+    sourceId: "p_c2",
+    left: 1274.5,
+    top: 627.4,
+    rotation: 178
+  },
+  {
+    sourceId: "p_c3",
+    left: 1245.5,
+    top: 623.9,
+    rotation: 178
+  },
+  {
+    sourceId: "p_c3",
+    left: 1212.5,
+    top: 623.9,
+    rotation: 198
+  },
+  {
+    sourceId: "p_c2",
+    left: 1304.5,
+    top: 582.4,
+    rotation: 14
+  },
+  {
+    sourceId: "p_d1",
+    left: 1150,
+    top: 621.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1214.5,
+    top: 610.9,
+    rotation: 58
+  },
+  {
+    sourceId: "p_d2",
+    left: 1139.5,
+    top: 591.9,
+    rotation: 20
+  },
+  {
+    sourceId: "p_d5",
+    left: 1307.5,
+    top: 614.4,
+    rotation: 144
+  },
+  {
+    sourceId: "p_d5",
+    left: 1074.5,
+    top: 590.4,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d5",
+    left: 1330,
+    top: 336.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d5",
+    left: 1257,
+    top: 613.9,
+    rotation: -114
+  },
+  {
+    sourceId: "m_d6",
+    left: 1276.5,
+    top: 610.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d7",
+    left: 1149.5,
+    top: 633.9,
+    rotation: 132
+  },
+  {
+    sourceId: "m_d7",
+    left: 1248.5,
+    top: 606.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d7",
+    left: 1077.5,
+    top: 623.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t7",
+    left: 1280,
+    top: 498.9,
+    rotation: 90
+  },
+  {
+    sourceId: "p_t7",
+    left: 1280,
+    top: 442.9,
+    rotation: 92
+  },
+  {
+    sourceId: "p_t7",
+    left: 1281,
+    top: 390.9,
+    rotation: 90
+  },
+  {
+    sourceId: "p_t7",
+    left: 1212,
+    top: 447.9,
+    rotation: 90
+  },
+  {
+    sourceId: "p_t7",
+    left: 1208,
+    top: 391.9,
+    rotation: 88
+  },
+  {
+    sourceId: "p_t5",
+    left: 984.5,
+    top: 420.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1047.5,
+    top: 419.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1107,
+    top: 449.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1106,
+    top: 421.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1049,
+    top: 474.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t4",
+    left: 1050,
+    top: 501.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 979.5,
+    top: 499.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1105.5,
+    top: 482.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1105.5,
+    top: 518.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_t5",
+    left: 1174.5,
+    top: 512.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c2",
+    left: 986.5,
+    top: 509.4,
+    rotation: -166
+  },
+  {
+    sourceId: "p_c3",
+    left: 1097.5,
+    top: 514.9,
+    rotation: -90
+  },
+  {
+    sourceId: "p_c2",
+    left: 1130.5,
+    top: 515.4,
+    rotation: 86
+  },
+  {
+    sourceId: "p_c3",
+    left: 1098.5,
+    top: 482.9,
+    rotation: -78
+  },
+  {
+    sourceId: "p_c2",
+    left: 1125.5,
+    top: 484.4,
+    rotation: 86
+  },
+  {
+    sourceId: "p_c3",
+    left: 1093.5,
+    top: 446.9,
+    rotation: -72
+  },
+  {
+    sourceId: "p_c2",
+    left: 1092.5,
+    top: 423.4,
+    rotation: -86
+  },
+  {
+    sourceId: "p_c3",
+    left: 1118.5,
+    top: 422.9,
+    rotation: 98
+  },
+  {
+    sourceId: "p_c2",
+    left: 1122.5,
+    top: 450.4,
+    rotation: 114
+  },
+  {
+    sourceId: "p_c3",
+    left: 1065.5,
+    top: 472.9,
+    rotation: 84
+  },
+  {
+    sourceId: "p_c2",
+    left: 1066.5,
+    top: 496.4,
+    rotation: 82
+  },
+  {
+    sourceId: "p_c3",
+    left: 1040.5,
+    top: 501.9,
+    rotation: -82
+  },
+  {
+    sourceId: "p_c2",
+    left: 1034.5,
+    top: 468.4,
+    rotation: -84
+  },
+  {
+    sourceId: "p_c3",
+    left: 1033.5,
+    top: 423.9,
+    rotation: -108
+  },
+  {
+    sourceId: "p_c2",
+    left: 1062.5,
+    top: 410.4,
+    rotation: 50
+  },
+  {
+    sourceId: "p_c3",
+    left: 984.5,
+    top: 483.9,
+    rotation: -6
+  },
+  {
+    sourceId: "p_c2",
+    left: 986.5,
+    top: 439.4,
+    rotation: 196
+  },
+  {
+    sourceId: "p_c3",
+    left: 987.5,
+    top: 404.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c2",
+    left: 1196.5,
+    top: 512.4,
+    rotation: 82
+  },
+  {
+    sourceId: "p_d1",
+    left: 1299,
+    top: 518.4,
+    rotation: 134
+  },
+  {
+    sourceId: "p_d1",
+    left: 1113,
+    top: 420.4,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1051.5,
+    top: 430.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 988.5,
+    top: 505.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d5",
+    left: 980.5,
+    top: 503.4,
+    rotation: -54
+  },
+  {
+    sourceId: "p_d5",
+    left: 1055.5,
+    top: 422.4,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d3",
+    left: 987,
+    top: 424.9,
+    rotation: 26
+  },
+  {
+    sourceId: "m_d5",
+    left: 1226,
+    top: 444.9,
+    rotation: 32
+  },
+  {
+    sourceId: "m_d7",
+    left: 1226.5,
+    top: 382.9,
+    rotation: 44
+  },
+  {
+    sourceId: "m_d5",
+    left: 1176,
+    top: 521.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d5",
+    left: 1292,
+    top: 456.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 1296.5,
+    top: 386.9,
+    rotation: 64
+  },
+  {
+    sourceId: "m_d5",
+    left: 1110,
+    top: 519.9,
+    rotation: 56
+  },
+  {
+    sourceId: "m_d6",
+    left: 1185.5,
+    top: 520.9,
+    rotation: 58
+  },
+  {
+    sourceId: "m_d5",
+    left: 1057,
+    top: 511.9,
+    rotation: 0
+  },
+  {
+    sourceId: "m_d6",
+    left: 1110.5,
+    top: 489.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1150,
+    top: 580.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1047,
+    top: 476.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1115,
+    top: 452.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1298,
+    top: 435.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1297,
+    top: 403.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1227,
+    top: 406.9,
+    rotation: 0
+  },
+  {
+    sourceId: "b_d8",
+    left: 1220,
+    top: 391.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_d2",
+    left: 1117.5,
+    top: 359.9,
+    rotation: 100
+  },
+  {
+    sourceId: "p_d2",
+    left: 1294.5,
+    top: 492.9,
+    rotation: -20
+  },
+  {
+    sourceId: "p_d2",
+    left: 1227.5,
+    top: 464.9,
+    rotation: 0
+  },
+  {
+    sourceId: "p_c3",
+    left: 1277.5,
+    top: 512.9,
+    rotation: -68
+  },
+  {
+    sourceId: "p_c2",
+    left: 1278.5,
+    top: 486.4,
+    rotation: -94
+  },
+  {
+    sourceId: "p_c3",
+    left: 1279.5,
+    top: 456.9,
+    rotation: -96
+  },
+  {
+    sourceId: "p_c2",
+    left: 1280.5,
+    top: 431.4,
+    rotation: -120
+  },
+  {
+    sourceId: "p_c3",
+    left: 1237.5,
+    top: 437.9,
+    rotation: 92
+  },
+  {
+    sourceId: "p_c2",
+    left: 1236.5,
+    top: 468.4,
+    rotation: 120
+  },
+  {
+    sourceId: "p_c3",
+    left: 1280.5,
+    top: 398.9,
+    rotation: -72
+  },
+  {
+    sourceId: "p_c2",
+    left: 1280.5,
+    top: 378.4,
+    rotation: -86
+  },
+  {
+    sourceId: "p_c3",
+    left: 1235.5,
+    top: 379.9,
+    rotation: 94
+  },
+  {
+    sourceId: "p_c2",
+    left: 1239.5,
+    top: 403.4,
+    rotation: 104
   }
 ]
   },
@@ -3839,6 +3824,56 @@ document
     }
   );
 
+  /* ============================================================
+   TOGGLE ARCHITECTURE
+   ============================================================ */
+
+const architectureButton =
+  document.getElementById(
+    "toggle-architecture"
+  );
+
+const backgroundPlan =
+  document.getElementById(
+    "background-plan"
+  );
+
+const foregroundPlan =
+  document.getElementById(
+    "foreground-plan"
+  );
+
+let architectureVisible = true;
+
+
+if (architectureButton) {
+
+  architectureButton.addEventListener(
+    "click",
+    () => {
+
+      architectureVisible =
+        !architectureVisible;
+
+      if (backgroundPlan) {
+        backgroundPlan.hidden =
+          !architectureVisible;
+      }
+
+      if (foregroundPlan) {
+        foregroundPlan.hidden =
+          !architectureVisible;
+      }
+
+      architectureButton.textContent =
+        architectureVisible
+          ? "masquer l'architecture"
+          : "afficher l'architecture";
+
+    }
+  );
+
+}
 
 /* ============================================================
    INITIAL PLAN
@@ -4835,11 +4870,11 @@ async function spawnObject(
 
 
   newElement.style.left =
-    "0px";
+    "-10000px";
 
 
   newElement.style.top =
-    "0px";
+    "-10000px";
 
 
   newElement.style.transform =
@@ -5478,185 +5513,6 @@ window.mostroStorageKey =
   STORAGE_KEY;
 
 </script>
-
-<!-- ============================================================
-     DEBUG — DEFAULT STATE
-     ============================================================ -->
-
-<style>
-  #default-state-debug {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 420px;
-    max-height: 70vh;
-    overflow: auto;
-
-    padding: 15px;
-
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid #000;
-
-    font-family: monospace;
-    font-size: 13px;
-
-    z-index: 99999;
-
-    box-sizing: border-box;
-  }
-
-  #default-state-debug-title {
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-
-  #default-state-debug pre {
-    margin: 0;
-    white-space: pre;
-  }
-
-  #default-state-debug button {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-</style>
-
-<div id="default-state-debug">
-
-  <div id="default-state-debug-title">
-    DEFAULT STATE
-  </div>
-
-  <button
-    type="button"
-    id="default-state-copy"
-  >
-    Copier
-  </button>
-
-  <pre id="default-state-debug-content"></pre>
-
-</div>
-
-<script>
-/* ============================================================
-   DEBUG — DISPLAY CURRENT OBJECT STATES
-   ============================================================ */
-
-function updateDefaultStateDebug() {
-
-  const elements =
-    document.querySelectorAll(
-      "#container img.can-arrange:not(.spawn-source)"
-    );
-
-  const objects = [];
-
-  elements.forEach(
-    element => {
-
-      const sourceId =
-        element.dataset.sourceId;
-
-      const left =
-        Number(element.dataset.left);
-
-      const top =
-        Number(element.dataset.top);
-
-      const rotation =
-        Number(element.dataset.rotation);
-
-      objects.push({
-        instanceId:
-          element.dataset.instanceId,
-
-        sourceId:
-          sourceId,
-
-        left:
-          Number.isFinite(left)
-            ? left
-            : 0,
-
-        top:
-          Number.isFinite(top)
-            ? top
-            : 0,
-
-        rotation:
-          Number.isFinite(rotation)
-            ? rotation
-            : 0
-      });
-
-    }
-  );
-
-  const text =
-`[
-${objects.map(
-  object =>
-`  {
-    sourceId: "${object.sourceId}",
-    left: ${object.left},
-    top: ${object.top},
-    rotation: ${object.rotation}
-  }`
-).join(",\n")}
-]`;
-
-  document
-    .getElementById(
-      "default-state-debug-content"
-    )
-    .textContent = text;
-
-}
-
-
-/* ============================================================
-   DEBUG — COPY
-   ============================================================ */
-
-document
-  .getElementById(
-    "default-state-copy"
-  )
-  .addEventListener(
-    "click",
-    async () => {
-
-      const text =
-        document
-          .getElementById(
-            "default-state-debug-content"
-          )
-          .textContent;
-
-      await navigator.clipboard.writeText(
-        text
-      );
-
-    }
-  );
-
-
-/* ============================================================
-   DEBUG — UPDATE
-   ============================================================ */
-
-function refreshDefaultStateDebug() {
-  updateDefaultStateDebug();
-
-  requestAnimationFrame(
-    refreshDefaultStateDebug
-  );
-}
-
-refreshDefaultStateDebug();
-</script>
-
 
 </body>
 

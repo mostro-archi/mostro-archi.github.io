@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet" />  
+</head>
+
+<style>
+  .calendrier {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 80px 80px 350px 80px;
+  }
+
+  .item_row {
+    display: flex;
+    flex:1 ;
+  }
+
+  .item {
+    background-color: whitesmoke;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.363);
+    margin: 5px;
+    flex:1;
+    padding: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .item:empty {
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: none;
+  }
+
+  .item:hover {
+    transform: scale(1.8);
+    rotate: (random(1deg,5deg));
+  }
+
+  .item:hover > p {
+  display: block;
+  padding: 5px;
+  margin-top: -15px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: auto;
+  z-index: 10;
+  font-size: 8px;
+  background-color: whitesmoke;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.363);
+  }
+
+  .item:hover > .gif {
+    display:block;
+        filter:
+    drop-shadow(
+      5px 5px 5px
+      rgba(0, 0, 0, 0.377)
+    );
+  }
+
+  .item:hover > .still {
+    display:none;
+  }
+
+  .item > img {
+    width:100%;
+  }
+
+  .item > .gif {
+    display:none;
+  }
+
+  .item > h2 {
+    text-align: center;
+    font-style: italic;
+    font-family: inherit;
+  }
+
+  .item > h3 {
+    text-align: center;
+    font-style: italic;
+    font-family: inherit;
+  }
+
+    .item > p {
+    display:none;
+    font-family: inherit;
+  }
+</style>
+
+<body>
+
+<header>
+<div><a href="../index"><h1>mostro</h1></a></div>
+<div class="box"></div>
+<div><a href="../projets"><h2>projets</h2></a></div>
+<div><a href="../agence"><h2>agence</h2></a></div>
+<div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+<div class="holder">
+
+<div class="multi-column" id="agence">
+
+  <div class="column" id="small">
+    <h2>Le séjour, du salon bourgeois à l'espace commun</h2>
+    <p>contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"<br>
+        institution : maison de l'architecture d'Ile de France<br>
+        date : septembre 2026<br>
+        scénographie : Matters.xyz<br>
+        type : enseignement et recherche
+    </p>
+    
+    <h3>
+      <i>“C’est la pièce de réunion où l’on reçoit le monde, et où par conséquent, selon l’importance des maisons, on rassemble le plus d’objets de commodité, d’agrément, de goût et de luxe.<br>
+      On se sauroit prescrire à ce local rien de déterminé ni pour la grandeur, ni pour la forme, ni pour la décoration. Il est sensible qu’à cet égard il se donnera autant de variétés qu’on en trouve entre les différents états de la société.”<br></i>
+      <br>
+      Antoine Chrysostome Quatremère de Quincy, <i>Dictionnaire Historique de l’Architecture</i>, 1832<br>
+      <br>Séjour, salon, salle à manger… les multiples noms que prennent dans chaque foyer la “salle commune” témoignent d’une généalogie plurielle et entrelacée de cette pièce. Sa diversité d’usages, de dimensions, et la négociation fine de ses limites avec les autres aires fonctionnelles du logement renforcent la difficulté de circonscrire ce qu’est l’espace du séjour. Aujourd’hui encore plus qu’à l’époque où Quatremère de Quincy en donnait une tentative de définition, il semble impossible de concevoir le séjour sous un angle purement architectonique.<br>
+      <br>
+      Peut-être faut-il mieux le comprendre comme un faisceau d’usages. Ci-contre, un tableau périodique des éléments du séjour propose un inventaire des objets qui l’ont composé au fil de son histoire jusqu’à aujourd’hui.</h3>
+  </div>
+
+  <div class="column calendrier">
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/1.gif"><img class="still" src="sprites/1.png"><h3>Balcon</h3><p>Indissociable de l’architecture haussmannienne, le balcon se dispose toujours en lien avec les pièces de réception dans les plans types de l’époque.<br>
+      <br>Qu’il s’agisse de loggia ou de terrasse, le séjour est systématiquement la pièce articulant le lien entre le logement et son prolongement extérieur.</p></div>
+      <div class="item"><img class="gif" src="sprites/2.gif"><img class="still" src="sprites/2.png"><h3>Bow-window</h3><p>L’assouplissement du règlement haussmannien dans les années 1880 voit apparaître une nouveauté architecturale importée des pays anglo-saxons : la fenêtre arquée, dite <i>bow-window.</i><br>
+      <br>Réservée aux salons, elle augmente l’apport de lumière naturelle et crée une alcôve supplémentaire participant à la redivision de ces espaces de réception.<br>Souvent associée à une banquette, la <i>parlor-window</i> est un espace associé à la lecture ou aux petits ouvrages de couture.</p></div>
+      <div class="item"><h3>la pièce donnant<br>sur l'extérieur</h3></div>
+      <div class="item"><img class="gif" src="sprites/3.gif"><img class="still" src="sprites/3.png"><h3>Baie-vitrée</h3><p>Le développement des techniques verrières en Angleterre, lors de la seconde moitié du XIXe siècle, permet la création de grands verres qui n’ont pas à être redivisés ou renforcés par des petits-bois.<br>
+      <br>Ces <i>picture-windows</i> sont installées dans les living-rooms non seulement pour offrir un maximum de luminosité et un cadrage sur le paysage, mais aussi car elles sont encore perçues comme peu intimistes et poussant au voyeurisme.</p></div>
+      <div class="item"><h2>le living room moderne</h2></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/4.gif"><img class="still" src="sprites/4.png"><h3>Cheminée</h3><p>Unique source de chaleur dans le logement bourgeois, la présence d’une cheminée dans chaque salon est signe de grande richesse.<br>
+      <br>Les familles bourgeoises les plus modestes ne l’allumaient que le <i>jour</i> de réception, la journée de la semaine où la maîtresse de maison attendait dans son salon la venue potentielle de visiteurs.</p></div>
+      <div class="item"><img class="gif" src="sprites/5.gif"><img class="still" src="sprites/5.png"><h3>Plantes d'intérieur</h3><p>Le goût européen pour les plantes d’intérieur se développe simultanément avec l’Empire britannique qui rapatrie régulièrement des espèces exotiques dans des intérieurs désormais correctement chauffés.<br>
+      <br>Tout comme le reste du mobilier, les plantes vertes suivent différentes vagues de mode, les succulentes remplaçant les fougères, qui avaient elles-mêmes chassées les aspidistras.</p></div>
+      <div class="item"><h3>la pièce<br>tempérée</h3></div>
+      <div class="item"><img class="gif" src="sprites/7.gif"><img class="still" src="sprites/7.png"><h3>Thermostat</h3><p>Le déplacement de la production de chauffage hors des pièces de vie éloigne alors le contrôle sur la température.<br>
+      <br>Le thermostat, tel qu’il est inventé à la fin du XIXe siècle, ne redonne pas seulement la possibilité de régler la température du foyer de manière centrale, il permet surtout de le faire passivement, sans interaction avec l’habitant.</p></div>
+      <div class="item"><img class="gif" src="sprites/6.gif"><img class="still" src="sprites/6.png"><h3>Fourneau</h3><p>Pour l’immense majorité des foyers, la plus grande salle du logement est la salle à manger ou salle commune. Rarement séparée de la cuisine, elle profite de la chaleur des installations et permet à l’ensemble du ménage de se retrouver, de la préparation à la consommation du repas.<br>
+      <br>À la fois cuisinière, radiateur et bouillotte, le fourneau enferme le feu permettant, au contraire de la cheminée, de l’installer dans les logis monopièces.</p></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"><img class="gif" src="sprites/8.gif"><img class="still" src="sprites/8.png"><h3>Tableau</h3><p>Délaissant la fresque antique ou la tapisserie médiévale, le salon bourgeois privilégie le tableau que l’on peut aisément déplacer selon que l’on déménage ou que l’on change son mobilier.<br>
+      <br>La mobilité du tableau, qui est aussi plus facilement vendable lors des salons, entraîne l’apparition des collectionneurs, qui les exposent alors fièrement dans des <i>cabinets</i>.</p></div>
+      <div class="item"><img class="gif" src="sprites/9.gif"><img class="still" src="sprites/9.png"><h3>Bibelots</h3><p>Rapportant un certain exotisme dans les intérieurs bourgeois, le bibelot vient de l’ailleurs ou du passé, de l’Orient ou de la Renaissance.<br>Les intérieurs bourgeois du XIXe siècles deviennent le lieu des <i>collections</i> dont la gratuité du geste s’associe avec l’application de la collecte.<br>
+      <br>Par sa totale inutilité, le bibelot est resté, de nos jours, l’objet de pure définition du goût de l’occupant des lieux.</p></div>
+      <div class="item"><h3>la pièce de<br>représentation</h3></div>
+      <div class="item"><img class="gif" src="sprites/10.gif"><img class="still" src="sprites/10.png"><h3>Photos de famille</h3><p>La démocratisation de la photographie, au tournant du XXe siècle, la fait entrer dans les foyers, et spécifiquement dans les salles communes.<br>
+      <br>Dans les années 1880 deviennent aussi populaires les photos de la famille réunie devant la maison, souvent avec ses plus belles possessions sorties et exposées devant l’objectif. C’est la maison elle-même et ses objets que l’on peut alors admirer aux murs du salon.</p></div>
+      <div class="item"><img class="gif" src="sprites/11.gif"><img class="still" src="sprites/11.png"><h3>Cendrier</h3><p>Si l’ensemble de la société du XIX° siècle pratique <i>la fume</i>, le type de tabac consommé en dit long sur le rang du fumeur. Alors que les classes inférieures s’allument des <i>brûle-gueules</i>, la bourgeoisie tire sur la pipe et protège ses doigts.<br>
+      <br>Architecturalement aussi, la mise à distance est un luxe réservé aux familles riches qui cantonnent le tabac au fumoir, un petit salon que l’on drape de velours pour y emprisonner les odeurs.</p></div>
+      <div class="item"><img class="gif" src="sprites/12.gif"><img class="still" src="sprites/12.png"><h3>Coffee table book</h3><p>La tradition des livres conçus pour être laissés en évidence et non nécessairement lus remonte peut être aux origines de l’édition.<br>
+      Montaigne se plaignait déjà au XVI° siècle que ses Essais <i>« servent les dames de meuble commun seulement et de meuble de salle »</i>.</p></div>
+      <div class="item"><img class="gif" src="sprites/13.gif"><img class="still" src="sprites/13.png"><h3>Desserte</h3><p>Développée au XVIIIe siècle, la desserte permet de se passer des domestiques lors du service, pour des raisons financières ou pour écarter les indiscrets.<br>
+      <br>
+      Sa montée en popularité traduit aussi le passage du service <i>à la française</i>, où tous les plats sont présents sur la grande table ou sur un buffet et partagés ensuite, au service <i>à la russe</i>, qui amène à table des assiettes déjà remplies de portions individuelles.</p></div>
+      <div class="item"><h3>la pièce<br>pour manger</h3></div>
+      <div class="item"><img class="gif" src="sprites/14.gif"><img class="still" src="sprites/14.png"><h3>Table à manger</h3><p>Avoir un meuble fixe réservé aux repas est une rareté jusqu’au XVIIIe siècle, y compris dans les classes supérieures. On a plutôt l’habitude de monter un plateau sur des tréteaux à l’heure du dîner, d’où l’expression <i>dresser la table.</i><br>
+      <br>Lors de grandes fêtes dans les habitats ruraux, il est même courant de dégonder la porte de la grange pour cela, augmentant ainsi la capacité d’accueil tout en envoyant un signal fort d’hospitalité.</p></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/15.gif"><img class="still" src="sprites/15.png"><h3>Vitrine</h3><p>Qu’il s’agisse d’argentiers, de vaisseliers ou de bibliothèques, le XVIIIe siècle voit apparaître les meubles-vitrines qui mettent en avant, au lieu de cacher, ce qu’ils renferment.<br>
+      <br>Derrière une façade vitrée ou grillagée, les objets sont présentés aux visiteurs, parfois même montés sur de petits présentoirs et par la suite éclairés spécifiquement.</p></div>
+      <div class="item"><img class="gif" src="sprites/16.gif"><img class="still" src="sprites/16.png"><h3>Billard</h3><p>Vers la fin du XVIII° les hommes de la bourgeoisie française se prennent de passion pour le billard anglais. Il est particulièrement bien vu d'en posséder un ; les familles les plus aisées y consacrent même une pièce entière, appellée logiquement <i>salon du billard</i>.<br>
+      <br>Il parait alors tout à fait naturel, pour les philanthropes à l’origine des premiers HBM, d’intégrer des billards collectifs parmi les services disponibles au rez-de-chaussée, au même titre que les laveries ou les crèches.</p></div>
+      <div class="item"><img class="gif" src="sprites/17.gif"><img class="still" src="sprites/17.png"><h3>Portemanteau</h3><p>Le mot <i>portemanteau</i> fait son entrée au dictionnaire de l’Académie Française en 1798 presque simultanément avec la naissance de Michael Thonet qui sera le premier à décrocher du mur la patère pour en faire un véritable meuble autostable en bois courbé.<br>
+      <br>Aussi surnommé <i>perroquet</i> le portemanteau trouve autant sa place dans les salons mondains que dans les bistrots, dont Thonet dessinera d’ailleurs la <i>chaise n°14</i>, encore emblématique des terrasses parisiennes.</p></div>
+      <div class="item"><h3>la pièce de<br>réception</h3></div>
+      <div class="item"><img class="gif" src="sprites/18.gif"><img class="still" src="sprites/18.png"><h3>Sapin de Noël</h3><p>Puisqu’il est le lieu de la réception, le séjour est la pièce de la fête et donc du passage du temps calendaire. Sapin de Noël, menorah, guirlandes de l’Aïd... le séjour se pare de divers décors au fil de l’année et révèle ainsi le temps qui passe.<br>
+      <br>A l’exception peut-être de la chambre qui troque les couettes pour les draps aux beaux jours, le salon est la seule pièce du logement qui change au cours de l’année.</p></div>
+      <div class="item"><img class="gif" src="sprites/19.gif"><img class="still" src="sprites/19.png"><h3>Piquet de grève</h3><p>Le lieu de la sociabilisation et de l’auto-définition peut aussi être le lieu de travail où l’on passe après tout la majeur partie de notre vie à condition d’y retrouver son agentivité.<br>
+      <br>Des occupations d’usines opéraïstes, aux grèves de mai 68, les témoignages d’ouvriers et d’ouvrières ne manquent pas pour révéler le potentiel social de l’usine quand elle est gouvernée par les travailleurs. Preuve supplémentaire que le salon se définit moins spatialement que socialement.</p></div>
+      <div class="item"><img class="gif" src="sprites/20.gif"><img class="still" src="sprites/20.png"><h3>Café</h3><p>L’absence de salon dans les logements populaires des XVIIIe et XIXe siècle ne doit pas laisser croire que les classes laborieuses n’ont pas de vie sociale. Seulement, elle se passe en majorité à l’extérieur du logement.<br>
+      <br>Ainsi, lors des jours de repos on se donne rendez-vous au café, en famille comme entre amis. Les débits de boisson et les restaurants sont les véritables salons ouvriers où l’on rencontre du monde, on écoute de la musique et on dine.</p></div>
+      <div class="item"><h2>la salle commune populaire</h2></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"><h2>le salon bourgeois</h2></div>
+      <div class="item"><img class="gif" src="sprites/21.gif"><img class="still" src="sprites/21.png"><h3>Piano</h3><p>C’est uniquement au XIXe siècle que le piano fait réellement son entrée dans le logement des familles bourgeoises où il joue un rôle important dans l’éducation des enfants.<br>
+      <br>L’invention du piano droit dans la second moitié du siècle facilite son installation dans le séjour là où le piano à queue nécessitait presque une pièce à soi.<br>Ainsi, les annonces pour hôtels garnis précisaient souvent la présence d’un piano comme argument de vente.</p></div>
+      <div class="item"><h3>la pièce du<br>divertissement</h3></div>
+      <div class="item"><img class="gif" src="sprites/22.gif"><img class="still" src="sprites/22.png"><h3>Système son</h3><p>C’est au tournant du XXe siècle que les foyers français s’équipent du premier appareil domestique de diffusion musicale : le gramophone à disques. Très vite il est associés aux premières radios. Les postes TSF et les premiers tourne-disques sont alors volumineux et souvent intégrés dans un véritable meuble en bois qui fait aussi office de décoration.<br>
+      Le développement des chaines hifi, alliant radiophonie, lecteurs vinyles puis cassette et CD participent à la sonorisation du séjour.</p></div>
+      <div class="item"><img class="gif" src="sprites/23.gif"><img class="still" src="sprites/23.png"><h3>Télévision</h3><p>En 1960, 24 ans après la première diffusion d’une émission, seulement 13% des foyers français sont équipés d’un poste de télévision, ce ne sera qu’en 1967, simultanément à la télévision en couleur que l’on atteindra les 60%. La télé devient alors l’élément central du séjour, autour duquel on dispose les fauteuils et le canapé.<br>
+      <br>Dans les années 70 on contrôle désormais le flux d’image depuis ce dernier avec l’invention de la télécommande et la pratique du zapping l’accompagnant.</p></div>
+      <div class="item"><img class="gif" src="sprites/24.gif"><img class="still" src="sprites/24.png"><h3>Télécommunications</h3><p>Le téléphone personnel à domicile ne se diffuse réellement qu’après la seconde guerre mondiale aux Etats-Unis et seulement dans les années 1970 en France avec le <i>Plan de rattrapage téléphonique</i>.<br>
+      <br>Au début installé dans l’entrée ou la cuisine, l’apparition du téléphone sans fil le fait finalement prendre sa place dans le salon où se concentre la majorité de l’électronique.</p></div>
+      <div class="item"><h3>la pièce hors<br>du logement</h3></div>
+      <div class="item"><img class="gif" src="sprites/25.gif"><img class="still" src="sprites/25.png"><h3>Maison de quartier</h3><p>Dans le même objectif de propagation des bonnes mœurs qui amène les bourgeois philanthropes à créer les offices HBM, les maisons des jeunes et autres maisons de quartier fleurissent au début du XXe siècle.<br>
+      <br>Ces espaces sont un peu le pendant populaire des <i>clubs</i>, espaces de sociabilisation auxquels n’ont accès que les classes supérieures. Dans les deux cas, on retrouve une transposition du mobilier du salon, créant ainsi des espaces domestiques mais publics.</p></div>
+      <div class="item"><img class="gif" src="sprites/26.gif"><img class="still" src="sprites/26.png"><h3>Espaces communs</h3><p>Quand les promoteurs philantropes se saisissent de la question du logement digne au début du XIXe siècle, ils mutualisent les espaces de service et de réception au rez-de-chaussée des nouvelles <i>Habitation à Bon Marché</i>.<br>
+      <br>Les logements privés sont réduits à des chambres et de véritables salons, salles de billards et fumoirs collectifs sont construits en pied d’immeuble aux côtés de laveries et parfois même de garderies.</p></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/27.gif"><img class="still" src="sprites/27.png"><h3>Horloge</h3><p>Si le suivi du temps à domicile est possible depuis le XVIe siècle grâce aux <i>comtoises</i>, c’est réellement le développement des pendules de cheminée, ou pendules de Paris qui fera entrer l’horloge dans le logement.<br>
+      <br>Miniaturisées et produites en série grâce aux avancées dans les fonderies et horlogeries, ces pendules préfigurent les premiers objets techniques que l’on expose fièrement sur la cheminée, autant pour leur utilité que pour leur attrait décoratif et novateur.</p></div>
+      <div class="item"><img class="gif" src="sprites/28.gif"><img class="still" src="sprites/28.png"><h3>Fauteuil</h3><p>Bergère, cabriolet, marquise... le fauteuil a connu bien des variantes sous l’Ancien Régime. Si, à son apparition à la cour au XVIe siècle, le type de siège renseigne sur le rang du séant via une hiérarchie allant du fauteuil au tabouret, le fauteuil dans le logement dévoile la capacité de l’hôte à suivre les modes qui se succèdent.<br>
+      Il n’est donc pas surprenant que le fauteuil fut régulièrement ressaisi par les designers modernes des Eames à Mies en passant par le Bauhaus.</p></div>
+      <div class="item"><img class="gif" src="sprites/29.gif"><img class="still" src="sprites/29.png"><h3>Canapé</h3><p>Bien qu’on puisse lui trouver un air de famille avec le <i>klinai</i>, ou divan antique, le canapé des salons européens est avant tout une version plus confortable du traditionnel banc en bois.<br>
+      <br>Comme le fauteuil, il a connu mille variations sous le ciseau des ébenistes, mais c’est bien sûr l’apparition de la TV qui en fit la pièce maîtresse de l’aménagement des séjours.</p></div>
+      <div class="item"><img class="gif" src="sprites/30.gif"><img class="still" src="sprites/30.png"><h3>Meuble design</h3><p>Grande pièce, aux usages multiples et non-déterminés, le salon devient le showroom de <i>statement pieces</i>, une nouvelle pratique du design moderne qui fait le pont entre expérimentation artistique et production sérielle.<br>
+      <br>Ainsi, le <i>Pratone</i> de Strum, le <i>Mae West Lips</i> de Dali ou les pierres coulées dans la dalle de la <i>Fallingwater</i> de Wright sont autant d’étapes supplémentaires dans la réinterrogation du sofa.</p></div>
+      <div class="item"><h3>la pièce<br>à meubler</h3></div>
+      <div class="item"><img class="gif" src="sprites/31.gif"><img class="still" src="sprites/31.png"><h3>Canapé-lit</h3><p><i>Clic-clac, BZ, convertible</i>, sous toutes ses formes le canapé-lit prolonge le rôle de la banquette qui offrait un couchage d’appoint dans la salle collective.<br>
+      <br>Que ce soit car la famille est nombreuse, ou car le logement est petit, le séjour accueille les corps surnuméraires qui n’ont pas de chambre attitrée.</p></div>
+      <div class="item"></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/32.gif"><img class="still" src="sprites/32.png"><h3>Enfilade</h3><p>Salle de vie et de réception, parfois <i>boudoir</i> parfois <i>antichambre</i>, le salon est particulièrement adapté au système haussmannien de l’enfilade en façade.<br>
+      <br>Le dessin unique des baies donnant sur la rue invite les familles les plus aisées à spécifier les diverses pièces qui se succèdent dans une unique perspective linéaire. On passe du petit au grand salon, ou du salon égyptien au salon chinois selon le thème du papier-peint.<br>Dès son apparition, le salon est aussi une pièce que l’on traverse.</p></div>
+      <div class="item"><img class="gif" src="sprites/33.gif"><img class="still" src="sprites/33.png"><h3>Paravent</h3><p>Le paravent apparait dans les grands salons du XVIIIe siècle pour rediviser l’espace social et permettre les discussions discrètes. Il sert aussi de mitigeur thermique, en coupant les courants d’air, ou en protégeant les convives et leurs manteaux du feu de la cheminée.<br>
+      <br>Redécouvert par les modernistes, le paravent devient dans le <i>living-room</i> une alternative à la cloison rigide. Régulièrement associé au tapis, il permet de recréer des sous-espaces dans le plan libre du séjour.</p></div>
+      <div class="item"><h3>la pièce<br>redivisable</h3></div>
+      <div class="item"><img class="gif" src="sprites/34.gif"><img class="still" src="sprites/34.png"><h3>Tapis</h3><p>La mécanisation de la fabrication du tapis au XIXe siècle lui permet de remplacer la natte et la toile de jutte qui couvraient alors les sols tandis que simultanément, le développement du chauffage permet de remplacer les tapisseries murales par de simples papiers-peints.<br>
+      <br>Le tapis est alors intimement lié à l’Afrique et l’Orient pour la population européenne qui assiste régulièrement à de grandes expositions coloniales qui diffusent un goût certain pour l’exotisme.</p></div>
+      <div class="item"><img class="gif" src="sprites/35.gif"><img class="still" src="sprites/35.png"><h3>Cloison coulissante</h3><p>Passe-plat, rideau, bar américain ou cloison coulissante, la salle à manger ne peut être entièrement coupée de la cuisine, ou du salon.<br>
+      <br>L’ouverture en grand des portes appelle les invités à venir à table quand leur clôture met en scène la préparation du repas comme un rituel secret réservé aux hôtes.</p></div>
+      <div class="item"><img class="gif" src="sprites/36.gif"><img class="still" src="sprites/36.png"><h3>Double hauteur</h3><p>Si aucun plan type n’a traversé l’histoire architecturale du salon, une constante semble être l’importance donnée à sa hauteur sous plafond. Du <i>hall</i> anglais aux appartements de <i>Nemausus</i>, en passant par la <i>Cité Radieuse</i>, le séjour est systématiquement la salle de la double hauteur dans le logement.<br>
+      <br>Le décloisonnement des escaliers suite à l’abandon de la construction en pierre fait du séjour en double hauteur la rotule du logement sur plusieurs niveaux.</p></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/37.gif"><img class="still" src="sprites/37.png"><h3>Bureau</h3><p>On peut trouver dans les règlements de copropriété une <i>clause d’habitation bourgeoise</i> interdisant aux propriétaires d’exercer une activité commerciale au sein de leurs foyers.<br>
+      <br>Il n’est pas anecdotique que dans le cas d’une clause simple les professions dites <i>libérales</i> (médecin, avocat, architectes) ne soient pas concernés par cette interdiction. En effet, on trouve dans la plupart des logements bourgeois du XVIIIe siècle un <i>office</i>, sorte de petit salon d’où travaille le maître de maison.</p></div>
+      <div class="item"><img class="gif" src="sprites/38.gif"><img class="still" src="sprites/38.png"><h3>Télétravail</h3><p>Le télétravail est devenu une pratique courante pour 22% des salariés du privé qui le pratiquent au moins une fois par mois. Travailler depuis chez soi implique alors de réinventer son espace de vie. L’installation d’un véritable home office ou simplement de son ordinateur portable sur la table à manger devient aussi un signe de position sociale.<br>
+      Ainsi si 2 cadres sur 3 pratiquent le <i>remote</i>, c’est seulement 1 employé sur 10 qui peut travailler de chez soi.</p></div>
+      <div class="item"><h3>la pièce<br>du travail</h3></div>
+      <div class="item"><img class="gif" src="sprites/39.gif"><img class="still" src="sprites/39.png"><h3>Planche à repasser</h3><p>Le repassage à domicile est rendu possible au XIXe siècle par le développement du fer plat en fonte qui étaient chauffés directement sur le feu de la cuisinière.<br>
+      <br>On doit la planche à repasser pliable et fuselée à Sarah Boone, ancienne esclave et première femme noire à posséder un brevet pour cette invention.<br>L’électrification du fer et surtout l’apparition de la télévision déplace le repassage dans le séjour qui peut alors se faire rapidement et en famille.</p></div>
+      <div class="item"><img class="gif" src="sprites/40.gif"><img class="still" src="sprites/40.png"><h3>Atelier</h3><p>Pour les classes laborieuses en premier lieu, le logement peut être un lieu de travail. Ainsi à Lyon, les <i>canuts</i> sont restés célèbres pour l’installation de leur métiers à tisser au sein même de leurs habitations.<br>
+      <br>Le logement s’organisait alors souvent en duplex, avec les chambres en mezzanine donnant sur l’espace de travail et sous elles la cuisine et les pièces d’eau.
+</p></div>
+      <div class="item"><h2>l'espace commun contemporain</h2></div>
+      <div class="item"></div>
+    </div>
+
+    <br><br><br><br><br>
+
+    <div class="item_row">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"><img class="gif" src="sprites/41.gif"><img class="still" src="sprites/41.png"><h3>Internet</h3><p>On peut finalement s’interroger sur la nécessaire physicalité du séjour. Puisqu’il s’agit d’une pièce qui au fil de son histoire s’est retrouvée dans et hors du logement, qui a pris mille et une formes, qui sert autant à recevoir les autres qu’à affirmer sa propre identité, le salon n’a-t-il pas atteint sa forme ultime en se dématérialisant ?<br>
+      <br>Les <i>forums</i> et <i>salons</i> de discussion en ligne ou les réseaux sociaux sont peut-être les nouveaux lieux du collectif auxquels on accède pourtant depuis le confort de notre intérieur.</p></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+

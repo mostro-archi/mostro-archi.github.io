@@ -98,6 +98,8 @@ const cursorImg = cursor.querySelector("img");
 const cursor2 = document.getElementById("cursor2");
 const cursor2Img = cursor2.querySelector("img");
 
+const cursorSound = new Audio("cursor.mp3");
+
 let previousX = 0;
 let cursorDirection = 1;
 
@@ -167,6 +169,9 @@ specials.forEach((special) => {
   // CLIC
 
   special.addEventListener("mousedown", () => {
+
+    cursorSound.currentTime = 0;
+    cursorSound.play();
 
     clearTimeout(cursor2Timeout);
 

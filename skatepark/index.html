@@ -10,6 +10,20 @@
 
 <body>
 
+  <style>
+    img#special:hover{
+      cursor:none;
+    }
+    
+    #cursor {
+      position: fixed;
+      pointer-events: none;
+      display: none;
+      z-index: 9999;
+      transform-origin: center center;
+    }
+  </style>
+
 <header>
 <div><a href="../index"><h1>mostro</h1></a></div>
 <div class="box"></div>
@@ -19,6 +33,9 @@
 </header>
 
 <div class="holder">
+  <div id="cursor">
+    <img src="cursor.png">
+  </div>
 
 <div class="multi-column" id="agence">
 
@@ -40,7 +57,7 @@ L'analyse des besoins du programme et du gisement de m² à disposition ainsi qu
     <p></p>
     <img class="image" src="2.png" title="perspective extérieure">
     <p></p>
-    <img class="image" src="3.png" title="plan du batiment réhabilité">
+    <img class="image" id="special" src="3.png" title="plan du batiment réhabilité">
   </div>
 
   <div class="column">
@@ -54,6 +71,164 @@ En se saisissant du gisement d’espace désaffecté existant, le projet assure 
 
 
 </div>
+
+
+<script>
+const special = document.getElementById("special");
+const cursor = document.getElementById("cursor");
+const cursorImg = cursor.querySelector("img");
+
+let previousX = 0;
+let previousY = 0;
+
+let targetRotation = 0;
+let currentRotation = 0;
+
+let cursorScale = 1;
+let targetScale = 1;
+
+let animationFrame = null;
+
+// ENTRÉE SUR L'IMAGE
+
+special.addEventListener("mouseenter", (event) => {
+
+  cursor.style.display = "block";
+
+  previousX = event.clientX;
+  previousY = event.clientY;
+
+  cursor.style.left = event.clientX + "px";
+  cursor.style.top = event.clientY + "px";
+
+  updateCursorScale();
+
+  if (!animationFrame) {
+    animateCursor();
+  }
+});
+
+// MOUVEMENT DE LA SOURIS
+
+special.addEventListener("mousemove", (event) => {
+
+  const x = event.clientX;
+  const y = event.clientY;
+
+  const dx = x - previousX;
+  const dy = y - previousY;
+
+  if (dx !== 0 || dy !== 0) {
+
+    targetRotation =
+      Math.atan2(dy, dx) * 180 / Math.PI;
+  }
+
+  cursor.style.left = x + "px";
+  cursor.style.top = y + "px";
+
+  previousX = x;
+  previousY = y;
+});
+
+// CLIC
+
+special.addEventListener("mousedown", () => {
+
+  // Grossissement jusqu'à 200 %
+  targetScale = 2;
+
+  // Retour à la taille normale après 150 ms
+  setTimeout(() => {
+    targetScale = 1;
+  }, 150);
+});
+
+// SORTIE DE L'IMAGE
+
+special.addEventListener("mouseleave", () => {
+
+  cursor.style.display = "none";
+
+  if (animationFrame) {
+    cancelAnimationFrame(animationFrame);
+    animationFrame = null;
+  }
+});
+
+// ANIMATION DU CURSEUR
+
+function animateCursor() {
+
+  // Plus la valeur est petite,
+  // plus le mouvement est fluide et inertiel.
+
+  const rotationSmoothing = 0.10;
+  const scaleSmoothing = 0.12;
+
+  // ROTATION
+
+  let difference =
+    targetRotation - currentRotation;
+
+  // Évite les rotations de 360° inutiles
+  if (difference > 180) {
+    difference -= 360;
+  }
+
+  if (difference < -180) {
+    difference += 360;
+  }
+
+  currentRotation +=
+    difference * rotationSmoothing;
+
+  // ÉCHELLE
+
+  cursorScale +=
+    (targetScale - cursorScale) * scaleSmoothing;
+
+  // APPLICATION
+
+
+  cursor.style.transform =
+    `translate(-50%, -50%)
+     rotate(${currentRotation}deg)
+     scale(${cursorScale})`;
+
+  animationFrame =
+    requestAnimationFrame(animateCursor);
+}
+
+// ÉCHELLE DU CURSEUR PAR RAPPORT À #SPECIAL
+
+function updateCursorScale() {
+
+  // Taille originale du PNG de #special
+  const naturalWidth =
+    special.naturalWidth;
+
+  // Taille réellement affichée à l'écran
+  const displayedWidth =
+    special.getBoundingClientRect().width;
+
+  // Ratio entre taille affichée et taille originale
+  const scale =
+    displayedWidth / naturalWidth;
+
+  // Application du même ratio au curseur
+  cursorImg.style.width =
+    (cursorImg.naturalWidth * scale) + "px";
+}
+
+// REDIMENSIONNEMENT DE LA FENÊTRE
+
+window.addEventListener(
+  "resize",
+  updateCursorScale
+);
+
+</script>
 
 
 

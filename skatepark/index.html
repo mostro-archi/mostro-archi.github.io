@@ -78,6 +78,8 @@ const special = document.getElementById("special");
 const cursor = document.getElementById("cursor");
 const cursorImg = cursor.querySelector("img");
 
+const cursorSound = new Audio("cursor.mp3");
+
 let previousX = 0;
 let previousY = 0;
 
@@ -135,13 +137,16 @@ special.addEventListener("mousemove", (event) => {
 
 special.addEventListener("mousedown", () => {
 
+  cursorSound.currentTime = 0;
+  cursorSound.play();
+
   // Grossissement jusqu'à 200 %
   targetScale = 2;
 
   // Retour à la taille normale après 150 ms
   setTimeout(() => {
     targetScale = 1;
-  }, 150);
+  }, 250);
 });
 
 // SORTIE DE L'IMAGE

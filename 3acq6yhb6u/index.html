@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet"/>
+
+  <style>
+
+    #admin {
+      width: 100%;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    #drawings-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .admin-drawing {
+      width: 220px;
+      box-sizing: border-box;
+      border : 2px black solid;
+      padding : 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: white;
+      box-shadow: 5px 5px 5px 5px rgb(0,0,0,0.5);
+    }
+
+    .admin-preview {
+      width: 204px;
+      height: 204px;
+      background: whitesmoke;
+      box-sizing: border-box;
+    }
+
+    .admin-preview canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .admin-info {
+      margin-top: 8px;
+      font-family: syne;
+      font-size: 12px;
+      word-break: break-all;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .admin-text {
+      margin-top: 0;
+      padding:4px;
+      font-family: syne;
+      font-size: 14px;
+      word-break: break-word;
+      font-style: normal;
+      background-color: whitesmoke;
+    }
+
+    .delete-button {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    #empty-message {
+      display: none;
+      margin-top: 30px;
+    }
+
+    button {
+      display: block;
+      padding: 3px 4px;
+      background: white;
+      border: none;
+      text-align: left;
+      font-family: syne;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: black;
+      color: white;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+
+<div class="holder">
+
+  <main id="admin">
+
+    <h2 style="font-family: 'Courier New', Courier, monospace;">This is not for you</h2>
+    <br>
+    <p style="font-size: 14px;">Ceci est le panneau de contrôle pour la page atlas du site. Il nous permet de supprimer des images postées si celles-ci sont inadaptées.<br>
+      Si vous êtes tombé·e sur cette page par erreur, merci de la refermer et de ne pas effacer le travail des autres. Merci.</p>
+
+    <div id="drawings-list"></div>
+
+    <p id="empty-message">aucun dessin publié</p>
+
+    <!-- ELEMENT PLAYHTML PARTAGE
+      Il doit avoir exactement le même id que
+      l'élément can-play de la page publique.-->
+    <div id="participatif" can-play style="display:none;"></div>
+
+  </main>
+
+</div>
+
+<script type="module">
+
+  import {
+    playhtml
+  }
+  from "https://unpkg.com/playhtml";
+
+  /* PLAYHTML */
+
+  const admin =
+    playhtml.register(
+      "participatif",
+      {
+        /* Même structure de données que sur la page publique. */
+        defaultData: {
+          drawings: []
+        },
+
+        /* Chaque changement de data.drawings met à jour l'interface admin. */
+        updateElement: ({
+          element,
+          data
+        }) => {
+          renderDrawings(
+            data.drawings
+          );
+        }
+      }
+    );
+
+  /* INITIALISATION */
+
+  await playhtml.init({
+    /*  Cette room doit être exactement la même que celle utilisée par /atlas/index.html */
+    room: "mostro-sejour"
+  });
+
+  /* Pour vérifier dans la console que les deux pages sont bien connectées à la même room : */
+  console.log(
+    "PlayHTML room :",
+    playhtml.roomId
+  );
+
+  /* RENDU DE LA LISTE */
+
+  function renderDrawings(
+    drawings
+  ) {
+
+    const list =
+      document.getElementById(
+        "drawings-list"
+      );
+
+    const emptyMessage =
+      document.getElementById(
+        "empty-message"
+      );
+
+    list.innerHTML = "";
+
+    /* Si aucun dessin */
+
+    if (
+      drawings.length === 0
+    ) {
+      emptyMessage.style.display = "block";
+      return;
+    }
+
+    emptyMessage.style.display =
+      "none";
+
+    /* Affichage des dessins */
+
+    drawings.forEach(
+      drawingData => {
+
+        createAdminDrawing(
+          list,
+          drawingData
+        );
+      }
+    );
+  }
+
+  /* CREATION D'UNE CARTE */
+
+  function createAdminDrawing(
+  container,
+  drawingData
+) {
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+  card.className = "admin-drawing";
+
+  /* APERCU */
+
+  const preview =
+    document.createElement(
+      "div"
+    );
+
+  preview.className = "admin-preview";
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+  canvas.width = 600;
+  canvas.height = 300;
+
+  const ctx =
+    canvas.getContext(
+      "2d"
+    );
+
+  const image =
+    new Image();
+
+  image.onload = () => {
+
+    ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.drawImage(
+      image,
+      0,
+      0
+    );
+  };
+
+  image.src =
+    drawingData.image;
+
+  preview.appendChild(
+    canvas
+  );
+
+  /* TEXTE */
+
+  const text =
+    document.createElement(
+      "p"
+    );
+
+  text.className = "admin-text";
+
+  text.textContent = drawingData.text || "";
+
+  /* INFORMATIONS */
+
+  const info =
+    document.createElement(
+      "div"
+    );
+
+  info.className = "admin-info";
+
+  const createdDate =
+    drawingData.createdAt
+      ? new Date(
+          drawingData.createdAt
+        ).toLocaleString(
+          "fr-FR"
+        )
+      : "date inconnue";
+
+  info.innerHTML = `
+    id : ${drawingData.id}<br>
+    date : ${createdDate}<br>
+    x : ${drawingData.x}<br>
+    y : ${drawingData.y}<br>
+    z-index : ${drawingData.zIndex || 0}
+  `;
+
+  /* DELETE */
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+  deleteButton.className = "delete-button";
+
+  deleteButton.type = "button";
+
+  deleteButton.textContent = "supprimer";
+
+  deleteButton.addEventListener(
+    "click",
+    () => {
+
+      const confirmed =
+        window.confirm(
+          "Supprimer pour tout le monde ?"
+        );
+
+      if (!confirmed) return;
+
+      deleteDrawing(
+        drawingData.id
+      );
+    }
+  );
+
+  /* ASSEMBLAGE */
+
+  card.appendChild(
+    preview
+  );
+
+  /* Le texte est affiché sous l'aperçu du dessin. */
+
+  if (
+    drawingData.text &&
+    drawingData.text.trim() !== ""
+  ) {
+
+    card.appendChild(
+      text
+    );
+  }
+
+  card.appendChild(
+    info
+  );
+
+  card.appendChild(
+    deleteButton
+  );
+
+  container.appendChild(
+    card
+  );
+}
+
+  /* SUPPRESSION */
+
+  function deleteDrawing(
+    drawingId
+  ) {
+
+    admin.setData(
+      data => {
+
+        const index =
+          data.drawings.findIndex(
+            drawing =>
+              drawing.id === drawingId
+          );
+
+        if (
+          index === -1
+        ) return;
+
+        /* Suppression de l'élément dans l'état partagé. */
+
+        data.drawings.splice(
+          index,
+          1
+        );
+
+      }
+    );
+  }
+
+</script>
+
+</body>
+
+</html>

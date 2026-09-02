@@ -10,6 +10,24 @@
 
 <body>
 
+  <style>
+    img.special:hover{
+      cursor:none;
+    }
+    
+    #cursor, #cursor2 {
+      position: fixed;
+      pointer-events: none;
+      display: none;
+      z-index: 9999;
+    }
+
+    #cursor img, #cursor2 img { 
+      display: block;
+      transform-origin: bottom left;
+    }
+  </style>
+
 <header>
 <div><a href="../index"><h1>mostro</h1></a></div>
 <div class="box"></div>
@@ -19,6 +37,8 @@
 </header>
 
 <div class="holder">
+  <div id="cursor"><img src="cursor.png"></div>
+  <div id="cursor2"><img src="cursor2.png"></div>
 
 <div class="multi-column" id="agence">
 
@@ -51,20 +71,280 @@
   <div class="column">
     <img class="image" src="masse.png" title="plan masse">
     <p></p>
-    <img class="image" src="axo_ecuries.png" title="axonométrie des écuries">
+    <img class="image special" src="axo_ecuries.png" title="axonométrie des écuries">
     <p>Les écuries s’organisent donc en 5 groupes rassemblant entre 16 et 42 boxes chacun (190 au total). Larges de 26m (en comptant les débords de toiture) ils encadrent la route actuelle sur l’axe nord-est / sud-ouest et s’interrompent au niveau du cheminement perpendiculaire pour créer comme un système de cardo et decumanus qui ordonne la clairière.</p>
-    <img class="image" src="ecuries.png" title="plan et coupes des écuries">
+    <img class="image special" src="ecuries_coupe.png" title="coupe des écuries">
+    <img class="image" src="ecuries_plan.png" title="plan des écuries">
     <p></p>
-    <img class="image" src="axo_salle.png" title="axonométrie de la salle de réception">
+    <img class="image special" src="axo_salle.png" title="axonométrie de la salle de réception">
     <p>La salle de réception s’implante sur le merlon surplombant la carrière du Prince Albert afin d’offrir une vue dégagée sur les compétition y prenant place. La salle prend la forme d'un bâtiment allongé et  fin de sorte à rendre traversante la salle de réception et donc d’ouvrir des vues sur la pinède à travers l’édifice.<br> Cette finesse permet de déployer deux terrasse longitudinale de chaque côté, couverte par des débords de toitures qui protège de la pluie comme des rayons tombants de soleil du matin comme du soir.</p>
-    <img class="image" src="plan_salle.png" title="plan et coupes des écuries">
+    <img class="image special" src="coupes_salle.png" title="coupes de la salle de réception">
     <p></p>
-    <img class="image" src="coupes_salle.png" title="plan et coupes des écuries">
+    <img class="image" src="plan_salle.png" title="plan de la salle de réception">
+    
+    
   </div>
 </div>
 
 </div>
 
+<script>
+
+const specials = document.querySelectorAll(".special");
+
+const cursor = document.getElementById("cursor");
+const cursorImg = cursor.querySelector("img");
+
+const cursor2 = document.getElementById("cursor2");
+const cursor2Img = cursor2.querySelector("img");
+
+let previousX = 0;
+let cursorDirection = 1;
+
+let cursor2Scale = 1;
+let targetCursor2Scale = 1;
+
+let animationFrame = null;
+let cursor2AnimationFrame = null;
+let cursor2Timeout = null;
+
+// ENTRÉE SUR UNE IMAGE
+
+specials.forEach((special) => {
+
+  special.addEventListener("mouseenter", (event) => {
+
+    cursor.style.display = "block";
+    cursor2.style.display = "none";
+
+    previousX = event.clientX;
+
+    cursor.style.left = event.clientX + "px";
+    cursor.style.top = event.clientY + "px";
+
+    cursor2.style.left = event.clientX + "px";
+    cursor2.style.top = event.clientY + "px";
+
+    cursorDirection = 1;
+
+    updateCursorTransform();
+    updateCursorScale(special);
+
+    if (!animationFrame) {
+      animateCursor();
+    }
+
+  });
+
+
+  // MOUVEMENT DE LA SOURIS
+
+  special.addEventListener("mousemove", (event) => {
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    if (x < previousX) {
+      cursorDirection = -1;
+    } else if (x > previousX) {
+      cursorDirection = 1;
+    }
+
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+
+    cursor2.style.left = x + "px";
+    cursor2.style.top = y + "px";
+
+    if (cursor2.style.display !== "block") {
+      updateCursorTransform();
+    }
+
+    previousX = x;
+
+  });
+
+  // CLIC
+
+  special.addEventListener("mousedown", () => {
+
+    clearTimeout(cursor2Timeout);
+
+    if (cursor2AnimationFrame) {
+      cancelAnimationFrame(cursor2AnimationFrame);
+      cursor2AnimationFrame = null;
+    }
+
+    cursor.style.display = "none";
+    cursor2.style.display = "block";
+
+    cursor2.style.left = cursor.style.left;
+    cursor2.style.top = cursor.style.top;
+
+    const clickDirection = cursorDirection;
+
+    cursor2Scale = 1;
+    targetCursor2Scale = 1.25;
+
+    // GROSSISSEMENT
+
+    animateCursor2Scale(clickDirection);
+
+    // RETOUR À LA TAILLE NORMALE
+
+    setTimeout(() => {
+
+      targetCursor2Scale = 1;
+
+    }, 150);
+
+    // RETOUR À CURSOR
+
+    cursor2Timeout = setTimeout(() => {
+
+      cursor2.style.display = "none";
+      cursor.style.display = "block";
+
+      updateCursorTransform();
+
+    }, 400);
+
+  });
+
+  // SORTIE DE L'IMAGE
+
+  special.addEventListener("mouseleave", () => {
+
+    cursor.style.display = "none";
+    cursor2.style.display = "none";
+
+    clearTimeout(cursor2Timeout);
+
+    if (animationFrame) {
+
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+
+    }
+
+    if (cursor2AnimationFrame) {
+
+      cancelAnimationFrame(cursor2AnimationFrame);
+      cursor2AnimationFrame = null;
+
+    }
+
+  });
+
+});
+
+// TRANSFORMATION DE CURSOR
+
+function updateCursorTransform() {
+
+  cursorImg.style.transform =
+    `scale(${cursorDirection}, 1)`;
+
+}
+
+// ANIMATION DU CURSEUR
+
+function animateCursor() {
+
+  // Aucun mouvement de rotation.
+  // Le curseur est uniquement retourné horizontalement.
+
+  animationFrame =
+    requestAnimationFrame(animateCursor);
+
+}
+
+// ANIMATION DE CURSOR2
+
+function animateCursor2Scale(direction) {
+
+  cursor2Scale +=
+    (targetCursor2Scale - cursor2Scale) * 0.15;
+
+
+  // Un seul scale :
+  // direction =  1 → normal
+  // direction = -1 → miroir
+  //
+  // cursor2Scale agit simultanément
+  // sur X et Y.
+
+  cursor2Img.style.transform =
+    `scale(
+      ${direction * cursor2Scale},
+      ${cursor2Scale}
+    )`;
+
+
+  if (
+    Math.abs(targetCursor2Scale - cursor2Scale) > 0.01
+  ) {
+
+    cursor2AnimationFrame =
+      requestAnimationFrame(() => {
+
+        animateCursor2Scale(direction);
+
+      });
+
+  } else {
+
+    cursor2AnimationFrame = null;
+
+  }
+
+}
+
+// ÉCHELLE DES CURSEURS PAR RAPPORT À L'IMAGE
+
+function updateCursorScale(special) {
+
+  const naturalWidth =
+    special.naturalWidth;
+
+  const displayedWidth =
+    special.getBoundingClientRect().width;
+
+  const scale =
+    displayedWidth / naturalWidth;
+
+  // CURSOR
+
+  cursorImg.style.width =
+    (cursorImg.naturalWidth * scale) + "px";
+
+  // CURSOR2
+
+  cursor2Img.style.width =
+    (cursor2Img.naturalWidth * scale) + "px";
+
+}
+
+// REDIMENSIONNEMENT DE LA FENÊTRE
+
+window.addEventListener("resize", () => {
+
+  specials.forEach((special) => {
+
+    const rect =
+      special.getBoundingClientRect();
+
+    if (rect.width > 0) {
+
+      updateCursorScale(special);
+
+    }
+
+  });
+
+});
+
+</script>
 
 </body>
 </html>

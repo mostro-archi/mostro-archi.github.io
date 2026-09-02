@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>mostro</title>
+
+  <link href="../style.css" rel="stylesheet" />
+
+  <style>
+
+    #participatif {
+      position: relative;
+      min-height: 500px;
+    }
+
+    #head-menu {
+      border : 2px black solid;
+      padding : 2px 2px 2px 8px;
+      background-color: black;
+      color: white;
+      font-family: syne;
+}
+
+    #drawing-zone {
+      border : 2px black solid;
+      padding : 8px;
+    }
+
+    #drawing-text {
+      width:100%;
+      border:none;
+      font-style: italic;
+      font-family: syne;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    #drawing-text:focus {
+      font-style: normal;
+    }
+
+    #drawing-canvas {
+      display: block;
+      width: 100%;
+      height: 300px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    #drawing-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    #buttons-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap:10px;
+    }
+
+    #character-count {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      font-family: syne;
+    }
+
+    .object-button {
+      display: block;
+      width: 100%;
+      padding: 3px 4px;
+      background: white;
+      border: none;
+      text-align: left;
+      font-family: syne;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .object-button:hover {
+      background: black;
+      color: white;
+    }
+
+    #post:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .published-drawing {
+      position: absolute;
+      width: 180px;
+      background: whitesmoke;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.377);
+    }
+
+    .published-drawing:active {
+      cursor: grabbing;
+    }
+
+    .published-drawing canvas {
+      display: block;
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+    }
+
+    .published-drawing p {
+      margin: 0;
+      padding: 5px;
+      box-sizing: border-box;
+      width: 100%;
+      font-size: 12px;
+      overflow-wrap: break-word;
+      pointer-events: none;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <div><a href="../index"><h1>mostro</h1></a></div>
+  <div class="box"></div>
+  <div><a href="../projets"><h2>projets</h2></a></div>
+  <div><a href="../agence"><h2>agence</h2></a></div>
+  <div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+<div class="holder">
+<div class="multi-column" id="agence">
+
+<div class="column" id="small">
+  <h2>Le séjour, du salon bourgeois à l'espace commun</h2>
+  <p>contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"<br>
+    institution : maison de l'architecture d'Ile de France<br>
+    date : septembre 2026<br>
+    scénographie : Matters.xyz<br>
+    type : enseignement et recherche
+  </p>
+  <h3>Le tableau périodique des éléments du séjour rassemble la plupart des fonctions que celui-ci a tenu dans le logement, de l’apparition du salon au XVII° siècle jusqu’à nos jours. Les objets qui le meublent y sont systématiquement représentés par un élément précis, choisi pour son importance historique, son hégémonie, ou sa qualité plastique particulière.<br>
+  <br>Or si l’on a représenté que un seul canapé, il en existe presque autant qu’il n’existe de séjours. Le séjour est la pièce d’auto-définition, celle que l’on meuble avec le plus de soin, celle que l’on montre à ses amis et à sa famille quand on les reçoit. C’est aussi la pièce du compromis, où tous les habitant·e·s du foyer doivent s’accorder sur la décoration et le mobilier. C’est un peu la carte d’identité du foyer.<br>
+  <br>
+  <i>Nous vous invitons à participer vous aussi à ce grand travail d’inventaire, à cette collection voir cet herbier du séjour. Quel est l’objet de votre séjour auquel vous tenez le plus ? celui qui représente le mieux votre foyer ? celui dont vous ne pourriez pas vous passer ? Utilisez les champs ci-dessous pour participer à l'inventaire.</i></h3>
+
+  <div id="head-menu">ajoutez votre meuble</div>
+  <div id="drawing-zone">
+    <canvas id="drawing-canvas" width="600" height="300"></canvas>
+    <input id="drawing-text" type="text" maxlength="100" placeholder="dessinez et décrivez votre mobilier">
+    <div id="drawing-buttons">
+      <span id="character-count">0 / 100</span>
+      <div id="buttons-row"><button id="clear" class="object-button" type="button">clear</button>
+          <button id="post" class="object-button" type="button">post</button></div>
+  </div>
+  </div>
+
+</div>
+
+<div class="column" id="participatif" can-play></div>
+
+</div>
+</div>
+
+<script type="module">
+  import { playhtml } from "https://unpkg.com/playhtml";
+
+  /* =========================================================
+     CANVAS DE DESSIN
+     ========================================================= */
+
+  const canvas =
+    document.getElementById("drawing-canvas");
+
+  const ctx =
+    canvas.getContext("2d");
+
+  const postButton =
+    document.getElementById("post");
+
+  const textInput =
+    document.getElementById("drawing-text");
+
+  const characterCount =
+    document.getElementById("character-count");
+
+  let drawing = false;
+
+
+  /* =========================================================
+     ÉTAT INITIAL DU BOUTON POST
+     ========================================================= */
+
+  postButton.disabled = true;
+
+
+  /* =========================================================
+     POSITION DU CURSEUR DANS LE CANVAS
+     ========================================================= */
+
+  function getCanvasPosition(event) {
+
+    const rect =
+      canvas.getBoundingClientRect();
+
+    return {
+      x:
+        (event.clientX - rect.left)
+        * canvas.width
+        / rect.width,
+
+      y:
+        (event.clientY - rect.top)
+        * canvas.height
+        / rect.height
+    };
+  }
+
+
+  /* =========================================================
+     DESSIN
+     ========================================================= */
+
+  canvas.addEventListener(
+    "pointerdown",
+    event => {
+
+      drawing = true;
+
+      // Dès qu'un dessin commence,
+      // le bouton post devient disponible
+      postButton.disabled = false;
+
+      canvas.setPointerCapture(
+        event.pointerId
+      );
+
+      const position =
+        getCanvasPosition(event);
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        position.x,
+        position.y
+      );
+    }
+  );
+
+
+  canvas.addEventListener(
+    "pointermove",
+    event => {
+
+      if (!drawing) return;
+
+      const position =
+        getCanvasPosition(event);
+
+      ctx.lineTo(
+        position.x,
+        position.y
+      );
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      ctx.stroke();
+    }
+  );
+
+
+  function stopDrawing() {
+
+    drawing = false;
+  }
+
+
+  canvas.addEventListener(
+    "pointerup",
+    stopDrawing
+  );
+
+  canvas.addEventListener(
+    "pointercancel",
+    stopDrawing
+  );
+
+
+  /* =========================================================
+     BOUTON CLEAR
+     ========================================================= */
+
+  document
+    .getElementById("clear")
+    .addEventListener(
+      "click",
+      () => {
+
+        ctx.clearRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        // Le canvas est maintenant vide
+        postButton.disabled = true;
+      }
+    );
+
+
+  /* =========================================================
+     COMPTEUR DE CARACTÈRES
+     ========================================================= */
+
+  textInput.addEventListener(
+    "input",
+    () => {
+
+      characterCount.textContent =
+        `${textInput.value.length} / 100`;
+    }
+  );
+
+
+  /* =========================================================
+     PLAYHTML
+     ========================================================= */
+
+  const participatif =
+    playhtml.register(
+      "participatif",
+      {
+
+        defaultData: {
+          drawings: []
+        },
+
+
+        updateElement: ({
+          element,
+          data
+        }) => {
+
+          const existing =
+            new Map();
+
+          element
+            .querySelectorAll(
+              ".published-drawing"
+            )
+            .forEach(
+              drawing => {
+
+                existing.set(
+                  drawing.dataset.id,
+                  drawing
+                );
+              }
+            );
+
+
+          const currentIds =
+            new Set();
+
+
+          data.drawings.forEach(
+            drawingData => {
+
+              currentIds.add(
+                drawingData.id
+              );
+
+              let drawing =
+                existing.get(
+                  drawingData.id
+                );
+
+
+              if (!drawing) {
+
+                createPublishedDrawing(
+                  element,
+                  drawingData
+                );
+
+                return;
+              }
+
+
+              drawing.style.left =
+                `${drawingData.x}px`;
+
+              drawing.style.top =
+                `${drawingData.y}px`;
+
+              drawing.style.zIndex =
+                drawingData.zIndex || 0;
+            }
+          );
+
+
+          existing.forEach(
+            (drawing, id) => {
+
+              if (
+                !currentIds.has(id)
+              ) {
+
+                drawing.remove();
+              }
+            }
+          );
+        }
+      }
+    );
+
+
+  /* =========================================================
+     INITIALISATION PLAYHTML
+     ========================================================= */
+
+  await playhtml.init({
+    room: "mostro-sejour"
+  });
+
+
+  /* =========================================================
+     CRÉATION D'UN DESSIN PUBLIÉ
+     ========================================================= */
+
+  function createPublishedDrawing(
+    container,
+    drawingData
+  ) {
+
+    const drawing =
+      document.createElement("div");
+
+    drawing.className =
+      "published-drawing";
+
+    drawing.id =
+      `published-${drawingData.id}`;
+
+    drawing.dataset.id =
+      drawingData.id;
+
+    drawing.style.left =
+      `${drawingData.x}px`;
+
+    drawing.style.top =
+      `${drawingData.y}px`;
+
+    drawing.style.zIndex =
+      drawingData.zIndex || 0;
+
+
+    /* ---------------------------------------------------------
+       IMAGE DU DESSIN
+       --------------------------------------------------------- */
+
+    const imageCanvas =
+      document.createElement("canvas");
+
+    imageCanvas.width = 600;
+    imageCanvas.height = 300;
+
+
+    const imageCtx =
+      imageCanvas.getContext("2d");
+
+
+    const image =
+      new Image();
+
+
+    image.onload = () => {
+
+      imageCtx.clearRect(
+        0,
+        0,
+        imageCanvas.width,
+        imageCanvas.height
+      );
+
+      imageCtx.drawImage(
+        image,
+        0,
+        0
+      );
+    };
+
+
+    image.src =
+      drawingData.image;
+
+
+    drawing.appendChild(
+      imageCanvas
+    );
+
+
+    /* ---------------------------------------------------------
+       TEXTE
+       --------------------------------------------------------- */
+
+    if (
+      drawingData.text &&
+      drawingData.text.trim() !== ""
+    ) {
+
+      const text =
+        document.createElement("p");
+
+      text.textContent =
+        drawingData.text;
+
+      drawing.appendChild(
+        text
+      );
+    }
+
+
+    container.appendChild(
+      drawing
+    );
+
+
+    makeDraggable(
+      drawing,
+      container,
+      drawingData.id
+    );
+  }
+
+
+  /* =========================================================
+     DRAG DES DESSINS PUBLIÉS
+     ========================================================= */
+
+  function makeDraggable(
+    drawing,
+    container,
+    drawingId
+  ) {
+
+    let dragging = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+
+    drawing.addEventListener(
+      "pointerdown",
+      event => {
+
+        if (event.button !== 0)
+          return;
+
+
+        /* -----------------------------------------------------
+           PLACE LE DESSIN AU PREMIER PLAN
+           ----------------------------------------------------- */
+
+        participatif.setData(
+          data => {
+
+            const maxZ =
+              data.drawings.reduce(
+                (
+                  max,
+                  item
+                ) =>
+                  Math.max(
+                    max,
+                    item.zIndex || 0
+                  ),
+                0
+              );
+
+
+            const item =
+              data.drawings.find(
+                item =>
+                  item.id === drawingId
+              );
+
+
+            if (!item)
+              return;
+
+
+            item.zIndex =
+              maxZ + 1;
+          }
+        );
+
+
+        dragging = true;
+
+
+        drawing.setPointerCapture(
+          event.pointerId
+        );
+
+
+        const rect =
+          drawing.getBoundingClientRect();
+
+
+        offsetX =
+          event.clientX -
+          rect.left;
+
+        offsetY =
+          event.clientY -
+          rect.top;
+
+
+        currentX =
+          parseFloat(
+            drawing.style.left
+          ) || 0;
+
+        currentY =
+          parseFloat(
+            drawing.style.top
+          ) || 0;
+
+
+        event.preventDefault();
+      }
+    );
+
+
+    /* ---------------------------------------------------------
+       DÉPLACEMENT
+       --------------------------------------------------------- */
+
+    drawing.addEventListener(
+      "pointermove",
+      event => {
+
+        if (!dragging)
+          return;
+
+
+        const containerRect =
+          container.getBoundingClientRect();
+
+
+        let x =
+          event.clientX -
+          containerRect.left -
+          offsetX;
+
+
+        let y =
+          event.clientY -
+          containerRect.top -
+          offsetY;
+
+
+        const maxX =
+          container.clientWidth -
+          drawing.offsetWidth;
+
+
+        const maxY =
+          container.clientHeight -
+          drawing.offsetHeight;
+
+
+        x =
+          Math.max(
+            0,
+            Math.min(
+              x,
+              maxX
+            )
+          );
+
+
+        y =
+          Math.max(
+            0,
+            Math.min(
+              y,
+              maxY
+            )
+          );
+
+
+        currentX = x;
+        currentY = y;
+
+
+        drawing.style.left =
+          `${x}px`;
+
+        drawing.style.top =
+          `${y}px`;
+      }
+    );
+
+
+    /* ---------------------------------------------------------
+       FIN DU DRAG
+       --------------------------------------------------------- */
+
+    function stopDragging(event) {
+
+      if (!dragging)
+        return;
+
+
+      dragging = false;
+
+
+      const finalX =
+        currentX;
+
+      const finalY =
+        currentY;
+
+
+      participatif.setData(
+        data => {
+
+          const item =
+            data.drawings.find(
+              drawing =>
+                drawing.id === drawingId
+            );
+
+
+          if (!item)
+            return;
+
+
+          item.x = finalX;
+          item.y = finalY;
+        }
+      );
+
+
+      if (
+        event &&
+        drawing.hasPointerCapture(
+          event.pointerId
+        )
+      ) {
+
+        drawing.releasePointerCapture(
+          event.pointerId
+        );
+      }
+    }
+
+
+    drawing.addEventListener(
+      "pointerup",
+      stopDragging
+    );
+
+    drawing.addEventListener(
+      "pointercancel",
+      stopDragging
+    );
+  }
+
+
+  /* =========================================================
+     POST D'UN DESSIN
+     ========================================================= */
+
+  postButton.addEventListener(
+    "click",
+    () => {
+
+      // Sécurité supplémentaire :
+      // impossible de poster si le bouton
+      // est désactivé
+      if (postButton.disabled)
+        return;
+
+
+      const text =
+        textInput.value.trim();
+
+
+      const image =
+        canvas.toDataURL(
+          "image/png"
+        );
+
+
+      const id =
+        crypto.randomUUID();
+
+
+      const width = 180;
+      const height = 180;
+
+
+      const x =
+        Math.max(
+          0,
+          (
+            participatif
+              .getElement()
+              .clientWidth -
+            width
+          ) / 2
+        );
+
+
+      const y =
+        Math.max(
+          0,
+          (
+            participatif
+              .getElement()
+              .clientHeight -
+            height
+          ) / 2
+        );
+
+
+      participatif.setData(
+        data => {
+
+          const maxZ =
+            data.drawings.reduce(
+              (
+                max,
+                drawing
+              ) =>
+                Math.max(
+                  max,
+                  drawing.zIndex || 0
+                ),
+              0
+            );
+
+
+          data.drawings.push({
+
+            id,
+
+            image,
+
+            x,
+
+            y,
+
+            zIndex:
+              maxZ + 1,
+
+            createdAt:
+              Date.now(),
+
+            text
+          });
+        }
+      );
+
+
+      /* -------------------------------------------------------
+         RESET DU FORMULAIRE
+         ------------------------------------------------------- */
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      textInput.value = "";
+
+
+      characterCount.textContent =
+        "0 / 100";
+
+
+      // Le canvas étant maintenant vide,
+      // post redevient désactivé
+      postButton.disabled = true;
+    }
+  );
+
+</script>
+
+
+
+</body>
+
+</html>

@@ -135,9 +135,32 @@ header a, header a:visited, header a:hover {
 }
 
 .image {
-  width:100%
+  width:100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+/*special pointer*/
+img.special:hover{
+ cursor:none;
+}
+    
+#cursor, #cursor2 {
+ position: fixed;
+ pointer-events: none;
+ display: none;
+ z-index: 9999;
+}
+
+#cursor img, #cursor2 img { 
+ display: block;
+ transform-origin: bottom left;
+}
 
 /*header*/
 h1 {

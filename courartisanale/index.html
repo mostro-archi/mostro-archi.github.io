@@ -10,6 +10,20 @@
 
 <body>
 
+  <style>
+    img.special:hover{
+      cursor:none;
+    }
+    
+    #cursor {
+      position: fixed;
+      pointer-events: none;
+      display: none;
+      z-index: 9999;
+      transform-origin: center center;
+    }
+  </style>
+
 <header>
 <div><a href="../index"><h1>mostro</h1></a></div>
 <div class="box"></div>
@@ -19,6 +33,7 @@
 </header>
 
 <div class="holder">
+  <div id="cursor"><img src="cursor.png"></div>
 
 <div class="multi-column" id="agence">
 
@@ -60,20 +75,186 @@ Porté par l’agglomération de Saumur et non par ses usagers futurs, le projet
   </div>
 
   <div class="column">
-    <img class="image" src="rdc.png" title="plan de rez de chaussée">
+    <img class="image special" src="rdc.png" title="plan de rez de chaussée">
     <p></p>
-    <img class="image" src="r+1.png" title="plan de premier étage">
+    <img class="image special" src="r+1.png" title="plan de premier étage">
     <p></p>
     <img class="image" src="coupe.png" title="coupe transversale">
     <p></p>
   </div>
 </div>
 
-
 </div>
 
+<script>
+const specials = document.querySelectorAll(".special");
+const cursor = document.getElementById("cursor");
+const cursorImg = cursor.querySelector("img");
+
+let previousX = 0;
+let previousY = 0;
+
+let targetRotation = 0;
+let currentRotation = 0;
+
+let cursorScale = 1;
+let targetScale = 1;
+
+let animationFrame = null;
 
 
+// ENTRÉE SUR UNE IMAGE
+
+specials.forEach((special) => {
+
+  special.addEventListener("mouseenter", (event) => {
+
+    cursor.style.display = "block";
+
+    previousX = event.clientX;
+    previousY = event.clientY;
+
+    cursor.style.left = event.clientX + "px";
+    cursor.style.top = event.clientY + "px";
+
+    updateCursorScale(special);
+
+    if (!animationFrame) {
+      animateCursor();
+    }
+  });
+
+
+  // MOUVEMENT DE LA SOURIS
+
+  special.addEventListener("mousemove", (event) => {
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const dx = x - previousX;
+    const dy = y - previousY;
+
+    if (dx !== 0 || dy !== 0) {
+
+      targetRotation =
+        Math.atan2(dy, dx) * 180 / Math.PI;
+    }
+
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+
+    previousX = x;
+    previousY = y;
+  });
+
+
+  // CLIC
+
+  special.addEventListener("mousedown", () => {
+
+    targetScale = 2;
+
+    setTimeout(() => {
+      targetScale = 1;
+    }, 150);
+  });
+
+
+  // SORTIE DE L'IMAGE
+
+  special.addEventListener("mouseleave", () => {
+
+    cursor.style.display = "none";
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+  });
+
+});
+
+
+// ANIMATION DU CURSEUR
+
+function animateCursor() {
+
+  const rotationSmoothing = 0.10;
+  const scaleSmoothing = 0.12;
+
+
+  // ROTATION
+
+  let difference =
+    targetRotation - currentRotation;
+
+  if (difference > 180) {
+    difference -= 360;
+  }
+
+  if (difference < -180) {
+    difference += 360;
+  }
+
+  currentRotation +=
+    difference * rotationSmoothing;
+
+
+  // ÉCHELLE
+
+  cursorScale +=
+    (targetScale - cursorScale) * scaleSmoothing;
+
+
+  // APPLICATION
+
+  cursor.style.transform =
+    `translate(-50%, -50%)
+     rotate(${currentRotation}deg)
+     scale(${cursorScale})`;
+
+
+  animationFrame =
+    requestAnimationFrame(animateCursor);
+}
+
+
+// ÉCHELLE DU CURSEUR PAR RAPPORT À L'IMAGE
+
+function updateCursorScale(special) {
+
+  const naturalWidth =
+    special.naturalWidth;
+
+  const displayedWidth =
+    special.getBoundingClientRect().width;
+
+  const scale =
+    displayedWidth / naturalWidth;
+
+  cursorImg.style.width =
+    (cursorImg.naturalWidth * scale) + "px";
+}
+
+
+// REDIMENSIONNEMENT DE LA FENÊTRE
+
+window.addEventListener("resize", () => {
+
+  specials.forEach((special) => {
+
+    const rect = special.getBoundingClientRect();
+
+    if (rect.width > 0) {
+      updateCursorScale(special);
+    }
+
+  });
+
+});
+
+</script>
 
 </body>
 

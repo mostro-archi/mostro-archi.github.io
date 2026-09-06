@@ -48,20 +48,12 @@
 }
 
 .can-arrange:hover {
-  filter:
-    drop-shadow(
-      5px 5px 5px
-      rgba(0, 0, 0, 0.5)
-    );
+  filter:drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
 .can-arrange:active {
   cursor: grabbing;
-  filter:
-    drop-shadow(
-      5px 5px 5px
-      rgba(0, 0, 0, 0.5)
-    );
+  filter:drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
 .floor {
@@ -111,17 +103,6 @@
   color: white;
 }
 
-.epoch-button.disabled {
-  opacity: 0.35;
-  cursor: default;
-  background-color: red;
-}
-
-.epoch-button.disabled:hover {
-  background: white;
-  color: black;
-}
-
 #plan-menu {
   z-index: 99999;
   font-family: syne;
@@ -142,6 +123,7 @@
   border: none;
   flex: 1;
   text-align: center;
+  text-decoration: none;  
 }
 
 .plan-button:hover {
@@ -152,17 +134,6 @@
 .plan-button.active {
   background: black;
   color: white;
-}
-
-.plan-button.disabled {
-  opacity: 0.35;
-  cursor: default;
-  background-color: red;
-}
-
-.plan-button.disabled:hover {
-  background: white;
-  color: black;
 }
 
 .category-row {
@@ -186,6 +157,7 @@
   font-size: 13px;
   cursor: pointer;
   flex: 1;
+  text-decoration: none;  
 }
 
 .category:hover .category-button {
@@ -217,8 +189,8 @@
   text-align: left;
   font-family: inherit;
   font-size: 13px;
-  white-space: nowrap;
   cursor: pointer;
+  text-decoration: none;  
 }
 
 .object-button:hover {
@@ -253,6 +225,13 @@
   padding : 8px;
 }
 
+.buttons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:10px;
+}
+
 #head-menu {
   border : 2px black solid;
   padding : 2px 2px 2px 8px;
@@ -260,12 +239,90 @@
   color: white;
   font-family: syne;
 }
-.buttons-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap:10px;
-    }
+
+/* menu de navigation */
+.menu {
+  border : 2px black solid;
+  padding : 8px;
+}
+
+.menu-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: balance;
+}
+
+.menu-div {
+  font-family: syne;
+  margin: 0px 0px;
+  font-size: 13px;
+  padding: 3px 4px;
+  flex:1;
+}
+
+.menu-lien {
+  color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;         
+}
+.menu-lien:hover {
+  color: white;
+  background:black;
+}
+
+.menu-fake {
+  color: white;
+  background-color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;  
+  margin: 3px 4px;       
+}
+
+/* adaptation mobile */
+
+.mobile * {
+  display:none;
+}
+
+@media (max-width:800px)  {
+
+#agence.multi-column {
+  flex-direction: column;
+  height: auto;
+  overflow: visible;
+}
+
+#small {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: none;
+}
+
+#container {
+height: 1000px;
+overflow: visible;
+}
+
+.holder {
+  height:200vh;
+}
+
+.multi-column{
+  padding-bottom: 300px;
+}
+
+.desktop * {
+  display:none;
+}
+.mobile * {
+  display: block;
+}
+}
 
 </style>
 
@@ -282,16 +339,21 @@
         scénographie : Matters.xyz<br>
         type : enseignement et recherche
       </p>
-      <div style="border: 2px black solid;padding:0px 8px;">
-      <div style="margin:-5px 0px -15px;">
-        <h3><a href="../lesejour" class="lien" style="display:block;text-align: center;flex:1">retour à l'exposition générale</a></h3>
+
+      <!-- MENU DE NAVIGATION -->
+      <div id="head-menu">navigation</div>
+      <div class="menu">
+        <div class="menu-row">
+          <h3 class="menu-div"><a href="../lesejour" class="menu-lien">retour à l'exposition générale</a></h3>
+        </div>
+        <br>
+        <div class="menu-row">
+          <h3 class="menu-div"><a href="../calendrier" class="menu-lien">1. tableau<br>périodique</a></h3>
+          <h3 class="menu-div menu-fake">2. plans<br>historiques</h3>
+          <h3 class="menu-div"><a href="../atlas" class="menu-lien">3. atlas<br>participatif</a></h3>
+        </div>
       </div>
-      <div class="buttons-row" style="margin-bottom: -5px;">
-        <h3><a href="../calendrier" class="lien" style="display:block;text-align: center;">1. tableau<br>périodique</a></h3>
-        <h3 style="background-color:black;color:white;font-weight: bold;display:block;text-align: center;">2. plans<br>historiques</h3>
-        <h3><a href="../atlas" class="lien" style="display:block;text-align: center;">3. atlas<br>participatif</a></h3>
-    </div>
-    </div>
+
       <h3>Si par sa multiplicité d’usages le séjour ne saurait présenter de plan type, on trouve à travers quatre exemples historiques une généalogie de cette pièce. Le salon et la salle commune s’hybrident ainsi dans le         living-room, et le débord des espaces collectifs contemporains renoue avec le séjour hors les murs. A l'occasion de l'archivage numérique de l'exposition, jouez avec la chronologie en associant ammeublement et plans d'époques diverses, ou piochez directement dans la bibliothèque d'objets pour composer votre séjour anachronique idéal.</h3>
 
       <!-- MENU DE PLAN -->
@@ -318,16 +380,17 @@
       <h3 id="description"></h3>
 
       <!-- MENU DE SPAWN -->
-      <div id="head-menu">éditeur de plan</div>
-      <div id="box-menu"><h3><i>> clic gauche : déplacer un objet<br>> clic droit : pivoter<br>> double clic-droit : supprimer</i></h3>
-        <div id="spawn-menu">
-        <div class="epoch-row">
-          <button class="epoch-button active" data-epoch="bourgeois">mobilier bourgeois</button>
-          <button class="epoch-button" data-epoch="populaire">mobilier populaire</button>
-          <button class="epoch-button" data-epoch="modern">mobilier moderne</button>
-          <button class="epoch-button" data-epoch="contemporary">mob. contemporain</button>
-        </div>
-        <div class="category-row">
+      <div class="desktop">
+        <div id="head-menu">éditeur de plan</div>
+        <div id="box-menu"><h3><i>> clic gauche : déplacer un objet<br>> clic droit : pivoter<br>> double clic-droit : supprimer</i></h3>
+          <div id="spawn-menu">
+          <div class="epoch-row">
+            <button class="epoch-button active" data-epoch="bourgeois">mobilier bourgeois</button>
+            <button class="epoch-button" data-epoch="populaire">mobilier populaire</button>
+            <button class="epoch-button" data-epoch="modern">mobilier moderne</button>
+            <button class="epoch-button" data-epoch="contemporary">mob. contemporain</button>
+          </div>
+          <div class="category-row">
 
           <div class="category">
             <button class="category-button">sols</button>
@@ -493,6 +556,10 @@
           </div>
         </div>
         </div>
+      </div>
+      </div>
+      <div class="mobile">
+        <h3 class="menu"><i>L'édition de plans et la manipulation du mobilier est désactivée sur mobile. Pour profiter de l'expérience totale privilégiez la naviagation sur ordinateur.</i></h3>
       </div>
 
     </div>

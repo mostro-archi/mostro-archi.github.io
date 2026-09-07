@@ -10,15 +10,56 @@
 
 <body>
 
-  <style>
-    .buttons-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap:10px;
-      overflow: hidden;
-    }
-  </style>
+<style>
+/* menu de navigation */
+#head-menu {
+  border : 2px black solid;
+  padding : 2px 2px 2px 8px;
+  background-color: black;
+  color: white;
+  font-family: syne;
+}
+
+.menu {
+  border : 2px black solid;
+  padding : 4px;
+}
+
+.menu-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: balance;
+}
+
+.menu-div {
+  font-family: syne;
+  margin: 0px 0px;
+  font-size: 13px;
+  padding: 3px 4px;
+  flex:1;
+}
+
+.menu-lien {
+  color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;         
+}
+.menu-lien:hover {
+  color: white;
+  background:black;
+}
+
+.menu-fake {
+  color: white;
+  background-color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;  
+  margin: 3px 4px;       
+}
+</style>
 
 <header>
 <div><a href="../index"><h1>mostro</h1></a></div>
@@ -39,18 +80,23 @@
     scénographie : Matters.xyz<br>
     type : enseignement et recherche
   </p>
-  <div style="border: 2px black solid;padding:0px 8px;">
-  <div style="margin:-5px 0px -15px;">
-    <h3 style="background-color:black;color:white;font-weight: bold;display:block;text-align: center;flex:1">vue d'ensemble de l'exposition</h3>
-  </div>
-  <div class="buttons-row" style="margin-bottom: -5px;">
-    <h3><a href="../calendrier" class="lien" style="display:block;text-align: center;">1. tableau<br>périodique</a></h3>
-    <h3><a href="../salon" class="lien" style="display:block;text-align: center;">2. plans<br>historiques</a></h3>
-    <h3><a href="../atlas" class="lien" style="display:block;text-align: center;">3. atlas<br>participatif</a></h3>
     
+  <!-- MENU DE NAVIGATION -->
+  <div id="head-menu">navigation</div>
+  <div class="menu">
+    <div class="menu-row">
+      <h3 class="menu-div"><a href="../lesejour" class="menu-lien">retour à l'exposition générale</a></h3>
+    </div>
+    <div class="menu-row">
+      <h3 class="menu-div"><a href="../calendrier" class="menu-lien">1. tableau<br>périodique</a></h3>
+      <h3 class="menu-div menu-fake">2. plans<br>historiques</h3>
+      <h3 class="menu-div"><a href="../atlas" class="menu-lien">3. atlas<br>participatif</a></h3>
+    </div>
   </div>
-  </div>
-    <h3>De l’italien <i>salone</i>, soit grande salle, le <i>salon</i> fait son apparition dans les mœurs et dans la pierre au XVII° siècle chez la bourgeoisie récemment constituée comme classe. Parallèlement, la majorité des foyers populaires partagent leurs repas et leur temps libre dans la <i>salle à manger</i> ou salle commune.<br>
+    
+    <h3>Organisée par la Maison de l'Architecture d'Ile-de-France, l’exposition <i>Le logement pièce par pièce</i> propose une traversée de l’habitat, de son histoire, de son actualité, et de ses enjeux, par le biais des pièces qui le composent. Six agences ont été missionnées, chacune se penchant sur une pièce spécifique de la maison. Aux côtés de ANAU (la chambre), Paris U (le couloir), Septembre (la cuisine), Dadour de Pous (les prolongements extérieurs) et 127af (la salle de bain), mostro s'est intéressé au séjour.<br>
+    <br>
+    De l’italien <i>salone</i>, soit grande salle, le <i>salon</i> fait son apparition dans les mœurs et dans la pierre au XVII° siècle chez la bourgeoisie récemment constituée comme classe. Parallèlement, la majorité des foyers populaires partagent leurs repas et leur temps libre dans la <i>salle à manger</i> ou salle commune.<br>
     De cette double origine – dont la synthèse se fera peut-être via le <i>living-room</i> moderne – le séjour a hérité d’une certaine informité, une indétermination spatiale qui résulte d’une prolifération de ses usages possibles.<br>
     <br>
     Délaissant la composition pour l’ameublement, le séjour est ici ausculté en trois séquences au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond.<br>

@@ -243,7 +243,7 @@
 /* menu de navigation */
 .menu {
   border : 2px black solid;
-  padding : 8px;
+  padding : 4px;
 }
 
 .menu-row {
@@ -283,7 +283,7 @@
 
 /* adaptation mobile */
 
-.mobile * {
+.mobile, .mobile * {
   display:none;
 }
 
@@ -304,28 +304,22 @@
 }
 
 #container {
-height: 1000px;
-overflow: visible;
+  display: none;
 }
 
 .holder {
-  height:200vh;
+  height:auto;
 }
 
-.multi-column{
-  padding-bottom: 300px;
-}
-
-.desktop * {
+.desktop, .desktop * {
   display:none;
 }
-.mobile * {
+.mobile, .mobile * {
   display: block;
 }
 }
 
 </style>
-
 
 <div class="holder">
 
@@ -346,7 +340,6 @@ overflow: visible;
         <div class="menu-row">
           <h3 class="menu-div"><a href="../lesejour" class="menu-lien">retour à l'exposition générale</a></h3>
         </div>
-        <br>
         <div class="menu-row">
           <h3 class="menu-div"><a href="../calendrier" class="menu-lien">1. tableau<br>périodique</a></h3>
           <h3 class="menu-div menu-fake">2. plans<br>historiques</h3>
@@ -366,11 +359,11 @@ overflow: visible;
             <button class="plan-button" data-plan="modern">le living room moderne</button>
             <button class="plan-button" data-plan="contemporary">l'espace commun contemporain</button>
           </div>
-          <div class="reset-row" style="margin-top: 8px;">
-            <button id="toggle-architecture" class="plan-button">masquer l'architecture</button>
+          <div class="reset-row desktop" style="margin-top: 8px;">
+            <button id="toggle-architecture" class="plan-button desktop">masquer l'architecture</button>
           </div>
-          <br>
-          <div class="reset-row">
+          <br class="desktop">
+          <div class="reset-row desktop">
             <button id="reset-scene">réinitialiser</button>
             <button id="empty-scene">vider</button>
           </div>
@@ -559,7 +552,7 @@ overflow: visible;
       </div>
       </div>
       <div class="mobile">
-        <h3 class="menu"><i>L'édition de plans et la manipulation du mobilier est désactivée sur mobile. Pour profiter de l'expérience totale privilégiez la naviagation sur ordinateur.</i></h3>
+        <h3 class="menu"><i>L'édition de plans et la manipulation du mobilier est désactivée sur mobile. Pour profiter de l'expérience totale privilégiez la navigation sur ordinateur.</i></h3>
       </div>
 
     </div>
@@ -713,17 +706,14 @@ overflow: visible;
 <script type="module">
 
 /* stockage local uniquement */
-
 const STORAGE_KEY =
   "mostro-scene-v2";
 
 /* initialisation sur le plan bourgeois */
-
 let currentPlan =
   "bourgeois";
 
 /* configuration de départ de chaque plan */
-
 const PLAN_CONFIG = {
 
   bourgeois: {
@@ -740,6 +730,7 @@ const PLAN_CONFIG = {
       Le salon est donc un outil d’accumulation de capital social, comme économique. Il en est aussi la conséquence : pièce surnuméraire, le salon est un symbole de richesse. Plus il est grand, plus il se multiplie, plus il se spécifie (en fumoir, salle de billard, boudoir...) plus le salon démontre la puissance du foyer qui dispose d’autant de mètres carrés, mais aussi et surtout de décorations et mobiliers.<br>
       <br>
       <i>Ci-contre : Plan inspiré du Chateau de Champs-sur-Marne, Pierre et Jean-Baptiste Bullet, 1707</i>
+      <img class="mobile" style="width:100%" src="sprites/b_mobile.png">
     `,
     defaultScene: [
   {
@@ -1739,6 +1730,12 @@ const PLAN_CONFIG = {
       Selon le revenu du foyer, il peut avoir accès au <i>type primaire</i> avec une salle commune, dans laquelle on cuisine et on mange, au <i>type normal</i> qui sépare la pièce où l’on cuisine de la salle à manger, et enfin le <i>type pour loyers moyens</i> qui dispose en enfilade de la salle à manger un véritable salon.<br>
       <br>
       <i>Ci-contre : Plan type primaire pour l’Office Parisien des Habitations à Bon Marché, conçu par Dubost et Gautruche (Architectes de la Ville), 1914</i>
+      <img class="mobile" style="width:100%" src="sprites/p_mobile.png">
+      <br class="mobile">
+      <div class="mobile">Les plans types de l’Office Parisien des Habitations à Bon Marché prévoient quatre variantes sur la même base. La plus petite, dite type primaire (représentée au dessus) n’offre qu’une salle commune en plus des chambres et des sanitaires. Le type normal (en haut) sépare l’endroit où l’on cuisine de l’endroit où l’on mange. Le plus grand type, proposé pour les loyers moyens, (en bas) double la salle à manger d’un salon qui est alors exactement identique aux chambres et peut être utilisé comme tel. Le bow-window reste dans la salle à manger.<br>
+      <br>
+      <i>Ci-dessous : Redessin augmenté des plans reproduits dans J. Lucan, Habiter, ville et architecture, EPFL Presses / Presses Polytechniques et Universitaires Romanes, 2021</i></div>
+      <img class="mobile" style="width:100%" src="sprites/p_mobile2.png">
     `,
     defaultScene: [
   {
@@ -2881,6 +2878,12 @@ const PLAN_CONFIG = {
       À l’occasion de ce renversement du plan paralysé, le séjour phagocyte souvent l’entrée et le couloir, intégrant au sein du même espace libre les fonctions de distribution, ce qui renforce sa position centrale dans le logement.<br>
       <br>
       <i>Ci-contre : Plan des logements destinés aux familles d’officiers au sein du SHAPE (Supreme Headquarters of the Allied Powers in Europe) Village, à Saint-Germain-en-Laye, Félix Dumail, 1951</i>
+      <img class="mobile" style="width:100%" src="sprites/m_mobile.png">
+      <br class="mobile">
+      <span class="mobile">Pour ses appartements aux 860 et 880 Lake Shore Drive à Chicago, Mies van der Rohe propose une pièce unique rassemblant table à manger, canapé et lit, uniquement redivisée par des têtes de cloisons, des tapis ou des meuble bas (en haut). Le plan est jugé trop radical par les promoteurs qui exigent le recloisonnement traditionnel des espaces en échange de leur financement (en bas). L’espace libre est clairement scindé entre une zone dining et une zone living et la chambre redevient une pièce à part.<br>
+      <br>
+      <i>Ci-dessous : Redessin augmenté des plans reproduits dans J. Lucan, Habiter, ville et architecture, EPFL Presses / Presses Polytechniques et Universitaires Romanes, 2021</i></span>
+      <img class="mobile" style="width:100%" src="sprites/m_mobile2.png">
     `,
     defaultScene: [
   {
@@ -3094,6 +3097,7 @@ const PLAN_CONFIG = {
       On peut voir dans les typologies dites <i>cluster</i> l’aboutissement d’une telle conception du logement collectif, dans laquelle des appartements indépendants - comprenant chambres et salles d’eau - sont reliés par des espaces aux usages plus ou moins déterminés. <br>
       <br>
       <i>Ci-contre : Plan de la Maison A du quartier Hunziker à Zurich, Duplex Architekten, 2015</i>
+      <img class="mobile" style="width:100%" src="sprites/c_mobile.png">
     `,
     defaultScene: [
   {
@@ -3730,32 +3734,19 @@ const PLAN_CONFIG = {
   }
 };
 
-
-/* ============================================================
-   SCÈNE ACTUELLE
-   ============================================================ */
-
-
+/* SCÈNE ACTUELLE */
 let savedScene = [];
 
 
-/* ============================================================
-   GET DEFAULT SCENE
-   ============================================================ */
-
-
+/* GET DEFAULT SCENE */
 function getDefaultScene() {
 
   const plan =
     PLAN_CONFIG[currentPlan];
 
-
   if (!plan) {
-
     return [];
-
   }
-
 
   return plan.defaultScene.map(
     object => ({
@@ -3765,12 +3756,7 @@ function getDefaultScene() {
 
 }
 
-
-/* ============================================================
-   APPLY PLAN
-   ============================================================ */
-
-
+/* APPLY PLAN */
 function applyPlan(
   planName
 ) {
@@ -3778,79 +3764,40 @@ function applyPlan(
   const plan =
     PLAN_CONFIG[planName];
 
-
   if (!plan) {
-
     return;
-
   }
 
+  currentPlan = planName;
 
-  currentPlan =
-    planName;
-
-
-  /*
-     Background
-  */
-
-
-  const background =
-    document.getElementById(
+  /* Background*/
+  const background = document.getElementById(
       "background-plan"
     );
 
-
   if (background) {
-
-    background.src =
-      plan.background;
-
+    background.src = plan.background;
   }
 
-
-  /*
-     Foreground
-  */
-
-
-  const foreground =
-    document.getElementById(
+  /* Foreground */
+  const foreground = document.getElementById(
       "foreground-plan"
     );
 
-
   if (foreground) {
-
-    foreground.src =
-      plan.foreground;
-
+    foreground.src = plan.foreground;
   }
 
-
-  /*
-     Description
-  */
-
-
-  const description =
-    document.getElementById(
+  /* Description */
+  const description = document.getElementById(
       "description"
     );
 
-
   if (description) {
-
-    description.innerHTML =
-      plan.description;
-
+    description.innerHTML = plan.description;
   }
 
-
-  /*
-     Active plan button
-  */
-
+  /* Active plan button */
 
   document
     .querySelectorAll(
@@ -3866,28 +3813,18 @@ function applyPlan(
       }
     );
 
-
-  const selectedButton =
-    document.querySelector(
+  const selectedButton = document.querySelector(
       `.plan-button[data-plan="${planName}"]`
     );
 
-
   if (selectedButton) {
-
     selectedButton.classList.add(
       "active"
     );
-
   }
-
 }
 
-
-/* ============================================================
-   PLAN BUTTON EVENTS
-   ============================================================ */
-
+/* PLAN BUTTON EVENTS */
 
 document
   .querySelectorAll(
@@ -3910,9 +3847,7 @@ document
     }
   );
 
-  /* ============================================================
-   TOGGLE ARCHITECTURE
-   ============================================================ */
+  /* toggle architecture */
 
 const architectureButton =
   document.getElementById(
@@ -3930,7 +3865,6 @@ const foregroundPlan =
   );
 
 let architectureVisible = true;
-
 
 if (architectureButton) {
 
@@ -3961,21 +3895,12 @@ if (architectureButton) {
 
 }
 
-/* ============================================================
-   INITIAL PLAN
-   ============================================================ */
-
-
+/* INITIAL PLAN */
 applyPlan(
   "bourgeois"
 );
 
-
-/* ============================================================
-   LOAD SCENE
-   ============================================================ */
-
-
+/* LOAD SCENE */
 function loadScene() {
 
   try {
@@ -3985,24 +3910,20 @@ function loadScene() {
         STORAGE_KEY
       );
 
-
     if (raw === null) {
 
       return null;
 
     }
 
-
     const parsed =
       JSON.parse(raw);
-
 
     if (!Array.isArray(parsed)) {
 
       return null;
 
     }
-
 
     return parsed.filter(
       item =>
@@ -4029,7 +3950,6 @@ function loadScene() {
 
   }
 
-
   catch (error) {
 
     console.warn(
@@ -4037,19 +3957,11 @@ function loadScene() {
       error
     );
 
-
     return null;
-
   }
-
 }
 
-
-/* ============================================================
-   SAVE SCENE
-   ============================================================ */
-
-
+/* SAVE SCENE */
 function saveScene() {
 
   try {
@@ -4058,9 +3970,7 @@ function saveScene() {
       STORAGE_KEY,
       JSON.stringify(savedScene)
     );
-
   }
-
 
   catch (error) {
 
@@ -4068,57 +3978,31 @@ function saveScene() {
       "Impossible de sauvegarder la scène locale.",
       error
     );
-
   }
-
 }
 
-
-/* ============================================================
-   INITIALISATION DE LA SCÈNE
-   ============================================================ */
-
-
+/* INITIALISATION DE LA SCÈNE */
 const loadedScene =
   loadScene();
 
-
 if (loadedScene === null) {
 
-  /*
-     Première visite :
-     le default state dépend du plan actuel.
-  */
-
-
+  /* Première visite : le default state dépend du plan actuel.*/
   savedScene =
     getDefaultScene();
 
-
   saveScene();
-
 }
-
 
 else {
 
-  /*
-     Visiteur existant :
-     on conserve exactement sa scène.
-  */
-
-
+  /* Visiteur existant : on conserve exactement sa scène. */
   savedScene =
     loadedScene;
 
 }
 
-
-/* ============================================================
-   UNIQUE INSTANCE ID
-   ============================================================ */
-
-
+/* UNIQUE INSTANCE ID */
 function createInstanceId() {
 
   if (
@@ -4129,7 +4013,6 @@ function createInstanceId() {
     return window.crypto.randomUUID();
 
   }
-
 
   return (
     "instance-" +
@@ -4142,12 +4025,7 @@ function createInstanceId() {
 
 }
 
-
-/* ============================================================
-   APPLY OBJECT STATE
-   ============================================================ */
-
-
+/* APPLY OBJECT STATE */
 function applyObjectState(
   element,
   state
@@ -4171,15 +4049,9 @@ function applyObjectState(
 
   element.dataset.rotation =
     String(state.rotation);
-
 }
 
-
-/* ============================================================
-   UPDATE SAVED OBJECT
-   ============================================================ */
-
-
+/* UPDATE SAVED OBJECT */
 function updateSavedObject(
   element
 ) {
@@ -4191,13 +4063,11 @@ function updateSavedObject(
         element.dataset.instanceId
     );
 
-
   if (index === -1) {
 
     return;
 
   }
-
 
   savedScene[index].left =
     Number(element.dataset.left);
@@ -4208,17 +4078,11 @@ function updateSavedObject(
   savedScene[index].rotation =
     Number(element.dataset.rotation);
 
-
   saveScene();
 
 }
 
-
-/* ============================================================
-   ADD OBJECT TO SCENE
-   ============================================================ */
-
-
+/* ADD OBJECT TO SCENE */
 function addSavedObject(
   element
 ) {
@@ -4242,17 +4106,11 @@ function addSavedObject(
 
   });
 
-
   saveScene();
 
 }
 
-
-/* ============================================================
-   REMOVE OBJECT FROM SCENE
-   ============================================================ */
-
-
+/* REMOVE OBJECT FROM SCENE */
 function removeSavedObject(
   element
 ) {
@@ -4269,12 +4127,7 @@ function removeSavedObject(
 
 }
 
-
-/* ============================================================
-   CENTER OBJECT
-   ============================================================ */
-
-
+/* CENTER OBJECT */
 function getCenteredPosition(
   element
 ) {
@@ -4283,7 +4136,6 @@ function getCenteredPosition(
     document.getElementById(
       "container"
     );
-
 
   if (!container) {
 
@@ -4294,14 +4146,11 @@ function getCenteredPosition(
 
   }
 
-
   const containerRect =
     container.getBoundingClientRect();
 
-
   const elementRect =
     element.getBoundingClientRect();
-
 
   const left =
     (
@@ -4309,13 +4158,11 @@ function getCenteredPosition(
       elementRect.width
     ) / 2;
 
-
   const top =
     (
       containerRect.height -
       elementRect.height
     ) / 2;
-
 
   return {
 
@@ -4329,12 +4176,7 @@ function getCenteredPosition(
 
 }
 
-
-/* ============================================================
-   KEEP OBJECT INSIDE CONTAINER
-   ============================================================ */
-
-
+/* KEEP OBJECT INSIDE CONTAINER */
 function constrainPosition(
   element,
   left,
@@ -4356,7 +4198,6 @@ function constrainPosition(
 
   }
 
-
   const containerRect =
     container.getBoundingClientRect();
 
@@ -4371,7 +4212,6 @@ function constrainPosition(
   const elementRect =
     element.getBoundingClientRect();
 
-
   if (
     elementRect.left <
     containerRect.left
@@ -4382,7 +4222,6 @@ function constrainPosition(
       elementRect.left;
 
   }
-
 
   if (
     elementRect.right >
@@ -4395,7 +4234,6 @@ function constrainPosition(
 
   }
 
-
   if (
     elementRect.top <
     containerRect.top
@@ -4407,7 +4245,6 @@ function constrainPosition(
 
   }
 
-
   if (
     elementRect.bottom >
     containerRect.bottom
@@ -4418,7 +4255,6 @@ function constrainPosition(
       containerRect.bottom;
 
   }
-
 
   return {
 
@@ -4432,21 +4268,11 @@ function constrainPosition(
 
 }
 
-
-/* ============================================================
-   POINTER STATE
-   ============================================================ */
-
-
+/* POINTER STATE */
 const pointerState =
   new WeakMap();
 
-
-/* ============================================================
-   START INTERACTION
-   ============================================================ */
-
-
+/* START INTERACTION */
 function startInteraction(
   element,
   event
@@ -4461,16 +4287,11 @@ function startInteraction(
 
   }
 
-
   event.preventDefault();
 
   event.stopPropagation();
 
-
-  /* ==========================================================
-     DOUBLE RIGHT CLICK = DELETE
-     ========================================================== */
-
+  /* DOUBLE RIGHT CLICK = DELETE */
 
   if (
     event.button === 2
@@ -4510,35 +4331,26 @@ function startInteraction(
 
     }
 
-
     element.dataset.lastRightClick =
       String(now);
 
   }
 
-
-  /* ==========================================================
-     NORMAL INTERACTION
-     ========================================================== */
-
-
+  /* NORMAL INTERACTION */
   const left =
     Number(
       element.dataset.left
     ) || 0;
-
 
   const top =
     Number(
       element.dataset.top
     ) || 0;
 
-
   const rotation =
     Number(
       element.dataset.rotation
     ) || 0;
-
 
   pointerState.set(
     element,
@@ -4565,19 +4377,12 @@ function startInteraction(
     }
   );
 
-
   element.setPointerCapture(
     event.pointerId
   );
-
 }
 
-
-/* ============================================================
-   MOVE / ROTATE
-   ============================================================ */
-
-
+/* MOVE / ROTATE */
 function moveInteraction(
   element,
   event
@@ -4595,21 +4400,15 @@ function moveInteraction(
 
   }
 
-
   const dx =
     event.clientX -
     state.startMouseX;
-
 
   const dy =
     event.clientY -
     state.startMouseY;
 
-
-  /* ==========================================================
-     LEFT BUTTON = MOVE
-     ========================================================== */
-
+  /* LEFT BUTTON = MOVE */
 
   if (
     state.button === 0
@@ -4619,11 +4418,9 @@ function moveInteraction(
       state.startLeft +
       dx;
 
-
     let top =
       state.startTop +
       dy;
-
 
     const constrained =
       constrainPosition(
@@ -4631,7 +4428,6 @@ function moveInteraction(
         left,
         top
       );
-
 
     left =
       constrained.left;
@@ -4663,17 +4459,11 @@ function moveInteraction(
     element.dataset.rotation =
       String(rotation);
 
-
     return;
 
   }
 
-
-  /* ==========================================================
-     RIGHT BUTTON = ROTATE
-     ========================================================== */
-
-
+  /* RIGHT BUTTON = ROTATE */
   if (
     state.button === 2
   ) {
@@ -4681,7 +4471,6 @@ function moveInteraction(
     const rotation =
       state.startRotation -
       dx * 2;
-
 
     element.style.left =
       `${state.startLeft}px`;
@@ -4692,7 +4481,6 @@ function moveInteraction(
     element.style.transform =
       `rotate(${rotation}deg)`;
 
-
     element.dataset.left =
       String(state.startLeft);
 
@@ -4701,17 +4489,10 @@ function moveInteraction(
 
     element.dataset.rotation =
       String(rotation);
-
   }
-
 }
 
-
-/* ============================================================
-   END INTERACTION
-   ============================================================ */
-
-
+/* END INTERACTION */
 function endInteraction(
   element,
   event
@@ -4722,18 +4503,15 @@ function endInteraction(
       element
     );
 
-
   if (!state) {
 
     return;
 
   }
 
-
   pointerState.delete(
     element
   );
-
 
   if (
     element.hasPointerCapture(
@@ -4747,19 +4525,12 @@ function endInteraction(
 
   }
 
-
   updateSavedObject(
     element
   );
-
 }
 
-
-/* ============================================================
-   PREPARE OBJECT
-   ============================================================ */
-
-
+/* PREPARE OBJECT */
 function prepareObject(
   element
 ) {
@@ -4776,7 +4547,6 @@ function prepareObject(
     }
   );
 
-
   element.addEventListener(
     "pointermove",
     event => {
@@ -4789,7 +4559,6 @@ function prepareObject(
     }
   );
 
-
   element.addEventListener(
     "pointerup",
     event => {
@@ -4798,10 +4567,8 @@ function prepareObject(
         element,
         event
       );
-
     }
   );
-
 
   element.addEventListener(
     "pointercancel",
@@ -4811,7 +4578,6 @@ function prepareObject(
         element,
         event
       );
-
     }
   );
 
@@ -4821,28 +4587,20 @@ function prepareObject(
     event => {
 
       event.preventDefault();
-
     }
   );
-
 }
 
-
-/* ============================================================
-   SPAWN OBJECT
-   ============================================================ */
-
-
+/* SPAWN OBJECT */
 async function spawnObject(
   sourceElement,
   savedObject = null
-) {
+  ) {
 
   const container =
     document.getElementById(
       "container"
     );
-
 
   if (
     !container ||
@@ -4856,23 +4614,13 @@ async function spawnObject(
 
   }
 
-
-  /* ----------------------------------------------------------
-     CREATE ELEMENT
-     ---------------------------------------------------------- */
-
-
+  /* create element */
   const newElement =
     document.createElement(
       sourceElement.tagName
     );
 
-
-  /* ----------------------------------------------------------
-     COPY SOURCE ATTRIBUTES
-     ---------------------------------------------------------- */
-
-
+  /* copy source attribute */
   for (
     const attribute of sourceElement.attributes
   ) {
@@ -4888,7 +4636,6 @@ async function spawnObject(
 
     }
 
-
     newElement.setAttribute(
       attribute.name,
       attribute.value
@@ -4896,97 +4643,50 @@ async function spawnObject(
 
   }
 
-
-  /* ----------------------------------------------------------
-     UNIQUE ID
-     ---------------------------------------------------------- */
-
-
+  /* give unique id */
   const instanceId =
     savedObject?.instanceId ||
     createInstanceId();
 
+  newElement.id = instanceId;
 
-  newElement.id =
-    instanceId;
+  /* create metadata */
+  newElement.dataset.instanceId = instanceId;
 
+  newElement.dataset.sourceId = sourceElement.id;
 
-  /* ----------------------------------------------------------
-     METADATA
-     ---------------------------------------------------------- */
+  /* object attributes */
 
-
-  newElement.dataset.instanceId =
-    instanceId;
-
-
-  newElement.dataset.sourceId =
-    sourceElement.id;
-
-
-  /* ----------------------------------------------------------
-     OBJECT ATTRIBUTES
-     ---------------------------------------------------------- */
-
-
-  newElement.hidden =
-    false;
-
+  newElement.hidden = false;
 
   newElement.classList.remove(
     "spawn-source"
   );
 
-
   newElement.classList.add(
     "can-arrange"
   );
 
+  newElement.style.position = "absolute";
 
-  newElement.style.position =
-    "absolute";
+  newElement.style.left = "-10000px";
 
+  newElement.style.top = "-10000px";
 
-  /*
-     IMPORTANT :
-
-     Un nouvel objet commence toujours avec une position
-     propre.
-  */
-
-
-  newElement.style.left =
-    "-10000px";
-
-
-  newElement.style.top =
-    "-10000px";
-
-
-  newElement.style.transform =
-    "rotate(0deg)";
-
+  newElement.style.transform = "rotate(0deg)";
 
   newElement.setAttribute(
     "draggable",
     "false"
   );
 
-
-  /* ----------------------------------------------------------
-     ADD TO DOM
-     ---------------------------------------------------------- */
-
+  /* add element to DOM  */
 
   container.appendChild(
     newElement
   );
 
-
-  /* ----------------------------------------------------------
-     WAIT FOR IMAGE LAYOUT
-     ---------------------------------------------------------- */
-
+  /* wait for image layout */
 
   if (
     !newElement.complete
@@ -5016,55 +4716,38 @@ async function spawnObject(
       )
   );
 
-
-  /* ==========================================================
-     RESTORE EXISTING OBJECT
-     ========================================================== */
-
-
+  /*  restore existing object  */
   if (savedObject) {
 
     const left =
       Number(savedObject.left);
 
-
     const top =
       Number(savedObject.top);
-
 
     const rotation =
       Number(savedObject.rotation);
 
-
     applyObjectState(
       newElement,
       {
-
         left:
           Number.isFinite(left)
             ? left
             : 0,
-
         top:
           Number.isFinite(top)
             ? top
             : 0,
-
         rotation:
           Number.isFinite(rotation)
             ? rotation
             : 0
-
       }
     );
-
   }
 
-
-  /* ==========================================================
-     NEW OBJECT
-     ========================================================== */
-
+  /* create new object */
 
   else {
 
@@ -5072,7 +4755,6 @@ async function spawnObject(
       getCenteredPosition(
         newElement
       );
-
 
     const state = {
 
@@ -5087,45 +4769,27 @@ async function spawnObject(
 
     };
 
-
     applyObjectState(
       newElement,
       state
     );
 
-
-    /*
-       On AJOUTE l'objet à la scène existante.
-    */
-
-
     addSavedObject(
       newElement
     );
-
   }
 
-
-  /* ----------------------------------------------------------
-     ENABLE INTERACTION
-     ---------------------------------------------------------- */
-
+  /* enable interaction */
 
   prepareObject(
     newElement
   );
 
-
   return newElement;
 
 }
 
-
-/* ============================================================
-   SPAWN BY SOURCE ID
-   ============================================================ */
-
-
+/* SPAWN BY SOURCE ID */
 async function spawnObjectById(
   sourceId
 ) {
@@ -5134,7 +4798,6 @@ async function spawnObjectById(
     document.getElementById(
       sourceId
     );
-
 
   if (
     !source ||
@@ -5147,19 +4810,12 @@ async function spawnObjectById(
 
   }
 
-
   return spawnObject(
     source
   );
-
 }
 
-
-/* ============================================================
-   MENU SPAWNING
-   ============================================================ */
-
-
+/* MENU SPAWNING */
 document
   .querySelectorAll(
     "#spawn-menu [data-spawn]"
@@ -5173,32 +4829,21 @@ document
 
           event.stopPropagation();
 
-
           spawnObjectById(
             button.dataset.spawn
           );
-
         }
       );
-
     }
   );
 
 
-/* ============================================================
-   EPOCH TOGGLE
-   ============================================================ */
-
-
+/* EPOCH TOGGLE */
 function setActiveEpoch(
   epoch
 ) {
 
-  /*
-     Boutons epoch
-  */
-
-
+  /*Boutons epoch*/
   document
     .querySelectorAll(
       ".epoch-button"
@@ -5209,31 +4854,22 @@ function setActiveEpoch(
         button.classList.remove(
           "active"
         );
-
       }
     );
-
 
   const selectedButton =
     document.querySelector(
       `.epoch-button[data-epoch="${epoch}"]`
     );
 
-
   if (selectedButton) {
 
     selectedButton.classList.add(
       "active"
     );
-
   }
 
-
-  /*
-     Object lists
-  */
-
-
+  /* Object lists */
   document
     .querySelectorAll(
       ".object-list"
@@ -5244,10 +4880,8 @@ function setActiveEpoch(
         list.classList.remove(
           "active"
         );
-
       }
     );
-
 
   document
     .querySelectorAll(
@@ -5259,27 +4893,16 @@ function setActiveEpoch(
         list.classList.add(
           "active"
         );
-
       }
     );
-
 }
 
-
-/* ------------------------------------------------------------
-   INITIAL EPOCH
-   ------------------------------------------------------------ */
-
-
+/* INITIAL EPOCH */
 setActiveEpoch(
   "bourgeois"
 );
 
-
-/* ------------------------------------------------------------
-   EPOCH BUTTON EVENTS
-   ------------------------------------------------------------ */
-
+/* EPOCH BUTTON EVENTS */
 
 document
   .querySelectorAll(
@@ -5295,26 +4918,16 @@ document
           setActiveEpoch(
             button.dataset.epoch
           );
-
         }
       );
-
     }
   );
 
-
-/* ============================================================
-   RESET SCENE
-   ============================================================ */
-
+/* RESET SCENE */
 
 async function resetScene() {
 
-  /*
-     1. Supprimer tous les objets actuellement présents.
-  */
-
-
+  /*1. Supprimer tous les objets actuellement présents.*/
   document
     .querySelectorAll(
       "#container img.can-arrange:not(.spawn-source)"
@@ -5324,27 +4937,11 @@ async function resetScene() {
         element.remove()
     );
 
-
-  /*
-     2. Récupérer le default state du PLAN ACTUEL.
-
-     Chaque plan possède sa propre scène.
-  */
-
-
+  /*2. Récupérer le default state du PLAN ACTUEL.*/
   savedScene =
     getDefaultScene();
 
-
-  /*
-     3. Chaque reset crée de nouvelles instances.
-
-     Les coordonnées et les objets du default state
-     restent toutefois exactement ceux définis dans
-     PLAN_CONFIG.
-  */
-
-
+  /*3. Chaque reset crée de nouvelles instances exactement ceux définis dans PLAN_CONFIG. */
   savedScene =
     savedScene.map(
       object => ({
@@ -5353,27 +4950,15 @@ async function resetScene() {
 
         instanceId:
           createInstanceId()
-
       })
     );
 
-
-  /*
-     4. Sauvegarder cette nouvelle scène.
-  */
-
-
+  /* 4. Sauvegarder cette nouvelle scène. */
   saveScene();
 
-
-  /*
-     5. Recréer les objets dans le DOM.
-  */
-
-
+  /* 5. Recréer les objets dans le DOM. */
   const objects =
     [...savedScene];
-
 
   for (
     const savedObject of objects
@@ -5384,29 +4969,20 @@ async function resetScene() {
         savedObject.sourceId
       );
 
-
     if (!source) {
 
       continue;
 
     }
 
-
     await spawnObject(
       source,
       savedObject
     );
-
   }
-
 }
 
-
-/* ------------------------------------------------------------
-   RESET BUTTON
-   ------------------------------------------------------------ */
-
-
+/* RESET BUTTON */
 document
   .getElementById(
     "reset-scene"
@@ -5419,22 +4995,14 @@ document
 
       event.stopPropagation();
 
-
       resetScene();
-
     }
   );
 
-/* ============================================================
-   EMPTY SCENE
-   ============================================================ */
-
+/* EMPTY SCENE */
 async function emptyScene() {
 
-  /*
-     Supprimer tous les objets actuellement présents.
-  */
-
+  /*Supprimer tous les objets actuellement présents.*/
   document
     .querySelectorAll(
       "#container img.can-arrange:not(.spawn-source)"
@@ -5444,18 +5012,10 @@ async function emptyScene() {
         element.remove()
     );
 
-  /*
-     La scène reste vide.
-     Aucun default state n'est chargé.
-     Aucun objet n'est recréé.
-  */
-
   savedScene = [];
 }
 
-/* ------------------------------------------------------------
-   EMPTY BUTTON
-   ------------------------------------------------------------ */
+/* EMPTY BUTTON */
 
 document
   .getElementById(
@@ -5474,31 +5034,22 @@ document
   );
 
 
-/* ============================================================
-   DISABLE NATIVE CONTEXT MENU
-   ============================================================ */
-
+/* DISABLE NATIVE CONTEXT MENU */
 
 document.addEventListener(
   "contextmenu",
   event => {
 
     event.preventDefault();
-
   }
 );
 
-
-/* ============================================================
-   RESTORE SAVED SCENE
-   ============================================================ */
-
+/* RESTORE SAVED SCENE */
 
 async function restoreScene() {
 
   const objects =
     [...savedScene];
-
 
   for (
     const savedObject of objects
@@ -5509,45 +5060,29 @@ async function restoreScene() {
         savedObject.sourceId
       );
 
-
     if (!source) {
 
       continue;
 
     }
 
-
     await spawnObject(
       source,
       savedObject
     );
-
   }
-
 }
-
 
 await restoreScene();
 
-
-/* ============================================================
-   GLOBAL FUNCTIONS
-   ============================================================ */
-
-
+/* GLOBAL FUNCTIONS */
 window.spawnObject =
   spawnObject;
-
 
 window.spawnObjectById =
   spawnObjectById;
 
-
-/* ============================================================
-   DEBUG — CLEAR SCENE
-   ============================================================ */
-
-
+/* DEBUG — CLEAR SCENE */
 window.mostroClearScene =
   function() {
 
@@ -5555,9 +5090,7 @@ window.mostroClearScene =
       STORAGE_KEY
     );
 
-
     savedScene = [];
-
 
     document
       .querySelectorAll(
@@ -5567,15 +5100,9 @@ window.mostroClearScene =
         element =>
           element.remove()
       );
-
   };
 
-
-/* ============================================================
-   DEBUG — INSPECT SCENE
-   ============================================================ */
-
-
+/* DEBUG — INSPECT SCENE */
 window.mostroScene =
   function() {
 
@@ -5583,18 +5110,10 @@ window.mostroScene =
       savedScene
     );
 
-
     return savedScene;
-
   };
 
-  
-
-/* ============================================================
-   DEBUG — STORAGE KEY
-   ============================================================ */
-
-
+/* DEBUG — STORAGE KEY */
 window.mostroStorageKey =
   STORAGE_KEY;
 

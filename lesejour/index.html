@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="../favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mostro</title>
+  <link href="../style.css" rel="stylesheet" />  
+</head>
+
+<body>
+
+<style>
+/* menu de navigation */
+#head-menu {
+  border : 2px black solid;
+  padding : 2px 2px 2px 8px;
+  background-color: black;
+  color: white;
+  font-family: syne;
+}
+
+.menu {
+  border : 2px black solid;
+  padding : 4px;
+}
+
+.menu-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: balance;
+}
+
+.menu-div {
+  font-family: syne;
+  margin: 0px 0px;
+  font-size: 13px;
+  padding: 3px 4px;
+  flex:1;
+}
+
+.menu-lien {
+  color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;         
+}
+.menu-lien:hover {
+  color: white;
+  background:black;
+}
+
+.menu-fake {
+  color: white;
+  background-color: black;
+  text-decoration: none;   
+  display: block;
+  text-align: center;  
+  margin: 3px 4px;       
+}
+</style>
+
+<header>
+<div><a href="../index"><h1>mostro</h1></a></div>
+<div class="box"></div>
+<div><a href="../projets"><h2>projets</h2></a></div>
+<div><a href="../agence"><h2>agence</h2></a></div>
+<div><a href="https://asap.archi"><h2>asap</h2></a></div>
+</header>
+
+<div class="holder">
+<div class="multi-column" id="agence">
+
+  <div class="column" id="small">
+  <h2>Le séjour, du salon bourgeois à l'espace commun</h2>
+  <p>contexte : comissariat partiel de l'exposition "Le logement pièce par pièce"<br>
+    institution : maison de l'architecture d'Ile de France<br>
+    date : septembre 2026<br>
+    scénographie : Matters.xyz<br>
+    type : enseignement et recherche
+  </p>
+    
+  <!-- MENU DE NAVIGATION -->
+  <div id="head-menu">navigation</div>
+  <div class="menu">
+    <div class="menu-row">
+      <h3 class="menu-div menu-fake">présentation générale</h3>
+    </div>
+    <div class="menu-row">
+      <h3 class="menu-div"><a href="../calendrier" class="menu-lien">1. tableau<br>périodique</a></h3>
+      <h3 class="menu-div"><a href="../salon" class="menu-lien">2. plans<br>historiques</a></h3>
+      <h3 class="menu-div"><a href="../atlas" class="menu-lien">3. atlas<br>participatif</a></h3>
+    </div>
+  </div>
+    
+    <h3>Organisée par la Maison de l'Architecture d'Ile-de-France, l’exposition <i>Le logement pièce par pièce</i> propose une traversée de l’habitat, de son histoire, de son actualité, et de ses enjeux, par le biais des pièces qui le composent. Six agences ont été missionnées, chacune se penchant sur une pièce spécifique de la maison. Aux côtés de ANAU (la chambre), Paris U (le couloir), Septembre (la cuisine), Dadour de Pous (les prolongements extérieurs) et 127af (la salle de bain), mostro s'est intéressé au séjour.<br>
+    <br>
+    De l’italien <i>salone</i>, soit grande salle, le <i>salon</i> fait son apparition dans les mœurs et dans la pierre au XVII° siècle chez la bourgeoisie récemment constituée comme classe. Parallèlement, la majorité des foyers populaires partagent leurs repas et leur temps libre dans la <i>salle à manger</i> ou salle commune.<br>
+    De cette double origine – dont la synthèse se fera peut-être via le <i>living-room</i> moderne – le séjour a hérité d’une certaine informité, une indétermination spatiale qui résulte d’une prolifération de ses usages possibles.<br>
+    <br>
+    Délaissant la composition pour l’ameublement, le séjour est ici ausculté en trois séquences au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond.<br>
+    Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ices qui peuvent alors participer à cet atlas de nos intériorités.</h3>
+  </div>
+
+  <div class="column">
+    <img class="image" src="1.png" title="le coin séjour dans la scénographie générale de Matters.xyz">
+    <p></p>
+    <img class="image" src="2.png" title="calendrier périodique des éléments du séjour">
+    <p></p>
+    <img class="image" src="3.png" title="détail sur la table à manger">
+  </div>
+
+  <div class="column">
+    <img class="image" src="GIF.gif" title="affiche, graphisme Pierre Vannier">
+    <p></p>
+    <img class="image" src="4.png" title="plan des salons bourgeois">
+    <p></p>
+    <img class="image" src="5.png" title="plans de salle commune populaire et living-room moderne">
+    <p></p>
+    <img class="image" src="6.png" title="plan de logements clusters">
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>
+
+

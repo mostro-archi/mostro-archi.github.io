@@ -11,6 +11,7 @@
 <body>
 
 <style>
+
 /* menu de navigation */
 #head-menu {
   border : 2px black solid;
@@ -59,6 +60,32 @@
   text-align: center;  
   margin: 3px 4px;       
 }
+
+#stack {
+  position: relative;
+  width: 100%;
+  min-height: 65vh;
+}
+/* a6 animés */
+.stackimage {
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(0, 0, 0, 0.25) ;
+  max-width:80%;
+  max-height: 60vh;
+
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  justify-self: center;
+}
 </style>
 
 <header>
@@ -100,15 +127,56 @@
     De cette double origine – dont la synthèse se fera peut-être via le <i>living-room</i> moderne – le séjour a hérité d’une certaine informité, une indétermination spatiale qui résulte d’une prolifération de ses usages possibles.<br>
     <br>
     Délaissant la composition pour l’ameublement, le séjour est ici ausculté en trois séquences au travers des objets qu’il abrite et non des formes qu’il revêt. Par un inventaire des éléments qui ont traversé l’histoire de cette pièce, tentons de comprendre les fonctions passées, présentes et futures auxquelles le séjour répond.<br>
-    Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ices qui peuvent alors participer à cet atlas de nos intériorités.</h3>
+    Allant du général au particulier, ce répertoire de formes d’abord abstraites s’instancie dans des plans historiques avant de s’ouvrir aux visiteur·ses qui peuvent alors participer à cet atlas de nos intériorités.</h3>
   </div>
 
-  <div class="column">
+  <div class="column" id="left">
     <img class="image" src="1.png" title="le coin séjour dans la scénographie générale de Matters.xyz">
     <p></p>
     <img class="image" src="2.png" title="calendrier périodique des éléments du séjour">
     <p></p>
     <img class="image" src="3.png" title="détail sur la table à manger">
+    <p>Ci dessous : Échantillon des dessins laissés par les visiteur·ses sur la table. Il leur était demandé de représenté un objet qui définissait à lui seul leur séjour.<br><br><br></p>
+    <div id="stack">
+      <img class="stackimage" src="a6/1.png">
+      <img class="stackimage" src="a6/2.png">
+      <img class="stackimage" src="a6/3.png">
+      <img class="stackimage" src="a6/4.png">
+      <img class="stackimage" src="a6/5.png">
+      <img class="stackimage" src="a6/6.png">
+      <img class="stackimage" src="a6/7.png">
+      <img class="stackimage" src="a6/8.png">
+      <img class="stackimage" src="a6/9.png">
+      <img class="stackimage" src="a6/10.png">
+      <img class="stackimage" src="a6/11.png">
+      <img class="stackimage" src="a6/12.png">
+      <img class="stackimage" src="a6/13.png">
+      <img class="stackimage" src="a6/14.png">
+      <img class="stackimage" src="a6/15.png">
+      <img class="stackimage" src="a6/16.png">
+      <img class="stackimage" src="a6/17.png">
+      <img class="stackimage" src="a6/18.png">
+      <img class="stackimage" src="a6/19.png">
+      <img class="stackimage" src="a6/20.png">
+      <img class="stackimage" src="a6/21.png">
+      <img class="stackimage" src="a6/22.png">
+      <img class="stackimage" src="a6/23.png">
+      <img class="stackimage" src="a6/24.png">
+      <img class="stackimage" src="a6/25.png">
+      <img class="stackimage" src="a6/26.png">
+      <img class="stackimage" src="a6/27.png">
+      <img class="stackimage" src="a6/28.png">
+      <img class="stackimage" src="a6/29.png">
+      <img class="stackimage" src="a6/30.png">
+      <img class="stackimage" src="a6/31.png">
+      <img class="stackimage" src="a6/32.png">
+      <img class="stackimage" src="a6/33.png">
+      <img class="stackimage" src="a6/34.png">
+      <img class="stackimage" src="a6/35.png">
+      <img class="stackimage" src="a6/36.png">
+      <img class="stackimage" src="a6/37.png">
+      <img class="stackimage" src="a6/38.png">
+    </div>
   </div>
 
   <div class="column">
@@ -123,11 +191,75 @@
   </div>
 </div>
 
-
 </div>
 
+<script>
+const stackImages = [...document.querySelectorAll(".stackimage")];
 
+let animating = false;
 
+stackImages.sort(() => Math.random() - 0.5);
+
+// Initialise l'ordre de la pile
+function updateStack() {
+  stackImages.forEach((img, index) => {
+    img.style.zIndex = stackImages.length - index;
+  });
+}
+
+stackImages.forEach((img) => {
+  const rotation = Math.random() * 20 - 10;
+  const position = Math.random() * 30 + 35;
+
+  img.style.rotate = `${rotation}deg`;
+  img.style.left = `${position}%`;
+});
+
+updateStack();
+
+stackImages.forEach((img) => {
+  img.addEventListener("click", async () => {
+
+    if (animating) return;
+    animating = true;
+
+    await img.animate(
+      [
+        { transform: "translate(-50%, 0)" },
+        { transform: "translate(-50%, -120%)" }
+      ],
+      {
+        duration: 250,
+        easing: "ease-in",
+        fill: "forwards"
+      }
+    ).finished;
+
+    // L'image passe au fond de la pile
+    stackImages.splice(stackImages.indexOf(img), 1);
+    stackImages.push(img);
+
+    updateStack();
+
+    const retour = img.animate(
+      [
+        { transform: "translate(-50%, -120%)" },
+        { transform: "translate(-50%, 0)" }
+      ],
+      {
+        duration: 250,
+        easing: "ease-out",
+        fill: "forwards"
+      }
+    );
+
+    await retour.finished;
+    retour.cancel();
+
+    animating = false;
+  });
+});
+</script>
 
 </body>
 
